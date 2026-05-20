@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://bhelsel.github.io/RLAB/presentations.html</loc>
+    <lastmod>2026-05-20T17:09:54.434Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bhelsel.github.io/RLAB/Presentations/Advanced R Special Topics/functionals.html</loc>
+    <lastmod>2025-08-27T13:49:11.275Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bhelsel.github.io/RLAB/Presentations/Advanced R Special Topics/performance.html</loc>
+    <lastmod>2026-05-20T16:16:53.058Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bhelsel.github.io/RLAB/Presentations/Advanced R Special Topics/meta-programming.html</loc>
+    <lastmod>2025-09-29T22:17:32.779Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bhelsel.github.io/RLAB/Presentations/Advanced R Foundations/vectors.html</loc>
+    <lastmod>2025-06-16T18:12:53.583Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bhelsel.github.io/RLAB/Presentations/Advanced R Foundations/control-flow.html</loc>
+    <lastmod>2025-07-23T15:08:57.592Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bhelsel.github.io/RLAB/Presentations/Advanced R Foundations/subsetting.html</loc>
+    <lastmod>2025-07-23T11:33:31.365Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bhelsel.github.io/RLAB/Presentations/Template/00-Template.html</loc>
+    <lastmod>2025-07-01T21:58:48.462Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bhelsel.github.io/RLAB/about.html</loc>
+    <lastmod>2026-05-20T16:19:50.980Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bhelsel.github.io/RLAB/LICENSE.html</loc>
+    <lastmod>2026-05-20T17:34:37.689Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bhelsel.github.io/RLAB/index.html</loc>
+    <lastmod>2026-05-20T17:33:32.638Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bhelsel.github.io/RLAB/Presentations/Introduction/Introduction.html</loc>
+    <lastmod>2025-06-25T13:46:52.201Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bhelsel.github.io/RLAB/Presentations/Advanced R Foundations/conditions.html</loc>
+    <lastmod>2026-05-20T15:36:26.672Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bhelsel.github.io/RLAB/Presentations/Advanced R Foundations/functions.html</loc>
+    <lastmod>2025-08-15T20:27:21.741Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bhelsel.github.io/RLAB/Presentations/Advanced R Foundations/environments.html</loc>
+    <lastmod>2025-08-13T12:04:26.148Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bhelsel.github.io/RLAB/Presentations/Advanced R Foundations/names-values.html</loc>
+    <lastmod>2025-06-16T18:12:37.415Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bhelsel.github.io/RLAB/Presentations/Advanced R Special Topics/function-operators.html</loc>
+    <lastmod>2025-09-02T12:08:14.118Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bhelsel.github.io/RLAB/Presentations/Advanced R Special Topics/function-factories.html</loc>
+    <lastmod>2025-08-31T20:42:52.083Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bhelsel.github.io/RLAB/Presentations/Advanced R Special Topics/object-oriented-programming.html</loc>
+    <lastmod>2025-09-23T11:17:40.773Z</lastmod>
+  </url>
+</urlset>
