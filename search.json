@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "presentations.html",
+    "href": "presentations.html",
+    "title": "R for Lifestyle and Brain Health (R-LAB)",
+    "section": "",
+    "text": "Conditions\nControl Flow"
+  },
+  {
     "objectID": "Presentations/Advanced R Special Topics/functionals.html#introduction",
     "href": "Presentations/Advanced R Special Topics/functionals.html#introduction",
     "title": "Advanced R: Functionals",
@@ -914,7 +921,7 @@
     "href": "index.html",
     "title": "RLAB",
     "section": "",
-    "text": "RLAB\n\nThis is a Quarto website.\ntest here.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\nView the Presentation"
+    "text": "RLAB\n\nThis is a Quarto website.\ntest here.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
   },
   {
     "objectID": "Presentations/Introduction/Introduction.html#downloading-this-presentation-or-anything-from-github",
