@@ -1248,24 +1248,19 @@ Julianne Clina, PhD
 <span id="cb1-4"><a></a>  c_temp <span class="ot">&lt;-</span> (f_temp <span class="sc">-</span> <span class="dv">32</span>) <span class="sc">*</span> <span class="dv">5</span> <span class="sc">/</span> <span class="dv">9</span></span>
 <span id="cb1-5"><a></a>  <span class="fu">return</span>(c_temp)</span>
 <span id="cb1-6"><a></a>}</span>
-<span id="cb1-7"><a></a><span class="fu">fahrenheit_to_celsius</span>(<span class="fl">98.6</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 37</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>get_bmi_category <span class="ot">&lt;-</span> <span class="cf">function</span>(wt, ht) {</span>
-<span id="cb3-2"><a></a>  bmi <span class="ot">&lt;-</span> wt <span class="sc">/</span> ht<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb3-3"><a></a>  category <span class="ot">&lt;-</span> <span class="fu">case_when</span>(</span>
-<span id="cb3-4"><a></a>    bmi <span class="sc">&lt;</span> <span class="fl">18.5</span> <span class="sc">~</span> <span class="st">&quot;Underweight&quot;</span>,</span>
-<span id="cb3-5"><a></a>    bmi <span class="sc">&gt;=</span> <span class="fl">18.5</span> <span class="sc">&amp;</span> bmi <span class="sc">&lt;</span> <span class="fl">24.9</span> <span class="sc">~</span> <span class="st">&quot;Normal weight&quot;</span>,</span>
-<span id="cb3-6"><a></a>    bmi <span class="sc">&gt;=</span> <span class="dv">25</span> <span class="sc">&amp;</span> bmi <span class="sc">&lt;</span> <span class="fl">29.9</span> <span class="sc">~</span> <span class="st">&quot;Overweight&quot;</span>,</span>
-<span id="cb3-7"><a></a>    bmi <span class="sc">&gt;=</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">&quot;Obesity&quot;</span>,</span>
-<span id="cb3-8"><a></a>  )</span>
-<span id="cb3-9"><a></a>  <span class="fu">return</span>(<span class="fu">paste0</span>(<span class="st">&quot;BMI = &quot;</span>, <span class="fu">round</span>(bmi, <span class="dv">1</span>), <span class="st">&quot; (&quot;</span>, category, <span class="st">&quot;)&quot;</span>))</span>
-<span id="cb3-10"><a></a>}</span>
-<span id="cb3-11"><a></a><span class="fu">get_bmi_category</span>(<span class="dv">85</span>, <span class="fl">1.54</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;BMI = 35.8 (Obesity)&quot;</code></pre>
-</div>
+<span id="cb1-7"><a></a><span class="fu">fahrenheit_to_celsius</span>(<span class="fl">98.6</span>)</span>
+<span id="cb1-8"><a></a></span>
+<span id="cb1-9"><a></a>get_bmi_category <span class="ot">&lt;-</span> <span class="cf">function</span>(wt, ht) {</span>
+<span id="cb1-10"><a></a>  bmi <span class="ot">&lt;-</span> wt <span class="sc">/</span> ht<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb1-11"><a></a>  category <span class="ot">&lt;-</span> <span class="fu">case_when</span>(</span>
+<span id="cb1-12"><a></a>    bmi <span class="sc">&lt;</span> <span class="fl">18.5</span> <span class="sc">~</span> <span class="st">&quot;Underweight&quot;</span>,</span>
+<span id="cb1-13"><a></a>    bmi <span class="sc">&gt;=</span> <span class="fl">18.5</span> <span class="sc">&amp;</span> bmi <span class="sc">&lt;</span> <span class="fl">24.9</span> <span class="sc">~</span> <span class="st">&quot;Normal weight&quot;</span>,</span>
+<span id="cb1-14"><a></a>    bmi <span class="sc">&gt;=</span> <span class="dv">25</span> <span class="sc">&amp;</span> bmi <span class="sc">&lt;</span> <span class="fl">29.9</span> <span class="sc">~</span> <span class="st">&quot;Overweight&quot;</span>,</span>
+<span id="cb1-15"><a></a>    bmi <span class="sc">&gt;=</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">&quot;Obesity&quot;</span>,</span>
+<span id="cb1-16"><a></a>  )</span>
+<span id="cb1-17"><a></a>  <span class="fu">return</span>(<span class="fu">paste0</span>(<span class="st">&quot;BMI = &quot;</span>, <span class="fu">round</span>(bmi, <span class="dv">1</span>), <span class="st">&quot; (&quot;</span>, category, <span class="st">&quot;)&quot;</span>))</span>
+<span id="cb1-18"><a></a>}</span>
+<span id="cb1-19"><a></a><span class="fu">get_bmi_category</span>(<span class="dv">85</span>, <span class="fl">1.54</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </section>
@@ -1289,7 +1284,7 @@ Julianne Clina, PhD
 <li>Stay consistent with collaborators and tutorials</li>
 </ul>
 <p>When you open R Studio it will tell you what version you are using</p>
-<p><img role="img" data-src="http://mercury.webster.edu/aleshunas/R_learning_infrastructure/images/R%20version%20screen.png"></p>
+<!-- ![](http://mercury.webster.edu/aleshunas/R_learning_infrastructure/images/R%20version%20screen.png) -->
 <p><strong>Update RStudio</strong></p>
 <ol type="1">
 <li>Visit <a href="https://posit.co/download/rstudio/">https://posit.co/download/rstudio/</a></li>
@@ -1299,7 +1294,7 @@ Julianne Clina, PhD
 <div class="fragment">
 <p><strong>Update Your Packages</strong></p>
 <p>Updated packages makes sure you are working with the latest versions which can include fixes of old bugs. Occasionally, if in the middle of an analysis or project, updated a package might not be desirable.</p>
-<p><strong>Tools → Check for Package Updates</strong> → Select and update <img role="img" data-src="https://r.kellogg.northwestern.edu/images/software_update_packages.png"></p>
+<p><strong>Tools → Check for Package Updates</strong> → Select and update <!-- ![](https://r.kellogg.northwestern.edu/images/software_update_packages.png) --></p>
 <p><strong>OR</strong></p>
 <p>Use:</p>
 <ul>
@@ -1359,38 +1354,23 @@ Julianne Clina, PhD
 <div class="fragment">
 <div class="code-box">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="co"># Double data: BMI</span></span>
-<span id="cb5-2"><a></a>bmi <span class="ot">&lt;-</span> <span class="fl">24.8</span></span>
-<span id="cb5-3"><a></a><span class="fu">is.double</span>(bmi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">class</span>(bmi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;numeric&quot;</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># Integer data: Participant ID</span></span>
-<span id="cb9-2"><a></a>id <span class="ot">&lt;-</span> <span class="dv">0003</span>L</span>
-<span id="cb9-3"><a></a><span class="fu">class</span>(id)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;integer&quot;</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">is.double</span>(id)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] FALSE</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="co"># Character data: randomization group</span></span>
-<span id="cb13-2"><a></a>treatment_arm <span class="ot">&lt;-</span> <span class="st">&quot;placebo&quot;</span></span>
-<span id="cb13-3"><a></a><span class="fu">class</span>(treatment_arm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;character&quot;</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co"># Logical data: presence of hypertension</span></span>
-<span id="cb15-2"><a></a>has_hypertension <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
-<span id="cb15-3"><a></a><span class="fu">class</span>(has_hypertension)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;logical&quot;</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co"># Double data: BMI</span></span>
+<span id="cb2-2"><a></a>bmi <span class="ot">&lt;-</span> <span class="fl">24.8</span></span>
+<span id="cb2-3"><a></a><span class="fu">is.double</span>(bmi)</span>
+<span id="cb2-4"><a></a><span class="fu">class</span>(bmi)</span>
+<span id="cb2-5"><a></a></span>
+<span id="cb2-6"><a></a><span class="co"># Integer data: Participant ID</span></span>
+<span id="cb2-7"><a></a>id <span class="ot">&lt;-</span> <span class="dv">0003</span>L</span>
+<span id="cb2-8"><a></a><span class="fu">class</span>(id)</span>
+<span id="cb2-9"><a></a><span class="fu">is.double</span>(id)</span>
+<span id="cb2-10"><a></a></span>
+<span id="cb2-11"><a></a><span class="co"># Character data: randomization group</span></span>
+<span id="cb2-12"><a></a>treatment_arm <span class="ot">&lt;-</span> <span class="st">&quot;placebo&quot;</span></span>
+<span id="cb2-13"><a></a><span class="fu">class</span>(treatment_arm)</span>
+<span id="cb2-14"><a></a></span>
+<span id="cb2-15"><a></a><span class="co"># Logical data: presence of hypertension</span></span>
+<span id="cb2-16"><a></a>has_hypertension <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb2-17"><a></a><span class="fu">class</span>(has_hypertension)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1404,63 +1384,39 @@ Julianne Clina, PhD
 </ul>
 <div class="code-box">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="co"># Numeric vs. character: Addition</span></span>
-<span id="cb17-2"><a></a>num1 <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb17-3"><a></a>num1 <span class="sc">+</span> <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 7</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>num2 <span class="ot">&lt;-</span> <span class="st">&quot;5&quot;</span></span>
-<span id="cb19-2"><a></a>num2 <span class="sc">+</span> <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in `num2 + 2`:
-! non-numeric argument to binary operator</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="co"># Logical used in math</span></span>
-<span id="cb21-2"><a></a>x <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
-<span id="cb21-3"><a></a>y <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
-<span id="cb21-4"><a></a><span class="fu">sum</span>(<span class="fu">c</span>(x, y, <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="co"># Sorting: numeric vs. character</span></span>
-<span id="cb23-2"><a></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">9</span>, <span class="dv">2</span>)</span>
-<span id="cb23-3"><a></a><span class="fu">sort</span>(ages)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  2  9 15</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>as_char <span class="ot">&lt;-</span> <span class="fu">as.character</span>(ages)</span>
-<span id="cb25-2"><a></a><span class="fu">sort</span>(as_char)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;15&quot; &quot;2&quot;  &quot;9&quot; </code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="co"># Missing Data</span></span>
-<span id="cb27-2"><a></a><span class="co"># Numeric NA</span></span>
-<span id="cb27-3"><a></a>num_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="cn">NA</span>, <span class="dv">200</span>)</span>
-<span id="cb27-4"><a></a><span class="fu">mean</span>(num_values)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] NA</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="fu">mean</span>(num_values, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 150</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="co"># Logical NA</span></span>
-<span id="cb31-2"><a></a>logical_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">NA</span>, <span class="cn">FALSE</span>)</span>
-<span id="cb31-3"><a></a><span class="fu">sum</span>(logical_values)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] NA</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">sum</span>(logical_values, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="co"># Character NA</span></span>
-<span id="cb35-2"><a></a>char_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;yes&quot;</span>, <span class="cn">NA</span>, <span class="st">&quot;no&quot;</span>)</span>
-<span id="cb35-3"><a></a><span class="fu">paste</span>(<span class="st">&quot;Answer:&quot;</span>, char_values)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;Answer: yes&quot; &quot;Answer: NA&quot;  &quot;Answer: no&quot; </code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># Numeric vs. character: Addition</span></span>
+<span id="cb3-2"><a></a>num1 <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb3-3"><a></a>num1 <span class="sc">+</span> <span class="dv">2</span></span>
+<span id="cb3-4"><a></a></span>
+<span id="cb3-5"><a></a>num2 <span class="ot">&lt;-</span> <span class="st">&quot;5&quot;</span></span>
+<span id="cb3-6"><a></a>num2 <span class="sc">+</span> <span class="dv">2</span></span>
+<span id="cb3-7"><a></a></span>
+<span id="cb3-8"><a></a><span class="co"># Logical used in math</span></span>
+<span id="cb3-9"><a></a>x <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb3-10"><a></a>y <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb3-11"><a></a><span class="fu">sum</span>(<span class="fu">c</span>(x, y, <span class="cn">TRUE</span>))</span>
+<span id="cb3-12"><a></a></span>
+<span id="cb3-13"><a></a><span class="co"># Sorting: numeric vs. character</span></span>
+<span id="cb3-14"><a></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">9</span>, <span class="dv">2</span>)</span>
+<span id="cb3-15"><a></a><span class="fu">sort</span>(ages)</span>
+<span id="cb3-16"><a></a></span>
+<span id="cb3-17"><a></a>as_char <span class="ot">&lt;-</span> <span class="fu">as.character</span>(ages)</span>
+<span id="cb3-18"><a></a><span class="fu">sort</span>(as_char)</span>
+<span id="cb3-19"><a></a></span>
+<span id="cb3-20"><a></a><span class="co"># Missing Data</span></span>
+<span id="cb3-21"><a></a><span class="co"># Numeric NA</span></span>
+<span id="cb3-22"><a></a>num_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="cn">NA</span>, <span class="dv">200</span>)</span>
+<span id="cb3-23"><a></a><span class="fu">mean</span>(num_values)</span>
+<span id="cb3-24"><a></a><span class="fu">mean</span>(num_values, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-25"><a></a></span>
+<span id="cb3-26"><a></a><span class="co"># Logical NA</span></span>
+<span id="cb3-27"><a></a>logical_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">NA</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb3-28"><a></a><span class="fu">sum</span>(logical_values)</span>
+<span id="cb3-29"><a></a><span class="fu">sum</span>(logical_values, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-30"><a></a></span>
+<span id="cb3-31"><a></a><span class="co"># Character NA</span></span>
+<span id="cb3-32"><a></a>char_values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;yes&quot;</span>, <span class="cn">NA</span>, <span class="st">&quot;no&quot;</span>)</span>
+<span id="cb3-33"><a></a><span class="fu">paste</span>(<span class="st">&quot;Answer:&quot;</span>, char_values)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </section>
@@ -1473,25 +1429,15 @@ Julianne Clina, PhD
 </ul>
 <div class="code-box">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
-<span id="cb37-2"><a></a><span class="fu">is.numeric</span>(v1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>v2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;cat&quot;</span>, <span class="st">&quot;house&quot;</span>, <span class="st">&quot;bunny&quot;</span>)</span>
-<span id="cb39-2"><a></a><span class="fu">is.character</span>(v2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a>v3 <span class="ot">&lt;-</span> <span class="fu">c</span>(v1, v2)</span>
-<span id="cb41-2"><a></a>v3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;1&quot;     &quot;2&quot;     &quot;3&quot;     &quot;4&quot;     &quot;5&quot;     &quot;cat&quot;   &quot;house&quot; &quot;bunny&quot;</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a><span class="fu">is.character</span>(v3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb4-2"><a></a><span class="fu">is.numeric</span>(v1)</span>
+<span id="cb4-3"><a></a></span>
+<span id="cb4-4"><a></a>v2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;cat&quot;</span>, <span class="st">&quot;house&quot;</span>, <span class="st">&quot;bunny&quot;</span>)</span>
+<span id="cb4-5"><a></a><span class="fu">is.character</span>(v2)</span>
+<span id="cb4-6"><a></a></span>
+<span id="cb4-7"><a></a>v3 <span class="ot">&lt;-</span> <span class="fu">c</span>(v1, v2)</span>
+<span id="cb4-8"><a></a>v3</span>
+<span id="cb4-9"><a></a><span class="fu">is.character</span>(v3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </section>
@@ -1504,33 +1450,21 @@ Julianne Clina, PhD
 </ul>
 <div class="code-box">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>bloodtype_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;AB&quot;</span>, <span class="st">&quot;O&quot;</span>)</span>
-<span id="cb45-2"><a></a><span class="fu">summary</span>(bloodtype_vector)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   Length     Class      Mode 
-        4 character character </code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a>bloodtype_factor <span class="ot">&lt;-</span> <span class="fu">factor</span>(bloodtype_vector)</span>
-<span id="cb47-2"><a></a><span class="fu">summary</span>(bloodtype_factor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> A AB  B  O 
- 1  1  1  1 </code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a>height_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;tall&quot;</span>, <span class="st">&quot;short&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;extra tall&quot;</span>, <span class="st">&quot;very short&quot;</span>)</span>
-<span id="cb49-2"><a></a><span class="fu">sort</span>(height_vector)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;extra tall&quot; &quot;medium&quot;     &quot;short&quot;      &quot;tall&quot;       &quot;very short&quot;</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a>height_factor <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
-<span id="cb51-2"><a></a>  height_vector,</span>
-<span id="cb51-3"><a></a>  <span class="at">ordered =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb51-4"><a></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;very short&quot;</span>, <span class="st">&quot;short&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;tall&quot;</span>, <span class="st">&quot;extra tall&quot;</span>)</span>
-<span id="cb51-5"><a></a>)</span>
-<span id="cb51-6"><a></a><span class="fu">sort</span>(height_factor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] very short short      medium     tall       extra tall
-Levels: very short &lt; short &lt; medium &lt; tall &lt; extra tall</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>bloodtype_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;AB&quot;</span>, <span class="st">&quot;O&quot;</span>)</span>
+<span id="cb5-2"><a></a><span class="fu">summary</span>(bloodtype_vector)</span>
+<span id="cb5-3"><a></a></span>
+<span id="cb5-4"><a></a>bloodtype_factor <span class="ot">&lt;-</span> <span class="fu">factor</span>(bloodtype_vector)</span>
+<span id="cb5-5"><a></a><span class="fu">summary</span>(bloodtype_factor)</span>
+<span id="cb5-6"><a></a></span>
+<span id="cb5-7"><a></a>height_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;tall&quot;</span>, <span class="st">&quot;short&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;extra tall&quot;</span>, <span class="st">&quot;very short&quot;</span>)</span>
+<span id="cb5-8"><a></a><span class="fu">sort</span>(height_vector)</span>
+<span id="cb5-9"><a></a></span>
+<span id="cb5-10"><a></a>height_factor <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb5-11"><a></a>  height_vector,</span>
+<span id="cb5-12"><a></a>  <span class="at">ordered =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-13"><a></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;very short&quot;</span>, <span class="st">&quot;short&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;tall&quot;</span>, <span class="st">&quot;extra tall&quot;</span>)</span>
+<span id="cb5-14"><a></a>)</span>
+<span id="cb5-15"><a></a><span class="fu">sort</span>(height_factor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </section>
@@ -1542,102 +1476,24 @@ Levels: very short &lt; short &lt; medium &lt; tall &lt; extra tall</code></pre>
 </ul>
 <div class="code-box">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a>my_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb53-2"><a></a>  <span class="at">name =</span> <span class="st">&quot;Bill&quot;</span>,</span>
-<span id="cb53-3"><a></a>  <span class="at">age =</span> <span class="dv">35</span>,</span>
-<span id="cb53-4"><a></a>  <span class="at">scores =</span> <span class="fu">c</span>(<span class="dv">92</span>, <span class="dv">87</span>, <span class="dv">95</span>),</span>
-<span id="cb53-5"><a></a>  <span class="at">passed =</span> <span class="cn">TRUE</span></span>
-<span id="cb53-6"><a></a>)</span>
-<span id="cb53-7"><a></a></span>
-<span id="cb53-8"><a></a>my_list</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$name
-[1] &quot;Bill&quot;
-
-$age
-[1] 35
-
-$scores
-[1] 92 87 95
-
-$passed
-[1] TRUE</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a><span class="co">#Results are stored as a list </span></span>
-<span id="cb55-2"><a></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt, <span class="at">data =</span> mtcars)</span>
-<span id="cb55-3"><a></a><span class="fu">class</span>(model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;lm&quot;</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a></a><span class="fu">is.list</span>(model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a></a><span class="fu">str</span>(model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>List of 12
- $ coefficients : Named num [1:2] 37.29 -5.34
-  ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;(Intercept)&quot; &quot;wt&quot;
- $ residuals    : Named num [1:32] -2.28 -0.92 -2.09 1.3 -0.2 ...
-  ..- attr(*, &quot;names&quot;)= chr [1:32] &quot;Mazda RX4&quot; &quot;Mazda RX4 Wag&quot; &quot;Datsun 710&quot; &quot;Hornet 4 Drive&quot; ...
- $ effects      : Named num [1:32] -113.65 -29.116 -1.661 1.631 0.111 ...
-  ..- attr(*, &quot;names&quot;)= chr [1:32] &quot;(Intercept)&quot; &quot;wt&quot; &quot;&quot; &quot;&quot; ...
- $ rank         : int 2
- $ fitted.values: Named num [1:32] 23.3 21.9 24.9 20.1 18.9 ...
-  ..- attr(*, &quot;names&quot;)= chr [1:32] &quot;Mazda RX4&quot; &quot;Mazda RX4 Wag&quot; &quot;Datsun 710&quot; &quot;Hornet 4 Drive&quot; ...
- $ assign       : int [1:2] 0 1
- $ qr           :List of 5
-  ..$ qr   : num [1:32, 1:2] -5.657 0.177 0.177 0.177 0.177 ...
-  .. ..- attr(*, &quot;dimnames&quot;)=List of 2
-  .. .. ..$ : chr [1:32] &quot;Mazda RX4&quot; &quot;Mazda RX4 Wag&quot; &quot;Datsun 710&quot; &quot;Hornet 4 Drive&quot; ...
-  .. .. ..$ : chr [1:2] &quot;(Intercept)&quot; &quot;wt&quot;
-  .. ..- attr(*, &quot;assign&quot;)= int [1:2] 0 1
-  ..$ qraux: num [1:2] 1.18 1.05
-  ..$ pivot: int [1:2] 1 2
-  ..$ tol  : num 1e-07
-  ..$ rank : int 2
-  ..- attr(*, &quot;class&quot;)= chr &quot;qr&quot;
- $ df.residual  : int 30
- $ xlevels      : Named list()
- $ call         : language lm(formula = mpg ~ wt, data = mtcars)
- $ terms        :Classes &#39;terms&#39;, &#39;formula&#39;  language mpg ~ wt
-  .. ..- attr(*, &quot;variables&quot;)= language list(mpg, wt)
-  .. ..- attr(*, &quot;factors&quot;)= int [1:2, 1] 0 1
-  .. .. ..- attr(*, &quot;dimnames&quot;)=List of 2
-  .. .. .. ..$ : chr [1:2] &quot;mpg&quot; &quot;wt&quot;
-  .. .. .. ..$ : chr &quot;wt&quot;
-  .. ..- attr(*, &quot;term.labels&quot;)= chr &quot;wt&quot;
-  .. ..- attr(*, &quot;order&quot;)= int 1
-  .. ..- attr(*, &quot;intercept&quot;)= int 1
-  .. ..- attr(*, &quot;response&quot;)= int 1
-  .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: R_GlobalEnv&gt; 
-  .. ..- attr(*, &quot;predvars&quot;)= language list(mpg, wt)
-  .. ..- attr(*, &quot;dataClasses&quot;)= Named chr [1:2] &quot;numeric&quot; &quot;numeric&quot;
-  .. .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;mpg&quot; &quot;wt&quot;
- $ model        :&#39;data.frame&#39;:  32 obs. of  2 variables:
-  ..$ mpg: num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
-  ..$ wt : num [1:32] 2.62 2.88 2.32 3.21 3.44 ...
-  ..- attr(*, &quot;terms&quot;)=Classes &#39;terms&#39;, &#39;formula&#39;  language mpg ~ wt
-  .. .. ..- attr(*, &quot;variables&quot;)= language list(mpg, wt)
-  .. .. ..- attr(*, &quot;factors&quot;)= int [1:2, 1] 0 1
-  .. .. .. ..- attr(*, &quot;dimnames&quot;)=List of 2
-  .. .. .. .. ..$ : chr [1:2] &quot;mpg&quot; &quot;wt&quot;
-  .. .. .. .. ..$ : chr &quot;wt&quot;
-  .. .. ..- attr(*, &quot;term.labels&quot;)= chr &quot;wt&quot;
-  .. .. ..- attr(*, &quot;order&quot;)= int 1
-  .. .. ..- attr(*, &quot;intercept&quot;)= int 1
-  .. .. ..- attr(*, &quot;response&quot;)= int 1
-  .. .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: R_GlobalEnv&gt; 
-  .. .. ..- attr(*, &quot;predvars&quot;)= language list(mpg, wt)
-  .. .. ..- attr(*, &quot;dataClasses&quot;)= Named chr [1:2] &quot;numeric&quot; &quot;numeric&quot;
-  .. .. .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;mpg&quot; &quot;wt&quot;
- - attr(*, &quot;class&quot;)= chr &quot;lm&quot;</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a></a>model<span class="sc">$</span>coefficients</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>(Intercept)          wt 
-  37.285126   -5.344472 </code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>my_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb6-2"><a></a>  <span class="at">name =</span> <span class="st">&quot;Bill&quot;</span>,</span>
+<span id="cb6-3"><a></a>  <span class="at">age =</span> <span class="dv">35</span>,</span>
+<span id="cb6-4"><a></a>  <span class="at">scores =</span> <span class="fu">c</span>(<span class="dv">92</span>, <span class="dv">87</span>, <span class="dv">95</span>),</span>
+<span id="cb6-5"><a></a>  <span class="at">passed =</span> <span class="cn">TRUE</span></span>
+<span id="cb6-6"><a></a>)</span>
+<span id="cb6-7"><a></a></span>
+<span id="cb6-8"><a></a>my_list</span>
+<span id="cb6-9"><a></a></span>
+<span id="cb6-10"><a></a><span class="co">#Results are stored as a list</span></span>
+<span id="cb6-11"><a></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt, <span class="at">data =</span> mtcars)</span>
+<span id="cb6-12"><a></a><span class="fu">class</span>(model)</span>
+<span id="cb6-13"><a></a></span>
+<span id="cb6-14"><a></a><span class="fu">is.list</span>(model)</span>
+<span id="cb6-15"><a></a></span>
+<span id="cb6-16"><a></a><span class="fu">str</span>(model)</span>
+<span id="cb6-17"><a></a></span>
+<span id="cb6-18"><a></a>model<span class="sc">$</span>coefficients</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </section>
@@ -1646,76 +1502,32 @@ $passed
 <p>You can use the <code>c()</code> function to concatenate values into a vector or list. These can be simple or you can combine lists or nested structures. The argument <code>recursive = TRUE/FALSE</code> is useful when combining lists or nested structures. Set <code>recursive = TRUE</code> to flatten the input. Set <code>recursive = FALSE</code> to preserve the structure.</p>
 <div class="code-box">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a></a><span class="co"># Combine character vectors</span></span>
-<span id="cb63-2"><a></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb63-3"><a></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;yellow&quot;</span>)</span>
-<span id="cb63-4"><a></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(a, b)</span>
-<span id="cb63-5"><a></a>colors</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;red&quot;    &quot;blue&quot;   &quot;green&quot;  &quot;yellow&quot;</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a></a><span class="co"># Combining lists </span></span>
-<span id="cb65-2"><a></a>x <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;red&quot;</span>, <span class="dv">1</span>, <span class="cn">TRUE</span>)</span>
-<span id="cb65-3"><a></a>y <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;green&quot;</span>, <span class="fu">list</span>( <span class="st">&quot;yellow&quot;</span> , <span class="cn">FALSE</span>, <span class="dv">6</span>))</span>
-<span id="cb65-4"><a></a>combo1 <span class="ot">&lt;-</span> <span class="fu">c</span>(x, y, <span class="at">recursive =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb65-5"><a></a>combo1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1]]
-[1] &quot;red&quot;
-
-[[2]]
-[1] 1
-
-[[3]]
-[1] TRUE
-
-[[4]]
-[1] &quot;green&quot;
-
-[[5]]
-[[5]][[1]]
-[1] &quot;yellow&quot;
-
-[[5]][[2]]
-[1] FALSE
-
-[[5]][[3]]
-[1] 6</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a></a>combo2 <span class="ot">&lt;-</span> <span class="fu">c</span>(x, y, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb67-2"><a></a>combo2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;red&quot;    &quot;1&quot;      &quot;TRUE&quot;   &quot;green&quot;  &quot;yellow&quot; &quot;FALSE&quot;  &quot;6&quot;     </code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a></a><span class="co"># Practical example of recursive</span></span>
-<span id="cb69-2"><a></a>person1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">&quot;Ava&quot;</span>, <span class="at">score =</span> <span class="dv">88</span>)</span>
-<span id="cb69-3"><a></a>person2 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">&quot;Ben&quot;</span>, <span class="at">score =</span> <span class="dv">92</span>)</span>
-<span id="cb69-4"><a></a>people <span class="ot">&lt;-</span> <span class="fu">list</span>(person1, person2)</span>
-<span id="cb69-5"><a></a>paired <span class="ot">&lt;-</span> <span class="fu">c</span>(people, <span class="at">recursive =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb69-6"><a></a><span class="fu">str</span>(paired)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>List of 2
- $ :List of 2
-  ..$ name : chr &quot;Ava&quot;
-  ..$ score: num 88
- $ :List of 2
-  ..$ name : chr &quot;Ben&quot;
-  ..$ score: num 92</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a></a>paired[[<span class="dv">1</span>]]<span class="sc">$</span>name</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;Ava&quot;</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a></a>paired[[<span class="dv">1</span>]]<span class="sc">$</span>score</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 88</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a></a>flattened <span class="ot">&lt;-</span> <span class="fu">c</span>(people, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb75-2"><a></a><span class="fu">str</span>(flattened)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> Named chr [1:4] &quot;Ava&quot; &quot;88&quot; &quot;Ben&quot; &quot;92&quot;
- - attr(*, &quot;names&quot;)= chr [1:4] &quot;name&quot; &quot;score&quot; &quot;name&quot; &quot;score&quot;</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="co"># Combine character vectors</span></span>
+<span id="cb7-2"><a></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb7-3"><a></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;yellow&quot;</span>)</span>
+<span id="cb7-4"><a></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(a, b)</span>
+<span id="cb7-5"><a></a>colors</span>
+<span id="cb7-6"><a></a></span>
+<span id="cb7-7"><a></a><span class="co"># Combining lists</span></span>
+<span id="cb7-8"><a></a>x <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;red&quot;</span>, <span class="dv">1</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb7-9"><a></a>y <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;green&quot;</span>, <span class="fu">list</span>(<span class="st">&quot;yellow&quot;</span>, <span class="cn">FALSE</span>, <span class="dv">6</span>))</span>
+<span id="cb7-10"><a></a>combo1 <span class="ot">&lt;-</span> <span class="fu">c</span>(x, y, <span class="at">recursive =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-11"><a></a>combo1</span>
+<span id="cb7-12"><a></a></span>
+<span id="cb7-13"><a></a>combo2 <span class="ot">&lt;-</span> <span class="fu">c</span>(x, y, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-14"><a></a>combo2</span>
+<span id="cb7-15"><a></a></span>
+<span id="cb7-16"><a></a><span class="co"># Practical example of recursive</span></span>
+<span id="cb7-17"><a></a>person1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">&quot;Ava&quot;</span>, <span class="at">score =</span> <span class="dv">88</span>)</span>
+<span id="cb7-18"><a></a>person2 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">&quot;Ben&quot;</span>, <span class="at">score =</span> <span class="dv">92</span>)</span>
+<span id="cb7-19"><a></a>people <span class="ot">&lt;-</span> <span class="fu">list</span>(person1, person2)</span>
+<span id="cb7-20"><a></a>paired <span class="ot">&lt;-</span> <span class="fu">c</span>(people, <span class="at">recursive =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-21"><a></a><span class="fu">str</span>(paired)</span>
+<span id="cb7-22"><a></a>paired[[<span class="dv">1</span>]]<span class="sc">$</span>name</span>
+<span id="cb7-23"><a></a>paired[[<span class="dv">1</span>]]<span class="sc">$</span>score</span>
+<span id="cb7-24"><a></a></span>
+<span id="cb7-25"><a></a>flattened <span class="ot">&lt;-</span> <span class="fu">c</span>(people, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-26"><a></a><span class="fu">str</span>(flattened)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </section>
@@ -1744,110 +1556,37 @@ $passed
 <p>Tibbles require <strong>exact column names</strong>, preventing this problem.</p>
 <div class="code-box">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a></a><span class="fu">library</span>(tibble)</span>
-<span id="cb77-2"><a></a></span>
-<span id="cb77-3"><a></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">experiment_group =</span> <span class="fu">c</span>(<span class="st">&quot;control&quot;</span>, <span class="st">&quot;treatment&quot;</span>))</span>
-<span id="cb77-4"><a></a>df1<span class="sc">$</span>experiment</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;control&quot;   &quot;treatment&quot;</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a></a>tb1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">experiment_group =</span> <span class="fu">c</span>(<span class="st">&quot;control&quot;</span>, <span class="st">&quot;treatment&quot;</span>))</span>
-<span id="cb79-2"><a></a>tb1<span class="sc">$</span>experiment</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>NULL</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a></a><span class="co"># Example where partial matching can cause bugs.</span></span>
-<span id="cb81-2"><a></a><span class="co">#Say you have a dataframe with age and height. You want to calcualte the age </span></span>
-<span id="cb81-3"><a></a><span class="co"># when people will graduate based on their current age: </span></span>
-<span id="cb81-4"><a></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb81-5"><a></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">45</span>),</span>
-<span id="cb81-6"><a></a>  <span class="at">average_height =</span> <span class="fu">c</span>(<span class="dv">55</span>, <span class="dv">62</span>, <span class="dv">50</span>)</span>
-<span id="cb81-7"><a></a>)</span>
-<span id="cb81-8"><a></a>df<span class="sc">$</span>grad_age <span class="ot">&lt;-</span> df<span class="sc">$</span>ave <span class="sc">+</span> <span class="dv">5</span></span>
-<span id="cb81-9"><a></a><span class="fu">print</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  age average_height grad_age
-1  25             55       60
-2  30             62       67
-3  45             50       55</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a></a>tb <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb83-2"><a></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">45</span>),</span>
-<span id="cb83-3"><a></a>  <span class="at">average_height =</span> <span class="fu">c</span>(<span class="dv">55</span>, <span class="dv">62</span>, <span class="dv">50</span>)</span>
-<span id="cb83-4"><a></a>)</span>
-<span id="cb83-5"><a></a>tb<span class="sc">$</span>grad_age <span class="ot">&lt;-</span> tb<span class="sc">$</span>ave <span class="sc">+</span> <span class="dv">5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in `$&lt;-`:
-! Assigned data `tb$ave + 5` must be compatible with existing data.
-✖ Existing data has 3 rows.
-✖ Assigned data has 0 rows.
-ℹ Only vectors of size 1 are recycled.
-Caused by error in `vectbl_recycle_rhs_rows()`:
-! Can&#39;t recycle input of size 0 to size 3.</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a></a><span class="co"># Create and print normal data frame and tibble for comparison</span></span>
-<span id="cb85-2"><a></a><span class="fu">class</span>(mtcars)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;data.frame&quot;</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a></a>mtcars</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
-Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
-Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
-Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
-Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
-Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
-Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
-Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
-Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
-Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
-Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
-Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
-Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
-Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
-Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
-Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
-Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
-Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
-Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
-Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
-Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
-Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
-AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
-Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
-Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
-Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
-Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
-Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
-Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
-Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
-Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
-Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a></a>tb3 <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(mtcars)</span>
-<span id="cb89-2"><a></a><span class="fu">class</span>(tb3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a></a>tb3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 32 × 11
-     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1  21       6  160    110  3.9   2.62  16.5     0     1     4     4
- 2  21       6  160    110  3.9   2.88  17.0     0     1     4     4
- 3  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
- 4  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
- 5  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
- 6  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
- 7  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
- 8  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
- 9  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
-10  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
-# ℹ 22 more rows</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">library</span>(tibble)</span>
+<span id="cb8-2"><a></a></span>
+<span id="cb8-3"><a></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">experiment_group =</span> <span class="fu">c</span>(<span class="st">&quot;control&quot;</span>, <span class="st">&quot;treatment&quot;</span>))</span>
+<span id="cb8-4"><a></a>df1<span class="sc">$</span>experiment</span>
+<span id="cb8-5"><a></a>tb1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">experiment_group =</span> <span class="fu">c</span>(<span class="st">&quot;control&quot;</span>, <span class="st">&quot;treatment&quot;</span>))</span>
+<span id="cb8-6"><a></a>tb1<span class="sc">$</span>experiment</span>
+<span id="cb8-7"><a></a></span>
+<span id="cb8-8"><a></a><span class="co"># Example where partial matching can cause bugs.</span></span>
+<span id="cb8-9"><a></a><span class="co">#Say you have a dataframe with age and height. You want to calcualte the age</span></span>
+<span id="cb8-10"><a></a><span class="co"># when people will graduate based on their current age:</span></span>
+<span id="cb8-11"><a></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb8-12"><a></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">45</span>),</span>
+<span id="cb8-13"><a></a>  <span class="at">average_height =</span> <span class="fu">c</span>(<span class="dv">55</span>, <span class="dv">62</span>, <span class="dv">50</span>)</span>
+<span id="cb8-14"><a></a>)</span>
+<span id="cb8-15"><a></a>df<span class="sc">$</span>grad_age <span class="ot">&lt;-</span> df<span class="sc">$</span>ave <span class="sc">+</span> <span class="dv">5</span></span>
+<span id="cb8-16"><a></a><span class="fu">print</span>(df)</span>
+<span id="cb8-17"><a></a></span>
+<span id="cb8-18"><a></a></span>
+<span id="cb8-19"><a></a>tb <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb8-20"><a></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">45</span>),</span>
+<span id="cb8-21"><a></a>  <span class="at">average_height =</span> <span class="fu">c</span>(<span class="dv">55</span>, <span class="dv">62</span>, <span class="dv">50</span>)</span>
+<span id="cb8-22"><a></a>)</span>
+<span id="cb8-23"><a></a>tb<span class="sc">$</span>grad_age <span class="ot">&lt;-</span> tb<span class="sc">$</span>ave <span class="sc">+</span> <span class="dv">5</span></span>
+<span id="cb8-24"><a></a></span>
+<span id="cb8-25"><a></a><span class="co"># Create and print normal data frame and tibble for comparison</span></span>
+<span id="cb8-26"><a></a><span class="fu">class</span>(mtcars)</span>
+<span id="cb8-27"><a></a>mtcars</span>
+<span id="cb8-28"><a></a></span>
+<span id="cb8-29"><a></a>tb3 <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(mtcars)</span>
+<span id="cb8-30"><a></a><span class="fu">class</span>(tb3)</span>
+<span id="cb8-31"><a></a>tb3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1952,7 +1691,7 @@ e.g., <code>https://github.com/bhelsel/RLAB</code></p></li>
 <li><p>Clone it to your local machine</p></li>
 </ol>
 <p>Now you can make changes and eventually make a pull request!</p>
-<p><img role="img" data-src="https://pages.github.nceas.ucsb.edu/lter/github-workshop/images/git-fork-workflow.png" class></p>
+<!-- ![](https://pages.github.nceas.ucsb.edu/lter/github-workshop/images/git-fork-workflow.png){.nostretch} -->
 </section>
 <section id="fun-free-resources" class="slide level2">
 <h2>Fun FREE Resources</h2>
