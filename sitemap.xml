@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://bhelsel.github.io/RLAB/presentations/Introduction/Introduction.html</loc>
-    <lastmod>2026-05-20T19:08:13.510Z</lastmod>
+    <loc>https://bhelsel.github.io/RLAB/presentations.html</loc>
+    <lastmod>2026-05-20T18:55:30.228Z</lastmod>
   </url>
   <url>
     <loc>https://bhelsel.github.io/RLAB/index.html</loc>
@@ -13,7 +13,7 @@
     <lastmod>2026-05-20T16:19:50.980Z</lastmod>
   </url>
   <url>
-    <loc>https://bhelsel.github.io/RLAB/presentations.html</loc>
-    <lastmod>2026-05-20T18:55:30.228Z</lastmod>
+    <loc>https://bhelsel.github.io/RLAB/introduction.html</loc>
+    <lastmod>2026-05-20T19:43:40.062Z</lastmod>
   </url>
 </urlset>
