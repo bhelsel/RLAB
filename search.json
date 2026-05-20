@@ -529,7 +529,7 @@
     "href": "Presentations/Advanced R Foundations/vectors.html#attributes",
     "title": "Advanced R: Vectors",
     "section": "Attributes",
-    "text": "Attributes\nEvery vector has attributes name-value pairs in the form of a list that attach metadata to an object\nDimension and class attributes are among the most important:\n\nDimension: Turns vectors into matrices and arrays\nClass: Powers the S3 generic functions\n\nIndividual attributes can be retrieved and modified with attr\n\nfile &lt;- system.file(\"extdata/example.gt3x\", package = \"agcounts\")\ndata &lt;- agcounts::agread(file, parser = \"read.gt3x\")\n\nattr(data, \"start_time\")\n#&gt; [1] \"2023-06-13 08:34:00 GMT\"\nattr(data, \"sample_rate\")\n#&gt; [1] 100\n\nMany attributes can be retrieved with attributes or set with structure\n\n\n\na &lt;- structure(\n  1:3,\n  x = \"abcdef\",\n  y = 4:6\n)\n\nstr(attributes(a))\n\n\n\n\n\n\nList of 2\n $ x: chr \"abcdef\"\n $ y: int [1:3] 4 5 6\n\n\nAttributes are lost by most operations.\n\nattributes(sum(a))\n#&gt; NULL\n\nOnly two attributes are routinely preserved: names and dim"
+    "text": "Attributes\nEvery vector has attributes name-value pairs in the form of a list that attach metadata to an object\nDimension and class attributes are among the most important:\n\nDimension: Turns vectors into matrices and arrays\nClass: Powers the S3 generic functions\n\nIndividual attributes can be retrieved and modified with attr\n\nfile &lt;- system.file(\"extdata/example.gt3x\", package = \"agcounts\")\ndata &lt;- agcounts::agread(file, parser = \"read.gt3x\")\n\nattr(data, \"start_time\")\n#&gt; [1] \"2023-06-13 08:34:00 GMT\"\nattr(data, \"sample_rate\")\n#&gt; [1] 100\n\nMany attributes can be retrieved with attributes or set with structure\n\n\n\na &lt;- structure(\n  1:3,\n  x = \"abcdef\",\n  y = 4:6\n)\n\nstr(attributes(a))\n\n\n\n\nAttributes are lost by most operations.\n\nattributes(sum(a))\n#&gt; NULL\n\nOnly two attributes are routinely preserved: names and dim"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/vectors.html#names",
@@ -543,7 +543,7 @@
     "href": "Presentations/Advanced R Foundations/vectors.html#dim",
     "title": "Advanced R: Vectors",
     "section": "dim",
-    "text": "dim\nAn integer vector short for dimensions that turns vectors into matrices or arrays\nAdding a dim attribute to a vector allows it to become a 2-dimensional matrix or multi-dimensional array. Matrices and arrays are primarily used for mathematical and statistical tools. You can create them using matrix() or array() but also by modifying the dimensions.\n\nx &lt;- 1:6\ndim(x) &lt;- c(3, 2) # or matrix(x, nrow = 3, ncol = 2)\nprint(x)\n\n     [,1] [,2]\n[1,]    1    4\n[2,]    2    5\n[3,]    3    6\n\ny &lt;- 1:12\ndim(y) &lt;- c(3, 2, 2) # or array(y, c(3, 2, 2))\nprint(y)\n\n, , 1\n\n     [,1] [,2]\n[1,]    1    4\n[2,]    2    5\n[3,]    3    6\n\n, , 2\n\n     [,1] [,2]\n[1,]    7   10\n[2,]    8   11\n[3,]    9   12"
+    "text": "dim\nAn integer vector short for dimensions that turns vectors into matrices or arrays\nAdding a dim attribute to a vector allows it to become a 2-dimensional matrix or multi-dimensional array. Matrices and arrays are primarily used for mathematical and statistical tools. You can create them using matrix() or array() but also by modifying the dimensions.\n\nx &lt;- 1:6\ndim(x) &lt;- c(3, 2) # or matrix(x, nrow = 3, ncol = 2)\nprint(x)\n\ny &lt;- 1:12\ndim(y) &lt;- c(3, 2, 2) # or array(y, c(3, 2, 2))\nprint(y)"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/vectors.html#class",
@@ -564,7 +564,7 @@
     "href": "Presentations/Advanced R Foundations/vectors.html#dates",
     "title": "Advanced R: Vectors",
     "section": "Dates",
-    "text": "Dates\nDate vectors are built on top of double vectors.\n\ntoday &lt;- Sys.Date()\ntypeof(today)\n#&gt; [1] \"double\"\nstr(attributes(today))\n#&gt; List of 1\n#&gt; $ class: chr \"Date\"\n\nRemoving the class shows the number of days since 1970-01-01 (the Unix Epoch)\n\nunclass(as.Date(Sys.Date()))\n\n[1] 20593"
+    "text": "Dates\nDate vectors are built on top of double vectors.\n\ntoday &lt;- Sys.Date()\ntypeof(today)\n#&gt; [1] \"double\"\nstr(attributes(today))\n#&gt; List of 1\n#&gt; $ class: chr \"Date\"\n\nRemoving the class shows the number of days since 1970-01-01 (the Unix Epoch)\n\nunclass(as.Date(Sys.Date()))"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/vectors.html#date-times",
@@ -854,53 +854,60 @@
     "text": "Boolean algebra vs. sets\nUsing set operations (integer subsetting) over Boolean algebra (logical subsetting) may be more effective when you want to find the first (or last) TRUE or you only have a few TRUE values.\nHere are the Boolean operators with their set equivalents.\n\n\n\nBoolean Algebra (Logical)\nSet Operators (Integer)\n\n\n\n\nX & Y\nintersect(X, Y)\n\n\nX | Y\nunion(X, Y)\n\n\nX & !Y\nsetdiff(X, Y)\n\n\nxor(X, Y)\nsetdiff(union(X, Y), intersect(X, Y))\n\n\n\n\nxor: Stands for exclusive or and returns TRUE if exactly one of X or Y is TRUE and the other is FALSE\n\nwhich() allows the conversion from a Boolean representation to integer, but a function needs to be created to reverse the operation.\n\n(x1 &lt;- 1:10 %% 2 == 0)\n#&gt; [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE\n(x2 &lt;- which(x1))\n#&gt; [1]  2  4  6  8 10\n\nunwhich &lt;- function(x, n) {\n  out &lt;- rep(FALSE, n)\n  out[x] &lt;- TRUE\n  out\n}\n\nunwhich(x2, 10)\n#&gt; [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE"
   },
   {
-    "objectID": "Presentations/Template/00-Template.html#what-is-r",
-    "href": "Presentations/Template/00-Template.html#what-is-r",
+    "objectID": "Presentations/Template/template.html#what-is-r",
+    "href": "Presentations/Template/template.html#what-is-r",
     "title": "Introduction to R Programming",
     "section": "What is R?",
     "text": "What is R?\n\nR is a language and environment for statistical computing and graphics\n\n\nKey Strengths:\n\nExtensive package ecosystem (CRAN)\nPowerful data visualization tools\nActive research community\nOpen source and free"
   },
   {
-    "objectID": "Presentations/Template/00-Template.html#getting-started",
-    "href": "Presentations/Template/00-Template.html#getting-started",
+    "objectID": "Presentations/Template/template.html#getting-started",
+    "href": "Presentations/Template/template.html#getting-started",
     "title": "Introduction to R Programming",
     "section": "Getting Started",
     "text": "Getting Started\n\n\nInstallation Requirements:\n\nBase R: Core language\nRStudio: Integrated development environment\nPackages: Extended functionality\n\n\n💡 Tip: Always update R and packages regularly for latest features\n\n\nEssential Packages:\n\n\n\nPackage\nPurpose\n\n\n\n\ntidyverse\nData manipulation\n\n\nggplot2\nVisualization\n\n\ndplyr\nData wrangling\n\n\nreadr\nData import"
   },
   {
-    "objectID": "Presentations/Template/00-Template.html#r-data-types-and-structures",
-    "href": "Presentations/Template/00-Template.html#r-data-types-and-structures",
+    "objectID": "Presentations/Template/template.html#r-data-types-and-structures",
+    "href": "Presentations/Template/template.html#r-data-types-and-structures",
     "title": "Introduction to R Programming",
     "section": "R Data Types and Structures",
-    "text": "R Data Types and Structures\n\nFundamental Data Types\n\n\n# Numeric data\nnumeric_var &lt;- 42.7\nclass(numeric_var)\n\n[1] \"numeric\"\n\n# Character strings\ntext_var &lt;- \"Hello, R!\"\nnchar(text_var)\n\n[1] 9\n\n# Logical values\nlogical_var &lt;- TRUE\nis.logical(logical_var)\n\n[1] TRUE\n\n# Factors for categories\nfactor_var &lt;- factor(c(\"Low\", \"Medium\", \"High\"))\nlevels(factor_var)\n\n[1] \"High\"   \"Low\"    \"Medium\""
+    "text": "R Data Types and Structures\n\nFundamental Data Types\n\n\n# Numeric data\nnumeric_var &lt;- 42.7\nclass(numeric_var)\n\n# Character strings\ntext_var &lt;- \"Hello, R!\"\nnchar(text_var)\n\n# Logical values\nlogical_var &lt;- TRUE\nis.logical(logical_var)\n\n# Factors for categories\nfactor_var &lt;- factor(c(\"Low\", \"Medium\", \"High\"))\nlevels(factor_var)"
   },
   {
-    "objectID": "Presentations/Template/00-Template.html#data-structures-in-r",
-    "href": "Presentations/Template/00-Template.html#data-structures-in-r",
+    "objectID": "Presentations/Template/template.html#data-structures-in-r",
+    "href": "Presentations/Template/template.html#data-structures-in-r",
     "title": "Introduction to R Programming",
     "section": "Data Structures in R",
     "text": "Data Structures in R\nVector Operations:\n\n# Creating vectors\nnumbers &lt;- c(1, 5, 10, 15, 20)\nnames &lt;- c(\"Alice\", \"Bob\", \"Charlie\")\n\n# Vector arithmetic (vectorized operations)\nnumbers * 2\n\n[1]  2 10 20 30 40\n\n\n\n\nData Frames - The Heart of R\nData frames are R’s primary data structure for rectangular data, similar to spreadsheets or SQL tables.\n\n\n# Creating a data frame\ndf &lt;- data.frame(\n  Name = c(\"Alice\", \"Bob\", \"Charlie\"),\n  Age = c(25, 30, 35),\n  Score = c(85, 92, 78)\n)\nhead(df, 2)\n\n   Name Age Score\n1 Alice  25    85\n2   Bob  30    92"
   },
   {
-    "objectID": "Presentations/Template/00-Template.html#data-import-and-export",
-    "href": "Presentations/Template/00-Template.html#data-import-and-export",
+    "objectID": "Presentations/Template/template.html#data-import-and-export",
+    "href": "Presentations/Template/template.html#data-import-and-export",
     "title": "Introduction to R Programming",
     "section": "Data Import and Export",
-    "text": "Data Import and Export\n\nBest Practice: Always examine your data structure with str(), summary(), and head() after importing\n\n\n\nReading Data:\n\n# Read CSV\nread.csv(\"data.csv\")\n# Read Excel\nreadxl::read_excel(\"data.xlsx\")\n``\n`\n:::\n\n::: {.column width=\"50%\"}\n**Writing Data:**\n\n`\n``\n{\n  r\n}\n#| echo: true\n#| eval: false\n\n# Save as CSV\nwrite.csv(data, \"output.csv\")\n# Save R objects\nsave(data, file = \"data.RData\")\n\n`\n`\n`\n:::\n:::\n\n## Data Visualization with ggplot2\n\n`\n``\n{\n  r\n}\n#| echo: true\n#| eval: true\n#| fig-width: 10\n#| fig-height: 4\n\nlibrary(ggplot2)\n\n# Sample data\nsample_data &lt;- data.frame(\n  x = 1:10,\n  y = c(2, 4, 3, 8, 6, 9, 7, 10, 12, 11),\n  group = rep(c(\"A\", \"B\"), each = 5)\n)\n\n# Create a professional plot\nggplot(sample_data, aes(x = x, y = y, color = group)) +\n  geom_line(size = 1.2) +\n  geom_point(size = 3) +\n  theme_minimal() +\n  labs(\n    title = \"Sample Time Series Data\",\n    x = \"Time\",\n    y = \"Value\",\n    color = \"Group\"\n  ) +\n  theme(plot.title = element_text(hjust = 0.5, size = 14))\n\n\nStatistical Analysis Workflow\n\nReproducible Research Principles: Document your analysis, use version control, and create reproducible scripts\n\nTypical R Analysis Pipeline:\n\nData Import → read.csv(), read_excel()\nData Cleaning → dplyr functions, missing value handling\n\nExploratory Analysis → summary(), cor(), visualizations\nStatistical Modeling → lm(), glm(), specialized packages\nResults Interpretation → Coefficients, p-values, effect sizes\nReporting → R Markdown, Quarto, publication-ready outputs\n\n\n\nNext Steps and Resources\n\n\nLearning Path:\n\nFundamentals: R syntax, data types, functions\nData Manipulation: tidyverse\nStatistics: Hypothesis testing, regression\nAdvanced Topics: Shiny apps\n\n\nGetting Help:\n\n# Built-in help\n?function_name\nhelp(\"lm\")\n\n\nRemember: R has a steep learning curve initially, but becomes incredibly powerful once you master the basics.\n\n\n\nQuestions?\nContact: your.email@institution.edu"
+    "text": "Data Import and Export\n\nBest Practice: Always examine your data structure with str(), summary(), and head() after importing\n\n\n\nReading Data:\n\n# Read CSV\nread.csv(\"data.csv\")\n# Read Excel\nreadxl::read_excel(\"data.xlsx\")\n\n\nWriting Data:\n\n# Save as CSV\nwrite.csv(data, \"output.csv\")\n# Save R objects\nsave(data, file = \"data.RData\")"
   },
   {
-    "objectID": "Presentations/Template/00-Template.html#statistical-analysis-workflow",
-    "href": "Presentations/Template/00-Template.html#statistical-analysis-workflow",
+    "objectID": "Presentations/Template/template.html#data-visualization-with-ggplot2",
+    "href": "Presentations/Template/template.html#data-visualization-with-ggplot2",
+    "title": "Introduction to R Programming",
+    "section": "Data Visualization with ggplot2",
+    "text": "Data Visualization with ggplot2\n\nlibrary(ggplot2)\n\n# Sample data\nsample_data &lt;- data.frame(\n  x = 1:10,\n  y = c(2, 4, 3, 8, 6, 9, 7, 10, 12, 11),\n  group = rep(c(\"A\", \"B\"), each = 5)\n)\n\n# Create a professional plot\nggplot(sample_data, aes(x = x, y = y, color = group)) +\n  geom_line(size = 1.2) +\n  geom_point(size = 3) +\n  theme_minimal() +\n  labs(\n    title = \"Sample Time Series Data\",\n    x = \"Time\",\n    y = \"Value\",\n    color = \"Group\"\n  ) +\n  theme(plot.title = element_text(hjust = 0.5, size = 14))"
+  },
+  {
+    "objectID": "Presentations/Template/template.html#statistical-analysis-workflow",
+    "href": "Presentations/Template/template.html#statistical-analysis-workflow",
     "title": "Introduction to R Programming",
     "section": "Statistical Analysis Workflow",
     "text": "Statistical Analysis Workflow\n\nReproducible Research Principles: Document your analysis, use version control, and create reproducible scripts\n\nTypical R Analysis Pipeline:\n\nData Import → read.csv(), read_excel()\nData Cleaning → dplyr functions, missing value handling\n\nExploratory Analysis → summary(), cor(), visualizations\nStatistical Modeling → lm(), glm(), specialized packages\nResults Interpretation → Coefficients, p-values, effect sizes\nReporting → R Markdown, Quarto, publication-ready outputs"
   },
   {
-    "objectID": "Presentations/Template/00-Template.html#next-steps-and-resources",
-    "href": "Presentations/Template/00-Template.html#next-steps-and-resources",
+    "objectID": "Presentations/Template/template.html#next-steps-and-resources",
+    "href": "Presentations/Template/template.html#next-steps-and-resources",
     "title": "Introduction to R Programming",
     "section": "Next Steps and Resources",
-    "text": "Next Steps and Resources\n\n\nLearning Path:\n\nFundamentals: R syntax, data types, functions\nData Manipulation: tidyverse\nStatistics: Hypothesis testing, regression\nAdvanced Topics: Shiny apps\n\n\nGetting Help:\n\n# Built-in help\n?function_name\nhelp(\"lm\")\n\n\nRemember: R has a steep learning curve initially, but becomes incredibly powerful once you master the basics.\n\n\n\nQuestions?\nContact: your.email@institution.edu"
+    "text": "Next Steps and Resources\n\n\nLearning Path:\n\nFundamentals: R syntax, data types, functions\nData Manipulation: tidyverse\nStatistics: Hypothesis testing, regression\nAdvanced Topics: Shiny apps\n\n\nGetting Help:\n\n# Built-in help\n?function_name\nhelp(\"lm\")\n\n\nRemember: R has a steep learning curve initially, but becomes incredibly powerful once you master the basics."
   },
   {
     "objectID": "about.html",
@@ -1201,7 +1208,7 @@
     "href": "Presentations/Advanced R Foundations/functions.html#attributes",
     "title": "Advanced R: Functions",
     "section": "Attributes",
-    "text": "Attributes\nFunctions may have different attributes like srcref short for source reference. It points to the source code used to create the function and is used for printing because it contains code comments and other formatting.\n\nf02 &lt;- function(x, y) {\n    # A comment\n    x + y\n}\n\nattr(f02, \"srcref\")\n\n#&gt; function(x, y){\n#&gt;   # A comment\n#&gt;   x + y\n#&gt; }"
+    "text": "Attributes\nFunctions may have different attributes like srcref short for source reference. It points to the source code used to create the function and is used for printing because it contains code comments and other formatting.\n\nf02 &lt;- function(x, y) {\n  # A comment\n  x + y\n}\n\nattr(f02, \"srcref\")\n\n#&gt; function(x, y){\n#&gt;   # A comment\n#&gt;   x + y\n#&gt; }"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/functions.html#primitive-functions",
@@ -1215,7 +1222,7 @@
     "href": "Presentations/Advanced R Foundations/functions.html#first-class-functions",
     "title": "Advanced R: Functions",
     "section": "First-class functions",
-    "text": "First-class functions\n\n\nR functions are objects without a special syntax for defining and naming a function. You simply create a function object using function and bind it to a name with &lt;-.\n\n\n\n\nf01 &lt;- function(x) {\n    sin(1 / x^2)\n}\n\nNearly all functions are bound to a name, but there are times where anonymous or list functions are preferred.\n\nunlist(lapply(mtcars, function(x) length(unique(x))))\n#&gt;   mpg  cyl disp  hp  drat  wt  qsec   vs  am  gear carb\n#&gt;   25    3   27   22   22   29   30    2    2    3    6\n\nfuns &lt;- list(\n    half = function(x) x / 2,\n    double = function(x) x * 2\n)\n\nfuns$double(10)\n#&gt; [1] 20\nfuns$half(10)\n#&gt; [1] 5"
+    "text": "First-class functions\n\n\nR functions are objects without a special syntax for defining and naming a function. You simply create a function object using function and bind it to a name with &lt;-.\n\n\n\n\nf01 &lt;- function(x) {\n  sin(1 / x^2)\n}\n\nNearly all functions are bound to a name, but there are times where anonymous or list functions are preferred.\n\nunlist(lapply(mtcars, function(x) length(unique(x))))\n#&gt;   mpg  cyl disp  hp  drat  wt  qsec   vs  am  gear carb\n#&gt;   25    3   27   22   22   29   30    2    2    3    6\n\nfuns &lt;- list(\n  half = function(x) x / 2,\n  double = function(x) x * 2\n)\n\nfuns$double(10)\n#&gt; [1] 20\nfuns$half(10)\n#&gt; [1] 5"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/functions.html#invoking-a-function",
@@ -1229,7 +1236,7 @@
     "href": "Presentations/Advanced R Foundations/functions.html#function-composition",
     "title": "Advanced R: Functions",
     "section": "Function composition",
-    "text": "Function composition\nBase R provides two ways to compose multiple function calls. You can either save the intermediate results as variables or nest the function calls.\n\nsquare &lt;- function(x) x^2\ndeviation &lt;- function(x) x - mean(x)\n\nx &lt;- 1:20\n\n# Saving intermediate results\nout &lt;- deviation(x)\nout &lt;- square(out)\nout &lt;- mean(out)\nout &lt;- sqrt(out)\n\n# Nested\nsqrt(mean(square(deviation(x))))\n\nThe magrittr package provides a third option using the binary operator %&gt;% which is called a pipe and pronounced as “and then”. Base R developed a comparable solution with |&gt;; however, it lacks some of the advanced features of %&gt;% like being able to use a placeholder . in multiple locations.\n\nlibrary(magrittr)\n\nx %&gt;%\n    deviation() %&gt;%\n    square() %&gt;%\n    mean() %&gt;%\n    {\n        paste0(\"Square root of \", ., \" is \", round(sqrt(.), 2))\n    }"
+    "text": "Function composition\nBase R provides two ways to compose multiple function calls. You can either save the intermediate results as variables or nest the function calls.\n\nsquare &lt;- function(x) x^2\ndeviation &lt;- function(x) x - mean(x)\n\nx &lt;- 1:20\n\n# Saving intermediate results\nout &lt;- deviation(x)\nout &lt;- square(out)\nout &lt;- mean(out)\nout &lt;- sqrt(out)\n\n# Nested\nsqrt(mean(square(deviation(x))))\n\nThe magrittr package provides a third option using the binary operator %&gt;% which is called a pipe and pronounced as “and then”. Base R developed a comparable solution with |&gt;; however, it lacks some of the advanced features of %&gt;% like being able to use a placeholder . in multiple locations.\n\nlibrary(magrittr)\n\nx %&gt;%\n  deviation() %&gt;%\n  square() %&gt;%\n  mean() %&gt;%\n  {\n    paste0(\"Square root of \", ., \" is \", round(sqrt(.), 2))\n  }"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/functions.html#lexical-scoping",
@@ -1243,21 +1250,21 @@
     "href": "Presentations/Advanced R Foundations/functions.html#name-masking",
     "title": "Advanced R: Functions",
     "section": "Name masking",
-    "text": "Name masking\nNames defined inside of a function mask names dfined outside of a function.\n\nx &lt;- 10\ny &lt;- 20\n\ng01 &lt;- function() {\n    x &lt;- 1\n    y &lt;- 2\n    c(x, y)\n}\n\ng01()\n#&gt; [1] 1 2\n\nR looks one level up if a name is not defined inside of a function.\n\nx &lt;- 2\n\ng02 &lt;- function() {\n    y &lt;- 1\n    c(x, y)\n}\n\ng02()\n#&gt; [1] 2 1\n\nThe same rules apply if a function is defined inside another function. If R is unable to find the value, it looks for the value in the location that the function is defined, all the way up to the global environment including other loaded packages.\n\nx &lt;- 1\n\ng03 &lt;- function() {\n    y &lt;- 2\n    i &lt;- function() {\n        z &lt;- 3\n        c(x, y, z)\n    }\n    i()\n}\n\ng03()\n#&gt; [1] 1 2 3"
+    "text": "Name masking\nNames defined inside of a function mask names dfined outside of a function.\n\nx &lt;- 10\ny &lt;- 20\n\ng01 &lt;- function() {\n  x &lt;- 1\n  y &lt;- 2\n  c(x, y)\n}\n\ng01()\n#&gt; [1] 1 2\n\nR looks one level up if a name is not defined inside of a function.\n\nx &lt;- 2\n\ng02 &lt;- function() {\n  y &lt;- 1\n  c(x, y)\n}\n\ng02()\n#&gt; [1] 2 1\n\nThe same rules apply if a function is defined inside another function. If R is unable to find the value, it looks for the value in the location that the function is defined, all the way up to the global environment including other loaded packages.\n\nx &lt;- 1\n\ng03 &lt;- function() {\n  y &lt;- 2\n  i &lt;- function() {\n    z &lt;- 3\n    c(x, y, z)\n  }\n  i()\n}\n\ng03()\n#&gt; [1] 1 2 3"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/functions.html#functions-versus-variables",
     "href": "Presentations/Advanced R Foundations/functions.html#functions-versus-variables",
     "title": "Advanced R: Functions",
     "section": "Functions versus variables",
-    "text": "Functions versus variables\nThe name masking rules apply to functions. However, a function and an object sharing the same name must reside in different environments.\n\ng04 &lt;- function(x) x + 1\ng05 &lt;- function(x) x * 2\n\ng06 &lt;- function() {\n    g04 &lt;- function(x) x + 100\n    g05 &lt;- 10\n    c(g04(10), g05(g05))\n}\n\ng06()\n#&gt; [1] 110 20"
+    "text": "Functions versus variables\nThe name masking rules apply to functions. However, a function and an object sharing the same name must reside in different environments.\n\ng04 &lt;- function(x) x + 1\ng05 &lt;- function(x) x * 2\n\ng06 &lt;- function() {\n  g04 &lt;- function(x) x + 100\n  g05 &lt;- 10\n  c(g04(10), g05(g05))\n}\n\ng06()\n#&gt; [1] 110 20"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/functions.html#a-fresh-start",
     "href": "Presentations/Advanced R Foundations/functions.html#a-fresh-start",
     "title": "Advanced R: Functions",
     "section": "A fresh start",
-    "text": "A fresh start\nA new environment is created each time a function is called to execute the function.\n\ng07 &lt;- function() {\n    if (!exists(\"a\")) {\n        a &lt;- 1\n    } else {\n        a &lt;- a + 1\n    }\n    a\n}\n\ng07()\n#&gt; [1] 1\n\ng07()\n#&gt; [1] 1"
+    "text": "A fresh start\nA new environment is created each time a function is called to execute the function.\n\ng07 &lt;- function() {\n  if (!exists(\"a\")) {\n    a &lt;- 1\n  } else {\n    a &lt;- a + 1\n  }\n  a\n}\n\ng07()\n#&gt; [1] 1\n\ng07()\n#&gt; [1] 1"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/functions.html#dynamic-lookup",
@@ -1271,21 +1278,21 @@
     "href": "Presentations/Advanced R Foundations/functions.html#lazy-evaluation",
     "title": "Advanced R: Functions",
     "section": "Lazy Evaluation",
-    "text": "Lazy Evaluation\nFunctions are lazily evaluated, meaning that they are only evaluated if accessed. This allows you to include potentially expensive computations in function arguments that are only evaluated if needed.\n\nh01 &lt;- function(x) {\n    10\n}\n# No error is generated because x is never used.\nh01(stop(\"This is an error!\"))\n#&gt; [1] 10"
+    "text": "Lazy Evaluation\nFunctions are lazily evaluated, meaning that they are only evaluated if accessed. This allows you to include potentially expensive computations in function arguments that are only evaluated if needed.\n\nh01 &lt;- function(x) {\n  10\n}\n# No error is generated because x is never used.\nh01(stop(\"This is an error!\"))\n#&gt; [1] 10"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/functions.html#promises",
     "href": "Presentations/Advanced R Foundations/functions.html#promises",
     "title": "Advanced R: Functions",
     "section": "Promises",
-    "text": "Promises\nLazy evaluation is powered by a data structure called a promise. A promise has 3 components:\n\nAn expression that defers evaluation until the value is used (e.g., x + y).\nAn environment where the function is called and the expression is evaluated.\n\n\ny &lt;- 10\n\nh02 &lt;- function(x) {\n    y &lt;- 100\n    x + 1\n}\n\n# Returns 11 not 101 since x is assigned a value of 10\n# from y outside of the function.\n\nh02(y)\n#&gt; [1] 11\n\n# Assignment inside a function call binds the\n# variable outside the function\nh02(y &lt;- 1000)\n#&gt; [1] 1001\n\nprint(y)\n#&gt; [1] 1000\n\n\nA value that is computed and cached the first time a promise is accessed.\n\n\n# Ensures that Calculating... is only printed once\n\ndouble &lt;- function(x) {\n    message(\"Calculating...\")\n    x * 2\n}\n\nh03 &lt;- function(x) {\n    c(x, x)\n}\n\nh03(double(20))\n#&gt; Calculating...\n#&gt; [1] 40 40"
+    "text": "Promises\nLazy evaluation is powered by a data structure called a promise. A promise has 3 components:\n\nAn expression that defers evaluation until the value is used (e.g., x + y).\nAn environment where the function is called and the expression is evaluated.\n\n\ny &lt;- 10\n\nh02 &lt;- function(x) {\n  y &lt;- 100\n  x + 1\n}\n\n# Returns 11 not 101 since x is assigned a value of 10\n# from y outside of the function.\n\nh02(y)\n#&gt; [1] 11\n\n# Assignment inside a function call binds the\n# variable outside the function\nh02(y &lt;- 1000)\n#&gt; [1] 1001\n\nprint(y)\n#&gt; [1] 1000\n\n\nA value that is computed and cached the first time a promise is accessed.\n\n\n# Ensures that Calculating... is only printed once\n\ndouble &lt;- function(x) {\n  message(\"Calculating...\")\n  x * 2\n}\n\nh03 &lt;- function(x) {\n  c(x, x)\n}\n\nh03(double(20))\n#&gt; Calculating...\n#&gt; [1] 40 40"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/functions.html#default-arguments",
     "href": "Presentations/Advanced R Foundations/functions.html#default-arguments",
     "title": "Advanced R: Functions",
     "section": "Default arguments",
-    "text": "Default arguments\nDefault values can be defined based on other arguments or even variables defined later in the function. Many base R functions use this strategy, but it is harder to read the code adn predict what is returned.\n\nh04 &lt;- function(x = 1, y = x * 2, z = a + b) {\n    a &lt;- 10\n    b &lt;- 100\n    c(x, y, z)\n}\n\nh04()\n#&gt; [1] 1 2 110\n\nThe evaluation environment is slightly different for default and user supplied arguments. Default arguments are evaluated inside the function.\n\nh05 &lt;- function(x = ls()) {\n    a &lt;- 1\n    x\n}\n\n# ls() evaluated inside h05\nh05()\n#&gt; [1] \"a\" \"x\"\n\n# ls() evaluated in the global environment\nh05(x = ls())\n#&gt; \"h05\""
+    "text": "Default arguments\nDefault values can be defined based on other arguments or even variables defined later in the function. Many base R functions use this strategy, but it is harder to read the code adn predict what is returned.\n\nh04 &lt;- function(x = 1, y = x * 2, z = a + b) {\n  a &lt;- 10\n  b &lt;- 100\n  c(x, y, z)\n}\n\nh04()\n#&gt; [1] 1 2 110\n\nThe evaluation environment is slightly different for default and user supplied arguments. Default arguments are evaluated inside the function.\n\nh05 &lt;- function(x = ls()) {\n  a &lt;- 1\n  x\n}\n\n# ls() evaluated inside h05\nh05()\n#&gt; [1] \"a\" \"x\"\n\n# ls() evaluated in the global environment\nh05(x = ls())\n#&gt; \"h05\""
   },
   {
     "objectID": "Presentations/Advanced R Foundations/functions.html#missing-arguments",
@@ -1299,49 +1306,49 @@
     "href": "Presentations/Advanced R Foundations/functions.html#an-example-with-sample",
     "title": "Advanced R: Functions",
     "section": "An Example with Sample",
-    "text": "An Example with Sample\nThis code is from base::sample which takes a sample of the specified size from the elements of x with or without replacement.\n\nThe missing function evaluates whether size is given and returns the length of x if it is missing.\nThis function makes it appear as if x and size are required arguments.\n\n\nsample &lt;- function(x, size, replace = FALSE, prob = NULL) {\n    if (length(x) == 1L && is.numeric(x) && is.finite(x) && x &gt;= 1) {\n        if (missing(size)) {\n            size &lt;- x\n        }\n        sample.int(x, size, replace, prob)\n    } else {\n        if (missing(size)) {\n            size &lt;- length(x)\n        }\n        x[sample.int(length(x), size, replace, prob)]\n    }\n}\n\nAn alternative way to write sample is setting size = NULL in the function arguments to indicate that it is not required. A simpler version of the sample function is to check for NULL.\n\nsample &lt;- function(x, size = NULL, replace = FALSE, prob = NULL) {\n    if (is.null(size)) size &lt;- length(x)\n    # Or using the `%||%` operator from base R to use the left\n    # side if it's not NULL and return the right side otherwise.\n    # size &lt;- size %||% length(x)\n    x[sample.int(length(x), size, replace, prob)]\n}"
+    "text": "An Example with Sample\nThis code is from base::sample which takes a sample of the specified size from the elements of x with or without replacement.\n\nThe missing function evaluates whether size is given and returns the length of x if it is missing.\nThis function makes it appear as if x and size are required arguments.\n\n\nsample &lt;- function(x, size, replace = FALSE, prob = NULL) {\n  if (length(x) == 1L && is.numeric(x) && is.finite(x) && x &gt;= 1) {\n    if (missing(size)) {\n      size &lt;- x\n    }\n    sample.int(x, size, replace, prob)\n  } else {\n    if (missing(size)) {\n      size &lt;- length(x)\n    }\n    x[sample.int(length(x), size, replace, prob)]\n  }\n}\n\nAn alternative way to write sample is setting size = NULL in the function arguments to indicate that it is not required. A simpler version of the sample function is to check for NULL.\n\nsample &lt;- function(x, size = NULL, replace = FALSE, prob = NULL) {\n  if (is.null(size)) {\n    size &lt;- length(x)\n  }\n  # Or using the `%||%` operator from base R to use the left\n  # side if it's not NULL and return the right side otherwise.\n  # size &lt;- size %||% length(x)\n  x[sample.int(length(x), size, replace, prob)]\n}"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/functions.html#the-dot-dot-dot",
     "href": "Presentations/Advanced R Foundations/functions.html#the-dot-dot-dot",
     "title": "Advanced R: Functions",
     "section": "The … (dot-dot-dot)",
-    "text": "The … (dot-dot-dot)\nA special argument ... (pronounced dot-dot-dot) can be used in a function to take any additional number of arguments. These arguments can either be used inside the function or passed to another function.\n\ni01 &lt;- function(y, z) {\n    list(y = y, z = z)\n}\n\ni02 &lt;- function(x, ...) {\n    i01(...)\n}\n\n# Passing x, y, and z to i01\nstr(i02(x = 1, y = 2, z = 3))\n\n#&gt; List of 2\n#&gt;  $ y: num 2\n#&gt;  $ z: num 3\n\nIt can be useful to store the arguments in a list to pass along to a different function. This is how the lapply function works in R.\n\nmylapply &lt;- function(X, FUN, ...) {\n    FUN &lt;- match.fun(FUN)\n    if (!is.vector(X) || is.object(X)) {\n        X &lt;- as.list(X)\n    }\n    .Internal(lapply(X, FUN))\n}\n\nx &lt;- list(c(1, 3, NA), c(4, NA, 6))\n\nstr(mylapply(x, mean, na.rm = TRUE))\n\n#&gt; List of 2\n#&gt;  $ : num 2\n#&gt;  $ : num 5\n\nS3 generic functions can use ... to allow the methods to take additional arguments. A function like print would have too many arguements for all the objects it would need to display.\n\nmyprint &lt;- function(x, ...) {\n    print(x, ...)\n}\n\nmyprint(factor(letters), max.levels = 4)\n#&gt;  [1] a b c d e f g h i j k l m n o p q r s t u v w x y z\n#&gt; 26 Levels: a b c ... z\n\nprint(\"Greetings!\", quote = FALSE)\n#&gt; [1] Greetings!\n\n\nThe downsides of using ... is that more documentation may be needed to help user’s understand what arguments they can pass and where those arguments go. Additionally, misspelled arguments go unnoticed as they disappear and do not raise an error.\n\n\nstr(mylapply(x, mean, na_rm = TRUE))\n\n#&gt; List of 2\n#&gt;  $ : num NA\n#&gt;  $ : num NA"
+    "text": "The … (dot-dot-dot)\nA special argument ... (pronounced dot-dot-dot) can be used in a function to take any additional number of arguments. These arguments can either be used inside the function or passed to another function.\n\ni01 &lt;- function(y, z) {\n  list(y = y, z = z)\n}\n\ni02 &lt;- function(x, ...) {\n  i01(...)\n}\n\n# Passing x, y, and z to i01\nstr(i02(x = 1, y = 2, z = 3))\n\n#&gt; List of 2\n#&gt;  $ y: num 2\n#&gt;  $ z: num 3\n\nIt can be useful to store the arguments in a list to pass along to a different function. This is how the lapply function works in R.\n\nmylapply &lt;- function(X, FUN, ...) {\n  FUN &lt;- match.fun(FUN)\n  if (!is.vector(X) || is.object(X)) {\n    X &lt;- as.list(X)\n  }\n  .Internal(lapply(X, FUN))\n}\n\nx &lt;- list(c(1, 3, NA), c(4, NA, 6))\n\nstr(mylapply(x, mean, na.rm = TRUE))\n\n#&gt; List of 2\n#&gt;  $ : num 2\n#&gt;  $ : num 5\n\nS3 generic functions can use ... to allow the methods to take additional arguments. A function like print would have too many arguements for all the objects it would need to display.\n\nmyprint &lt;- function(x, ...) {\n  print(x, ...)\n}\n\nmyprint(factor(letters), max.levels = 4)\n#&gt;  [1] a b c d e f g h i j k l m n o p q r s t u v w x y z\n#&gt; 26 Levels: a b c ... z\n\nprint(\"Greetings!\", quote = FALSE)\n#&gt; [1] Greetings!\n\n\nThe downsides of using ... is that more documentation may be needed to help user’s understand what arguments they can pass and where those arguments go. Additionally, misspelled arguments go unnoticed as they disappear and do not raise an error.\n\n\nstr(mylapply(x, mean, na_rm = TRUE))\n\n#&gt; List of 2\n#&gt;  $ : num NA\n#&gt;  $ : num NA"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/functions.html#exiting-a-function",
     "href": "Presentations/Advanced R Foundations/functions.html#exiting-a-function",
     "title": "Advanced R: Functions",
     "section": "Exiting a function",
-    "text": "Exiting a function\nFunctions exit by returning a value or throwing an error. Returns can be implicit where the last evaluated expression is returned or explicit by calling return.\n\n# Implicit\nj01 &lt;- function(x) {\n    if (x &lt; 10) {\n        0\n    } else {\n        10\n    }\n}\n\nj01(9)\n#&gt; [1] 0\n\n# Explicit\nj02 &lt;- function(x) {\n    if (x &lt; 10) {\n        return(0)\n    } else {\n        return(10)\n    }\n}\n\n\nMost functions return visibly, but the invisible function prevents automatic printing of the last value. The most common function that returns invisibly is &lt;-.\n\n\na &lt;- 2\n\n# You can display visibly with print or by wrapping in ()\nprint(a &lt;- 2)\n#&gt; [1] 2\n\n(a &lt;- 2)\n#&gt; [1] 2"
+    "text": "Exiting a function\nFunctions exit by returning a value or throwing an error. Returns can be implicit where the last evaluated expression is returned or explicit by calling return.\n\n# Implicit\nj01 &lt;- function(x) {\n  if (x &lt; 10) {\n    0\n  } else {\n    10\n  }\n}\n\nj01(9)\n#&gt; [1] 0\n\n# Explicit\nj02 &lt;- function(x) {\n  if (x &lt; 10) {\n    return(0)\n  } else {\n    return(10)\n  }\n}\n\n\nMost functions return visibly, but the invisible function prevents automatic printing of the last value. The most common function that returns invisibly is &lt;-.\n\n\na &lt;- 2\n\n# You can display visibly with print or by wrapping in ()\nprint(a &lt;- 2)\n#&gt; [1] 2\n\n(a &lt;- 2)\n#&gt; [1] 2"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/functions.html#errors",
     "href": "Presentations/Advanced R Foundations/functions.html#errors",
     "title": "Advanced R: Functions",
     "section": "Errors",
-    "text": "Errors\nErrors occur when a function cannot complete its assigned task. It uses the stop function to stop the execution of the function.\n\ndouble &lt;- function(x) {\n    if (!is.numeric(x)) {\n        stop(sprintf(\"%s is not numeric\", x))\n    }\n    return(x * 2)\n}\n\ndouble(10)\n#&gt; [1] 20\n\ndouble(\"10\")\n#&gt; Error in double(\"10\") : 10 is not numeric"
+    "text": "Errors\nErrors occur when a function cannot complete its assigned task. It uses the stop function to stop the execution of the function.\n\ndouble &lt;- function(x) {\n  if (!is.numeric(x)) {\n    stop(sprintf(\"%s is not numeric\", x))\n  }\n  return(x * 2)\n}\n\ndouble(10)\n#&gt; [1] 20\n\ndouble(\"10\")\n#&gt; Error in double(\"10\") : 10 is not numeric"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/functions.html#exit-handlers",
     "href": "Presentations/Advanced R Foundations/functions.html#exit-handlers",
     "title": "Advanced R: Functions",
     "section": "Exit handlers",
-    "text": "Exit handlers\nA function may need to make a temporary change to the global state. However, cleaning up those changes may be problematic if there is an error. Using on.exit ensures those changes are undone and the global state restored.\n\npretty_print &lt;- function(x) {\n    old_digits &lt;- getOption(\"digits\")\n    options(digits = 2)\n    on.exit(options(digits = old_digits), add = TRUE)\n    print(x / 3)\n}\n\npretty_print(1:5)\n#&gt; [1] 0.33 0.67 1.00 1.33 1.67\n\nprint(1 / 3)\n#&gt; [1] 0.3333333\n\n\nYou can use after = TRUE or after = FALSE to control the order of on.exit within a function if you need some actions to be performed in a specific order."
+    "text": "Exit handlers\nA function may need to make a temporary change to the global state. However, cleaning up those changes may be problematic if there is an error. Using on.exit ensures those changes are undone and the global state restored.\n\npretty_print &lt;- function(x) {\n  old_digits &lt;- getOption(\"digits\")\n  options(digits = 2)\n  on.exit(options(digits = old_digits), add = TRUE)\n  print(x / 3)\n}\n\npretty_print(1:5)\n#&gt; [1] 0.33 0.67 1.00 1.33 1.67\n\nprint(1 / 3)\n#&gt; [1] 0.3333333\n\n\nYou can use after = TRUE or after = FALSE to control the order of on.exit within a function if you need some actions to be performed in a specific order."
   },
   {
     "objectID": "Presentations/Advanced R Foundations/functions.html#function-forms",
     "href": "Presentations/Advanced R Foundations/functions.html#function-forms",
     "title": "Advanced R: Functions",
     "section": "Function forms",
-    "text": "Function forms\nThere are four varieties of functions in R:\n\nPrefix: The function name comes before its arguments (e.g., print(x))\nInfix: The function name comes in between its arguments (e.g., x + y)\nReplacement: The function replaces values by assignment (e.g., names(x) &lt;- c(“a”, “b”, “c”))\nSpecial: Functions like [[, if, and for\n\nAn interesting property of R is that all function varieties can be rewritten to prefix form.\n\nx &lt;- 1:5\ny &lt;- 2\n\n`+`(x, y)\n#&gt; [1] 3 4 5 6 7\n\nstr(`names&lt;-`(data.frame(x, y), c(\"a\", \"b\")))\n#&gt; 'data.frame':   5 obs. of  2 variables:\n#&gt;  $ a: int  1 2 3 4 5\n#&gt;  $ b: num  2 2 2 2 2\n\n`for`(i, x, print(i))\n#&gt; [1] 1\n#&gt; [1] 2\n#&gt; [1] 3\n#&gt; [1] 4\n#&gt; [1] 5\n\nKnowing the name of a non-prefix function allows you to override its behavior.\n\n`+` &lt;- function(x, y) {\n    return(x * y)\n}\n\n5 + 10\n#&gt; [1] 50\n\nrm(`+`)\n\n5 + 10\n#&gt; [1] 15"
+    "text": "Function forms\nThere are four varieties of functions in R:\n\nPrefix: The function name comes before its arguments (e.g., print(x))\nInfix: The function name comes in between its arguments (e.g., x + y)\nReplacement: The function replaces values by assignment (e.g., names(x) &lt;- c(“a”, “b”, “c”))\nSpecial: Functions like [[, if, and for\n\nAn interesting property of R is that all function varieties can be rewritten to prefix form.\n\nx &lt;- 1:5\ny &lt;- 2\n\n`+`(x, y)\n#&gt; [1] 3 4 5 6 7\n\nstr(`names&lt;-`(data.frame(x, y), c(\"a\", \"b\")))\n#&gt; 'data.frame':   5 obs. of  2 variables:\n#&gt;  $ a: int  1 2 3 4 5\n#&gt;  $ b: num  2 2 2 2 2\n\n`for`(i, x, print(i))\n#&gt; [1] 1\n#&gt; [1] 2\n#&gt; [1] 3\n#&gt; [1] 4\n#&gt; [1] 5\n\nKnowing the name of a non-prefix function allows you to override its behavior.\n\n`+` &lt;- function(x, y) {\n  return(x * y)\n}\n\n5 + 10\n#&gt; [1] 50\n\nrm(`+`)\n\n5 + 10\n#&gt; [1] 15"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/functions.html#prefix-functions",
     "href": "Presentations/Advanced R Foundations/functions.html#prefix-functions",
     "title": "Advanced R: Functions",
     "section": "Prefix Functions",
-    "text": "Prefix Functions\nMost common functions in R and can specify functions in three ways:\n\nPosition (e.g., help(mean))\nPartial Matching (e.g., help(top = mean))\nName (e.g., help(topic = mean))\n\n\nget_structure &lt;- function(age_years, weight_kg, amyloid_level) {\n    str(list(age = age_years, weight = weight_kg, amyloid = amyloid_level))\n}\n\n# By Position\n\nget_structure(30, 70, 19)\n\n#&gt; List of 3\n#&gt;  $ age    : num 30\n#&gt;  $ weight : num 70\n#&gt;  $ amyloid: num 19\n\n# By name (full name or partial-matching)\n\nget_structure(weight = 70, 19, age = 30)\n\n#&gt; List of 3\n#&gt;  $ age    : num 30\n#&gt;  $ weight : num 70\n#&gt;  $ amyloid: num 19\n\n# Raises error as a matches both age_years and amyloid_level\n\nget_structure(30, 175, a = 19)\n#&gt; Error in get_structure(30, 175, a = 19) :\n#&gt;   argument 3 matches multiple formal arguments"
+    "text": "Prefix Functions\nMost common functions in R and can specify functions in three ways:\n\nPosition (e.g., help(mean))\nPartial Matching (e.g., help(top = mean))\nName (e.g., help(topic = mean))\n\n\nget_structure &lt;- function(age_years, weight_kg, amyloid_level) {\n  str(list(age = age_years, weight = weight_kg, amyloid = amyloid_level))\n}\n\n# By Position\n\nget_structure(30, 70, 19)\n\n#&gt; List of 3\n#&gt;  $ age    : num 30\n#&gt;  $ weight : num 70\n#&gt;  $ amyloid: num 19\n\n# By name (full name or partial-matching)\n\nget_structure(weight = 70, 19, age = 30)\n\n#&gt; List of 3\n#&gt;  $ age    : num 30\n#&gt;  $ weight : num 70\n#&gt;  $ amyloid: num 19\n\n# Raises error as a matches both age_years and amyloid_level\n\nget_structure(30, 175, a = 19)\n#&gt; Error in get_structure(30, 175, a = 19) :\n#&gt;   argument 3 matches multiple formal arguments"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/functions.html#infix-functions",
@@ -1355,7 +1362,7 @@
     "href": "Presentations/Advanced R Foundations/functions.html#replacement-functions",
     "title": "Advanced R: Functions",
     "section": "Replacement functions",
-    "text": "Replacement functions\nAct like they modify their arguments in place and have the special name xxx&lt;- with arguments x and value. If additional arguments are needed, place them between x and value.\n\n`second&lt;-` &lt;- function(x, value) {\n    x[2] &lt;- value\n    x\n}\n\nx &lt;- 1:5\nsecond(x) &lt;- 5L\nx\n#&gt; [1] 1 5 3 4 5\n\n`modify&lt;-` &lt;- function(x, position, value) {\n    x[position] &lt;- value\n    x\n}\n\nmodify(x, 1) &lt;- 10\nx\n#&gt; [1] 10 5 3 4 5\n\n# R interprets modify as \"x &lt;- `modify&lt;-`(x, 1, 10)\".\n\nCombining replacement with other functions requires more complex translations.\n\nx &lt;- c(a = 1, b = 2, c = 3)\n\nnames(x)\n#&gt; [1] \"a\" \"b\" \"c\"\n\nnames(x)[2] &lt;- \"two\"\nnames(x)\n#&gt; [1] \"a\" \"two\" \"c\"\n\n#' R interprets this as the following:\n`*tmp*` &lt;- x\nx &lt;- `names&lt;-`(`*tmp*`, `[&lt;-`(names(`*tmp*`), 2, \"two\"))\nrm(`*tmp*`)\nnames(x)\n#&gt; [1] \"a\" \"two\" \"c\""
+    "text": "Replacement functions\nAct like they modify their arguments in place and have the special name xxx&lt;- with arguments x and value. If additional arguments are needed, place them between x and value.\n\n`second&lt;-` &lt;- function(x, value) {\n  x[2] &lt;- value\n  x\n}\n\nx &lt;- 1:5\nsecond(x) &lt;- 5L\nx\n#&gt; [1] 1 5 3 4 5\n\n`modify&lt;-` &lt;- function(x, position, value) {\n  x[position] &lt;- value\n  x\n}\n\nmodify(x, 1) &lt;- 10\nx\n#&gt; [1] 10 5 3 4 5\n\n# R interprets modify as \"x &lt;- `modify&lt;-`(x, 1, 10)\".\n\nCombining replacement with other functions requires more complex translations.\n\nx &lt;- c(a = 1, b = 2, c = 3)\n\nnames(x)\n#&gt; [1] \"a\" \"b\" \"c\"\n\nnames(x)[2] &lt;- \"two\"\nnames(x)\n#&gt; [1] \"a\" \"two\" \"c\"\n\n#' R interprets this as the following:\n`*tmp*` &lt;- x\nx &lt;- `names&lt;-`(`*tmp*`, `[&lt;-`(names(`*tmp*`), 2, \"two\"))\nrm(`*tmp*`)\nnames(x)\n#&gt; [1] \"a\" \"two\" \"c\""
   },
   {
     "objectID": "Presentations/Advanced R Foundations/functions.html#special-forms",
@@ -1502,28 +1509,28 @@
     "href": "Presentations/Advanced R Foundations/names-values.html#binding-basics",
     "title": "Advanced R: Names and Values",
     "section": "Binding Basics",
-    "text": "Binding Basics\n\nlibrary(lobstr)\nx &lt;- c(1, 2, 3)\nobj_addr(x)\n\n[1] \"0x10c114778\"\n\n\n\n\nBehind the scenes R creates a vector object of values c(1, 2, 3) and binds it to a name x with an object address of 0x10c114778.\n\n\n\n# Creates another binding to the same object\ny &lt;- x\nobj_addr(y)\n\n[1] \"0x10c114778\""
+    "text": "Binding Basics\n\nlibrary(lobstr)\nx &lt;- c(1, 2, 3)\nobj_addr(x)\n#&gt; 0x8d526b868\n\n\n\nBehind the scenes R creates a vector object of values c(1, 2, 3) and binds it to a name x with an object address of 0x8d526b868.\n\n\n\n# Creates another binding to the same object\ny &lt;- x\nobj_addr(y)\n#&gt; 0x8d526b868"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/names-values.html#copy-on-modify",
     "href": "Presentations/Advanced R Foundations/names-values.html#copy-on-modify",
     "title": "Advanced R: Names and Values",
     "section": "Copy-on-modify",
-    "text": "Copy-on-modify\n\ny[[3]] &lt;- 4\nobj_addr(y)\n\n[1] \"0x10969e128\"\n\n\nModifying y creates a new object that is a copy of 0x10c114778 and has a new object address of 0x10969e128.\n\nWe can see when an object gets copied with base::tracemem()\n\ny &lt;- x\ntracemem(x)\ny[[3]] &lt;- 4\nuntracemem(x)\n\n\n\n[1] \"&lt;0x10c114778&gt;\"\n\n\n\n\n[1] \"tracemem[0x10c114778 -&gt; 0x10969e128]:\""
+    "text": "Copy-on-modify\n\ny[[3]] &lt;- 4\nobj_addr(y)\n#&gt; 0x8d56e6968\n\nModifying y creates a new object that is a copy of 0x8d526b868 and has a new object address of 0x8d56e6968.\n\nWe can see when an object gets copied with base::tracemem()\n\ny &lt;- x\ntracemem(x)\ny[[3]] &lt;- 4\nuntracemem(x)\n\n\n# echo: false\n\npaste0(\"&lt;\", obj_addr(x), \"&gt;\")\n\n\n# echo: false\n\npaste0(\"tracemem[\", obj_addr(x), \" -&gt; \", obj_addr(y), \"]:\")"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/names-values.html#function-calls",
     "href": "Presentations/Advanced R Foundations/names-values.html#function-calls",
     "title": "Advanced R: Names and Values",
     "section": "Function Calls",
-    "text": "Function Calls\nThe same rules for copying apply to function calls.\n\nf &lt;- function(a) {\n  a\n}\n\ntracemem(x)\n\nz &lt;- f(x)\n\nuntracemem(x)\n\n\n\n\n[1] \"&lt;0x10c114778&gt;\"\n\n\nOnce f() completes, x and z will point to the same object.\n\n\n\n[1] \"tracemem[0x10c114778 -&gt; 0x10c114778]:\""
+    "text": "Function Calls\nThe same rules for copying apply to function calls.\n\nf &lt;- function(a) {\n  a\n}\n\ntracemem(x)\n\nz &lt;- f(x)\n\nuntracemem(x)\n\n\n\n# echo: false\n\npaste0(\"&lt;\", obj_addr(x), \"&gt;\")\n\nOnce f() completes, x and z will point to the same object.\n\n\n# echo: false\n\nf &lt;- function(a) {\n  a\n}\n\nz &lt;- f(x)\n\npaste0(\"tracemem[\", obj_addr(x), \" -&gt; \", obj_addr(z), \"]:\")"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/names-values.html#lists",
     "href": "Presentations/Advanced R Foundations/names-values.html#lists",
     "title": "Advanced R: Names and Values",
     "section": "Lists",
-    "text": "Lists\nElements of lists can also point to objects, but copy-on-modify differs from variables in that a shallow copy is created.\n\nl1 &lt;- list(1, 2, 3)\n\nA list stores references to the values rather than the values. This is important to know for understanding what happens when we modify a list.\n\n\nl2 &lt;- l1\n\n\n\nl2[[3]] &lt;- 4\n\n\nUsing the ref() function from the lobstr package shows the shared bindings across l1 and l2.\n\nref(l1, l2)\n\n█ [1:0x12c59a578] &lt;list&gt; \n├─[2:0x10ba562e0] &lt;dbl&gt; \n├─[3:0x10ba56120] &lt;dbl&gt; \n└─[4:0x10ba55f60] &lt;dbl&gt; \n \n█ [5:0x10c1cc5e8] &lt;list&gt; \n├─[2:0x10ba562e0] \n├─[3:0x10ba56120] \n└─[6:0x10be07a30] &lt;dbl&gt;"
+    "text": "Lists\nElements of lists can also point to objects, but copy-on-modify differs from variables in that a shallow copy is created.\n\nl1 &lt;- list(1, 2, 3)\n\nA list stores references to the values rather than the values. This is important to know for understanding what happens when we modify a list.\n\n\nl2 &lt;- l1\n\n\n\nl2[[3]] &lt;- 4\n\n\nUsing the ref() function from the lobstr package shows the shared bindings across l1 and l2.\n\nref(l1, l2)"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/names-values.html#data-frames",
@@ -1537,14 +1544,14 @@
     "href": "Presentations/Advanced R Foundations/names-values.html#character-vectors",
     "title": "Advanced R: Names and Values",
     "section": "Character Vectors",
-    "text": "Character Vectors\nR uses a global string pool where each element in a character vector points to a unique string in the pool.\n\nx &lt;- c(\"a\", \"a\", \"abc\", \"d\")\n\n\nref(x, character = TRUE)\n\n\n\n\n\n█ [1:0x109e12578] &lt;chr&gt; \n├─[2:0x12babc940] &lt;string: \"a\"&gt; \n├─[2:0x12babc940] \n├─[3:0x109c1a6a0] &lt;string: \"abc\"&gt; \n└─[4:0x13bada2b0] &lt;string: \"d\"&gt; \n\n\n\n\n\nThe global string pool has an impact on the amount of memory a character vector uses, but can otherwise be thought of similarly to numeric vectors."
+    "text": "Character Vectors\nR uses a global string pool where each element in a character vector points to a unique string in the pool.\n\nx &lt;- c(\"a\", \"a\", \"abc\", \"d\")\n\n\nref(x, character = TRUE)\n\n\n\n\n\n\n\nThe global string pool has an impact on the amount of memory a character vector uses, but can otherwise be thought of similarly to numeric vectors."
   },
   {
     "objectID": "Presentations/Advanced R Foundations/names-values.html#object-size",
     "href": "Presentations/Advanced R Foundations/names-values.html#object-size",
     "title": "Advanced R: Names and Values",
     "section": "Object Size",
-    "text": "Object Size\nUse lobstr::obj_size to find out how much memory an object takes.\n\nx &lt;- rnorm(1000, mean = 35, sd = 5)\ny &lt;- list(x, x, x)\nx_size &lt;- obj_size(x)\ny_size &lt;- obj_size(y)\n\nsprintf(\n  \"y (size: %s B) is only %s B larger than x (size: %s B)\",\n  y_size,\n  y_size - x_size,\n  x_size\n)\n\n[1] \"y (size: 8128 B) is only 80 B larger than x (size: 8048 B)\"\n\n\n\n\nThe elements of a list are references to the values. Storing x three times is the size of an empty list with three NULL elements.\n\n\n\n\n\n\n\n\n\n\n\n\nobj_size(list(NULL, NULL, NULL))\n\n80 B\n\n\n\nCharacter vectors also take up less memory than expected.\n\nfruits &lt;- c(\"apple\", \"apple\", \"apple\")\n\nsprintf(\n  \"Repeating fruit 100 times takes up %s B more in memory\",\n  obj_size(rep(fruits, 100)) - obj_size(fruits)\n)\n\n[1] \"Repeating fruit 100 times takes up 2368 B more in memory\""
+    "text": "Object Size\nUse lobstr::obj_size to find out how much memory an object takes.\n\nx &lt;- rnorm(1000, mean = 35, sd = 5)\ny &lt;- list(x, x, x)\nx_size &lt;- obj_size(x)\ny_size &lt;- obj_size(y)\n\nsprintf(\n  \"y (size: %s B) is only %s B larger than x (size: %s B)\",\n  y_size,\n  y_size - x_size,\n  x_size\n)\n\n\n\nThe elements of a list are references to the values. Storing x three times is the size of an empty list with three NULL elements.\n\n\n\n\nobj_size(list(NULL, NULL, NULL))\n\n\nCharacter vectors also take up less memory than expected.\n\nfruits &lt;- c(\"apple\", \"apple\", \"apple\")\n\nsprintf(\n  \"Repeating fruit 100 times takes up %s B more in memory\",\n  obj_size(rep(fruits, 100)) - obj_size(fruits)\n)"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/names-values.html#object-size-for-shared-values",
@@ -1558,7 +1565,7 @@
     "href": "Presentations/Advanced R Foundations/names-values.html#alternative-representation",
     "title": "Advanced R: Names and Values",
     "section": "Alternative Representation",
-    "text": "Alternative Representation\nR has the ability to represent some vectors compactly. For example, using the : when providing a numeric range stores the first and last number only such that every sequence is always the same size.\n\nprint(1:10)\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\n\n\nobj_size(1:10)\n#&gt; 680 B\nobj_size(1:1000)\n#&gt; 680 B\nobj_size(1:1000000)\n#&gt; 680 B"
+    "text": "Alternative Representation\nR has the ability to represent some vectors compactly. For example, using the : when providing a numeric range stores the first and last number only such that every sequence is always the same size.\n\nprint(1:10)\n\n\nobj_size(1:10)\n#&gt; 680 B\nobj_size(1:1000)\n#&gt; 680 B\nobj_size(1:1000000)\n#&gt; 680 B"
   },
   {
     "objectID": "Presentations/Advanced R Foundations/names-values.html#environments",
@@ -1572,7 +1579,7 @@
     "href": "Presentations/Advanced R Foundations/names-values.html#unbinding-and-the-garbage-collector",
     "title": "Advanced R: Names and Values",
     "section": "Unbinding and the garbage collector",
-    "text": "Unbinding and the garbage collector\n\n\n\n# Assigns x to\n# numeric object\nx &lt;- 1:3\n\n\n\n\n# Reassigns x to new\n# numeric object\nx &lt;- 2:4\n\n\n\n\n# Unbinds x from\n# numeric objects\nrm(x)\n\n\n\nAfter running this code, we have two numeric objects not bound to a name. The garbage collector (GC) frees up memory by deleting R objects that are no longer used. The garbage collector runs automatically when R needs more memory to create new objects or manually using the gc function. You can also check the memory used using the lobstr::mem_used function.\n\ngc()\n\n          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)\nNcells  695172 37.2    1404795 75.1         NA  1404795 75.1\nVcells 1283228  9.8    8388608 64.0      16384  2048898 15.7\n\nmem_used()\n\n49.20 MB"
+    "text": "Unbinding and the garbage collector\n\n\n\n# Assigns x to\n# numeric object\nx &lt;- 1:3\n\n\n\n\n# Reassigns x to new\n# numeric object\nx &lt;- 2:4\n\n\n\n\n# Unbinds x from\n# numeric objects\nrm(x)\n\n\n\nAfter running this code, we have two numeric objects not bound to a name. The garbage collector (GC) frees up memory by deleting R objects that are no longer used. The garbage collector runs automatically when R needs more memory to create new objects or manually using the gc function. You can also check the memory used using the lobstr::mem_used function.\n\ngc()\n\nmem_used()"
   },
   {
     "objectID": "Presentations/Advanced R Special Topics/function-operators.html#a-basic-example",
