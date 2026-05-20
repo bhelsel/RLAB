@@ -1,1 +1,119 @@
-/* css styles */
+/* Reset Quarto defaults that interfere with the layout */
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background: #f4f6f8;
+  color: #1f2d3d;
+}
+
+/* Hide default Quarto page title since we use our own hero */
+.quarto-title-block {
+  display: none;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  background: white;
+}
+
+/* HERO */
+.hero {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  padding: 10px;
+  align-items: center;
+  gap: 60px;
+}
+
+.hero h1 {
+  font-size: 36px;
+  margin: 0;
+  color: #163A5F;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-top: 10px;
+  color: #163A5F;
+}
+
+.hero img {
+  width: 100%;
+}
+
+/* DATE BAR */
+.date-bar {
+  background: #163A5F;
+  color: white;
+  padding: 10px 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.date-bar strong {
+  font-size: 20px;
+}
+
+/* SECTION TITLE */
+.section-title {
+  text-align: center;
+  font-weight: bold;
+  margin: 10px 0 5px;
+  color: #163A5F;
+  letter-spacing: 1px;
+}
+
+/* CONTENT GRID */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 5px 20px;
+}
+
+.card {
+  background: #eef3f7;
+  border-radius: 10px;
+  padding: 20px;
+  font-size: 15px;
+}
+
+.card h3 {
+  margin-top: 0;
+  color: #163A5F;
+}
+
+.card img {
+  width: 120px;
+  float: left;
+  margin-right: 15px;
+}
+
+.bullet {
+  margin: 10px 0;
+}
+
+/* LOWER SECTION */
+.grid-2.alt {
+  margin-top: 10px;
+}
+
+.checklist li {
+  margin-bottom: 8px;
+}
+
+/* FOOTER */
+.footer {
+  background: #163A5F;
+  color: white;
+  margin-top: 10px;
+  padding: 5px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer strong {
+  font-size: 20px;
+}
