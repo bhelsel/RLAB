@@ -924,144 +924,144 @@
     "text": "About this site"
   },
   {
-    "objectID": "introduction.html#downloading-this-presentation-or-anything-from-github",
-    "href": "introduction.html#downloading-this-presentation-or-anything-from-github",
+    "objectID": "introduction.html",
+    "href": "introduction.html",
     "title": "Basics of R",
-    "section": "Downloading this presentation (or anything from Github!)",
-    "text": "Downloading this presentation (or anything from Github!)\nMake sure you have the “remotes” package downloaded\n\nInstall the package you are trying to download (devtools::install_github(\"bhelsel/RLAB\")\nCall in the function from the package and set any parameters (RLAB::render_presentation(outdir = \"whereever_you_want_this_stored\", name = \"01\"))"
+    "section": "",
+    "text": "Make sure you have the devtools package installed.\n\n\n\ninstall.packages(\"devtools\")\ndevtools::install_github(\"bhelsel/RLAB\")\n\n\n\n\n\nRLAB::render_presentation(\n  outdir = \"where_you_want_this_stored\",\n  name = \"01\"\n)"
   },
   {
-    "objectID": "introduction.html#what-are-r-and-rstudio",
-    "href": "introduction.html#what-are-r-and-rstudio",
+    "objectID": "introduction.html#install-the-rlab-package",
+    "href": "introduction.html#install-the-rlab-package",
     "title": "Basics of R",
-    "section": "What are R and RStudio?",
-    "text": "What are R and RStudio?\nWhat is R?\nR is a programming language for statistical computing and graphics.\nWhat is RStudio?\nRStudio is an Integrated Development Environment (IDE) — a software that provides a user-friendly interface to write, organize, and run R code more easily.\n\n\nAnalogy: R is like a car engine and RStudio is like a car dashboard."
+    "section": "",
+    "text": "install.packages(\"devtools\")\ndevtools::install_github(\"bhelsel/RLAB\")"
   },
   {
-    "objectID": "introduction.html#components-of-rstudio",
-    "href": "introduction.html#components-of-rstudio",
+    "objectID": "introduction.html#render-a-presentation",
+    "href": "introduction.html#render-a-presentation",
     "title": "Basics of R",
-    "section": "Components of RStudio",
-    "text": "Components of RStudio\n\n\n\n\n\nComponent\nDescription\n\n\n\n\nConsole\nRun R commands directly and view error messages\n\n\nSource\nWrite, edit, and save scripts or projects\n\n\nEnvironment\nShows data objects (e.g., variables, data frames)\n\n\nOutput\nDisplays plots and tables.\n\n\n\n\n\n\n\nAdditional components and functions:\n\nHistory: Keeps track of the commands you’ve run.\nFiles: Manage your project files and folders.\n\nPackages: Install and load add-ons that extend R’s functionality.\n\nHelp: Access documentation and help files.\n\nViewer: Display web content or interactive visualizations within RStudio.\nTerminal: A command-line interface where you can run system commands or use other programming languages alongside R."
+    "section": "",
+    "text": "RLAB::render_presentation(\n  outdir = \"where_you_want_this_stored\",\n  name = \"01\"\n)"
   },
   {
-    "objectID": "introduction.html#starting-a-project-in-rstudio",
-    "href": "introduction.html#starting-a-project-in-rstudio",
+    "objectID": "introduction.html#what-is-r",
+    "href": "introduction.html#what-is-r",
     "title": "Basics of R",
-    "section": "Starting a Project in RStudio",
-    "text": "Starting a Project in RStudio\n\n\nStarting a Project\n\nKeeps files organized by project.\n\nPrevents mixing data or scripts from different analyses.\n\nMakes sharing and reproducing work easier.\n\n\n\n\n\n\n\nWhat is the Working Directory?\n\nThe folder where R reads and saves files by default.\n\nActs as R’s “home folder” during your session.\n\n\nSetting the working directory \n\nHow the Working Directory Works with Projects\n\nWhen you start a new project, RStudio sets the working directory to that project’s folder.\n\nAny files you create or export are saved there by default.\n\nThis helps keep all your project files together and easy to find."
+    "section": "2.1 What is R?",
+    "text": "2.1 What is R?\nR is a programming language designed for:\n\nstatistical analysis\ndata visualization\nreproducible research\ndata science workflows"
   },
   {
-    "objectID": "introduction.html#packages-and-functions-in-r",
-    "href": "introduction.html#packages-and-functions-in-r",
+    "objectID": "introduction.html#what-is-positron",
+    "href": "introduction.html#what-is-positron",
     "title": "Basics of R",
-    "section": "Packages and Functions in R",
-    "text": "Packages and Functions in R\nWhat is a Package?\n\nA set of functions, data, or code designed to accomplish specific tasks\n\nWhat is a Function?\n\nFunctions take input, do something, and return output\n\n\nThink of it like a toolbox. A package is like a toolbox, and a function is a specific tool in the box.\n\nThe tidyverse is a collection of packages in R that are designed for data science.\nEssential tidyverse Packages\n\n\n\nPackage\nPurpose\nExample Functions\n\n\n\n\ndplyr\nData Wrangling\nfilter, select, mutate\n\n\ntidyr\nData Organization\npivot_longer, drop_na\n\n\nggplot2\nData Visualization\ngeom_point, facet_wrap\n\n\nreadr\nData Import\nread_csv"
+    "section": "2.2 What is Positron?",
+    "text": "2.2 What is Positron?\nPositron is a modern development environment created by Posit for working with R and Python.\nCompared to traditional RStudio, Positron offers:\n\na cleaner interface\nmodern editor features\nAI-assisted coding tools\nmulti-language support\nimproved performance\n\n\nR is the language. Positron/RStudio is the workspace where you write and run code."
   },
   {
-    "objectID": "introduction.html#basics-of-using-a-function",
-    "href": "introduction.html#basics-of-using-a-function",
+    "objectID": "introduction.html#ide-layout",
+    "href": "introduction.html#ide-layout",
     "title": "Basics of R",
-    "section": "Basics of Using a Function",
-    "text": "Basics of Using a Function\n\n\n\nIn order to use a function, you have to feed it the information it needs to complete its task\nYou can use the help function help(function_name) or its shortcut ?function_name. You can also click the “Help” tab.\nHere you read about the package usage, descriptions arguments, details etc."
+    "section": "3.1 IDE Layout",
+    "text": "3.1 IDE Layout"
   },
   {
-    "objectID": "introduction.html#making-your-very-own-function",
-    "href": "introduction.html#making-your-very-own-function",
+    "objectID": "introduction.html#console",
+    "href": "introduction.html#console",
     "title": "Basics of R",
-    "section": "Making Your Very Own Function!",
-    "text": "Making Your Very Own Function!\n\nWriting your own functions helps increase efficiency if doing the same task over and over\nComponents of the function are the function name, input, code that explains what you want the function to do, and the output\n\n\n\nlibrary(dplyr)\n\nfahrenheit_to_celsius &lt;- function(f_temp) {\n  c_temp &lt;- (f_temp - 32) * 5 / 9\n  return(c_temp)\n}\nfahrenheit_to_celsius(98.6)\n\nget_bmi_category &lt;- function(wt, ht) {\n  bmi &lt;- wt / ht^2\n  category &lt;- case_when(\n    bmi &lt; 18.5 ~ \"Underweight\",\n    bmi &gt;= 18.5 & bmi &lt; 24.9 ~ \"Normal weight\",\n    bmi &gt;= 25 & bmi &lt; 29.9 ~ \"Overweight\",\n    bmi &gt;= 30 ~ \"Obesity\",\n  )\n  return(paste0(\"BMI = \", round(bmi, 1), \" (\", category, \")\"))\n}\nget_bmi_category(85, 1.54)"
+    "section": "4.1 Console",
+    "text": "4.1 Console\nThe Console runs commands immediately.\nUse it for:\n\nquick calculations\ntesting code\nexploring objects\n\nExample:\n\n2 + 2"
   },
   {
-    "objectID": "introduction.html#package-cheat-sheets",
-    "href": "introduction.html#package-cheat-sheets",
+    "objectID": "introduction.html#script-files",
+    "href": "introduction.html#script-files",
     "title": "Basics of R",
-    "section": "Package Cheat Sheets",
-    "text": "Package Cheat Sheets\ntidyr\n\nggplot2\n\ndplyr"
+    "section": "4.2 Script Files",
+    "text": "4.2 Script Files\nScripts let you save and organize code.\nBenefits include:\n\nreproducibility\neasier debugging\ncollaboration\ncleaner workflows\n\nMost analyses should be written in scripts instead of directly in the Console.\n\nmy_number &lt;- 2 + 2"
   },
   {
-    "objectID": "introduction.html#updating-r-studio-and-packages",
-    "href": "introduction.html#updating-r-studio-and-packages",
+    "objectID": "introduction.html#why-use-projects",
+    "href": "introduction.html#why-use-projects",
     "title": "Basics of R",
-    "section": "Updating R Studio and Packages",
-    "text": "Updating R Studio and Packages\nWhy even bother?\n\nGet new features, bug fixes, and better performance\n\nEnsure compatibility with newer packages\n\nStay consistent with collaborators and tutorials\n\nWhen you open R Studio it will tell you what version you are using\n\nUpdate RStudio\n\nVisit https://posit.co/download/rstudio/\nChoose your operating system (Windows or Mac)\nDownload and install the latest version\n\n\nUpdate Your Packages\nUpdated packages makes sure you are working with the latest versions which can include fixes of old bugs. Occasionally, if in the middle of an analysis or project, updated a package might not be desirable.\nTools → Check for Package Updates → Select and update \nOR\nUse:\n\nupdate.packages(ask=FALSE)\ninstall.packages(\"package_name\")\n\nSet the dependencies argument to TRUE for installing the package “Suggests” (default is to install “Depends”, “Imports”, and “LinkingTo”)"
+    "section": "6.1 Why Use Projects?",
+    "text": "6.1 Why Use Projects?\nProjects help:\n\nkeep files organized\nseparate analyses\nimprove reproducibility\nsimplify collaboration"
   },
   {
-    "objectID": "introduction.html#atomic-data-types-in-r",
-    "href": "introduction.html#atomic-data-types-in-r",
+    "objectID": "introduction.html#what-is-a-working-directory",
+    "href": "introduction.html#what-is-a-working-directory",
     "title": "Basics of R",
-    "section": "Atomic Data Types in R",
-    "text": "Atomic Data Types in R\nFundamental Data Types\n\nIn R, variables can be stored as several types of data\nDifferent data types can do different things\n\nData Types We Might Use\n\n\n\n\n\n\n\n\nData Type\nExample\nUse\n\n\n\n\ndouble\n120, 34.2\nblood pressures, bmi\n\n\ninteger\n15, 26, 0003\nsteps, number of siblings, participant ID\n\n\ncharacter (string)\nplacebo, tall\nrandomization arm, category\n\n\nlogical (boolean)\nTRUE, FALSE\nsurvival, presence of health condition\n\n\n\n\nDouble and Integer data are both types of Numeric Data\n\n\n\n\n# Double data: BMI\nbmi &lt;- 24.8\nis.double(bmi)\nclass(bmi)\n\n# Integer data: Participant ID\nid &lt;- 0003L\nclass(id)\nis.double(id)\n\n# Character data: randomization group\ntreatment_arm &lt;- \"placebo\"\nclass(treatment_arm)\n\n# Logical data: presence of hypertension\nhas_hypertension &lt;- FALSE\nclass(has_hypertension)"
+    "section": "6.2 What is a Working Directory?",
+    "text": "6.2 What is a Working Directory?\nThe working directory is the default folder where R reads and saves files.\n\nWhen you open a project, the working directory is automatically set to that project folder."
   },
   {
-    "objectID": "introduction.html#why-data-types-matter-in-r",
-    "href": "introduction.html#why-data-types-matter-in-r",
+    "objectID": "introduction.html#naming-tips",
+    "href": "introduction.html#naming-tips",
     "title": "Basics of R",
-    "section": "Why Data Types Matter in R",
-    "text": "Why Data Types Matter in R\n\nKnowing your data types helps prevent bugs and weird results\nFunctions behave differently depending on type\nMistakes often create errors (and that’s OK!)\n\n\n\n# Numeric vs. character: Addition\nnum1 &lt;- 5\nnum1 + 2\n\nnum2 &lt;- \"5\"\nnum2 + 2\n\n# Logical used in math\nx &lt;- TRUE\ny &lt;- FALSE\nsum(c(x, y, TRUE))\n\n# Sorting: numeric vs. character\nages &lt;- c(15, 9, 2)\nsort(ages)\n\nas_char &lt;- as.character(ages)\nsort(as_char)\n\n# Missing Data\n# Numeric NA\nnum_values &lt;- c(100, NA, 200)\nmean(num_values)\nmean(num_values, na.rm = TRUE)\n\n# Logical NA\nlogical_values &lt;- c(TRUE, NA, FALSE)\nsum(logical_values)\nsum(logical_values, na.rm = TRUE)\n\n# Character NA\nchar_values &lt;- c(\"yes\", NA, \"no\")\npaste(\"Answer:\", char_values)"
+    "section": "7.1 Naming Tips",
+    "text": "7.1 Naming Tips\nGood variable names are:\n\ndescriptive\nlowercase\nconsistent\n\nRecommended style:\n\nblood_pressure\nparticipant_age\nstudy_group\n\nAvoid vague names like:\n\nx\ndata1\nthing"
   },
   {
-    "objectID": "introduction.html#vectors-in-r",
-    "href": "introduction.html#vectors-in-r",
+    "objectID": "introduction.html#what-is-a-package",
+    "href": "introduction.html#what-is-a-package",
     "title": "Basics of R",
-    "section": "Vectors in R",
-    "text": "Vectors in R\n\nA vector is the most basic data structure in R.\nVectors are everywhere in R — for example, each column in a data frame is a vector.\nIt is a sequence of values that are all the same data type (if not, R will force it to be)\n\n\n\nv1 &lt;- c(1:5)\nis.numeric(v1)\n\nv2 &lt;- c(\"cat\", \"house\", \"bunny\")\nis.character(v2)\n\nv3 &lt;- c(v1, v2)\nv3\nis.character(v3)"
+    "section": "8.1 What is a Package?",
+    "text": "8.1 What is a Package?\nA package is a collection of functions, datasets, and tools designed for a specific purpose."
   },
   {
-    "objectID": "introduction.html#factor",
-    "href": "introduction.html#factor",
+    "objectID": "introduction.html#what-is-a-function",
+    "href": "introduction.html#what-is-a-function",
     "title": "Basics of R",
-    "section": "Factor",
-    "text": "Factor\n\nA factor is a type of vector for categorical data\nUsed when there is an order or levels to a variable (i.e “short”, “medium”, “tall”)\nResponds differently to certain functions\n\n\n\nbloodtype_vector &lt;- c(\"A\", \"B\", \"AB\", \"O\")\nsummary(bloodtype_vector)\n\nbloodtype_factor &lt;- factor(bloodtype_vector)\nsummary(bloodtype_factor)\n\nheight_vector &lt;- c(\"tall\", \"short\", \"medium\", \"extra tall\", \"very short\")\nsort(height_vector)\n\nheight_factor &lt;- factor(\n  height_vector,\n  ordered = TRUE,\n  levels = c(\"very short\", \"short\", \"medium\", \"tall\", \"extra tall\")\n)\nsort(height_factor)"
+    "section": "8.2 What is a Function?",
+    "text": "8.2 What is a Function?\nFunctions:\n\ntake input\nperform an action\nreturn output\n\n\nA package is like a toolbox. A function is a single tool inside the toolbox."
   },
   {
-    "objectID": "introduction.html#lists",
-    "href": "introduction.html#lists",
+    "objectID": "introduction.html#why-update",
+    "href": "introduction.html#why-update",
     "title": "Basics of R",
-    "section": "Lists",
-    "text": "Lists\n\nA list can hold elements of different types and lengths (unlike a vector)\nUseful for storing models, results, or datasets together.\n\n\n\nmy_list &lt;- list(\n  name = \"Bill\",\n  age = 35,\n  scores = c(92, 87, 95),\n  passed = TRUE\n)\n\nmy_list\n\n#Results are stored as a list\nmodel &lt;- lm(mpg ~ wt, data = mtcars)\nclass(model)\n\nis.list(model)\n\nstr(model)\n\nmodel$coefficients"
+    "section": "13.1 Why Update?",
+    "text": "13.1 Why Update?\nUpdating software helps:\n\nfix bugs\nimprove performance\nadd new features\nimprove package compatibility"
   },
   {
-    "objectID": "introduction.html#combining-vectors-or-lists-in-r",
-    "href": "introduction.html#combining-vectors-or-lists-in-r",
+    "objectID": "introduction.html#update-packages",
+    "href": "introduction.html#update-packages",
     "title": "Basics of R",
-    "section": "Combining Vectors or Lists in R",
-    "text": "Combining Vectors or Lists in R\nYou can use the c() function to concatenate values into a vector or list. These can be simple or you can combine lists or nested structures. The argument recursive = TRUE/FALSE is useful when combining lists or nested structures. Set recursive = TRUE to flatten the input. Set recursive = FALSE to preserve the structure.\n\n\n# Combine character vectors\na &lt;- c(\"red\", \"blue\")\nb &lt;- c(\"green\", \"yellow\")\ncolors &lt;- c(a, b)\ncolors\n\n# Combining lists\nx &lt;- list(\"red\", 1, TRUE)\ny &lt;- list(\"green\", list(\"yellow\", FALSE, 6))\ncombo1 &lt;- c(x, y, recursive = FALSE)\ncombo1\n\ncombo2 &lt;- c(x, y, recursive = TRUE)\ncombo2\n\n# Practical example of recursive\nperson1 &lt;- list(name = \"Ava\", score = 88)\nperson2 &lt;- list(name = \"Ben\", score = 92)\npeople &lt;- list(person1, person2)\npaired &lt;- c(people, recursive = FALSE)\nstr(paired)\npaired[[1]]$name\npaired[[1]]$score\n\nflattened &lt;- c(people, recursive = TRUE)\nstr(flattened)"
+    "section": "13.2 Update Packages",
+    "text": "13.2 Update Packages\n\nupdate.packages(ask = FALSE)\n\nInstall an individual package:\n\ninstall.packages(\"package_name\")"
   },
   {
-    "objectID": "introduction.html#data-structures",
-    "href": "introduction.html#data-structures",
+    "objectID": "introduction.html#common-data-types",
+    "href": "introduction.html#common-data-types",
     "title": "Basics of R",
-    "section": "Data Structures",
-    "text": "Data Structures\nWhat is a Data Frame?\n\nThe basic R structure for storing tabular data\nBuilt into base R\nConverts strings to factors by default (unless told not to)\nCan sometimes change column types automatically\nAllows partial matching of column names (can cause subtle bugs)\n\nWhat is a Tibble?\n\nA tibble is a data frame (with a modern twist!)\nPart of the tidyverse\nNever converts strings to factors, never changes variable names, never creates row names\nPrints cleaner summaries (only first 10 rows and columns shown)\nBetter handling of large or complex data\nDoes NOT allow partial matching — safer and more predictable\n\n\nPartial Matching Example:\nSometimes, base R data frames will let you access columns by partially matching the name — which can lead to silent errors.\nTibbles require exact column names, preventing this problem.\n\n\nlibrary(tibble)\n\ndf1 &lt;- data.frame(experiment_group = c(\"control\", \"treatment\"))\ndf1$experiment\ntb1 &lt;- tibble(experiment_group = c(\"control\", \"treatment\"))\ntb1$experiment\n\n# Example where partial matching can cause bugs.\n#Say you have a dataframe with age and height. You want to calcualte the age\n# when people will graduate based on their current age:\ndf &lt;- data.frame(\n  age = c(25, 30, 45),\n  average_height = c(55, 62, 50)\n)\ndf$grad_age &lt;- df$ave + 5\nprint(df)\n\n\ntb &lt;- tibble(\n  age = c(25, 30, 45),\n  average_height = c(55, 62, 50)\n)\ntb$grad_age &lt;- tb$ave + 5\n\n# Create and print normal data frame and tibble for comparison\nclass(mtcars)\nmtcars\n\ntb3 &lt;- as_tibble(mtcars)\nclass(tb3)\ntb3"
+    "section": "14.1 Common Data Types",
+    "text": "14.1 Common Data Types\n\n\n\nType\nExample\nTypical Use\n\n\n\n\ndouble\n34.2\nBMI, blood pressure\n\n\ninteger\n15L\nIDs, counts\n\n\ncharacter\n\"placebo\"\nLabels, groups\n\n\nlogical\nTRUE\nConditions\n\n\n\n\nIntegers and doubles are both numeric types.\n\n\n# Double\nbmi &lt;- 24.8\nclass(bmi)\n\n# Integer\nid &lt;- 3L\nclass(id)\n\n# Character\ntreatment_arm &lt;- \"placebo\"\nclass(treatment_arm)\n\n# Logical\nhas_hypertension &lt;- FALSE\nclass(has_hypertension)"
   },
   {
-    "objectID": "introduction.html#github-and-cran",
-    "href": "introduction.html#github-and-cran",
+    "objectID": "introduction.html#data-frames",
+    "href": "introduction.html#data-frames",
     "title": "Basics of R",
-    "section": "GitHub and CRAN",
-    "text": "GitHub and CRAN\n\n\n\n\n\n\n\n\n\nSource\nDescription\nWhen to Use\nInstall With\n\n\n\n\nCRAN\nOfficial R package repository\nMost stable and tested version\ninstall.packages(\"pkgname\")\n\n\nGitHub\nDeveloper’s source code (often in progress)\nGet latest features or unreleased updates\ndevtools::install_github(\"user/pkgname\")\n\n\n\n\nThink of CRAN like the App Store — safe, reviewed, and stable.\nThink of GitHub like the developer’s lab — early access, but maybe still being tested.\n\nInstall from CRAN install.packages(\"ggplot2\")\nInstall from GitHub install.packages(\"devtools\") devtools::install_github(\"bhelsel/RLAB\")\nGitHub packages may require additional setup or dependencies."
+    "section": "19.1 Data Frames",
+    "text": "19.1 Data Frames\n\nBase R structure\nAllows partial matching\nMay automatically convert types"
   },
   {
-    "objectID": "introduction.html#forking-vs-cloning-in-github",
-    "href": "introduction.html#forking-vs-cloning-in-github",
+    "objectID": "introduction.html#tibbles",
+    "href": "introduction.html#tibbles",
     "title": "Basics of R",
-    "section": "Forking vs Cloning in Github",
-    "text": "Forking vs Cloning in Github\n\n\n\n\n\n\n\n\n\nForking 🪄\nCloning 🔄\n\n\n\n\nWhat it is\nCopies a repo to your GitHub account\nCopies a repo to your local machine\n\n\nWhere\nHappens on GitHub.com\nHappens on your computer\n\n\nUse case\nYou want to contribute or customize\nYou want to use or explore code\n\n\nEditable?\nYes — you own the forked version\nYes — but you can’t push to original*\n\n\nCommon for\nSubmitting a pull request\nWorking privately or learning\n\n\n\n\n✨ You usually fork first, then clone your fork to your computer."
+    "section": "19.2 Tibbles",
+    "text": "19.2 Tibbles\n\nPart of the tidyverse\nCleaner printing\nRequires exact column names\nSafer behavior\n\n\nlibrary(tibble)\n\ntb &lt;- tibble(\n  age = c(25, 30, 45),\n  average_height = c(55, 62, 50)\n)\n\ntb"
   },
   {
-    "objectID": "introduction.html#forking-a-repository-on-github",
-    "href": "introduction.html#forking-a-repository-on-github",
+    "objectID": "introduction.html#install-from-cran",
+    "href": "introduction.html#install-from-cran",
     "title": "Basics of R",
-    "section": "Forking a Repository on GitHub",
-    "text": "Forking a Repository on GitHub\nFork - Your own copy of someone else’s repository\nFork and Clone Tutorial\nSteps:\n\nGo to the GitHub repo you want to contribute to\ne.g., https://github.com/bhelsel/RLAB\nClick “Fork” (top right corner)\nChoose your account → GitHub will create your copy\nClone it to your local machine\n\nNow you can make changes and eventually make a pull request!"
+    "section": "20.1 Install from CRAN",
+    "text": "20.1 Install from CRAN\n\ninstall.packages(\"ggplot2\")"
   },
   {
-    "objectID": "introduction.html#fun-free-resources",
-    "href": "introduction.html#fun-free-resources",
+    "objectID": "introduction.html#install-from-github",
+    "href": "introduction.html#install-from-github",
     "title": "Basics of R",
-    "section": "Fun FREE Resources",
-    "text": "Fun FREE Resources\nR Programming 101 Youtube\nData Daft Introduction to R Playlist Youtube\nMarin Stats Lectures Youtube\nEquitable Equations Youtube\nDynamic Data Script Yotube\nR for Data Science Book\nData Flair R Programming\nR Programming from Johns Hopkins\nRandom persons google drive with tons of free PDFs"
+    "section": "20.2 Install from GitHub",
+    "text": "20.2 Install from GitHub\n\ninstall.packages(\"devtools\")\n\ndevtools::install_github(\"bhelsel/RLAB\")"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/conditions.html#introduction",
