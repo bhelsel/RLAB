@@ -900,7 +900,7 @@
     "href": "introduction.html",
     "title": "R Basics",
     "section": "",
-    "text": "R is a programming language designed for:\n\nstatistical analysis\ndata visualization\nreproducible research\ndata science workflows\n\n\n\n\nPositron is a modern development environment created by Posit for working with R and Python.\nCompared to traditional RStudio, Positron offers:\n\na cleaner interface\nmodern editor features\nAI-assisted coding tools\nmulti-language support\nimproved performance\n\n\nR is the language. Positron/RStudio is the workspace where you write and run code."
+    "text": "R is a programming language designed for:\n\nstatistical analysis\ndata visualization\nreproducible research\ndata science workflows\n\n\n\n\nPositron is a modern development environment created by Posit for working with R and Python.\nCompared to traditional RStudio, Positron offers:\n\na cleaner interface\nmodern editor features\nAI-assisted coding tools\nmulti-language support\nimproved performance\n\n\nR is the language. Positron/RStudio is the workspace where you write and run code.\n\n\n\n\n\n\n\n\nTip\n\n\n\nSee this tutorial on Installing R and Positron if you need help prior to the first day of R-LAB."
   },
   {
     "objectID": "introduction.html#what-is-r",
@@ -914,7 +914,7 @@
     "href": "introduction.html#what-is-positron",
     "title": "R Basics",
     "section": "",
-    "text": "Positron is a modern development environment created by Posit for working with R and Python.\nCompared to traditional RStudio, Positron offers:\n\na cleaner interface\nmodern editor features\nAI-assisted coding tools\nmulti-language support\nimproved performance\n\n\nR is the language. Positron/RStudio is the workspace where you write and run code."
+    "text": "Positron is a modern development environment created by Posit for working with R and Python.\nCompared to traditional RStudio, Positron offers:\n\na cleaner interface\nmodern editor features\nAI-assisted coding tools\nmulti-language support\nimproved performance\n\n\nR is the language. Positron/RStudio is the workspace where you write and run code.\n\n\n\n\n\n\n\n\nTip\n\n\n\nSee this tutorial on Installing R and Positron if you need help prior to the first day of R-LAB."
   },
   {
     "objectID": "introduction.html#ide-layout",
@@ -1022,20 +1022,6 @@
     "text": "19.2 Install from GitHub\n\ninstall.packages(\"devtools\")\n\ndevtools::install_github(\"bhelsel/RLAB\")"
   },
   {
-    "objectID": "attendees.html",
-    "href": "attendees.html",
-    "title": "2026 Attendees",
-    "section": "",
-    "text": "Jackie Adedokun\nJackie is a Research Specialist with the Department of Psychiatry at the University of Pittsburgh.\n\n\nAbass Babatunde\nAbassis a Postdoctoral Fellow with the Institute for the Advancement of Community Health at Furman University.\n\n\nAshlyn Barry\nAshlyn is a Graduate Student with the Department of Kinesiology at the University of Wisconsin - Madison.\n\n\nMorgan Brucks\nMorgan is a Senior Research Associate with the Department of Population Health at the University of Kansas Medical Center.\n\n\nWasayef Bsharat\nWasayef is a Graduate Student with the Department of Clinical Psychology at Montclair State University.\n\n\nJulianne Clina\nJulianne is a Postdoctoral Fellow with the Division of Physical Activity and Weight Mangagement in the Department of Internal Medicine at the University of Kansas Medical Center.\n\n\nKellie Collins\nKellie is a Graduate Student in Clinical Investigation with the Department of Pediatrics at the University of Wisconsin - Madison.\n\n\nBethany Forseth\nBethany is an Assistant Professor with the Department of Physical Therapy, Rehabilitation Science, and Athletic Training at the University of Kansas Medical Center.\n\n\nSara Fortin-Miller\nSara is a Postdoctoral Fellow with the Department of Population Health at the University of Kansas Medical Center.\n\n\nElham Ghanbarian\nElham is a Postdoctoral Fellow with the Department of Neurology at the University of California, Irvine.\n\n\nRachel Hantman\nRachel is a Graduate Student with the Department of Psychology at the University of South Carolina.\n\n\nJohn Heap\nJohn is a Graduate Student with the School of Medicine at the University of Kansas Medical Center.\n\n\nBrian Helsel\nBrian is an Assistant Professor with the University of Kansas Alzheimer’s Disease Research Center in the Department of Neurology at the University of Kansas Medical Center.\n\n\nRashelle Hoffman\nRashelle is an Assistant Professor with the Department of Physical Therapy at Creighton University.\n\n\nDominic Javonillo\nDominic is a Graduate Student with the Department of Neurobiology & Behavior at the University of California, Irvine.\n\n\nMelissa Jenkins\nMelissa is a Postdoctoral Fellow with the Waisman Center at the University of Wisconsin - Madison.\n\n\nSullafa Kadura\nSullafa is an Associate Professor with the Departmnet of Medicine at the University of Pittsburgh.\n\n\nJessica Keller\nJessicais a Postdoctoral Fellow with the Department of Anesthesiology at the University of Kansas Medical Center\n\n\nYasaman Razavi\nYasaman is an Associate Specialist with the Department of Anesthesia at the University of California San Francisco.\n\n\nSadaf Salehi\nSadaf is an Associate Researcher with the Multiple Sclerosis Research Center at the Tehran University of Medical Sciences.\n\n\nLeela Shah\nLeela is a Graduate Student with the Waisman Center at the University of Wisconsin - Madison.\n\n\nKameron Suire\nKameron is an Assistant Professor of Exercise Science with the Department of Kinesiology at Berry College.\n\n\nDavid Titus\nDavid is a Neuroscientist with the Department of Veterinary Clinical Sciences at the University of Minnesota Twin Cities.\n\n\nAinsley VanderGiesen\nAinsley is a Clinical Research Assistant with the Department of Anesthesiology at the University of Kansas Medical Center.\n\n\nIan Weidling\nIan is a Postdoctoral Fellow with the Department of Neurology at the University of Kansas Medical Center."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "R for Lifestyle and Brain Health (R-LAB)",
-    "section": "",
-    "text": "About this site"
-  },
-  {
     "objectID": "index.html#what-well-cover",
     "href": "index.html#what-well-cover",
     "title": "R for Lifestyle and Brain Health",
@@ -1048,6 +1034,76 @@
     "title": "R for Lifestyle and Brain Health",
     "section": "Why This Course?",
     "text": "Why This Course?\n\n\nWhy this course?\n\nConnects early-career researchers\nBridges data & domain expertise\nBuild practical, career-advancing skills\nAdvances research software development\n\n\nYou’ll walk away with:\n\nStrong programming skills in R\nAbility to develop new research tools\nSkills to build reproducible workflows\nConfidence using R to support research\n\n\n\n\nConnect with other scientists interested in learning R to support lifestyle and brain health research."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "R for Lifestyle and Brain Health (R-LAB)",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "attendees.html",
+    "href": "attendees.html",
+    "title": "2026 Attendees",
+    "section": "",
+    "text": "Jackie Adedokun\nJackie is a Research Specialist with the Department of Psychiatry at the University of Pittsburgh.\n\n\nAbass Babatunde\nAbassis a Postdoctoral Fellow with the Institute for the Advancement of Community Health at Furman University.\n\n\nAshlyn Barry\nAshlyn is a Graduate Student with the Department of Kinesiology at the University of Wisconsin - Madison.\n\n\nMorgan Brucks\nMorgan is a Senior Research Associate with the Department of Population Health at the University of Kansas Medical Center.\n\n\nWasayef Bsharat\nWasayef is a Graduate Student with the Department of Clinical Psychology at Montclair State University.\n\n\nJulianne Clina\nJulianne is a Postdoctoral Fellow with the Division of Physical Activity and Weight Mangagement in the Department of Internal Medicine at the University of Kansas Medical Center.\n\n\nKellie Collins\nKellie is a Graduate Student in Clinical Investigation with the Department of Pediatrics at the University of Wisconsin - Madison.\n\n\nBethany Forseth\nBethany is an Assistant Professor with the Department of Physical Therapy, Rehabilitation Science, and Athletic Training at the University of Kansas Medical Center.\n\n\nSara Fortin-Miller\nSara is a Postdoctoral Fellow with the Department of Population Health at the University of Kansas Medical Center.\n\n\nElham Ghanbarian\nElham is a Postdoctoral Fellow with the Department of Neurology at the University of California, Irvine.\n\n\nRachel Hantman\nRachel is a Graduate Student with the Department of Psychology at the University of South Carolina.\n\n\nJohn Heap\nJohn is a Graduate Student with the School of Medicine at the University of Kansas Medical Center.\n\n\nBrian Helsel\nBrian is an Assistant Professor with the University of Kansas Alzheimer’s Disease Research Center in the Department of Neurology at the University of Kansas Medical Center.\n\n\nRashelle Hoffman\nRashelle is an Assistant Professor with the Department of Physical Therapy at Creighton University.\n\n\nDominic Javonillo\nDominic is a Graduate Student with the Department of Neurobiology & Behavior at the University of California, Irvine.\n\n\nMelissa Jenkins\nMelissa is a Postdoctoral Fellow with the Waisman Center at the University of Wisconsin - Madison.\n\n\nSullafa Kadura\nSullafa is an Associate Professor with the Departmnet of Medicine at the University of Pittsburgh.\n\n\nJessica Keller\nJessicais a Postdoctoral Fellow with the Department of Anesthesiology at the University of Kansas Medical Center\n\n\nYasaman Razavi\nYasaman is an Associate Specialist with the Department of Anesthesia at the University of California San Francisco.\n\n\nSadaf Salehi\nSadaf is an Associate Researcher with the Multiple Sclerosis Research Center at the Tehran University of Medical Sciences.\n\n\nLeela Shah\nLeela is a Graduate Student with the Waisman Center at the University of Wisconsin - Madison.\n\n\nKameron Suire\nKameron is an Assistant Professor of Exercise Science with the Department of Kinesiology at Berry College.\n\n\nDavid Titus\nDavid is a Neuroscientist with the Department of Veterinary Clinical Sciences at the University of Minnesota Twin Cities.\n\n\nAinsley VanderGiesen\nAinsley is a Clinical Research Assistant with the Department of Anesthesiology at the University of Kansas Medical Center.\n\n\nIan Weidling\nIan is a Postdoctoral Fellow with the Department of Neurology at the University of Kansas Medical Center."
+  },
+  {
+    "objectID": "installation.html",
+    "href": "installation.html",
+    "title": "Before Day 1: Getting Set Up for R Lab",
+    "section": "",
+    "text": "R is the statistical programming language we’ll use throughout this course. You need to install it first before installing RStudio or Positron.\n\nGo to https://cran.r-project.org\nClick Download R for your operating system (Windows, macOS, or Linux)\nFollow the installer instructions\nOpen the R application once to confirm it installed correctly, you should see the R console\n\n\n\n\n\n\n\nTip\n\n\n\nWhich version? Always download the latest release. As of this writing that is R 4.5.3."
+  },
+  {
+    "objectID": "installation.html#install-r",
+    "href": "installation.html#install-r",
+    "title": "Before Day 1: Getting Set Up for R Lab",
+    "section": "",
+    "text": "R is the statistical programming language we’ll use throughout this course. You need to install it first before installing RStudio or Positron.\n\nGo to https://cran.r-project.org\nClick Download R for your operating system (Windows, macOS, or Linux)\nFollow the installer instructions\nOpen the R application once to confirm it installed correctly, you should see the R console\n\n\n\n\n\n\n\nTip\n\n\n\nWhich version? Always download the latest release. As of this writing that is R 4.5.3."
+  },
+  {
+    "objectID": "installation.html#development-environment",
+    "href": "installation.html#development-environment",
+    "title": "Before Day 1: Getting Set Up for R Lab",
+    "section": "2 Development Environment",
+    "text": "2 Development Environment\nYou’ll want an Integrated Development Environment (IDE) to write and run your R code comfortably. We recommend Positron, though RStudio is a perfectly fine alternative.\n\n2.1 Option A: Positron (Preferred)\nPositron is a next-generation data science IDE built by Posit (the same team behind RStudio). It’s built on VS Code and offers a modern, flexible environment for R and Python.\n\nGo to https://github.com/posit-co/positron/releases\nDownload the latest release for your operating system\nInstall and open Positron\nOpen a new R file and run 1 + 1 to confirm R is connected\n\n\n\n\n\n\n\nImportant\n\n\n\nWhy Positron? Positron has a cleaner interface, better multi-language support, and is the direction the R ecosystem is heading. We’ll be using it in class demos.\n\n\n\n\n2.2 Option B: RStudio\nRStudio is the classic, battle-tested R IDE and is a great choice if you prefer something more established.\n\nGo to https://posit.co/download/rstudio-desktop/\nScroll down and download the free RStudio Desktop version for your OS\nInstall and open RStudio\nIn the Console pane, type 1 + 1 and press Enter to confirm R is working\n\n\n\n\n\n\n\nTip\n\n\n\nEither IDE will work fine for this course. Just pick one and stick with it!"
+  },
+  {
+    "objectID": "installation.html#create-a-github-account",
+    "href": "installation.html#create-a-github-account",
+    "title": "Before Day 1: Getting Set Up for R Lab",
+    "section": "3 Create a GitHub Account",
+    "text": "3 Create a GitHub Account\nWe’ll use GitHub to share code, submit assignments, and practice version control.\n\nGo to https://github.com\nClick Sign up and create a free account\nChoose a username\nVerify your email address"
+  },
+  {
+    "objectID": "installation.html#install-github-desktop",
+    "href": "installation.html#install-github-desktop",
+    "title": "Before Day 1: Getting Set Up for R Lab",
+    "section": "4 Install GitHub Desktop",
+    "text": "4 Install GitHub Desktop\nGitHub Desktop gives you a visual interface for working with Git and GitHub.\n\nGo to https://desktop.github.com\nDownload and install GitHub Desktop for your OS\nOpen GitHub Desktop and sign in with your GitHub account\nYou’re all set — we’ll walk through using it together in class"
+  },
+  {
+    "objectID": "installation.html#course-textbooks",
+    "href": "installation.html#course-textbooks",
+    "title": "Before Day 1: Getting Set Up for R Lab",
+    "section": "5 Course Textbooks",
+    "text": "5 Course Textbooks\nWe’ll draw from two excellent, freely available online books throughout this course. Bookmark both now.\n\n5.1 R for Data Science (2nd Edition)\nHadley Wickham, Mine Çetinkaya-Rundel & Garrett Grolemund\nThe go-to introduction to doing data science in R using the tidyverse. Covers data import, tidying, visualization, and more.\nhttps://r4ds.hadley.nz\n\n\n5.2 Advanced R (2nd Edition)\nHadley Wickham\nA deeper dive into how R works under the hood, functions, environments, object-oriented programming, and performance. We’ll reference this later in the course.\nhttps://adv-r.hadley.nz"
+  },
+  {
+    "objectID": "installation.html#helpful-resources",
+    "href": "installation.html#helpful-resources",
+    "title": "Before Day 1: Getting Set Up for R Lab",
+    "section": "6 Helpful Resources",
+    "text": "6 Helpful Resources\nNot sure where to begin with Git or R? These beginner-friendly resources will help you feel more comfortable before we dive in.\n\n6.1 GitHub: Cloning a Repository\nOnce you have GitHub Desktop set up, one of the first things you’ll do is clone a repository (that means downloading a copy of a project from GitHub to your computer). The official GitHub docs walk you through exactly how to do this:\nCloning a repository — GitHub Docs\n\n\n6.2 Beginner Video Tutorials\nSometimes it’s easier to watch someone do it first. Here are a few videos to get you oriented:\nGit and GitHub for Beginners. A great overview of Git concepts and how to use GitHub, covers the core ideas you’ll need for this course.\nLearn R in 39 Minutes Video. A great overview of downloading and using R.\nR Programming for Beginners. A beginner, follow-along lesson great for learning basics!"
+  },
+  {
+    "objectID": "installation.html#quick-checklist",
+    "href": "installation.html#quick-checklist",
+    "title": "Before Day 1: Getting Set Up for R Lab",
+    "section": "7 Quick Checklist",
+    "text": "7 Quick Checklist\nBefore our first class, make sure you have:\n\nR installed (cran.r-project.org)\nPositron or RStudio installed and connected to R\nA GitHub account created\nGitHub Desktop installed and signed in\nBoth course textbooks bookmarked\nWatched the beginner GitHub video\n\nSee you on Day 1!"
   },
   {
     "objectID": "presentations.html",
