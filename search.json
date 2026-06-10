@@ -2132,7 +2132,7 @@
     "href": "presentations/DataScience/transform.html#strings",
     "title": "Transform",
     "section": "Strings",
-    "text": "Strings"
+    "text": "Strings\nYou can create strings with single quotes (') or double quotes (\"). If you want to add a quote inside a string, then you should use single quotes.\n\nstring1 &lt;- \"This is a string\"\nstring2 &lt;- 'If I want to include a \"quote\" inside a string'\n\nYou can use \\ as an escape to include a literal single or double quote or other special characters in a string.\n\nsingle_quote &lt;- \"\\'\"\ndouble_quote &lt;- \"\\\"\"\nbackslash &lt;- \"\\\\\"\nx &lt;- c(single_quote, double_quote, backslash)\nx\n#&gt; [1] \"'\"  \"\\\"\" \"\\\\\"\nstringr::str_view(x)\n#&gt; [1] │ '\n#&gt; [2] │ \"\n#&gt; [3] │ \\"
   },
   {
     "objectID": "presentations/SpecialTopics.html",

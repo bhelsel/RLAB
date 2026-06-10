@@ -1490,6 +1490,24 @@ Brian C. Helsel, PhD
 </section>
 <section id="strings" class="slide level2">
 <h2>Strings</h2>
+<p>You can create strings with single quotes (<code>&#39;</code>) or double quotes (<code>&quot;</code>). If you want to add a quote inside a string, then you should use single quotes.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>string1 <span class="ot">&lt;-</span> <span class="st">&quot;This is a string&quot;</span></span>
+<span id="cb22-2"><a></a>string2 <span class="ot">&lt;-</span> <span class="st">&#39;If I want to include a &quot;quote&quot; inside a string&#39;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You can use <code>\</code> as an <strong>escape</strong> to include a literal single or double quote or other special characters in a string.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>single_quote <span class="ot">&lt;-</span> <span class="st">&quot;</span><span class="sc">\&#39;</span><span class="st">&quot;</span></span>
+<span id="cb23-2"><a></a>double_quote <span class="ot">&lt;-</span> <span class="st">&quot;</span><span class="sc">\&quot;</span><span class="st">&quot;</span></span>
+<span id="cb23-3"><a></a>backslash <span class="ot">&lt;-</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span></span>
+<span id="cb23-4"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(single_quote, double_quote, backslash)</span>
+<span id="cb23-5"><a></a>x</span>
+<span id="cb23-6"><a></a><span class="co">#&gt; [1] &quot;&#39;&quot;  &quot;\&quot;&quot; &quot;\\&quot;</span></span>
+<span id="cb23-7"><a></a>stringr<span class="sc">::</span><span class="fu">str_view</span>(x)</span>
+<span id="cb23-8"><a></a><span class="co">#&gt; [1] │ &#39;</span></span>
+<span id="cb23-9"><a></a><span class="co">#&gt; [2] │ &quot;</span></span>
+<span id="cb23-10"><a></a><span class="co">#&gt; [3] │ \</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 
 
 </section>
