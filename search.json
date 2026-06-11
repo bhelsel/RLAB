@@ -182,6 +182,258 @@
     "text": "Strings\nYou can create strings with single quotes (') or double quotes (\"). If you want to add a quote inside a string, then you should use single quotes.\n\nstring1 &lt;- \"This is a string\"\nstring2 &lt;- 'If I want to include a \"quote\" inside a string'\n\nYou can use \\ as an escape to include a literal single or double quote or other special characters in a string.\n\nsingle_quote &lt;- \"\\'\"\ndouble_quote &lt;- \"\\\"\"\nbackslash &lt;- \"\\\\\"\nx &lt;- c(single_quote, double_quote, backslash)\nx\n#&gt; [1] \"'\"  \"\\\"\" \"\\\\\"\nstringr::str_view(x)\n#&gt; [1] │ '\n#&gt; [2] │ \"\n#&gt; [3] │ \\"
   },
   {
+    "objectID": "presentations/DataScience/transform.html#raw-strings",
+    "href": "presentations/DataScience/transform.html#raw-strings",
+    "title": "Transform",
+    "section": "Raw Strings",
+    "text": "Raw Strings\nComplex strings requiring multiple quotes or backslashes can get confusing with all the escape characters. Using a raw string can help make the code more readable.\n\ntricky &lt;- \"double_quote &lt;- \\\"\\\\\\\"\\\" # or '\\\"' single_quote &lt;- '\\\\'' # or \\\"'\\\"\"\nstringr::str_view(tricky)\n#&gt; [1] │ double_quote &lt;- \"\\\"\" # or '\"' single_quote &lt;- '\\'' # or \"'\"\n\nraw_string &lt;- r\"(double_quote &lt;- \"\\\"\" # or '\"' single_quote &lt;- '\\'' # or \"'\")\"\nstringr::str_view(raw_string)\n#&gt; [1] │ double_quote &lt;- \"\\\"\" # or '\"' single_quote &lt;- '\\'' # or \"'\"\n\n\nA raw string usually starts with r\"( and ends with )\", but you can also use r\"[]\" or r\"{}\" if your string contains )“."
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#creating-strings-from-data",
+    "href": "presentations/DataScience/transform.html#creating-strings-from-data",
+    "title": "Transform",
+    "section": "Creating Strings from Data",
+    "text": "Creating Strings from Data\nThe stringr::str_c function is like paste0 but designed to be used within dplyr::mutate. It combines strings with a variable inside your dataset. You can also use stringr::glue which avoids the need to separate the string into parts with multiple quotation marks.\n\ndf &lt;- tibble::tibble(name = c(\"Jonathan\", \"David\", \"Susan\"))\n\ndf |&gt;\n  dplyr::mutate(\n    greeting = stringr::str_c(\"Hi \", name, \"!\"),\n    question = stringr::str_glue(\"{name}, what is your favorite color?\")\n  )\n\n#&gt; # A tibble: 3 × 3\n#&gt;   name     greeting     question\n#&gt;   &lt;chr&gt;    &lt;chr&gt;        &lt;glue&gt;\n#&gt; 1 Jonathan Hi Jonathan! Jonathan, what is your favorite color?\n#&gt; 2 David    Hi David!    David, what is your favorite color?\n#&gt; 3 Susan    Hi Susan!    Susan, what is your favorite color?\n\nThe stringr::str_flatten function works with dplyr::summarize to return a single string from a character vector.\n\ndf &lt;- tibble::tribble(\n  ~name      , ~color   ,\n  \"Jonathan\" , \"blue\"   ,\n  \"Jonathan\" , \"red\"    ,\n  \"David\"    , \"green\"  ,\n  \"David\"    , \"yellow\" ,\n  \"David\"    , \"orange\" ,\n  \"Susan\"    , \"purple\" ,\n  \"Susan\"    , \"red\"\n)\n\ndf |&gt;\n  dplyr::summarise(\n    color = stringr::str_flatten(color, \", \"),\n    .by = name\n  )\n\n#&gt; # A tibble: 3 × 2\n#&gt;   name     color\n#&gt;   &lt;chr&gt;    &lt;chr&gt;\n#&gt; 1 Jonathan blue, red\n#&gt; 2 David    green, yellow, orange\n#&gt; 3 Susan    purple, red"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#extracting-data-from-strings",
+    "href": "presentations/DataScience/transform.html#extracting-data-from-strings",
+    "title": "Transform",
+    "section": "Extracting Data from Strings",
+    "text": "Extracting Data from Strings\nFunctions in the tidyr package can help you separate a single string into multiple rows or columns.\nSeparating into Rows\n\ntibble::tibble(x = c(\"a,b,c\", \"d,e\", \"f\")) |&gt;\n  tidyr::separate_longer_delim(x, delim = \",\")\n\n#&gt; # A tibble: 6 × 1\n#&gt;   x\n#&gt;   &lt;chr&gt;\n#&gt; 1 a\n#&gt; 2 b\n#&gt; 3 c\n#&gt; 4 d\n#&gt; 5 e\n#&gt; 6 f\n\nSeparating into Columns\n\n# By delimiter\ntibble::tibble(x = c(\"07.01.2026\", \"07.02.2026\", \"07.03.2026\")) |&gt;\n  tidyr::separate_wider_delim(\n    x,\n    delim = \".\",\n    names = c(\"month\", \"day\", \"year\")\n  )\n\n# By widths\ntibble::tibble(x = c(\"07012026\", \"07022026\", \"07032026\")) |&gt;\n  tidyr::separate_wider_position(\n    x,\n    widths = c(month = 2, day = 2, year = 4)\n  )\n\n#&gt;   month day   year\n#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;\n#&gt; 1 07    01    2026\n#&gt; 2 07    02    2026\n#&gt; 3 07    03    2026"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#regular-expressions",
+    "href": "presentations/DataScience/transform.html#regular-expressions",
+    "title": "Transform",
+    "section": "Regular Expressions",
+    "text": "Regular Expressions\nA conncise and powerful language for describing patterns within strings (often abbreviated as regex or regexp). The simplest regex patterns consist of letters or numbers that are a direct match.\n\nfruit &lt;- stringr::fruit\nstringr::str_view(fruit, \"berry\")\n\n#&gt;  [6] │ bil&lt;berry&gt;\n#&gt;  [7] │ black&lt;berry&gt;\n#&gt; [10] │ blue&lt;berry&gt;\n#&gt; [11] │ boysen&lt;berry&gt;\n#&gt; [19] │ cloud&lt;berry&gt;\n#&gt; [21] │ cran&lt;berry&gt;\n#&gt; [29] │ elder&lt;berry&gt;\n#&gt; [32] │ goji &lt;berry&gt;\n#&gt; [33] │ goose&lt;berry&gt;\n#&gt; [38] │ huckle&lt;berry&gt;\n#&gt; [50] │ mul&lt;berry&gt;\n#&gt; [70] │ rasp&lt;berry&gt;\n#&gt; [73] │ salal &lt;berry&gt;\n#&gt; [76] │ straw&lt;berry&gt;"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#metacharacters",
+    "href": "presentations/DataScience/transform.html#metacharacters",
+    "title": "Transform",
+    "section": "Metacharacters",
+    "text": "Metacharacters\nMost punctuation characters like ., +, *, [, ], and ? have special meanings in regex. For example, “a…e” will match any string that contains an “a” followed by 3 letters and then an “e”.\n\nstringr::str_view(fruit, \"a...e\")\n\n#&gt;  [1] │ &lt;apple&gt;\n#&gt;  [7] │ bl&lt;ackbe&gt;rry\n#&gt; [48] │ mand&lt;arine&gt;\n#&gt; [51] │ nect&lt;arine&gt;\n#&gt; [62] │ pine&lt;apple&gt;\n#&gt; [64] │ pomegr&lt;anate&gt;\n#&gt; [70] │ r&lt;aspbe&gt;rry\n#&gt; [73] │ sal&lt;al be&gt;rry"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#quantifiers",
+    "href": "presentations/DataScience/transform.html#quantifiers",
+    "title": "Transform",
+    "section": "Quantifiers",
+    "text": "Quantifiers\nControl how many times a pattern can match:\n\n? makes a pattern optional (i.e., it matches 0 or 1 times)\n+ lets a pattern repeat (i.e., it matches it at least once)\n* lets a pattern be optional or repeat\n\n\n# Matches an ap, optionally followed by an r\nstringr::str_view(fruit, \"apr?\")\n\n#&gt;  [1] │ &lt;ap&gt;ple\n#&gt;  [2] │ &lt;apr&gt;icot\n#&gt; [34] │ gr&lt;ap&gt;e\n#&gt; [35] │ gr&lt;ap&gt;efruit\n#&gt; [56] │ p&lt;ap&gt;aya\n#&gt; [62] │ pine&lt;ap&gt;ple\n\n# Matches an ap, followed by at least one r\nstringr::str_view(fruit, \"apr+\")\n#&gt;  [2] │ &lt;apr&gt;icot\n\n\nYou can use {n}, {n,}, and {n,m} to match exactly n times, at least n times, or between n and m times."
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#character-classes",
+    "href": "presentations/DataScience/transform.html#character-classes",
+    "title": "Transform",
+    "section": "Character Classes",
+    "text": "Character Classes\nDefined by [] and lets you match a set of characters. You can also invert the match by starting with ^. This matches anything except the listed characters.\n\nwords &lt;- stringr::words\n\n# Find an x surrounded by vowels\nstringr::str_view(words, \"[aeiou]x[aeiou]\")\n#&gt; [284] │ &lt;exa&gt;ct\n#&gt; [285] │ &lt;exa&gt;mple\n#&gt; [288] │ &lt;exe&gt;rcise\n#&gt; [289] │ &lt;exi&gt;st\n\n# Find a y surrounded by consonants\nstringr::str_view(words, \"[^aeiou]y[^aeiou]\")\n#&gt; [836] │ &lt;sys&gt;tem\n#&gt; [901] │ &lt;typ&gt;e\n\nYou can also use a - to define a range of letters or numbers.\n\nx &lt;- \"abcd ABCD 12345 -!@#%.\"\n\nstringr::str_view(x, \"[A-Z]\")\n#&gt; [1] │ abcd &lt;A&gt;&lt;B&gt;&lt;C&gt;&lt;D&gt; 12345 -!@#%.\n\nstringr::str_view(x, \"[0-9]\")\n#&gt; [1] | abcd ABCD &lt;1&gt;&lt;2&gt;&lt;3&gt;&lt;4&gt;&lt;5&gt; -!@#%."
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#character-class-shortcuts",
+    "href": "presentations/DataScience/transform.html#character-class-shortcuts",
+    "title": "Transform",
+    "section": "Character Class Shortcuts",
+    "text": "Character Class Shortcuts\n\n\\d matches any digit\n\\D matches anything that is not a digit\n\\s matches any whitespace (e.g., space, tab, newline)\n\\S matches anything that is not a whitespace\n\\w matches any “word” character (i.e., letters or numbers)\n\\W matches any non-word character\n\n\nstringr::str_view(x, \"\\\\W+\")\n#&gt; [1] │ abcd&lt; &gt;ABCD&lt; &gt;12345&lt; -!@#%.&gt;\n\nstringr::str_view(x, \"\\\\d+\")\n#&gt; [1] │ abcd ABCD &lt;12345&gt; -!@#%.\n\nstringr::str_view(x, \"\\\\D+\")\n#&gt; [1] │ &lt;abcd ABCD &gt;12345&lt; -!@#%.&gt;"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#alteration",
+    "href": "presentations/DataScience/transform.html#alteration",
+    "title": "Transform",
+    "section": "Alteration",
+    "text": "Alteration\nYou can use | to pick between one or more alternative patterns.\n\nstringr::str_view(fruit, \"aa|ee|ii|oo|uu\")\n\n#&gt;  [9] │ bl&lt;oo&gt;d orange\n#&gt; [33] │ g&lt;oo&gt;seberry\n#&gt; [47] │ lych&lt;ee&gt;\n#&gt; [66] │ purple mangost&lt;ee&gt;n"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#detecting-strings-in-a-dataset",
+    "href": "presentations/DataScience/transform.html#detecting-strings-in-a-dataset",
+    "title": "Transform",
+    "section": "Detecting Strings in a Dataset",
+    "text": "Detecting Strings in a Dataset\n\ntibble::tibble(fruit = fruit) |&gt;\n  dplyr::mutate(berry = stringr::str_detect(fruit, \"berry\")) |&gt;\n  dplyr::count(berry)\n\n#&gt; # A tibble: 2 × 2\n#&gt;   berry     n\n#&gt;   &lt;lgl&gt; &lt;int&gt;\n#&gt; 1 FALSE    66\n#&gt; 2 TRUE     14\n\nThe stringr::str_detect function can also be used with dplyr::filter and dplyr::summarize. For example, the code below calculates the total number and proportion of fruits containing the word “berry”.\n\ntibble::tibble(fruit = fruit) |&gt;\n  dplyr::summarize(\n    berry_sum = sum(stringr::str_detect(fruit, \"berry\")),\n    berry_prop = mean(stringr::str_detect(fruit, \"berry\")) * 100\n  )\n\n#&gt; # A tibble: 1 × 2\n#&gt;   berry_sum berry_prop\n#&gt;       &lt;int&gt;      &lt;dbl&gt;\n#&gt; 1        14       17.5\n\n\nThe stringr::str_subset and stringr::str_which functions are closely related to stringr::str_detect. The stringr::str_subset function returns a character vector with the strings that match and stringr::str_which returns an integer vector with the positions of the strings that match."
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#counting-matches",
+    "href": "presentations/DataScience/transform.html#counting-matches",
+    "title": "Transform",
+    "section": "Counting Matches",
+    "text": "Counting Matches\n\ntibble::tibble(fruit = fruit) |&gt;\n  dplyr::mutate(\n    vowels = stringr::str_count(fruit, \"[aeiou]\"),\n    consonants = stringr::str_count(fruit, \"[^aeiou]\")\n  )\n\n#&gt; # A tibble: 80 × 3\n#&gt;    fruit        vowels consonants\n#&gt;    &lt;chr&gt;         &lt;int&gt;      &lt;int&gt;\n#&gt;  1 apple             2          3\n#&gt;  2 apricot           3          4\n#&gt;  3 avocado           4          3\n#&gt;  4 banana            3          3\n#&gt;  5 bell pepper       3          8\n#&gt;  6 bilberry          2          6\n#&gt;  7 blackberry        2          8\n#&gt;  8 blackcurrant      3          9\n#&gt;  9 blood orange      5          7\n#&gt; 10 blueberry         3          6\n#&gt; # ℹ 70 more rows\n#&gt; # ℹ Use `print(n = ...)` to see more rows"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#removing-and-replacing-values",
+    "href": "presentations/DataScience/transform.html#removing-and-replacing-values",
+    "title": "Transform",
+    "section": "Removing and Replacing Values",
+    "text": "Removing and Replacing Values\n\ntibble::tibble(fruit = fruit) |&gt;\n  dplyr::filter(stringr::str_detect(fruit, \"berry\")) |&gt;\n  dplyr::mutate(\n    prefix = stringr::str_remove(fruit, \"berry\"),\n    asterisk = stringr::str_replace(fruit, \"berry\", \"*\")\n  )\n\n\nUse stringr::str_remove_all and stringr::str_replace_all to remove or replace all matches as str_remove and str_replace only remove or replace the first match."
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#anchors",
+    "href": "presentations/DataScience/transform.html#anchors",
+    "title": "Transform",
+    "section": "Anchors",
+    "text": "Anchors\nMatching the start or end of the string requires an anchor. Use ^ to match the start or $ to match the end of the string.\n\n# All fruits that start with an a\nstringr::str_view(fruit, \"^a\")\n#&gt; [1] │ &lt;a&gt;pple\n#&gt; [2] │ &lt;a&gt;pricot\n#&gt; [3] │ &lt;a&gt;vocado\n\n# All fruits that end with an a\nstringr::str_view(fruit, \"a$\")\n#&gt;  [4] │ banan&lt;a&gt;\n#&gt; [15] │ cherimoy&lt;a&gt;\n#&gt; [30] │ feijo&lt;a&gt;\n#&gt; [36] │ guav&lt;a&gt;\n#&gt; [56] │ papay&lt;a&gt;\n#&gt; [74] │ satsum&lt;a&gt;"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#capturing-groups",
+    "href": "presentations/DataScience/transform.html#capturing-groups",
+    "title": "Transform",
+    "section": "Capturing Groups",
+    "text": "Capturing Groups\nAllow you to use sub-components of the match by referring back to it with a back references (e.g., \\1 refers to the match contained in the first parenthesis, \\2 in the second parenthesis, etc.)\n\n# Finds all fruits with a repeated pair of letters\nstringr::str_view(fruit, \"(..)\\\\1\")\n#&gt;  [4] │ b&lt;anan&gt;a\n#&gt; [20] │ &lt;coco&gt;nut\n#&gt; [22] │ &lt;cucu&gt;mber\n#&gt; [41] │ &lt;juju&gt;be\n#&gt; [56] │ &lt;papa&gt;ya\n#&gt; [73] │ s&lt;alal&gt; berry\n\n# Finds all words that start and end with the same pair of letters\nstringr::str_view(words, \"^(..).*\\\\1$\")\n#&gt; [152] │ &lt;church&gt;\n#&gt; [217] │ &lt;decide&gt;\n#&gt; [617] │ &lt;photograph&gt;\n#&gt; [699] │ &lt;require&gt;\n#&gt; [739] │ &lt;sense&gt;"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#factors",
+    "href": "presentations/DataScience/transform.html#factors",
+    "title": "Transform",
+    "section": "Factors",
+    "text": "Factors\nFactors are used for categorical variables. The forcats package is part of tidyverse and provides tools for dealing with factors.\n\n# Create a vector of valid levels\nweekdays &lt;- c(\n  \"Sunday\",\n  \"Monday\",\n  \"Tuesday\",\n  \"Wednesday\",\n  \"Thursday\",\n  \"Friday\",\n  \"Saturday\"\n)\n\nweekday_levels &lt;- substr(weekdays, 1, 3)\n\nx &lt;- c(\"Tue\", \"Thu\", \"Fri\")\n\nfactor(x, levels = weekday_levels, labels = weekdays)\n#&gt; [1] Tuesday  Thursday Friday\n#&gt; Levels: Sunday Monday Tuesday Wednesday Thursday Friday Saturday"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#missing-factor-levels",
+    "href": "presentations/DataScience/transform.html#missing-factor-levels",
+    "title": "Transform",
+    "section": "Missing Factor Levels",
+    "text": "Missing Factor Levels\nAny values that are not in the level will be silently converted to NA. The forcats::fct function turns this into an error message and may be preferred.\n\nx &lt;- c(x, \"Satur\")\n\nfactor(x, levels = weekday_levels, labels = weekdays)\n#&gt; [1] Tuesday  Thursday Friday &lt;NA&gt;\n#&gt; Levels: Sunday Monday Tuesday Wednesday Thursday Friday Saturday\n\nforcats::fct(x, levels = weekday_levels)\n#&gt; Error in `forcats::fct()` at presentations/DataScience/transform.qmd:987:1:\n#&gt; ! All values of `x` must appear in `levels` or `na`\n#&gt; ℹ Missing level: \"Satur\"\n\n\nRemoving levels in factor(x) will take the unique values in alphabetical order. The forcats::fct function will order by first appearance."
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#modifying-factor-order",
+    "href": "presentations/DataScience/transform.html#modifying-factor-order",
+    "title": "Transform",
+    "section": "Modifying Factor Order",
+    "text": "Modifying Factor Order\nYou can use forcats::fct_reorder to reorder the factor by a numeric vector. For example, we may want to plot miles per gallon for cats in the mtcars dataset that is ordered miles per gallon.\n\nmtcars_df &lt;- tibble::tibble(model = factor(rownames(mtcars)), mtcars)\n\nmtcars_df_ordered &lt;- mtcars_df |&gt;\n  dplyr::mutate(model = forcats::fct_reorder(model, mpg))\n\n\n\nNot Ordered by Miles Per Gallon\n\n\n\n\n\n\n\n\n\n\nOrdered by Miles Per Gallon"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#other-useful-functions-for-factors",
+    "href": "presentations/DataScience/transform.html#other-useful-functions-for-factors",
+    "title": "Transform",
+    "section": "Other Useful Functions for Factors",
+    "text": "Other Useful Functions for Factors\n\n\n\n\n\n\n\nFunction\nPurpose\n\n\n\n\nfct_reorder2(.f, .x., .y)\nReorder the factor .f by the .y values associated with the largest .x values\n\n\nfct_infreq(f)\nOrder factor levels by frequency (most common first)\n\n\nfct_rev(f)\nReverse the order of factor levels\n\n\nfct_recode(.f, ...)\nRename factor levels\n\n\nfct_collapse(.f, ...)\nCombine multiple levels into broader categories\n\n\nfct_lump(f, n, prop)\nCombine infrequent levels into \"Other\"\n\n\nfct_lump_n(f, n)\nKeep the top n levels by frequency and lump the rest\n\n\nfct_lump_min(f, min)\nLump levels occurring fewer than a minimum count\n\n\nfct_lump_prop(f, prop)\nLump levels whose proportion is below a threshold\n\n\nfct_lump_lowfreq(f)\nLump the lowest-frequency levels into \"Other\""
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#dates-and-times",
+    "href": "presentations/DataScience/transform.html#dates-and-times",
+    "title": "Transform",
+    "section": "Dates and Times",
+    "text": "Dates and Times\nISO8601 is the international standard for writing dates where the components of the dates are organized from largest to smallest and separated with a - (e.g., 2026-07-01). This format can also include times where the hour, minute, and second are separated by a : (e.g., 2026-07-01 09:00:00)."
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#describing-date-and-time-formats",
+    "href": "presentations/DataScience/transform.html#describing-date-and-time-formats",
+    "title": "Transform",
+    "section": "Describing Date and Time Formats",
+    "text": "Describing Date and Time Formats\nYou can describe a date or time format with a % followed by a single character.\n\nYear: %Y (four digits) or %y (two digits)\nMonth: %m (number), %b (abbreviated name like Jul), %B (full name)\nDay: %d (one or two digits) or %e (two digits like 07)\nTime: %H (24-hour hour), %I (12-hour hour), %M (minute), %S (second)\nOther Time: %p (AM/PM), %Z (time zone name), %z (time zone offset)"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#creating-dates-from-strings",
+    "href": "presentations/DataScience/transform.html#creating-dates-from-strings",
+    "title": "Transform",
+    "section": "Creating Dates from Strings",
+    "text": "Creating Dates from Strings\nThe lubridate package is designed to make working with dates and times easier and more intuitive.\n\nlubridate::ymd(\"2026-07-01\")\n#&gt; [1] \"2026-07-01\"\n\nlubridate::mdy(\"July 1, 2026\")\n#&gt; [1] \"2026-07-01\"\n\nlubridate::mdy_hm(\"07/01/2026 09:00\")\n#&gt; [1] \"2026-07-01 09:00:00 UTC\""
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#creating-dates-from-components",
+    "href": "presentations/DataScience/transform.html#creating-dates-from-components",
+    "title": "Transform",
+    "section": "Creating Dates from Components",
+    "text": "Creating Dates from Components\n\nflights &lt;- nycflights13::flights\n\nflights |&gt;\n  dplyr::select(year, month, day, hour, minute) |&gt;\n  dplyr::mutate(\n    departure = lubridate::make_datetime(year, month, day, hour, minute)\n  )\n\n#&gt; # A tibble: 336,776 × 6\n#&gt;     year month   day  hour minute departure\n#&gt;    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dttm&gt;\n#&gt;  1  2013     1     1     5     15 2013-01-01 05:15:00\n#&gt;  2  2013     1     1     5     29 2013-01-01 05:29:00\n#&gt;  3  2013     1     1     5     40 2013-01-01 05:40:00\n#&gt;  4  2013     1     1     5     45 2013-01-01 05:45:00\n#&gt;  5  2013     1     1     6      0 2013-01-01 06:00:00\n#&gt;  6  2013     1     1     5     58 2013-01-01 05:58:00\n#&gt;  7  2013     1     1     6      0 2013-01-01 06:00:00\n#&gt;  8  2013     1     1     6      0 2013-01-01 06:00:00\n#&gt;  9  2013     1     1     6      0 2013-01-01 06:00:00\n#&gt; 10  2013     1     1     6      0 2013-01-01 06:00:00\n#&gt; # ℹ 336,766 more rows\n#&gt; # ℹ Use `print(n = ...)` to see more rows"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#retrieving-components-from-a-date",
+    "href": "presentations/DataScience/transform.html#retrieving-components-from-a-date",
+    "title": "Transform",
+    "section": "Retrieving Components from a Date",
+    "text": "Retrieving Components from a Date\nYou can extract indiviudal components from a date or time with functions like year, month, mday (day of the month), yday (day of the year), wday (day of the week), hour, minute, and second. You can also use label and abbr to return labels instead of numeric values.\n\ndatetime &lt;- lubridate::ymd_hms(\"2026-07-01 09:00:00\")\n\nlubridate::year(datetime)\n#&gt; [1] 2026\n\nlubridate::month(datetime, label = TRUE)\n#&gt; [1] Jul\n#&gt; Levels: Jan &lt; Feb &lt; Mar &lt; Apr &lt; May &lt; Jun &lt; Jul &lt; Aug &lt; Sep &lt; Oct &lt; Nov &lt; Dec\n\nlubridate::yday(datetime)\n#&gt; [1] 182\n\nlubridate::wday(datetime, label = TRUE, abbr = FALSE)\n#&gt; [1] Wednesday\n#&gt; Levels: Sunday &lt; Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; Friday &lt; Saturday"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#rounding-1",
+    "href": "presentations/DataScience/transform.html#rounding-1",
+    "title": "Transform",
+    "section": "Rounding",
+    "text": "Rounding\nThe lubridate package also has round_date, floor_date, and ceiling_date to adjust the date to the nearest second, minute, hour, day, week, month, bimonth, quarter, season, halfyear and year.\n\nlubridate::round_date(datetime, unit = \"week\")\n#&gt; [1] \"2026-06-28 UTC\"\n\nlubridate::floor_date(datetime, unit = \"week\")\n#&gt; [1] \"2026-06-28 UTC\"\n\nlubridate::ceiling_date(datetime, unit = \"week\")\n#&gt; [1] \"2026-07-05 UTC\""
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#modifying-date-components",
+    "href": "presentations/DataScience/transform.html#modifying-date-components",
+    "title": "Transform",
+    "section": "Modifying date components",
+    "text": "Modifying date components\nYou can also use each accessor function to modify the components of a date or time or use update to modify multiple components at the same time.\n\nlubridate::day(datetime) &lt;- 8\n\ndatetime\n#&gt; [1] \"2026-07-08 09:00:00 UTC\"\n\nlubridate::hour(datetime) &lt;- lubridate::hour(datetime) + 1\n\ndatetime\n#&gt; [1] \"2026-07-08 10:00:00 UTC\"\n\nupdate(datetime, day = 7, hour = 9)\n#&gt; [1] \"2026-07-07 09:00:00 UTC\""
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#time-spans",
+    "href": "presentations/DataScience/transform.html#time-spans",
+    "title": "Transform",
+    "section": "Time Spans",
+    "text": "Time Spans\nYou can also perform addition, subtraction, and division with date and time objects. Time spans can be represented by durations (seconds), periods (weeks and months), and intervals (starting and ending points).\n\n# How old is a person born on January 1, 1990 if today is July 1, 2026\n\nage &lt;- lubridate::date(datetime) - lubridate::ymd(\"1990-01-01\")\n\nage\n#&gt; Time difference of 13337 days\n\nA difftime class object records a time span in seconds, minutes, hours, days, or weeks. The lubridate as.duration function always records in seconds. The package also includes convenient constructors like dseconds, dminutes, dhours, ddays, dweeks, and dyears for adding durations and minutes, hours, days, months, and years for adding periods.\n\nlubridate::dyears(3)\n#&gt; [1] \"94672800s (~3 years)\"\n\ndatetime + lubridate::dyears(3)\n#&gt; [1] \"2029-07-08 04:00:00 UTC\"\n\ndatetime + lubridate::years(3)\n#&gt; [1] \"2029-07-08 10:00:00 UTC\"\n\n\nPeriods are time spans without a fixed length in seconds and are more likely than durations to do what you would expect."
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#intervals",
+    "href": "presentations/DataScience/transform.html#intervals",
+    "title": "Transform",
+    "section": "Intervals",
+    "text": "Intervals\nAn interval is a pair of starting and ending dates. You can think of it as a duration with a starting point.\n\n`%--%` &lt;- lubridate::`%--%`\ny2024 &lt;- lubridate::ymd(\"2024-01-01\") %--% lubridate::ymd(\"2025-01-01\")\ny2026 &lt;- lubridate::ymd(\"2026-01-01\") %--% lubridate::ymd(\"2027-01-01\")\n\ny2024\n#&gt; [1] 2024-01-01 UTC--2025-01-01 UTC\n\ny2026\n#&gt; [1] 2026-01-01 UTC--2027-01-01 UTC\n\ny2024 / lubridate::days(1)\n#&gt; [1] 366\n\ny2026 / lubridate::days(1)\n#&gt; [1] 365"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#missing-values-1",
+    "href": "presentations/DataScience/transform.html#missing-values-1",
+    "title": "Transform",
+    "section": "Missing Values",
+    "text": "Missing Values\nYou can use last observation carried forward with tidyr::fill or fill in fixed values with dplyr::coalesce. An NA can be added using dplyr::na_if if a value like -99 represents a missing value.\n\nprint(anthro)\n\n#&gt; # A tibble: 5 × 4\n#&gt;   subject timepoint height weight\n#&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;\n#&gt; 1    1001         1    165     65\n#&gt; 2    1001         2     NA     67\n#&gt; 3    1001         3     NA     68\n#&gt; 4    1002         1    170     72\n#&gt; 5    1002         3     NA    -99\n\ntidyr::fill(anthro, height)[[\"height\"]]\n#&gt; [1] 165 165 165 170 170\n\ndplyr::coalesce(data$height, mean(data$height, na.rm = TRUE))\n#&gt; [1] 165.0 167.5 167.5 170.0 167.5\n\ndplyr::na_if(anthro$weight, -99)\n#&gt; [1] 65 67 68 72 NA"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#implicit-missing-values",
+    "href": "presentations/DataScience/transform.html#implicit-missing-values",
+    "title": "Transform",
+    "section": "Implicit Missing Values",
+    "text": "Implicit Missing Values\nExplicit missing values are usually represented by NA, NaN, or a negative number like -99. Implicit missing values are not in the dataset. You can use tidyr::complete to add missing rows.\n\ntidyr::complete(anthro, subject, timepoint = 1:3)\n\n#&gt; # A tibble: 6 × 4\n#&gt;   subject timepoint height weight\n#&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;\n#&gt; 1    1001         1    165     65\n#&gt; 2    1001         2     NA     67\n#&gt; 3    1001         3     NA     68\n#&gt; 4    1002         1    170     72\n#&gt; 5    1002         2     NA     NA\n#&gt; 6    1002         3     NA    -99"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#joins",
+    "href": "presentations/DataScience/transform.html#joins",
+    "title": "Transform",
+    "section": "Joins",
+    "text": "Joins\nMultiple data frames can be joined together with mutating or filtering joins. Mutating joins add new variables to one data frame from matching observations in another. Filtering joins filter observations from one data frame based on whether or not they match an observation in another."
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#inner-join",
+    "href": "presentations/DataScience/transform.html#inner-join",
+    "title": "Transform",
+    "section": "Inner Join",
+    "text": "Inner Join\nOnly observations that match in both data frames are kept.\n\n\n\ndplyr::inner_join(x, y)\n\n#&gt; # A tibble: 2 × 3\n#&gt;     key val_x val_y\n#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;\n#&gt; 1     1 x1    y1\n#&gt; 2     2 x2    y2\n\n\n\n\nAn outer join is the opposite of inner join and will keep observations that appear in at least one of the data frames."
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#left-join",
+    "href": "presentations/DataScience/transform.html#left-join",
+    "title": "Transform",
+    "section": "Left Join",
+    "text": "Left Join\nKeeps all observations of X.\n\n\n\ndplyr::left_join(x, y)\n\n#&gt; # A tibble: 3 × 3\n#&gt;     key val_x val_y\n#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;\n#&gt; 1     1 x1    y1\n#&gt; 2     2 x2    y2\n#&gt; 3     3 x3    NA"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#right-join",
+    "href": "presentations/DataScience/transform.html#right-join",
+    "title": "Transform",
+    "section": "Right Join",
+    "text": "Right Join\nKeeps all observations of Y.\n\n\n\ndplyr::right_join(x, y)\n\n#&gt; # A tibble: 3 × 3\n#&gt;     key val_x val_y\n#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;\n#&gt; 1     1 x1    y1\n#&gt; 2     2 x2    y2\n#&gt; 3     3 NA    y3"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#full-join",
+    "href": "presentations/DataScience/transform.html#full-join",
+    "title": "Transform",
+    "section": "Full Join",
+    "text": "Full Join\nKeeps all observations in X and Y.\n\n\n\ndplyr::full_join(x, y)\n\n#&gt; # A tibble: 4 × 3\n#&gt;     key val_x val_y\n#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;\n#&gt; 1     1 x1    y1\n#&gt; 2     2 x2    y2\n#&gt; 3     3 x3    NA\n#&gt; 4     4 NA    y3"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#semi-join",
+    "href": "presentations/DataScience/transform.html#semi-join",
+    "title": "Transform",
+    "section": "Semi-Join",
+    "text": "Semi-Join\nKeeps observations in X that appear in Y but does not join Y.\n\n\n\ndplyr::semi_join(x, y)\n\n#&gt; # A tibble: 2 × 2\n#&gt;     key val_x\n#&gt;   &lt;dbl&gt; &lt;chr&gt;\n#&gt; 1     1 x1\n#&gt; 2     2 x2"
+  },
+  {
+    "objectID": "presentations/DataScience/transform.html#anti-join",
+    "href": "presentations/DataScience/transform.html#anti-join",
+    "title": "Transform",
+    "section": "Anti-Join",
+    "text": "Anti-Join\nKeeps observations in X that do not appear in Y but does not join Y.\n\n\n\ndplyr::anti_join(x, y)\n\n#&gt; # A tibble: 1 × 2\n#&gt;     key val_x\n#&gt;   &lt;dbl&gt; &lt;chr&gt;\n#&gt; 1     3 x3"
+  },
+  {
     "objectID": "presentations/AdvancedR/SpecialTopics/performance.html#measuring-performance",
     "href": "presentations/AdvancedR/SpecialTopics/performance.html#measuring-performance",
     "title": "Measuring and Improving Performance",
@@ -2132,7 +2384,7 @@
     "href": "presentations/DataScience.html",
     "title": "R for Data Science",
     "section": "",
-    "text": "Transform\n\n\nTools to Work with Common Variable Types\n\n\n\n\n\n\n\n\nJul 8, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nVisualization\n\n\nIntroduction to ggplot2\n\n\n\n\n\n\n\n\nJul 8, 2026\n\n\nAshlyn Barry\n\n\n\n\n\nNo matching items"
+    "text": "Transform\n\n\nTools to Work with Common Variable Types\n\n\n\n\n\n\n\n\nJul 1, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nVisualization\n\n\nIntroduction to ggplot2\n\n\n\n\n\n\n\n\nJul 8, 2026\n\n\nAshlyn Barry\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "presentations/DataScience/visualization.html#what-is-ggplot2",
