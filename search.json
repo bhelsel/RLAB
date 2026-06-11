@@ -60,7 +60,7 @@
     "href": "presentations/Foundations.html",
     "title": "Advanced R Foundations",
     "section": "",
-    "text": "Names and Values\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nAug 12, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nVectors\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nAug 19, 2026\n\n\nMorgan Brucks, CCRP\n\n\n\n\n\n\n\n\n\n\n\n\nSubsetting\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nAug 26, 2026\n\n\nJulianne Clina, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nControl Flow\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 2, 2026\n\n\nJulianne G. Clina, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nFunctions\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 9, 2026\n\n\nAshlyn Barry\n\n\n\n\n\n\n\n\n\n\n\n\nEnvironments\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 16, 2026\n\n\nIan Weidling, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nAdvanced R: Conditions\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 23, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\nNo matching items"
+    "text": "Names and Values\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nAug 12, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nVectors\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nAug 19, 2026\n\n\nMorgan Brucks, CCRP\n\n\n\n\n\n\n\n\n\n\n\n\nSubsetting\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nAug 26, 2026\n\n\nJulianne Clina, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nControl Flow\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 2, 2026\n\n\nJulianne G. Clina, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nFunctions\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 9, 2026\n\n\nAshlyn Barry\n\n\n\n\n\n\n\n\n\n\n\n\nEnvironments\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 16, 2026\n\n\nIan Weidling, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nConditions\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 23, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "presentations/DataScience/transform.html#logical-vectors",
@@ -1143,126 +1143,126 @@
   {
     "objectID": "presentations/AdvancedR/Foundations/conditions.html#introduction",
     "href": "presentations/AdvancedR/Foundations/conditions.html#introduction",
-    "title": "Advanced R: Conditions",
+    "title": "Conditions",
     "section": "Introduction",
     "text": "Introduction\nProvides a paired set of tools that allows the author of a function to indicate that something unusual is happening and a user to deal with it. The author signals conditions with functions like stop() (for errors), warning() (for warnings), and message() (for messages).\nThe user can handle the signals with functions like tryCatch() and withCallingHandlers()."
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/conditions.html#signalling-conditions",
     "href": "presentations/AdvancedR/Foundations/conditions.html#signalling-conditions",
-    "title": "Advanced R: Conditions",
+    "title": "Conditions",
     "section": "Signalling conditions",
     "text": "Signalling conditions\n\nErrors indicate that there is no way for a function to continue and execution must stop\nWarnings show that something has gone wrong but the function could at least partially recover\nMessages inform users that some action has been performed on their behalf\n\nConditions are displayed prominently with errors always starting with Error and warnings starting with Warning.\n\nstop(\"This is an error\")\n#&gt; Error: This is an error\n\n\nwarning(\"Here is a warning...\")\n\nWarning: Here is a warning...\n\nmessage(\"and a message\")\n\nand a message"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/conditions.html#errors",
     "href": "presentations/AdvancedR/Foundations/conditions.html#errors",
-    "title": "Advanced R: Conditions",
+    "title": "Conditions",
     "section": "Errors",
     "text": "Errors\nErrors are signalled, or thrown using stop() Adding call. = FALSE removes the function call which is typically not useful and can be obtained from traceback. This can be accomplished automatically with rlang::abort.\n\nf &lt;- function() g()\ng &lt;- function() h()\nh &lt;- function() stop(\"Here is an error!\", call. = FALSE)\n\nf()\n#&gt; Error: Here is an error!\n\n\nThe best error messages tell you what is wrong and provides direction toward fixing the problem. Writing good error messages is challenging because it is hard to imagine how the user is thinking incorrectly about your code.\n\nYou can visit the tidyverse style guide for helpful tips in writing error messages."
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/conditions.html#warnings",
     "href": "presentations/AdvancedR/Foundations/conditions.html#warnings",
-    "title": "Advanced R: Conditions",
+    "title": "Conditions",
     "section": "Warnings",
     "text": "Warnings\nWarnings signal that something has gone wrong, but the code recovered and was able to continue. You can have multiple warnings within a function.\n\nfw &lt;- function() {\n  cat(\"1\\n\")\n  warning(\"Warning #1\", call. = FALSE)\n  cat(\"2\\n\")\n  warning(\"Warning #2\", call. = FALSE)\n}\n\nfw()\n\n#&gt; 1\n#&gt; 2\n#&gt; Warning messages:\n#&gt; 1: Warning #1\n#&gt; 2: Warning #2\n\nWarnings are cached and printed only when a function exists, but you can control this behavior with the warn option.\n\noptions(warn = 0) is the default behavior and prints warnings at the end.\noptions(warn = 1) will make the warnings appear immediately.\noptions(warn = 2) will turn the warnings into errors (helps with debugging a warning).\n\nIt is difficult to know when to use warnings. Warnings are often missed if there is a lot of other output and restraining use of warnings is advised. Warnings are appropriate when:\n\nYou deprecate a function and want to allow older code to run but encourage users to switch to the newer function\nYou are reasonable certain you can recover but not fix a problem"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/conditions.html#messages",
     "href": "presentations/AdvancedR/Foundations/conditions.html#messages",
-    "title": "Advanced R: Conditions",
+    "title": "Conditions",
     "section": "Messages",
     "text": "Messages\nProvide information to let the user know you have done something on their behalf. Good messages provide useful information so the user knows what is happening, but not too many details that the user feels overwhelmed. Messages are recommended when:\n\nProviding a default argument in a function that requires some computation and you want to let the user know what value was used (e.g., ggplot2 reports the number of bins if binwidth is missing)\nUsing functions that are called for their side-effects and would otherwise be silent (e.g., writing files to disk or calling a web API)\nStarting a long, multi-step running process\nProviding a message when your package is loaded (e.g., .onAttach())\n\n\nThe results of the message() and cat() functions are similar but their purposes are different. Use cat when the user asks for a message to be printed to the console and message when the developer elects for a message to be printed."
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/conditions.html#ignoring-conditions",
     "href": "presentations/AdvancedR/Foundations/conditions.html#ignoring-conditions",
-    "title": "Advanced R: Conditions",
+    "title": "Conditions",
     "section": "Ignoring Conditions",
     "text": "Ignoring Conditions\nA simple way to handle conditions in R is to ignore them. This can be done using try for errors, suppressWarnings for warnings, and suppressMessages for messages.\nThe try() function allows execution to continue after an error has occurred.\n\nf1 &lt;- function(x) {\n  try(log(x))\n  10\n}\n\nf1()\n\n#&gt; Error in log(x) : argument \"x\" is missing, with no default\n#&gt; [1] 10\n\nBy doing assignment within the call, you can define a default value for use if the code does not work. This works because the argument is evaluated in the calling environment and not the function.\n\ndefault &lt;- NULL\n\ntry(default &lt;- read.csv(\"this-file-does-not-exist.csv\"), silent = TRUE)\n\nBoth suppressWarnings() and suppressMessages() suppress all warnings and messages.\n\nsuppressWarnings({\n  warning(\"This might be a problem!\")\n  1\n})\n#&gt; [1] 1\n\nsuppressMessages({\n  message(\"Greetings!\")\n  2\n})\n#&gt; [1] 2"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/conditions.html#handling-conditions",
     "href": "presentations/AdvancedR/Foundations/conditions.html#handling-conditions",
-    "title": "Advanced R: Conditions",
+    "title": "Conditions",
     "section": "Handling Conditions",
     "text": "Handling Conditions\nEach signalling condition has a default behavior:\n\nErrors stop execution and return to the top level\nWarnings are captured and displayed in aggregate\nMessages are immediately shown\n\nCondition handlers allow us to temporarily override or supplement the default behavior. We can use tryCatch and withCallingHandlers to register handlers.\n\ntryCatch(\n  error = function(condition) {\n    # code to run when an error is thrown\n  },\n  # code to run while handlers are active\n)\n\nwithCallingHandlers(\n  warning = function(condition) {\n    # code to run when a warning is signalled\n  },\n\n  message = function(condition) {\n    # code to run when a message is signalled\n  },\n\n  # code to run while handlers are active\n)"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/conditions.html#condition-objects",
     "href": "presentations/AdvancedR/Foundations/conditions.html#condition-objects",
-    "title": "Advanced R: Conditions",
+    "title": "Conditions",
     "section": "Condition Objects",
     "text": "Condition Objects\nViewing a condition object that is signalled can be done with rlang::catch_cnd. Built-in conditions have two elements:\n\nA message containing the text that should be displayed to the user\nA call that triggered the condition\n\n\ncnd &lt;- rlang::catch_cnd(stop(\"Here is an error!\"))\nstr(cnd)\n\n#&gt; List of 2\n#&gt;  $ message: chr \"Here is an error!\"\n#&gt;  $ call   : language force(expr)\n#&gt;  - attr(*, \"class\")= chr [1:3] \"simpleError\" \"error\" \"condition\"\n\n# Extract the message\nconditionMessage(cnd)\n\n# Extract the call\nconditionCall(cnd)"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/conditions.html#exiting-handlers",
     "href": "presentations/AdvancedR/Foundations/conditions.html#exiting-handlers",
-    "title": "Advanced R: Conditions",
+    "title": "Conditions",
     "section": "Exiting Handlers",
     "text": "Exiting Handlers\nThe function tryCatch can be used to handle error conditions. You can override the default error behavior (e.g., return NA instead of an error) and code executes normally if no error exists.\n\nf2 &lt;- function(x) {\n  tryCatch(\n    error = function(cnd) NA,\n    log(x)\n  )\n}\n\nf2(\"x\")\n#&gt; [1] NA\n\nf2(10)\n#&gt; [1] 2.302585\n\n\nIt is called an exiting handler because control passes to the handler after the error occurs and never returns to the original code.\n\nThe handler functions are called with a single argument (i.e., the condition object). This object becomes more useful when you make your own custom conditions.\n\ntryCatch(\n  error = function(cnd) {\n    paste0(\"--\", conditionMessage(cnd), \"--\")\n  },\n  stop(\"Here is an error\")\n)\n\n#&gt; [1] \"--Here is an error--\"\n\nThe tryCatch function also has a finally argument to provide a block of code that runs regardless of whether the initial expression is successful. This could be useful for clean up (e.g., deleting files) or closing connections.\n\npath &lt;- tempfile()\n\ntryCatch(\n  {\n    writeLines(\"Hi\", path)\n  },\n  finally = {\n    unlink(path)\n  }\n)"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/conditions.html#calling-handlers",
     "href": "presentations/AdvancedR/Foundations/conditions.html#calling-handlers",
-    "title": "Advanced R: Conditions",
+    "title": "Conditions",
     "section": "Calling handlers",
     "text": "Calling handlers\nUnlike exiting handlers, calling handlers like withCallingHandlers allow code execution to continue normally once the handler returns, making a more natural pairing with the non-error conditions (i.e., message, warning). Notice how the execution of the code below differs:\n\ntryCatch(\n  message = function(cnd) cat(\"Here is a message!\\n\"),\n  {\n    message(\"Is someone available?\")\n    message(\"Why, yes! How can I help?\")\n  }\n)\n\n#&gt; Here is a message!\n\nwithCallingHandlers(\n  message = function(cnd) cat(\"Here is a message!\\n\"),\n  {\n    message(\"Is someone available?\")\n    message(\"Why, yes! How can I help?\")\n  }\n)\n\n#&gt; Here is a message!\n#&gt; Is someone available?\n#&gt; Here is a message!\n#&gt; Why, yes! How can I help?\n\nHandlers are applied in order so you do not need to worry about infinite loops, but you may want to think through the order if using multiple handlers.\n\nwithCallingHandlers(\n  message = function(cnd) message(\"Second message\"),\n  message(\"First message\")\n)\n\n#&gt; Second message\n#&gt; First message\n\nA unique side-effect of calling handlers is the ability to muffle the signal. A condition will continue to propagate to the parent handlers all the way to the parent or exiting handler.\n\n# Bubbles up to the default handler which generates the message\nwithCallingHandlers(\n  message = function(cnd) cat(\"Level 2\\n\"),\n  withCallingHandlers(\n    message = function(cnd) cat(\"Level 1\\n\"),\n    message(\"Greetings!\")\n  )\n)\n\n#&gt; Level 1\n#&gt; Level 2\n#&gt; Greetings!\n\n# Muffles the default handler\n\nwithCallingHandlers(\n  message = function(cnd) {\n    cat(\"Level 2\\n\")\n    rlang::cnd_muffle(cnd)\n  },\n  withCallingHandlers(\n    message = function(cnd) cat(\"Level 1\\n\"),\n    message(\"Greetings!\")\n  )\n)\n\n#&gt; Level 1\n#&gt; Level 2"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/conditions.html#custom-conditions",
     "href": "presentations/AdvancedR/Foundations/conditions.html#custom-conditions",
-    "title": "Advanced R: Conditions",
+    "title": "Conditions",
     "section": "Custom Conditions",
     "text": "Custom Conditions\nR has the ability to create custom conditions containing additional metadata. Using rlang::abort allows you to apply a custom .subclass and additional metadata, guiding the user toward a solution to the problem.\n\nmy_log &lt;- function(x, base = exp(1)) {\n  if (!is.numeric(x)) {\n    rlang::abort(\n      paste0(\n        \"`x` must be a numeric vector; not \",\n        typeof(x),\n        \".\"\n      )\n    )\n  }\n  if (!is.numeric(base)) {\n    rlang::abort(\n      paste0(\n        \"`base` must be a numeric vector; not \",\n        typeof(base),\n        \".\"\n      )\n    )\n  }\n  base::log(x, base = base)\n}\n\nmy_log(letters)\n#&gt; Error in `my_log()`: `x` must be a numeric vector; not character.\n\nmy_log(1:10, base = letters)\n#&gt; Error in `my_log()`: `base` must be a numeric vector; not character."
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/conditions.html#signalling",
     "href": "presentations/AdvancedR/Foundations/conditions.html#signalling",
-    "title": "Advanced R: Conditions",
+    "title": "Conditions",
     "section": "Signalling",
     "text": "Signalling\nLet’s improve our my_log error handling by making it more generalized, including a nice error message with the glue R package for the user and more metadata for the developer.\n\n# An example of doing this in Base R is in Advaned R on page 191\n\nabort_bad_argument &lt;- function(arg, must, not = NULL) {\n  msg &lt;- glue::glue(\"`{arg}` must {must}\")\n  if (!is.null(not)) {\n    not &lt;- typeof(not)\n    msg &lt;- glue::glue(\"{msg}; not {not}\")\n  }\n  rlang::abort(\n    \"error_bad_argument\",\n    message = msg,\n    arg = arg,\n    must = must,\n    not = not\n  )\n}\n\nmy_log &lt;- function(x, base = exp(1)) {\n  if (!is.numeric(x)) {\n    abort_bad_argument(\"x\", must = \"be numeric\", not = x)\n  }\n  if (!is.numeric(base)) {\n    abort_bad_argument(\"base\", must = \"be numeric\", not = base)\n  }\n  base::log(x, base = base)\n}\n\nmy_log(letters)\n#&gt; Error in `abort_bad_argument()`: ! `x` must be numeric; not character\n\nmy_log(1:10, base = letters)\n#&gt; Error in `abort_bad_argument()`: ! `base` must be numeric; not character\n\n\nThis structure makes programming more efficient and can be used in a wide range of scenarios including unit testing in package development."
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/conditions.html#applications",
     "href": "presentations/AdvancedR/Foundations/conditions.html#applications",
-    "title": "Advanced R: Conditions",
+    "title": "Conditions",
     "section": "Applications",
     "text": "Applications\nSome common applications of the condition system in R:\n\nFailure value\nSuccess and failure values\nResignal\nRecord\nNo default behavior"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/conditions.html#failure-value",
     "href": "presentations/AdvancedR/Foundations/conditions.html#failure-value",
-    "title": "Advanced R: Conditions",
+    "title": "Conditions",
     "section": "Failure Value",
     "text": "Failure Value\nReturn a default value if an error occurs\n\nfail_with &lt;- function(expr, value = NULL) {\n  tryCatch(\n    error = function(cnd) value,\n    expr\n  )\n}\n\nfail_with(log(10), NA_real_)\n#&gt; [1] 2.302585\n\nfail_with(log(\"x\"), NA_real_)\n#&gt; [1] NA\n\nA more sophisticated application is base::try():\n\ntry2 &lt;- function(expr, silent = FALSE) {\n  tryCatch(\n    error = function(cnd) {\n      msg &lt;- conditionMessage(cnd)\n      if (!silent) {\n        message(\"Error: \", msg)\n      }\n      structure(msg, class = \"try-error\")\n    },\n    expr\n  )\n}\n\ntry2(1)\n#&gt; [1] 1\n\ntry2(stop(\"Hello!\"))\n#&gt; Error: Hello!\n#&gt; [1] \"Hello!\"\n#&gt; attr(,\"class\")\n#&gt; [1] \"try-error\"\n\ntry2(stop(\"Hello!\"), silent = TRUE)\n#&gt; [1] \"Hello!\"\n#&gt; attr(,\"class\")\n#&gt; [1] \"try-error\""
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/conditions.html#success-and-failure-values",
     "href": "presentations/AdvancedR/Foundations/conditions.html#success-and-failure-values",
-    "title": "Advanced R: Conditions",
+    "title": "Conditions",
     "section": "Success and Failure Values",
     "text": "Success and Failure Values\nAn extension of the failure value by returning a different value if the code evaluates successfully. This requires an evaluation of the code supplied by the user.\nWe can use this to determine if an expression fails:\n\ndoes_error &lt;- function(expr) {\n  tryCatch(\n    error = function(cnd) TRUE,\n    {\n      expr\n      FALSE\n    }\n  )\n}\n\ndoes_error(log(10))\n#&gt; [1] FALSE\n\ndoes_error(log(\"x\"))\n#&gt; [1] TRUE\n\nOr to capture any condition as seen in rlang::catch_cnd\n\ncatch_cnd &lt;- function(expr) {\n  tryCatch(\n    condition = function(cnd) cnd,\n    {\n      expr\n      NULL\n    }\n  )\n}\n\ncatch_cnd(log(\"x\"))\n#&gt; &lt;simpleError in log(\"x\"): non-numeric argument to mathematical function&gt;\n\ncatch_cnd(log(10))\n#&gt; NULL\n\nWe can also create a variant of the try function that returns a list consisting of a result and error component.\n\nsafety &lt;- function(expr) {\n  tryCatch(\n    error = function(cnd) {\n      list(result = NULL, error = cnd)\n    },\n    list(result = expr, error = NULL)\n  )\n}\n\nsafety(log(\"x\"))\n#&gt; $result\n#&gt; NULL\n\n#&gt; $error\n#&gt; &lt;simpleError in log(\"x\"): non-numeric argument to mathematical function&gt;\n\nsafety(log(10))\n#&gt; $result\n#&gt; [1] 2.302585\n\n#&gt; $error\n#&gt; NULL"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/conditions.html#resignal",
     "href": "presentations/AdvancedR/Foundations/conditions.html#resignal",
-    "title": "Advanced R: Conditions",
+    "title": "Conditions",
     "section": "Resignal",
     "text": "Resignal\nHandlers can be used to make informative error messages and simulate options(warn = 2) to turn a warning into an error for a single block of code to help with debugging. You could write a similar function if you were trying to locate the source of a message.\n\nwarning2error &lt;- function(expr) {\n  withCallingHandlers(\n    warning = function(cnd) rlang::abort(conditionMessage(cnd)),\n    expr\n  )\n}\n\nrlang::warn(\"Hello\")\n#&gt; Warning message:\n#&gt; Hello\n\nwarning2error({\n  x &lt;- 2 * 4\n  rlang::warn(\"Hello\")\n})\n\n#&gt; Error:\n#&gt; ! Hello"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/conditions.html#record",
     "href": "presentations/AdvancedR/Foundations/conditions.html#record",
-    "title": "Advanced R: Conditions",
+    "title": "Conditions",
     "section": "Record",
     "text": "Record\nRecording conditions for later investigation can be accomplished with conditions if an object is modified in place as calling handlers are called for their side effects and cannot return values. You can also capture errors by wrapping withCallingHandlers in a tryCatch.\n\ncatch_cnds &lt;- function(expr) {\n  conds &lt;- list()\n  add_cond &lt;- function(cnd) {\n    conds &lt;&lt;- append(conds, list(cnd))\n    rlang::cnd_muffle(cnd)\n  }\n\n  tryCatch(\n    error = function(cnd) {\n      conds &lt;&lt;- append(conds, list(cnd))\n    },\n    withCallingHandlers(\n      message = add_cond,\n      warning = add_cond,\n      expr\n    )\n  )\n  conds\n}\n\n\ncatch_cnds({\n  rlang::inform(\"a\")\n  rlang::warn(\"b\")\n  rlang::abort(\"c\")\n})\n\n#&gt; [[1]]\n#&gt; &lt;message/rlang_message&gt;\n#&gt; Message:\n#&gt; a\n\n#&gt; [[2]]\n#&gt; &lt;warning/rlang_warning&gt;\n#&gt; Warning:\n#&gt; b\n\n#&gt; [[3]]\n#&gt; &lt;error/rlang_error&gt;\n#&gt; Error:\n#&gt; ! c\n#&gt; ---\n#&gt; Backtrace:\n#&gt;     ▆\n#&gt;  1. ├─global catch_cnds(...)\n#&gt;  2. │ ├─base::tryCatch(...)\n#&gt;  3. │ │ └─base (local) tryCatchList(expr, classes, parentenv, handlers)\n#&gt;  4. │ │   └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])\n#&gt;  5. │ │     └─base (local) doTryCatch(return(expr), name, parentenv, handler)\n#&gt;  6. │ └─base::withCallingHandlers(...)\n#&gt;  7. └─rlang::abort(\"c\")\n\n\nThe idea of recording conditions led to the creation of the evaluate R package which powers knitr. The functions in evaluate capture each output into a special data structure so it can be later replayed. The code is more complex as it needs to handle both plot and text output."
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/conditions.html#no-default-behavior",
     "href": "presentations/AdvancedR/Foundations/conditions.html#no-default-behavior",
-    "title": "Advanced R: Conditions",
+    "title": "Conditions",
     "section": "No Default Behavior",
     "text": "No Default Behavior\nYou can signal a condition that does not inherit from a message, warning, or error. In this case, there is no default behavior and the condition has no effect unless the user requests it. For example, you could create a logging system based on conditions:\n\nlog &lt;- function(message, level = c(\"info\", \"error\", \"fatal\")) {\n  level &lt;- match.arg(level)\n  rlang::signal(message, \"log\", level = level)\n}\n\nlog(\"This code was run\")\n\nThe condition is signalled, but nothing happens with the code above as it has no default handler. To activate logging, you need a handler that does something with the log condition.\n\nrecord_log &lt;- function(expr, path = stdout()) {\n  withCallingHandlers(\n    log = function(cnd) {\n      cat(\n        \"[\",\n        cnd$level,\n        \"] \",\n        cnd$message,\n        \"\\n\",\n        sep = \"\",\n        file = path,\n        append = TRUE\n      )\n    },\n    expr\n  )\n}\n\nrecord_log(log(\"Hello\"))\n#&gt; [info] Hello\n\nYou could even add another function to selectively ignore some logging levels.\n\nignore_log_levels &lt;- function(expr, levels) {\n  withCallingHandlers(\n    log = function(cnd) {\n      if (cnd$level %in% levels) {\n        rlang::cnd_muffle(cnd)\n      }\n    },\n    expr\n  )\n}\n\nrecord_log(ignore_log_levels(log(\"Hello\"), \"info\"))"
   },
