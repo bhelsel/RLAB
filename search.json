@@ -2660,18 +2660,25 @@
     "text": "Today’s Plan\n\n\nWorkflow basics\n\nNaming, style, scripts, projects\nThese habits show up in every lesson going forward, so we won’t repeat them\n\n\nThe four tools\n\nImport data → readr\nTidy data → tidyr\nTransform data → dplyr\nVisualize data → ggplot2\n\n\n\nWe’re covering this in import → tidy → transform → visualize order today (rather than the book’s order) because that’s the order you actually touch a new dataset."
   },
   {
+    "objectID": "presentations/DataScience/whole-game.html#the-whole-game-explained-like-a-kitchen",
+    "href": "presentations/DataScience/whole-game.html#the-whole-game-explained-like-a-kitchen",
+    "title": "Whole Game",
+    "section": "The Whole Game, Explained Like a Kitchen",
+    "text": "The Whole Game, Explained Like a Kitchen\n\nThink of data science like cooking a meal:\n\n\n\n\nData science step\nKitchen analogy\n\n\n\n\nImport\nGrocery shopping\n\n\nTidy\nWashing & chopping ingredients\n\n\nTransform\nCooking & seasoning\n\n\nVisualize\nPlating the dish\n\n\nCommunicate\nServing it to others\n\n\n\nYou can’t plate raw ingredients, and you shouldn’t cook before you chop."
+  },
+  {
     "objectID": "presentations/DataScience/whole-game.html#naming-things-and-writing-code",
     "href": "presentations/DataScience/whole-game.html#naming-things-and-writing-code",
     "title": "Whole Game",
     "section": "Naming Things and Writing Code",
-    "text": "Naming Things and Writing Code\n\n# Assignment uses &lt;- (shortcut: Alt/Option + -)\nx &lt;- 3 * 4\nprimes &lt;- c(2, 3, 5, 7, 11, 13)\n\n\n\nStrive for:\n\nshort_flights &lt;- flights %&gt;%\n  filter(air_time &lt; 60)\n\n\nAvoid:\n\nSHORTFLIGHTS &lt;- flights %&gt;%\n  filter(air_time &lt; 60)\n\n\n\nsnake_case, spaces around &lt;- and operators, and %&gt;% at the end of a line (not the start) — these three habits make code dramatically easier to read later."
+    "text": "Naming Things and Writing Code\n\n\nWho are you writing code for?\n\nNot your professor\n\nNot your classmates\n\nFuture you (who has forgotten everything)\n\n\n\n\nIf code only makes sense right now, it will absolutely fail you in 2 weeks.\n\n\n\n# Assignment uses &lt;- (shortcut: Alt/Option + -)\nx &lt;- 3 * 4\nprimes &lt;- c(2, 3, 5, 7, 11, 13)\n\n\n\nStrive for:\n\nshort_flights &lt;- flights %&gt;%\n  filter(air_time &lt; 60)\n\n\nAvoid:\n\nSHORTFLIGHTS &lt;- flights %&gt;%\n  filter(air_time &lt; 60)\n\n\n\nsnake_case, spaces around &lt;- and operators, and %&gt;% at the end of a line (not the start) — these three habits make code dramatically easier to read later."
   },
   {
     "objectID": "presentations/DataScience/whole-game.html#scripts-and-projects",
     "href": "presentations/DataScience/whole-game.html#scripts-and-projects",
     "title": "Whole Game",
     "section": "Scripts and Projects",
-    "text": "Scripts and Projects\n\nWrite code in the script editor, not just the console — Cmd/Ctrl + Enter runs a line, Cmd/Ctrl + Shift + S runs the whole script\nKeep every project (data, scripts, outputs) together using an RStudio Project (.Rproj) — never setwd()\nUse relative paths (data/students.csv), never absolute ones (/Users/you/...) — relative paths work on anyone’s machine\n\n\n# Good — relative to the project folder\nwrite_csv(diamonds, \"data/diamonds.csv\")\n\n\nRestart R often (Cmd/Ctrl + Shift + 0) and re-run your script from scratch. If it still works, your script, not your environment, is the real source of truth."
+    "text": "Scripts and Projects\n\nWrite code in the script editor, not just the console — Cmd/Ctrl + Enter runs a line, Cmd/Ctrl + Shift + S runs the whole script\nKeep every project (data, scripts, outputs) together using an RStudio Project (.Rproj)\nFor those using Positron, this is set up for you by working in a specific workspace (folder)\nUse relative paths (data/students.csv), never absolute ones (/Users/you/...) — relative paths work on anyone’s machine\n\n\n# Good — relative to the project folder\nwrite_csv(diamonds, \"data/diamonds.csv\")\n\n\nRestart R often (Cmd/Ctrl + Shift + 0) and re-run your script from scratch. If it still works, your script, not your environment, is the real source of truth."
   },
   {
     "objectID": "presentations/DataScience/whole-game.html#reading-data-in-with-readr",
@@ -2749,6 +2756,76 @@
     "title": "Whole Game",
     "section": "Summary",
     "text": "Summary\n\nThe four tools: readr (import) → tidyr (tidy) → dplyr (transform) → ggplot2 (visualize)\n\nThe habits that make it sustainable: descriptive names, consistent style, RStudio projects with relative paths, restarting R often, and knowing how to ask for help.\nWe’ll go much deeper on each of these tools in upcoming lessons — today was about seeing how they fit together."
+  },
+  {
+    "objectID": "presentations/DataScience/whole-game.html#in-class-activity-your-first-github-push",
+    "href": "presentations/DataScience/whole-game.html#in-class-activity-your-first-github-push",
+    "title": "Whole Game",
+    "section": "In-Class Activity: Your First GitHub Push",
+    "text": "In-Class Activity: Your First GitHub Push\n\nGoal for the remainder of the meeting:\nEveryone will: - Edit a file in their own folder - Push it to GitHub - See it render online"
+  },
+  {
+    "objectID": "presentations/DataScience/whole-game.html#step-1-fork-the-repository",
+    "href": "presentations/DataScience/whole-game.html#step-1-fork-the-repository",
+    "title": "Whole Game",
+    "section": "Step 1: Fork the Repository",
+    "text": "Step 1: Fork the Repository\n\nOpen the class repo on GitHub\nClick Fork\nAccept all defaults\nWait for GitHub to finish\n\nYou should now see the repo under your username"
+  },
+  {
+    "objectID": "presentations/DataScience/whole-game.html#step-2-clone-your-fork",
+    "href": "presentations/DataScience/whole-game.html#step-2-clone-your-fork",
+    "title": "Whole Game",
+    "section": "Step 2: Clone Your Fork",
+    "text": "Step 2: Clone Your Fork\nFrom your fork on GitHub:\n\nClick Code\nCopy the HTTPS URL or Open it GitHub Desktop\nIn RStudio or Positron:\n\nClone repository\nPaste the URL\nOpen the project"
+  },
+  {
+    "objectID": "presentations/DataScience/whole-game.html#step-3-navigate-to-your-folder",
+    "href": "presentations/DataScience/whole-game.html#step-3-navigate-to-your-folder",
+    "title": "Whole Game",
+    "section": "Step 3: Navigate to Your Folder",
+    "text": "Step 3: Navigate to Your Folder\nInside the project (on your computer in Positron), go to: - attendees/ - YourName/ - code"
+  },
+  {
+    "objectID": "presentations/DataScience/whole-game.html#step-4-create-a-simple-quarto-document",
+    "href": "presentations/DataScience/whole-game.html#step-4-create-a-simple-quarto-document",
+    "title": "Whole Game",
+    "section": "Step 4: Create a Simple Quarto Document",
+    "text": "Step 4: Create a Simple Quarto Document\nInside your code/ folder:\nCreate a file called: whole-game.qmd"
+  },
+  {
+    "objectID": "presentations/DataScience/whole-game.html#paste-this-as-the-yaml",
+    "href": "presentations/DataScience/whole-game.html#paste-this-as-the-yaml",
+    "title": "Whole Game",
+    "section": "Paste this: as the YAML",
+    "text": "Paste this: as the YAML\ntitle: “The Whole Game Practice” format: html — Create an R Code Chunk and enter:\n\n\n[1] 5.5\n\n\nAnd Save the file!"
+  },
+  {
+    "objectID": "presentations/DataScience/whole-game.html#step-5-render-with-quarto-locally",
+    "href": "presentations/DataScience/whole-game.html#step-5-render-with-quarto-locally",
+    "title": "Whole Game",
+    "section": "Step 5: Render with Quarto Locally",
+    "text": "Step 5: Render with Quarto Locally\n\nOpem your .qmd files\nIn the terminal or console, run:\n\nquarto render\n\nThis creates the HTML and confirms it’s correct!"
+  },
+  {
+    "objectID": "presentations/DataScience/whole-game.html#step-6-commit-push",
+    "href": "presentations/DataScience/whole-game.html#step-6-commit-push",
+    "title": "Whole Game",
+    "section": "Step 6: Commit & Push!",
+    "text": "Step 6: Commit & Push!\n\nOpen GitHub Desktop\nYou should see your .qmd file listed as a change\nAdd a message and description\nClick Commmit to Main\nClicK Push Origin\n\nYou should now see your file on GitHub!"
+  },
+  {
+    "objectID": "presentations/DataScience/whole-game.html#step-7-enable-github-pages",
+    "href": "presentations/DataScience/whole-game.html#step-7-enable-github-pages",
+    "title": "Whole Game",
+    "section": "Step 7: Enable GitHub Pages",
+    "text": "Step 7: Enable GitHub Pages\nWithin your fork on GitHub.com\n\nClick Settings\nClick Pages\nUnder Source\n\n\nBranch: main\nFolder: /(root)\n\n\nClick Save\n\nYou should get a Pages URL, which you can preview. Navigate to your folder to preview it!"
+  },
+  {
+    "objectID": "presentations/DataScience/whole-game.html#step-8-create-a-pull-request",
+    "href": "presentations/DataScience/whole-game.html#step-8-create-a-pull-request",
+    "title": "Whole Game",
+    "section": "Step 8: Create a Pull Request",
+    "text": "Step 8: Create a Pull Request\nThis will allow you to merge your work into the class repository. From your fork on GitHub 1. Click Contribute 2. Click Open pull request 3. Confirm the information is correct 4. Click Create pull request 5. Add a title and description with a clear message ex. Title: Whole Game Practice (Your Name) Description: - added whole-game.qmd"
   },
   {
     "objectID": "presentations/SpecialTopics.html",

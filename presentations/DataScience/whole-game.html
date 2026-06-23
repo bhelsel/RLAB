@@ -1103,6 +1103,43 @@ Julianne Clina
 <p>We’re covering this in <strong>import → tidy → transform → visualize</strong> order today (rather than the book’s order) because that’s the order you actually touch a new dataset.</p>
 </div>
 </section>
+<section id="the-whole-game-explained-like-a-kitchen" class="slide level2 pattern-dots">
+<h2>The Whole Game, Explained Like a Kitchen</h2>
+<div class="highlight-box">
+<p>Think of data science like cooking a meal:</p>
+</div>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Data science step</th>
+<th>Kitchen analogy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Import</td>
+<td>Grocery shopping</td>
+</tr>
+<tr class="even">
+<td>Tidy</td>
+<td>Washing &amp; chopping ingredients</td>
+</tr>
+<tr class="odd">
+<td>Transform</td>
+<td>Cooking &amp; seasoning</td>
+</tr>
+<tr class="even">
+<td>Visualize</td>
+<td>Plating the dish</td>
+</tr>
+<tr class="odd">
+<td>Communicate</td>
+<td>Serving it to others</td>
+</tr>
+</tbody>
+</table>
+<p>You <em>can’t</em> plate raw ingredients, and you <em>shouldn’t</em> cook before you chop.</p>
+</section>
 <section>
 <section id="workflow-the-habits-that-make-this-easier" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Workflow: The Habits That Make This Easier</h1>
@@ -1110,6 +1147,22 @@ Julianne Clina
 </section>
 <section id="naming-things-and-writing-code" class="slide level2 pattern-dots">
 <h2>Naming Things and Writing Code</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="who-are-you-writing-code-for">Who are you writing code for?</h3>
+<ul>
+<li>Not your professor<br>
+</li>
+<li>Not your classmates<br>
+</li>
+<li><strong>Future you (who has forgotten everything)</strong><br>
+</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="tip-box">
+<p>If code only makes sense <em>right now</em>, it will absolutely fail you in 2 weeks.</p>
+</div>
+</div></div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># Assignment uses &lt;- (shortcut: Alt/Option + -)</span></span>
 <span id="cb1-2"><a></a>x <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">*</span> <span class="dv">4</span></span>
@@ -1137,7 +1190,8 @@ Julianne Clina
 <h2>Scripts and Projects</h2>
 <ul>
 <li>Write code in the <strong>script editor</strong>, not just the console — Cmd/Ctrl + Enter runs a line, Cmd/Ctrl + Shift + S runs the whole script</li>
-<li>Keep every project (data, scripts, outputs) together using an <strong>RStudio Project</strong> (<code>.Rproj</code>) — never <code>setwd()</code></li>
+<li>Keep every project (data, scripts, outputs) together using an <strong>RStudio Project</strong> (<code>.Rproj</code>)</li>
+<li>For those using Positron, this is set up for you by working in a specific workspace (folder)</li>
 <li>Use <strong>relative paths</strong> (<code>data/students.csv</code>), never absolute ones (<code>/Users/you/...</code>) — relative paths work on anyone’s machine</li>
 </ul>
 <div class="cell">
@@ -1421,10 +1475,98 @@ Julianne Clina
 <p><strong>The habits that make it sustainable:</strong> descriptive names, consistent style, RStudio projects with relative paths, restarting R often, and knowing how to ask for help.</p>
 <p>We’ll go much deeper on each of these tools in upcoming lessons — today was about seeing how they fit together.</p>
 </section>
-<section class="slide level2">
-
-<p><strong>Questions?</strong></p>
-<p>Contact: jclina@kumcs.edu</p>
+<section id="in-class-activity-your-first-github-push" class="slide level2 pattern-dots">
+<h2>In-Class Activity: Your First GitHub Push</h2>
+<div class="highlight-box">
+<p>Goal for the remainder of the meeting:</p>
+<p>Everyone will: - Edit a file in <em>their own folder</em> - Push it to GitHub - See it render online</p>
+</div>
+</section>
+<section id="step-1-fork-the-repository" class="slide level2">
+<h2>Step 1: Fork the Repository</h2>
+<ol type="1">
+<li>Open the class repo on GitHub</li>
+<li>Click <strong>Fork</strong></li>
+<li>Accept all defaults</li>
+<li>Wait for GitHub to finish</li>
+</ol>
+<p>You should now see the repo under <strong>your username</strong></p>
+</section>
+<section id="step-2-clone-your-fork" class="slide level2">
+<h2>Step 2: Clone Your Fork</h2>
+<p>From <em>your fork</em> on GitHub:</p>
+<ol type="1">
+<li>Click <strong>Code</strong></li>
+<li>Copy the HTTPS URL or Open it GitHub Desktop</li>
+<li>In RStudio or Positron:
+<ul>
+<li>Clone repository</li>
+<li>Paste the URL</li>
+<li>Open the project</li>
+</ul></li>
+</ol>
+</section>
+<section id="step-3-navigate-to-your-folder" class="slide level2">
+<h2>Step 3: Navigate to Your Folder</h2>
+<p>Inside the project (on your computer in Positron), go to: - attendees/ - YourName/ - code</p>
+</section>
+<section id="step-4-create-a-simple-quarto-document" class="slide level2">
+<h2>Step 4: Create a Simple Quarto Document</h2>
+<p>Inside your <code>code/</code> folder:</p>
+<p>Create a file called: whole-game.qmd</p>
+</section>
+<section id="paste-this-as-the-yaml" class="slide level2">
+<h2>Paste this: as the YAML</h2>
+<p>title: “The Whole Game Practice” format: html — Create an R Code Chunk and enter:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.5</code></pre>
+</div>
+</div>
+<p>And Save the file!</p>
+</section>
+<section id="step-5-render-with-quarto-locally" class="slide level2">
+<h2>Step 5: Render with Quarto Locally</h2>
+<ul>
+<li>Opem your .qmd files</li>
+<li>In the terminal or console, run:</li>
+</ul>
+<p><code>quarto render</code></p>
+<ul>
+<li>This creates the HTML and confirms it’s correct!</li>
+</ul>
+</section>
+<section id="step-6-commit-push" class="slide level2">
+<h2>Step 6: Commit &amp; Push!</h2>
+<ul>
+<li>Open GitHub Desktop</li>
+<li>You should see your .qmd file listed as a change</li>
+<li>Add a message and description</li>
+<li>Click <strong>Commmit to Main</strong></li>
+<li>ClicK <strong>Push Origin</strong></li>
+</ul>
+<p>You should now see your file on GitHub!</p>
+</section>
+<section id="step-7-enable-github-pages" class="slide level2">
+<h2>Step 7: Enable GitHub Pages</h2>
+<p>Within <strong>your fork</strong> on GitHub.com</p>
+<ol type="1">
+<li>Click <em>Settings</em></li>
+<li>Click <em>Pages</em></li>
+<li>Under <em>Source</em></li>
+</ol>
+<ul>
+<li>Branch: main</li>
+<li>Folder: /(root)</li>
+</ul>
+<ol start="4" type="1">
+<li>Click <em>Save</em></li>
+</ol>
+<p>You should get a Pages URL, which you can preview. Navigate to your folder to preview it!</p>
+</section>
+<section id="step-8-create-a-pull-request" class="slide level2">
+<h2>Step 8: Create a Pull Request</h2>
+<p>This will allow you to merge your work into the class repository. From <strong>your fork</strong> on GitHub 1. Click <em>Contribute</em> 2. Click <em>Open pull request</em> 3. Confirm the information is correct 4. Click <em>Create pull request</em> 5. Add a title and description with a clear message ex. Title: Whole Game Practice (Your Name) Description: - added whole-game.qmd</p>
 
 
 </section></section>
