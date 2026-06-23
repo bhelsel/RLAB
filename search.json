@@ -2762,14 +2762,14 @@
     "href": "presentations/DataScience/whole-game.html#in-class-activity-your-first-github-push",
     "title": "Whole Game",
     "section": "In-Class Activity: Your First GitHub Push",
-    "text": "In-Class Activity: Your First GitHub Push\n\nGoal for the remainder of the meeting:\nEveryone will: - Edit a file in their own folder - Push it to GitHub - See it render online"
+    "text": "In-Class Activity: Your First GitHub Push\n\nGoal for the remainder of the meeting: Everyone will…\n\nEdit a file in their own folder\nPush it to GitHub\nSee it render online"
   },
   {
     "objectID": "presentations/DataScience/whole-game.html#step-1-fork-the-repository",
     "href": "presentations/DataScience/whole-game.html#step-1-fork-the-repository",
     "title": "Whole Game",
     "section": "Step 1: Fork the Repository",
-    "text": "Step 1: Fork the Repository\n\nOpen the class repo on GitHub\nClick Fork\nAccept all defaults\nWait for GitHub to finish\n\nYou should now see the repo under your username"
+    "text": "Step 1: Fork the Repository\nOpen the class repo on Github:\n\nClick Fork\nAccept all defaults\nWait for GitHub to finish\n\nYou should now see the repo under your username"
   },
   {
     "objectID": "presentations/DataScience/whole-game.html#step-2-clone-your-fork",
@@ -2783,21 +2783,14 @@
     "href": "presentations/DataScience/whole-game.html#step-3-navigate-to-your-folder",
     "title": "Whole Game",
     "section": "Step 3: Navigate to Your Folder",
-    "text": "Step 3: Navigate to Your Folder\nInside the project (on your computer in Positron), go to: - attendees/ - YourName/ - code"
+    "text": "Step 3: Navigate to Your Folder\nInside the project (on your computer in Positron), go to:\n\nattendees/\nYourName/\ncode"
   },
   {
     "objectID": "presentations/DataScience/whole-game.html#step-4-create-a-simple-quarto-document",
     "href": "presentations/DataScience/whole-game.html#step-4-create-a-simple-quarto-document",
     "title": "Whole Game",
     "section": "Step 4: Create a Simple Quarto Document",
-    "text": "Step 4: Create a Simple Quarto Document\nInside your code/ folder:\nCreate a file called: whole-game.qmd"
-  },
-  {
-    "objectID": "presentations/DataScience/whole-game.html#paste-this-as-the-yaml",
-    "href": "presentations/DataScience/whole-game.html#paste-this-as-the-yaml",
-    "title": "Whole Game",
-    "section": "Paste this: as the YAML",
-    "text": "Paste this: as the YAML\ntitle: “The Whole Game Practice” format: html — Create an R Code Chunk and enter:\n\n\n[1] 5.5\n\n\nAnd Save the file!"
+    "text": "Step 4: Create a Simple Quarto Document\nInside your code/ folder:\nCreate a file called: whole-game.qmd\nPaste this: as the YAML\n---\ntitle: \"The Whole Game Practice\"\nformat: html\n---\nCreate an R Code Chunk and enter:\n\n# Hello R-LAB\n\nmessage(\"My first GitHub push worked!\")\n\nx &lt;- 1:10\nmean(x)\n\nAnd Save the file!"
   },
   {
     "objectID": "presentations/DataScience/whole-game.html#step-5-render-with-quarto-locally",
@@ -2818,14 +2811,14 @@
     "href": "presentations/DataScience/whole-game.html#step-7-enable-github-pages",
     "title": "Whole Game",
     "section": "Step 7: Enable GitHub Pages",
-    "text": "Step 7: Enable GitHub Pages\nWithin your fork on GitHub.com\n\nClick Settings\nClick Pages\nUnder Source\n\n\nBranch: main\nFolder: /(root)\n\n\nClick Save\n\nYou should get a Pages URL, which you can preview. Navigate to your folder to preview it!"
+    "text": "Step 7: Enable GitHub Pages\nWithin your fork on GitHub.com\n\nClick Settings\nClick Pages\nUnder Source\n+ Branch: main\n+ Folder: /(root)\n\nClick Save\n\nYou should get a Pages URL, which you can preview. Navigate to your folder to preview it!"
   },
   {
     "objectID": "presentations/DataScience/whole-game.html#step-8-create-a-pull-request",
     "href": "presentations/DataScience/whole-game.html#step-8-create-a-pull-request",
     "title": "Whole Game",
     "section": "Step 8: Create a Pull Request",
-    "text": "Step 8: Create a Pull Request\nThis will allow you to merge your work into the class repository. From your fork on GitHub 1. Click Contribute 2. Click Open pull request 3. Confirm the information is correct 4. Click Create pull request 5. Add a title and description with a clear message ex. Title: Whole Game Practice (Your Name) Description: - added whole-game.qmd"
+    "text": "Step 8: Create a Pull Request\nThis will allow you to merge your work into the class repository. From your fork on GitHub\n\nClick Contribute\nClick Open pull request\nConfirm the information is correct\nClick Create pull request\nAdd a title and description with a clear message\n+ Title: Whole Game Practice (Your Name)\n+ Description: - added whole-game.qmd"
   },
   {
     "objectID": "presentations/SpecialTopics.html",

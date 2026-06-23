@@ -1478,14 +1478,18 @@ Julianne Clina
 <section id="in-class-activity-your-first-github-push" class="slide level2 pattern-dots">
 <h2>In-Class Activity: Your First GitHub Push</h2>
 <div class="highlight-box">
-<p>Goal for the remainder of the meeting:</p>
-<p>Everyone will: - Edit a file in <em>their own folder</em> - Push it to GitHub - See it render online</p>
+<p>Goal for the remainder of the meeting: Everyone will…</p>
+<ul>
+<li>Edit a file in <em>their own folder</em></li>
+<li>Push it to GitHub</li>
+<li>See it render online</li>
+</ul>
 </div>
 </section>
 <section id="step-1-fork-the-repository" class="slide level2">
 <h2>Step 1: Fork the Repository</h2>
+<p>Open the class repo on Github:</p>
 <ol type="1">
-<li>Open the class repo on GitHub</li>
 <li>Click <strong>Fork</strong></li>
 <li>Accept all defaults</li>
 <li>Wait for GitHub to finish</li>
@@ -1508,20 +1512,30 @@ Julianne Clina
 </section>
 <section id="step-3-navigate-to-your-folder" class="slide level2">
 <h2>Step 3: Navigate to Your Folder</h2>
-<p>Inside the project (on your computer in Positron), go to: - attendees/ - YourName/ - code</p>
+<p>Inside the project (on your computer in Positron), go to:</p>
+<ul>
+<li>attendees/</li>
+<li>YourName/</li>
+<li>code</li>
+</ul>
 </section>
 <section id="step-4-create-a-simple-quarto-document" class="slide level2">
 <h2>Step 4: Create a Simple Quarto Document</h2>
 <p>Inside your <code>code/</code> folder:</p>
 <p>Create a file called: whole-game.qmd</p>
-</section>
-<section id="paste-this-as-the-yaml" class="slide level2">
-<h2>Paste this: as the YAML</h2>
-<p>title: “The Whole Game Practice” format: html — Create an R Code Chunk and enter:</p>
+<p>Paste this: as the YAML</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb16-1"><a></a><span class="pp">---</span></span>
+<span id="cb16-2"><a></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;The Whole Game Practice&quot;</span></span>
+<span id="cb16-3"><a></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
+<span id="cb16-4"><a></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Create an R Code Chunk and enter:</p>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 5.5</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="co"># Hello R-LAB</span></span>
+<span id="cb17-2"><a></a></span>
+<span id="cb17-3"><a></a><span class="fu">message</span>(<span class="st">&quot;My first GitHub push worked!&quot;</span>)</span>
+<span id="cb17-4"><a></a></span>
+<span id="cb17-5"><a></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb17-6"><a></a><span class="fu">mean</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>And Save the file!</p>
 </section>
@@ -1553,20 +1567,26 @@ Julianne Clina
 <ol type="1">
 <li>Click <em>Settings</em></li>
 <li>Click <em>Pages</em></li>
-<li>Under <em>Source</em></li>
-</ol>
-<ul>
-<li>Branch: main</li>
-<li>Folder: /(root)</li>
-</ul>
-<ol start="4" type="1">
+<li>Under <em>Source</em><br>
++ Branch: main<br>
++ Folder: /(root)<br>
+</li>
 <li>Click <em>Save</em></li>
 </ol>
 <p>You should get a Pages URL, which you can preview. Navigate to your folder to preview it!</p>
 </section>
 <section id="step-8-create-a-pull-request" class="slide level2">
 <h2>Step 8: Create a Pull Request</h2>
-<p>This will allow you to merge your work into the class repository. From <strong>your fork</strong> on GitHub 1. Click <em>Contribute</em> 2. Click <em>Open pull request</em> 3. Confirm the information is correct 4. Click <em>Create pull request</em> 5. Add a title and description with a clear message ex. Title: Whole Game Practice (Your Name) Description: - added whole-game.qmd</p>
+<p>This will allow you to merge your work into the class repository. From <strong>your fork</strong> on GitHub</p>
+<ol type="1">
+<li>Click <em>Contribute</em></li>
+<li>Click <em>Open pull request</em></li>
+<li>Confirm the information is correct</li>
+<li>Click <em>Create pull request</em></li>
+<li>Add a title and description with a clear message<br>
++ Title: Whole Game Practice (Your Name)<br>
++ Description: - added whole-game.qmd</li>
+</ol>
 
 
 </section></section>
