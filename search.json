@@ -2272,7 +2272,7 @@
     "href": "presentations/DataScience.html",
     "title": "R for Data Science",
     "section": "",
-    "text": "Whole Game\n\n\nR for Data Science Chapters 1-8\n\n\n\n\n\n\n\n\nJun 24, 2026\n\n\nJulianne Clina\n\n\n\n\n\n\n\n\n\n\n\n\nTransform\n\n\nTools to Work with Common Variable Types\n\n\n\n\n\n\n\n\nJul 1, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nVisualization\n\n\nIntroduction to ggplot2\n\n\n\n\n\n\n\n\nJul 8, 2026\n\n\nAshlyn Barry\n\n\n\n\n\nNo matching items"
+    "text": "Whole Game\n\n\nR for Data Science Chapters 1-8\n\n\n\n\n\n\n\n\nJun 24, 2026\n\n\nJulianne G. Clina, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nTransform\n\n\nTools to Work with Common Variable Types\n\n\n\n\n\n\n\n\nJul 1, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nVisualization\n\n\nIntroduction to ggplot2\n\n\n\n\n\n\n\n\nJul 8, 2026\n\n\nAshlyn Barry\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "presentations/DataScience/transform.html#logical-vectors",
@@ -2671,7 +2671,7 @@
     "href": "presentations/DataScience/whole-game.html#naming-things-and-writing-code",
     "title": "Whole Game",
     "section": "Naming Things and Writing Code",
-    "text": "Naming Things and Writing Code\n\n\nWho are you writing code for?\n\nNot your professor\n\nNot your classmates\n\nFuture you (who has forgotten everything)\n\n\n\n\nIf code only makes sense right now, it will absolutely fail you in 2 weeks.\n\n\n\n# Assignment uses &lt;- (shortcut: Alt/Option + -)\nx &lt;- 3 * 4\nprimes &lt;- c(2, 3, 5, 7, 11, 13)\n\n\n\nStrive for:\n\nshort_flights &lt;- flights %&gt;%\n  filter(air_time &lt; 60)\n\n\nAvoid:\n\nSHORTFLIGHTS &lt;- flights %&gt;%\n  filter(air_time &lt; 60)\n\n\n\nsnake_case, spaces around &lt;- and operators, and %&gt;% at the end of a line (not the start) — these three habits make code dramatically easier to read later."
+    "text": "Naming Things and Writing Code\n\n\nWho are you writing code for?\n\nNot your professor\n\nNot your classmates\n\nFuture you (who has forgotten everything)\n\n\n\n\nIf code only makes sense right now, it will absolutely fail you in 2 weeks.\n\n\n\n# Assignment uses &lt;- (shortcut: Alt/Option + -)\nx &lt;- 3 * 4\nprimes &lt;- c(2, 3, 5, 7, 11, 13)\n\n\n\nStrive for:\n\nshort_flights &lt;- flights %&gt;%\n  filter(air_time &lt; 60)\n\n\nAvoid:\n\nSHORTFLIGHTS &lt;- flights %&gt;%\n  filter(air_time &lt; 60)\n\nshort.flights &lt;- flights %&gt;%\n  filter(air_time &lt; 60)\n\nShortFlights &lt;- flights %&gt;%\n  filter(air_time &lt; 60)\n\n\n\nsnake_case, spaces around &lt;- and operators, and %&gt;% at the end of a line (not the start) — these three habits make code dramatically easier to read later."
   },
   {
     "objectID": "presentations/DataScience/whole-game.html#scripts-and-projects",
@@ -2706,7 +2706,14 @@
     "href": "presentations/DataScience/whole-game.html#dplyr-one-grammar-for-rows-columns-and-groups",
     "title": "Whole Game",
     "section": "dplyr: One Grammar for Rows, Columns, and Groups",
-    "text": "dplyr: One Grammar for Rows, Columns, and Groups\nEvery dplyr verb: (1) takes a data frame first, (2) refers to columns by bare name, (3) returns a new data frame.\n\n\n\n\n\n\n\nActs on\nVerbs\n\n\n\n\nRows\nfilter(), arrange(), distinct()\n\n\nColumns\nmutate(), select(), rename(), relocate()\n\n\nGroups\ngroup_by(), summarize(), slice_max() / slice_min()\n\n\n\n\nflights |&gt;\n  filter(dest == \"IAH\") %&gt;%\n  mutate(speed = distance / air_time * 60) %&gt;%\n  select(year:day, dep_time, carrier, speed) %&gt;%\n  arrange(desc(speed))\n\n\nRead %&gt;% or |&gt; as “then.” This pipeline reads: take flights, then filter, then mutate, then select, then arrange."
+    "text": "dplyr: One Grammar for Rows, Columns, and Groups\nEvery dplyr verb: (1) takes a data frame first, (2) refers to columns by bare name, (3) returns a new data frame.\n\n\n\n\n\n\n\nActs on\nVerbs\n\n\n\n\nRows\nfilter(), arrange(), distinct()\n\n\nColumns\nmutate(), select(), rename(), relocate()\n\n\nGroups\ngroup_by(), summarize(), slice_max() / slice_min()\n\n\n\nBefore — flights, untouched:\n\nhead(flights)\n\n# A tibble: 6 × 19\n   year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n  &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n1  2013     1     1      517            515         2      830            819\n2  2013     1     1      533            529         4      850            830\n3  2013     1     1      542            540         2      923            850\n4  2013     1     1      544            545        -1     1004           1022\n5  2013     1     1      554            600        -6      812            837\n6  2013     1     1      554            558        -4      740            728\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;"
+  },
+  {
+    "objectID": "presentations/DataScience/whole-game.html#dplyr-in-action-before-after",
+    "href": "presentations/DataScience/whole-game.html#dplyr-in-action-before-after",
+    "title": "Whole Game",
+    "section": "dplyr in Action: Before → After",
+    "text": "dplyr in Action: Before → After\nThe pipeline:\n\nfast_iah &lt;- flights |&gt;\n  filter(dest == \"IAH\") %&gt;%\n  mutate(speed = distance / air_time * 60) %&gt;%\n  select(year:day, dep_time, carrier, speed) %&gt;%\n  arrange(desc(speed))\n\nAfter — filtered to IAH, new speed column, fewer columns, sorted:\n\nhead(fast_iah)\n\n# A tibble: 6 × 6\n   year month   day dep_time carrier speed\n  &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;\n1  2013     7     9      707 UA       522.\n2  2013     8    27     1850 UA       521.\n3  2013     8    28      902 UA       519.\n4  2013     8    28     2122 UA       519.\n5  2013     6    11     1628 UA       515.\n6  2013     8    27     1017 UA       515.\n\n\n\nRead %&gt;% or |&gt; as “then.” This pipeline reads: take flights, then filter, then mutate, then select, then arrange."
   },
   {
     "objectID": "presentations/DataScience/whole-game.html#grouped-summaries",
@@ -2720,14 +2727,42 @@
     "href": "presentations/DataScience/whole-game.html#ggplot2-the-grammar-of-graphics",
     "title": "Whole Game",
     "section": "ggplot2: The Grammar of Graphics",
-    "text": "ggplot2: The Grammar of Graphics\n\n“The simple graph has brought more information to the data analyst’s mind than any other device.” — John Tukey\n\nEvery plot: data + mapping (aes()) + geom.\n\nlibrary(palmerpenguins)\nggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +\n  geom_point(aes(color = species, shape = species)) +\n  geom_smooth(method = \"lm\")"
+    "text": "ggplot2: The Grammar of Graphics\n\n“The simple graph has brought more information to the data analyst’s mind than any other device.” — John Tukey\n\nEvery plot: data + mapping (aes()) + geom.\n\nLet’s build one up layer by layer so you can see exactly what each piece adds."
+  },
+  {
+    "objectID": "presentations/DataScience/whole-game.html#building-a-plot-layer-by-layer-14",
+    "href": "presentations/DataScience/whole-game.html#building-a-plot-layer-by-layer-14",
+    "title": "Whole Game",
+    "section": "Building a Plot, Layer by Layer (1/4)",
+    "text": "Building a Plot, Layer by Layer (1/4)\nStart with data + mapping — aes() just sets up the coordinate system, no geometry yet:\n\nlibrary(palmerpenguins)\nggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))\n\n\n\nNothing plots yet — ggplot() + aes() only declares what goes where, not how to draw it."
+  },
+  {
+    "objectID": "presentations/DataScience/whole-game.html#building-a-plot-layer-by-layer-24",
+    "href": "presentations/DataScience/whole-game.html#building-a-plot-layer-by-layer-24",
+    "title": "Whole Game",
+    "section": "Building a Plot, Layer by Layer (2/4)",
+    "text": "Building a Plot, Layer by Layer (2/4)\nAdd a geom — now there’s something to look at:\n\nggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +\n  geom_point()"
+  },
+  {
+    "objectID": "presentations/DataScience/whole-game.html#building-a-plot-layer-by-layer-34",
+    "href": "presentations/DataScience/whole-game.html#building-a-plot-layer-by-layer-34",
+    "title": "Whole Game",
+    "section": "Building a Plot, Layer by Layer (3/4)",
+    "text": "Building a Plot, Layer by Layer (3/4)\nMap species to color and shape — a third variable, no new geom required:\n\nggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +\n  geom_point(aes(color = species, shape = species))"
+  },
+  {
+    "objectID": "presentations/DataScience/whole-game.html#building-a-plot-layer-by-layer-44",
+    "href": "presentations/DataScience/whole-game.html#building-a-plot-layer-by-layer-44",
+    "title": "Whole Game",
+    "section": "Building a Plot, Layer by Layer (4/4)",
+    "text": "Building a Plot, Layer by Layer (4/4)\nAdd a second geom — geom_smooth() layers a trend line on top:\n\nggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +\n  geom_point(aes(color = species, shape = species)) +\n  geom_smooth(method = \"lm\")\n\n\n\nEvery plot is data + mapping (aes()) + one or more geoms — each + stacks another layer on the same coordinate system."
   },
   {
     "objectID": "presentations/DataScience/whole-game.html#matching-plot-type-to-question",
     "href": "presentations/DataScience/whole-game.html#matching-plot-type-to-question",
     "title": "Whole Game",
     "section": "Matching Plot Type to Question",
-    "text": "Matching Plot Type to Question\n\n\n\n\n\n\n\nQuestion\nGeom(s)\n\n\n\n\nOne categorical variable\ngeom_bar()\n\n\nOne numerical variable\ngeom_histogram(), geom_density()\n\n\nNumerical vs. categorical\ngeom_boxplot()\n\n\nTwo numerical variables\ngeom_point(), geom_smooth()\n\n\n3+ variables\nextra aesthetics (color, shape) or facet_wrap()\n\n\n\n\n# Faceting beats cramming too many aesthetics onto one plot\nggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +\n  geom_point(aes(color = species)) +\n  facet_wrap(~island)\n\n\nmap a variable to an aesthetic when you want it to vary by data; set it (color = \"blue\") when you just want a fixed look."
+    "text": "Matching Plot Type to Question\n\n\n\n\n\n\n\nQuestion\nGeom(s)\n\n\n\n\nOne categorical variable\ngeom_bar()\n\n\nOne numerical variable\ngeom_histogram(), geom_density()\n\n\nNumerical vs. categorical\ngeom_boxplot()\n\n\nTwo numerical variables\ngeom_point(), geom_smooth()\n\n\n3+ variables\nextra aesthetics (color, shape) or facet_wrap()\n\n\n\n\n# Faceting beats cramming too many aesthetics onto one plot\nggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +\n  geom_point(aes(color = species)) +\n  facet_wrap(~island)\n\n\n\nmap a variable to an aesthetic when you want it to vary by data; set it (color = \"blue\") when you just want a fixed look."
   },
   {
     "objectID": "presentations/DataScience/whole-game.html#polishing-and-saving",
@@ -2797,7 +2832,7 @@
     "href": "presentations/DataScience/whole-game.html#step-5-render-with-quarto-locally",
     "title": "Whole Game",
     "section": "Step 5: Render with Quarto Locally",
-    "text": "Step 5: Render with Quarto Locally\n\nOpem your .qmd files\nIn the terminal or console, run:\n\nquarto render\n\nThis creates the HTML and confirms it’s correct!"
+    "text": "Step 5: Render with Quarto Locally\n\nOpen your .qmd files\nIn the terminal or console, run:\n\nquarto render\n\nThis creates the HTML and confirms it’s correct!"
   },
   {
     "objectID": "presentations/DataScience/whole-game.html#step-6-commit-push",
