@@ -90,11 +90,6 @@ Wisconsin - Madison.
 Sullafa is an Associate Professor with the Departmnet of Medicine at the
 University of Pittsburgh.
 
-### [Jessica Keller](https://bhelsel.github.io/2026-RLAB-Practical-Exercises/attendees/JessicaKeller/about.html)
-
-Jessica is a Postdoctoral Fellow with the Department of Anesthesiology at the
-University of Kansas Medical Center
-
 ### [Mason McClarnon](https://bhelsel.github.io/2026-RLAB-Practical-Exercises/attendees/MasonMcClarnon/about.html)
 
 Mason is a research assistant with the School of Pharmacy and Health Professions
