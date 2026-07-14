@@ -322,261 +322,261 @@
     "text": "ggplot2 Hands-On Practice\n\nWork through the activity for your level — and continue to the next if you finish early!\n\nOpen visualization_activities.qmd in RStudio to get started\n\n\n\nLevel\nGroup\nActivity\n\n\n\n\n🟢 Beginner\nActivity 1\nFill in the blanks\n\n\n🟡 Intermediate\nActivity 2\nUpdate the facet plots\n\n\n🔴 Advanced\nActivity 3\nCreate figure using new dataset\n\n\n\n\nFinished early? Try the bonus question or move to the next level!"
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#data-import",
-    "href": "presentations/DataScience/data-import.html#data-import",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#data-import",
+    "href": "presentations/DataScience/import.html#data-import",
+    "title": "Import",
     "section": "Data import",
     "text": "Data import\n\nData import is the bridge between real-world data and analysis-ready R objects.\n\n\nToday we will focus on the practical question every data analysis begins with\n\nEmphasize that this lecture is not just about memorizing functions. The goal is to help students recognize what kind of data source they have and choose an import strategy that preserves the meaning of the data."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#learning-goals",
-    "href": "presentations/DataScience/data-import.html#learning-goals",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#learning-goals",
+    "href": "presentations/DataScience/import.html#learning-goals",
+    "title": "Import",
     "section": "Learning goals",
     "text": "Learning goals\nBy the end of this session, you should be able to:\n\nChoose the right import function for common data sources\nUse project-oriented file paths\nDiagnose common import problems\nUnderstand when data are loaded immediately versus queried lazily\nRecognize hierarchical data and choose a rectangling strategy\nExtract simple data from an HTML page\n\n\nFrame these goals as practical skills. Students do not need mastery of every edge case today. They need enough conceptual understanding to know what tool to reach for and what to check after importing."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#class-plan",
-    "href": "presentations/DataScience/data-import.html#class-plan",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#class-plan",
+    "href": "presentations/DataScience/import.html#class-plan",
+    "title": "Import",
     "section": "Class plan",
     "text": "Class plan\n\nWe will alternate between short lecture/demo sections and coding breaks.\n\n\n\n\n\n\n\n\n\n\nSection\nTopic\nInstructor-led\nStudent practice\n\n\n\n\n1\nImporting files into R\n~15 min\nCoding Break 1 — 10 min\n\n\n2\nWorking with databases and large datasets\n~15 min\nCoding Break 2 — 15 min\n\n\n3\nHierarchical and web data\n~15 min\nCoding Break 3 — 10 min\n\n\n\n\n💡 The goal is not to memorize every argument. The goal is to practice the workflow: import → inspect → fix → continue.\n\n\nThis slide replaces the original long lecture followed by long practice plan. Tell students that they will practice after each major section while the material is still fresh."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#the-import-mindset",
-    "href": "presentations/DataScience/data-import.html#the-import-mindset",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#the-import-mindset",
+    "href": "presentations/DataScience/import.html#the-import-mindset",
+    "title": "Import",
     "section": "The import mindset",
     "text": "The import mindset\n\nImporting data is not complete when the file loads without an error.\n\nA good import workflow asks:\n\nDid the data load?\nAre the rows and columns what I expected?\nDid R guess the column types correctly?\nAre missing values represented correctly?\nIs the result ready for transformation or visualization?\n\n\nThis is the central “why” behind the lecture. R may import a file successfully but still misinterpret IDs, dates, missing values, or column names. Encourage students to slow down and inspect their objects immediately after importing."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#project-oriented-workflow",
-    "href": "presentations/DataScience/data-import.html#project-oriented-workflow",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#project-oriented-workflow",
+    "href": "presentations/DataScience/import.html#project-oriented-workflow",
+    "title": "Import",
     "section": "Project-oriented workflow",
     "text": "Project-oriented workflow\n\nUse relative paths that describe where files live inside your project.\n\ndata-import-workshop/\n├── data/\n│   ├── penguins.csv\n│   └── sales.xlsx\n├── data_import_practice.qmd\n└── data-import-workshop.Rproj\nread_csv(\"data/penguins.csv\")\n\nAvoid file paths that only work on your computer, like C:/Users/yourname/Downloads/data.csv.\n\n\nExplain that many “import problems” are really file path problems. Relative paths make code shareable across computers because they describe the location of a file within the project rather than the location of the project on one person’s machine."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#section-1-importing-files-into-r",
-    "href": "presentations/DataScience/data-import.html#section-1-importing-files-into-r",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#section-1-importing-files-into-r",
+    "href": "presentations/DataScience/import.html#section-1-importing-files-into-r",
+    "title": "Import",
     "section": "Section 1: Importing files into R",
     "text": "Section 1: Importing files into R\n\nCSV, TSV, delimited text files, URLs, and spreadsheets\n\n\nWe will start with the file types students are most likely to encounter first.\n\nThis section combines the text-file and spreadsheet material. The emphasis should be on choosing the right read function and inspecting the result."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#common-import-functions",
-    "href": "presentations/DataScience/data-import.html#common-import-functions",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#common-import-functions",
+    "href": "presentations/DataScience/import.html#common-import-functions",
+    "title": "Import",
     "section": "Common import functions",
     "text": "Common import functions\n\n\n\nData source\nPackage\nFunction\n\n\n\n\nCSV\nreadr\nread_csv()\n\n\nTSV\nreadr\nread_tsv()\n\n\nOther delimiters\nreadr\nread_delim()\n\n\nExcel\nreadxl\nread_excel()\n\n\nGoogle Sheets\ngooglesheets4\nread_sheet()\n\n\n\n\nThe function you choose should match how the data are stored.\n\n\nThis slide gives students a mental lookup table. It also introduces the idea that import functions are specialized because different file formats store data differently."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#delimiters",
-    "href": "presentations/DataScience/data-import.html#delimiters",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#delimiters",
+    "href": "presentations/DataScience/import.html#delimiters",
+    "title": "Import",
     "section": "Delimiters",
     "text": "Delimiters\nA delimiter is the character that separates one column from the next.\n\n\n\nFile type\nDelimiter\nFunction\n\n\n\n\n.csv\ncomma\nread_csv()\n\n\n.tsv\ntab\nread_tsv()\n\n\n.txt\nvaries\nread_delim()\n\n\n\nread_delim(\"data/labs.txt\", delim = \"|\")\n\n💡 File extensions can be misleading. If import looks wrong, open the file as plain text and inspect the delimiter.\n\n\nExplain that delimited text files are just plain-text tables. The delimiter tells R where one column ends and the next begins. If the delimiter is wrong, R may put everything into one column or split columns incorrectly."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#read-a-csv-file",
-    "href": "presentations/DataScience/data-import.html#read-a-csv-file",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#read-a-csv-file",
+    "href": "presentations/DataScience/import.html#read-a-csv-file",
+    "title": "Import",
     "section": "Read a CSV file",
     "text": "Read a CSV file\nlibrary(tidyverse)\n\npenguins &lt;- read_csv(\"data/penguins.csv\")\npenguins\n#&gt; # A tibble: 344 × 8\n#&gt;   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex     year\n#&gt;   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;\n#&gt; 1 Adelie  Torgersen           39.1          18.7               181        3750 male    2007\n#&gt; 2 Adelie  Torgersen           39.5          17.4               186        3800 female  2007\n#&gt; 3 Adelie  Torgersen           40.3          18                 195        3250 female  2007\n\nThe code and printed output are kept in one non-evaluated code block so the example stays together and always renders consistently. Point out the tibble dimensions and the column type abbreviations under each column name."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#read-directly-from-a-url",
-    "href": "presentations/DataScience/data-import.html#read-directly-from-a-url",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#read-directly-from-a-url",
+    "href": "presentations/DataScience/import.html#read-directly-from-a-url",
+    "title": "Import",
     "section": "Read directly from a URL",
     "text": "Read directly from a URL\npenguins_url &lt;- \"https://raw.githubusercontent.com/allisonhorst/palmerpenguins/master/inst/extdata/penguins.csv\"\n\npenguins &lt;- read_csv(penguins_url)\n\nreadr functions can read from local files or URLs.\n\n\nThis is useful for reproducible examples, teaching materials, and public datasets.\n\nEmphasize that students do not always need to manually download a file. If the data are available at a stable URL, they can import directly from the link."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#inspect-after-import",
-    "href": "presentations/DataScience/data-import.html#inspect-after-import",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#inspect-after-import",
+    "href": "presentations/DataScience/import.html#inspect-after-import",
+    "title": "Import",
     "section": "Inspect after import",
     "text": "Inspect after import\npenguins |&gt; glimpse()\n#&gt; Rows: 344\n#&gt; Columns: 8\n#&gt; $ species           &lt;chr&gt; \"Adelie\", \"Adelie\", \"Adelie\", ...\n#&gt; $ island            &lt;chr&gt; \"Torgersen\", \"Torgersen\", \"Torgersen\", ...\n#&gt; $ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, ...\n#&gt; $ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, ...\n#&gt; $ flipper_length_mm &lt;dbl&gt; 181, 186, 195, ...\n#&gt; $ body_mass_g       &lt;dbl&gt; 3750, 3800, 3250, ...\n#&gt; $ sex               &lt;chr&gt; \"male\", \"female\", \"female\", ...\n#&gt; $ year              &lt;dbl&gt; 2007, 2007, 2007, ...\n\n💡 A successful import should still be checked with glimpse() and, when needed, spec().\n\n\nExplain that glimpse() is a quick import quality check. It shows dimensions, names, types, and example values. This is often the first thing you should do after reading in a dataset."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#column-type-guessing-and-specifications",
-    "href": "presentations/DataScience/data-import.html#column-type-guessing-and-specifications",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#column-type-guessing-and-specifications",
+    "href": "presentations/DataScience/import.html#column-type-guessing-and-specifications",
+    "title": "Import",
     "section": "Column type guessing and specifications",
     "text": "Column type guessing and specifications\nread_csv() guesses column types automatically.\npenguins &lt;- read_csv(penguins_url)\nspec(penguins)\n#&gt; cols(\n#&gt;   species = col_character(),\n#&gt;   island = col_character(),\n#&gt;   bill_length_mm = col_double(),\n#&gt;   bill_depth_mm = col_double(),\n#&gt;   flipper_length_mm = col_double(),\n#&gt;   body_mass_g = col_double(),\n#&gt;   sex = col_character(),\n#&gt;   year = col_double()\n#&gt; )\n\n💡 Guessing is convenient, but not perfect. Use col_types when a column has meaning that R cannot infer, such as IDs, zip codes, or years you want treated as labels.\n\npenguins &lt;- read_csv(\n  penguins_url,\n  col_types = cols(\n    year = col_character()\n  )\n)\n\nThis slide consolidates the old column type guessing, specification, and manual column type slides. The key message is that readr guesses types, but analysts should verify those guesses. Explain that years, IDs, and codes often look numeric but may be better represented as character variables."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#why-spreadsheets-are-different",
-    "href": "presentations/DataScience/data-import.html#why-spreadsheets-are-different",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#why-spreadsheets-are-different",
+    "href": "presentations/DataScience/import.html#why-spreadsheets-are-different",
+    "title": "Import",
     "section": "Why spreadsheets are different",
     "text": "Why spreadsheets are different\n\nSpreadsheets are designed for humans first and computers second.\n\nCommon spreadsheet issues:\n\nMultiple sheets\nExtra titles or notes above the data\nMerged cells\nNon-data formatting\nInconsistent column names\n\nlibrary(readxl)\n\nread_excel(\"data/sales.xlsx\", sheet = \"January\")\n\nThe purpose of this slide is to explain why Excel import is a separate topic. Spreadsheets often contain presentation choices that make sense for people but complicate analysis."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#column-names-from-excel",
-    "href": "presentations/DataScience/data-import.html#column-names-from-excel",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#column-names-from-excel",
+    "href": "presentations/DataScience/import.html#column-names-from-excel",
+    "title": "Import",
     "section": "Column names from Excel",
     "text": "Column names from Excel\nSometimes the first row is not the real header.\nread_excel(\"data/sales.xlsx\", skip = 2)\nOr you can specify a range:\nread_excel(\"data/sales.xlsx\", range = \"A3:F20\")\n\n💡 janitor::clean_names() can standardize messy names, and purrr::map() can help read many sheets using the same workflow.\n\n\nThis slide now preserves the key Excel-header point and folds in janitor and purrr as tips rather than separate slides. Explain that the strategy is to identify where the actual rectangular data begins."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#coding-break-1-read-functions",
-    "href": "presentations/DataScience/data-import.html#coding-break-1-read-functions",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#coding-break-1-read-functions",
+    "href": "presentations/DataScience/import.html#coding-break-1-read-functions",
+    "title": "Import",
     "section": "Coding Break 1: Read functions",
     "text": "Coding Break 1: Read functions\n\nGoal: import a public CSV and control one column type.\n\nOpen your practice file and complete the following tasks:\n\nLoad the tidyverse.\nRead the Palmer Penguins CSV directly from the URL.\nUse glimpse() to inspect the imported data.\nRe-import the data and force year to be a character column.\nConfirm that year changed from numeric to character.\n\npenguins_url &lt;- \"https://raw.githubusercontent.com/allisonhorst/palmerpenguins/master/inst/extdata/penguins.csv\"\n\n💡 Finish early? Try forcing species to a factor with col_factor().\n\n\nGive students about 15 minutes. The point is to practice import, inspection, and column type control with a public dataset that does not require local files."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#coding-break-1-solution",
-    "href": "presentations/DataScience/data-import.html#coding-break-1-solution",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#coding-break-1-solution",
+    "href": "presentations/DataScience/import.html#coding-break-1-solution",
+    "title": "Import",
     "section": "Coding Break 1: Solution",
     "text": "Coding Break 1: Solution\nlibrary(tidyverse)\n\npenguins_url &lt;- \"https://raw.githubusercontent.com/allisonhorst/palmerpenguins/master/inst/extdata/penguins.csv\"\n\npenguins &lt;- read_csv(penguins_url)\npenguins |&gt; glimpse()\n\npenguins_year_chr &lt;- read_csv(\n  penguins_url,\n  col_types = cols(\n    year = col_character()\n  )\n)\n\npenguins_year_chr |&gt; glimpse()\n\nDuring discussion, ask students why they might want to treat a year as character. The answer is not that year is always character, but that analysts should decide based on how the variable will be used."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#section-2-working-with-databases-and-large-datasets",
-    "href": "presentations/DataScience/data-import.html#section-2-working-with-databases-and-large-datasets",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#section-2-working-with-databases-and-large-datasets",
+    "href": "presentations/DataScience/import.html#section-2-working-with-databases-and-large-datasets",
+    "title": "Import",
     "section": "Section 2: Working with databases and large datasets",
     "text": "Section 2: Working with databases and large datasets\n\nSometimes the data are too large, too shared, or too structured to live in a single CSV.\n\nThis section introduces database-backed tables and larger-than-memory data workflows.\n\nThe goal is conceptual. Students do not need to become database administrators. They need to understand why databases exist and how dplyr can help them query database tables."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#why-databases",
-    "href": "presentations/DataScience/data-import.html#why-databases",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#why-databases",
+    "href": "presentations/DataScience/import.html#why-databases",
+    "title": "Import",
     "section": "Why databases?",
     "text": "Why databases?\nCompared with a CSV, a database can:\n\nStore many related tables\nSupport larger datasets\nLet multiple users access the same data\nQuery only the rows and columns you need\nPreserve structure and relationships\n\n\nWith databases, you usually query first and collect later.\n\n\nThis slide provides the “why” for databases. A CSV is loaded into memory all at once. A database can stay where it is, while R sends instructions about what subset to retrieve."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#database-workflow-connect-reference-then-query",
-    "href": "presentations/DataScience/data-import.html#database-workflow-connect-reference-then-query",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#database-workflow-connect-reference-then-query",
+    "href": "presentations/DataScience/import.html#database-workflow-connect-reference-then-query",
+    "title": "Import",
     "section": "Database workflow: connect, reference, then query",
     "text": "Database workflow: connect, reference, then query\nWhen working with a database, R does not usually import the whole dataset right away.\nInstead, the workflow is:\n\nConnect to the database\nReference a table with tbl()\nBuild a query using dplyr verbs\nCollect only the result you need\n\n\ntbl() is like a pointer to a table that lives somewhere else. It lets you work with the table without copying everything into R.\n\n\n💡 In the coding break, we will create a small temporary database from Palmer Penguins so you can practice this workflow without needing access to a real institutional database.\n\n\nThis slide replaces the large setup code block with the conceptual takeaway. Emphasize that the setup code is not the lesson; the lesson is the mental model. In database workflows, you first connect, then reference a table, then write a query, and only at the end collect a smaller result into R."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#use-dplyr-on-a-database",
-    "href": "presentations/DataScience/data-import.html#use-dplyr-on-a-database",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#use-dplyr-on-a-database",
+    "href": "presentations/DataScience/import.html#use-dplyr-on-a-database",
+    "title": "Import",
     "section": "Use dplyr on a database",
     "text": "Use dplyr on a database\nYou can write familiar dplyr code:\nadelie_query &lt;- penguins_db |&gt;\n  filter(species == \"Adelie\") |&gt;\n  select(species, island, body_mass_g, sex)\n\nadelie_query\nBehind the scenes, dbplyr translates the dplyr pipeline into SQL.\nadelie_query |&gt; show_query()\n\nThe code feels like dplyr, but the work happens in the database.\n\n\nThis combines the dplyr and SQL translation slides. Emphasize that students do not need to write SQL to benefit from databases, although seeing the SQL can help them understand what is happening."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#collect-results-into-r",
-    "href": "presentations/DataScience/data-import.html#collect-results-into-r",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#collect-results-into-r",
+    "href": "presentations/DataScience/import.html#collect-results-into-r",
+    "title": "Import",
     "section": "Collect results into R",
     "text": "Collect results into R\nUse collect() when you are ready to bring the result into memory.\nadelie_local &lt;- adelie_query |&gt;\n  collect()\n\nadelie_local\n\n💡 Disconnect when finished:\ndbDisconnect(con)\n\n\nExplain that collect() is the boundary between database work and local R work. Once collected, the result is a regular tibble in R memory. Also remind students to disconnect from database connections when done."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#where-arrow-and-parquet-fit",
-    "href": "presentations/DataScience/data-import.html#where-arrow-and-parquet-fit",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#where-arrow-and-parquet-fit",
+    "href": "presentations/DataScience/import.html#where-arrow-and-parquet-fit",
+    "title": "Import",
     "section": "Where Arrow and Parquet fit",
     "text": "Where Arrow and Parquet fit\n\nParquet is a file format; Arrow is a toolkit for working with columnar data efficiently.\n\nWhy this matters:\n\nParquet files are often smaller than CSV files\nColumnar storage is efficient for selecting variables\nArrow can work with large data without loading everything at once\nThe workflow often resembles database work: filter first, collect later\n\n\nFor this course, focus on the concept: large data workflows often avoid loading everything into memory immediately.\n\n\nThis single conceptual slide replaces multiple Arrow-specific workflow slides. The aim is to connect Arrow to the database idea of lazy querying without overwhelming students with another API."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#coding-break-2-database-queries",
-    "href": "presentations/DataScience/data-import.html#coding-break-2-database-queries",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#coding-break-2-database-queries",
+    "href": "presentations/DataScience/import.html#coding-break-2-database-queries",
+    "title": "Import",
     "section": "Coding Break 2: Database queries",
     "text": "Coding Break 2: Database queries\n\nGoal: query a simulated database using dplyr and collect a summary.\n\nRun this setup code first:\nlibrary(tidyverse)\nlibrary(DBI)\nlibrary(RSQLite)\nlibrary(dbplyr)\nlibrary(palmerpenguins)\n\ncon &lt;- dbConnect(SQLite(), \":memory:\")\ncopy_to(con, penguins, \"penguins\", temporary = FALSE)\nThen:\n\nReference the penguins table with tbl().\nFilter to Gentoo penguins.\nSelect species, island, body_mass_g, and sex.\nGroup by sex and calculate mean body mass.\nUse collect() to bring the result into R.\n\n\n💡 Finish early? Run show_query() before collect().\n\n\nGive students the database setup code so the exercise focuses on database-backed dplyr logic rather than setup. The key learning objective is when to use collect()."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#coding-break-2-solution",
-    "href": "presentations/DataScience/data-import.html#coding-break-2-solution",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#coding-break-2-solution",
+    "href": "presentations/DataScience/import.html#coding-break-2-solution",
+    "title": "Import",
     "section": "Coding Break 2: Solution",
     "text": "Coding Break 2: Solution\nlibrary(tidyverse)\nlibrary(DBI)\nlibrary(RSQLite)\nlibrary(dbplyr)\nlibrary(palmerpenguins)\n\ncon &lt;- dbConnect(SQLite(), \":memory:\")\ncopy_to(con, penguins, \"penguins\", temporary = FALSE)\n\npenguins_db &lt;- tbl(con, \"penguins\")\n\nbody_mass_summary &lt;- penguins_db |&gt;\n  filter(species == \"Gentoo\") |&gt;\n  select(species, island, body_mass_g, sex) |&gt;\n  group_by(sex) |&gt;\n  summarize(mean_body_mass_g = mean(body_mass_g, na.rm = TRUE)) |&gt;\n  collect()\n\nbody_mass_summary\n\ndbDisconnect(con)\n\nIn the discussion, highlight the order of operations. Students first create a lazy query against the database, then collect only the small summary table."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#section-3-hierarchical-and-web-data",
-    "href": "presentations/DataScience/data-import.html#section-3-hierarchical-and-web-data",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#section-3-hierarchical-and-web-data",
+    "href": "presentations/DataScience/import.html#section-3-hierarchical-and-web-data",
+    "title": "Import",
     "section": "Section 3: Hierarchical and web data",
     "text": "Section 3: Hierarchical and web data\n\nNot all data arrive as rectangles.\n\nThis section covers:\n\nLists and list-columns\nRectangling nested data\nJSON\nHTML tables and web scraping\n\n\nThis merged section replaces the separate hierarchical data and web scraping title slides. Emphasize that web data often arrive in nested or semi-structured formats."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#rectangular-versus-hierarchical-data",
-    "href": "presentations/DataScience/data-import.html#rectangular-versus-hierarchical-data",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#rectangular-versus-hierarchical-data",
+    "href": "presentations/DataScience/import.html#rectangular-versus-hierarchical-data",
+    "title": "Import",
     "section": "Rectangular versus hierarchical data",
     "text": "Rectangular versus hierarchical data\nA rectangular dataset has rows and columns:\nspecies | island    | body_mass_g\nAdelie  | Torgersen | 3750\nAdelie  | Torgersen | 3800\nA hierarchical dataset is tree-like:\npenguin\n├── species\n├── island\n└── measurements\n    ├── bill_length_mm\n    └── body_mass_g\n\nRectangling means converting tree-like data into rows and columns.\n\n\nThis is the big conceptual transition. Students already know how to work with rectangular data. Hierarchical data require inspecting structure and deciding how to turn nested components into rows or columns."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#lists-store-hierarchical-data",
-    "href": "presentations/DataScience/data-import.html#lists-store-hierarchical-data",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#lists-store-hierarchical-data",
+    "href": "presentations/DataScience/import.html#lists-store-hierarchical-data",
+    "title": "Import",
     "section": "Lists store hierarchical data",
     "text": "Lists store hierarchical data\nLists can contain different kinds of objects.\nx &lt;- list(\n  species = \"Adelie\",\n  measurements = list(\n    bill_length_mm = 39.1,\n    body_mass_g = 3750\n  ),\n  tags = c(\"Torgersen\", \"male\")\n)\n\nstr(x)\n#&gt; List of 3\n#&gt;  $ species     : chr \"Adelie\"\n#&gt;  $ measurements:List of 2\n#&gt;   ..$ bill_length_mm: num 39.1\n#&gt;   ..$ body_mass_g   : num 3750\n#&gt;  $ tags        : chr [1:2] \"Torgersen\" \"male\"\n\nThis slide follows the R4DS chapter’s emphasis on lists as the structure that makes hierarchical data possible. Use str() as the main inspection tool."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#list-columns",
-    "href": "presentations/DataScience/data-import.html#list-columns",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#list-columns",
+    "href": "presentations/DataScience/import.html#list-columns",
+    "title": "Import",
     "section": "List-columns",
     "text": "List-columns\nA list-column is a list stored inside a tibble.\ndf &lt;- tibble(\n  id = 1:2,\n  bird = c(\"A\", \"B\"),\n  measurements = list(\n    list(bill = 39.1, mass = 3750),\n    list(bill = 46.5, mass = 4200)\n  )\n)\n\ndf\n#&gt; # A tibble: 2 × 3\n#&gt;      id bird  measurements\n#&gt;   &lt;int&gt; &lt;chr&gt; &lt;list&gt;\n#&gt; 1     1 A     &lt;named list [2]&gt;\n#&gt; 2     2 B     &lt;named list [2]&gt;\n\ndf |&gt; pull(measurements) |&gt; str()\n#&gt; List of 2\n#&gt;  $ :List of 2\n#&gt;   ..$ bill: num 39.1\n#&gt;   ..$ mass: num 3750\n#&gt;  $ :List of 2\n#&gt;   ..$ bill: num 46.5\n#&gt;   ..$ mass: num 4200\n\n💡 Tibbles summarize list-columns as &lt;list&gt;. Use pull() + str() to inspect what is inside.\n\n\nThe requested change was to print the str() result so students can see the underlying structure. Explain that list-columns are normal columns, but each cell can contain a more complex object."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#rectangling-decision-guide",
-    "href": "presentations/DataScience/data-import.html#rectangling-decision-guide",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#rectangling-decision-guide",
+    "href": "presentations/DataScience/import.html#rectangling-decision-guide",
+    "title": "Import",
     "section": "Rectangling decision guide",
     "text": "Rectangling decision guide\n\nChoose the function based on what the nested values represent.\n\n\n\n\n\n\n\n\n\nSituation\nCommon tool\nResult\n\n\n\n\nNamed values should become variables\nunnest_wider()\nMore columns\n\n\nRepeated values should become observations\nunnest_longer()\nMore rows\n\n\nYou only need a few pieces\nhoist()\nSelected columns\n\n\nYou are not sure yet\nstr() / View()\nInspect structure\n\n\n\n\nRectangling is iterative: inspect → choose wider/longer/hoist → inspect again.\n\n\nThis consolidates the many individual rectangling function slides into one decision guide. Use this slide to keep the why front and center. The function is chosen based on the meaning of the nested data."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#compact-rectangling-example",
-    "href": "presentations/DataScience/data-import.html#compact-rectangling-example",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#compact-rectangling-example",
+    "href": "presentations/DataScience/import.html#compact-rectangling-example",
+    "title": "Import",
     "section": "Compact rectangling example",
     "text": "Compact rectangling example\ndf &lt;- tibble(\n  id = 1:2,\n  measurements = list(\n    list(bill = 39.1, mass = 3750),\n    list(bill = 46.5, mass = 4200)\n  ),\n  tags = list(\n    c(\"Torgersen\", \"male\"),\n    c(\"Biscoe\", \"female\")\n  )\n)\n\n# Named elements become columns\ndf |&gt; unnest_wider(measurements)\n\n# Repeated values become rows\ndf |&gt; unnest_longer(tags)\n\nThis replaces separate wider/longer slides with a compact comparison. Explain that named measurement values behave like variables, while repeated tags behave like multiple observations."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#what-is-json",
-    "href": "presentations/DataScience/data-import.html#what-is-json",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#what-is-json",
+    "href": "presentations/DataScience/import.html#what-is-json",
+    "title": "Import",
     "section": "What is JSON?",
     "text": "What is JSON?\n\nJSON stands for JavaScript Object Notation. It is a common format for storing and exchanging hierarchical data.\n\nYou will often encounter JSON when data comes from:\n\nWeb APIs\nPublic data portals\nApplication logs\nWeb services\nNested metadata files\n\nJSON can represent structures that do not fit neatly into rows and columns right away:\n{\n  \"name\": \"Ava\",\n  \"scores\": [90, 92],\n  \"metadata\": {\"group\": \"A\", \"site\": \"KC\"}\n}\n\n💡 Many APIs return JSON because it can store nested information. In R, JSON often becomes a list or list-column, so we use rectangling tools to turn it into a tibble.\n\n\nUse this slide to connect rectangling to real data sources. JSON is common in APIs because it can represent nested structures: one person can have multiple scores, metadata can have named subfields, and records do not need to be perfectly rectangular at first. The key transition is that JSON data often enters R as lists, and rectangling turns those lists into columns and rows."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#read-json-then-rectangle-it",
-    "href": "presentations/DataScience/data-import.html#read-json-then-rectangle-it",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#read-json-then-rectangle-it",
+    "href": "presentations/DataScience/import.html#read-json-then-rectangle-it",
+    "title": "Import",
     "section": "Read JSON, then rectangle it",
     "text": "Read JSON, then rectangle it\nlibrary(jsonlite)\nlibrary(tidyr)\n\njson &lt;- '[\n  {\"id\": 1, \"name\": \"Ava\", \"scores\": [90, 92]},\n  {\"id\": 2, \"name\": \"Ben\", \"scores\": [85, 88, 91]}\n]'\n\nstudents &lt;- fromJSON(json, simplifyVector = FALSE)\n\ntibble(student = students) |&gt;\n  unnest_wider(student) |&gt;\n  unnest_longer(scores)\n#&gt; # A tibble: 5 × 3\n#&gt;      id name  scores\n#&gt;   &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt;\n#&gt; 1     1 Ava       90\n#&gt; 2     1 Ava       92\n#&gt; 3     2 Ben       85\n#&gt; 4     2 Ben       88\n#&gt; 5     2 Ben       91\n\nThis slide keeps the code and its displayed output together in one code block using the #&gt; convention. Explain that JSON often becomes a list in R, and rectangling turns that list into a tibble."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#web-scraping",
-    "href": "presentations/DataScience/data-import.html#web-scraping",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#web-scraping",
+    "href": "presentations/DataScience/import.html#web-scraping",
+    "title": "Import",
     "section": "Web scraping",
     "text": "Web scraping\n\nWeb scraping means extracting data from HTML.\n\nA common workflow is:\nlibrary(rvest)\n\npage &lt;- read_html(\"https://example.com\")\n\ntables &lt;- page |&gt;\n  html_elements(\"table\") |&gt;\n  html_table()\n\n💡 Always check whether a site allows scraping, and prefer stable public pages or official APIs when available.\n\n\nKeep this slide practical and cautious. Web scraping is powerful, but fragile. HTML structure can change, and not all sites allow scraping."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#coding-break-3-web-scraping-challenge",
-    "href": "presentations/DataScience/data-import.html#coding-break-3-web-scraping-challenge",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#coding-break-3-web-scraping-challenge",
+    "href": "presentations/DataScience/import.html#coding-break-3-web-scraping-challenge",
+    "title": "Import",
     "section": "Coding Break 3: Web scraping challenge",
     "text": "Coding Break 3: Web scraping challenge\n\nGoal: scrape a public HTML table and turn it into a tibble.\n\nUse this public page:\nurl &lt;- \"https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)\"\nTasks:\n\nRead the page with read_html().\nExtract all tables with html_elements(\"table\") and html_table().\nPull out the first table.\nUse glimpse() to inspect it.\nSelect a few columns that look useful.\n\n\n💡 Finish early? Clean the column names with janitor::clean_names(). Because web pages change, inspect the tables before assuming which one you need.\n\n\nGive students about 15 minutes. Remind them that web pages can contain many tables, so scraping often begins by extracting a list of tables and inspecting which one you need."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#coding-break-3-solution",
-    "href": "presentations/DataScience/data-import.html#coding-break-3-solution",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#coding-break-3-solution",
+    "href": "presentations/DataScience/import.html#coding-break-3-solution",
+    "title": "Import",
     "section": "Coding Break 3: Solution",
     "text": "Coding Break 3: Solution\nlibrary(tidyverse)\nlibrary(rvest)\n\nurl &lt;- \"https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)\"\n\npage &lt;- read_html(url)\n\ntables &lt;- page |&gt;\n  html_elements(\"table\") |&gt;\n  html_table()\n\npopulation &lt;- tables[[1]]\n\npopulation |&gt; glimpse()\n\npopulation_small &lt;- population |&gt;\n  select(1:4)\n\npopulation_small\n\nIf the page structure changes, adapt live by inspecting length(tables) and viewing the first few table names. This is a teachable moment: web scraping is useful but more fragile than reading a stable file."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#summary",
-    "href": "presentations/DataScience/data-import.html#summary",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#summary",
+    "href": "presentations/DataScience/import.html#summary",
+    "title": "Import",
     "section": "Summary",
     "text": "Summary\n\n\n\n\n\n\n\nSource\nKey idea\n\n\n\n\nText files\nChoose the function that matches the delimiter\n\n\nSpreadsheets\nFind the actual rectangle inside the workbook\n\n\nDatabases\nQuery first, collect() later\n\n\nArrow / Parquet\nLarge data workflows often avoid loading everything at once\n\n\nHierarchical data\nInspect lists and rectangle iteratively\n\n\nWeb pages\nExtract HTML elements carefully and check the result\n\n\n\n\nImport is successful only when the object in R matches the meaning of the original data.\n\n\nEnd by returning to the core theme: data import is about preserving meaning. A dataset that loads successfully can still be wrong if types, names, paths, or structure were misinterpreted."
   },
   {
-    "objectID": "presentations/DataScience/data-import.html#practice-files",
-    "href": "presentations/DataScience/data-import.html#practice-files",
-    "title": "Data Import",
+    "objectID": "presentations/DataScience/import.html#practice-files",
+    "href": "presentations/DataScience/import.html#practice-files",
+    "title": "Import",
     "section": "Practice files",
     "text": "Practice files\n\nContinue working in the companion activity file.\n\nRecommended files:\n\ndata_import_activities.qmd for the three coding breaks\nThe rendered slides for reference\nThe R4DS import chapters for deeper examples\n\n\nUse this as the bridge from the lecture to the companion practice document. If time remains, students can repeat the breaks or extend them."
   },
@@ -585,7 +585,7 @@
     "href": "presentations/DataScience.html",
     "title": "R for Data Science",
     "section": "",
-    "text": "Whole Game\n\n\nR for Data Science Chapters 1-8\n\n\n\n\n\n\n\n\nJun 24, 2026\n\n\nJulianne G. Clina, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nTransform\n\n\nTools to Work with Common Variable Types\n\n\n\n\n\n\n\n\nJul 1, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nAn Introduction to ggplot2\n\n\n\n\n\n\n\n\nJul 8, 2026\n\n\nAshlyn Barry\n\n\n\n\n\n\n\n\n\n\n\n\nData Import\n\n\nGetting data into R\n\n\n\n\n\n\n\n\nJul 15, 2026\n\n\nIan Weidling\n\n\n\n\n\nNo matching items"
+    "text": "Whole Game\n\n\nR for Data Science Chapters 1-8\n\n\n\n\n\n\n\n\nJun 24, 2026\n\n\nJulianne G. Clina, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nTransform\n\n\nTools to Work with Common Variable Types\n\n\n\n\n\n\n\n\nJul 1, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nAn Introduction to ggplot2\n\n\n\n\n\n\n\n\nJul 8, 2026\n\n\nAshlyn Barry\n\n\n\n\n\n\n\n\n\n\n\n\nImport\n\n\nGetting data into R\n\n\n\n\n\n\n\n\nJul 15, 2026\n\n\nIan Weidling\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "presentations/AdvancedR/SpecialTopics/object-oriented-programming.html#polymorphism",
