@@ -1,10 +1,10 @@
 ---
-title: "Data Import"
+title: "Import"
 subtitle: "Getting data into R"
 author: "Ian Weidling"
 institute: "University of Kansas Medical Center"
 date: 2026-07-15
-image: "../../images/thumbnails/image-template.png"
+image: "../../images/thumbnails/import.png"
 format:
   revealjs:
     theme: [default, "../../styles/styleReveal.scss"]
