@@ -585,7 +585,7 @@
     "href": "presentations/DataScience.html",
     "title": "R for Data Science",
     "section": "",
-    "text": "Whole Game\n\n\nR for Data Science Chapters 1-8\n\n\n\n\n\n\n\n\nJun 24, 2026\n\n\nJulianne G. Clina, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nTransform\n\n\nTools to Work with Common Variable Types\n\n\n\n\n\n\n\n\nJul 1, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nAn Introduction to ggplot2\n\n\n\n\n\n\n\n\nJul 8, 2026\n\n\nAshlyn Barry\n\n\n\n\n\n\n\n\n\n\n\n\nImport\n\n\nGetting data into R\n\n\n\n\n\n\n\n\nJul 15, 2026\n\n\nIan Weidling\n\n\n\n\n\nNo matching items"
+    "text": "Whole Game\n\n\nR for Data Science Chapters 1-8\n\n\n\n\n\n\n\n\nJun 24, 2026\n\n\nJulianne G. Clina, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nTransform\n\n\nTools to Work with Common Variable Types\n\n\n\n\n\n\n\n\nJul 1, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nAn Introduction to ggplot2\n\n\n\n\n\n\n\n\nJul 8, 2026\n\n\nAshlyn Barry\n\n\n\n\n\n\n\n\n\n\n\n\nImport\n\n\nGetting data into R\n\n\n\n\n\n\n\n\nJul 15, 2026\n\n\nIan Weidling\n\n\n\n\n\n\n\n\n\n\n\n\nProgram\n\n\nR for Data Science Chapters 25-27\n\n\n\n\n\n\n\n\nJul 23, 2026\n\n\nJulianne G. Clina, PhD\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "presentations/AdvancedR/SpecialTopics/object-oriented-programming.html#polymorphism",
@@ -3169,5 +3169,299 @@
     "title": "Advanced R Special Topics",
     "section": "",
     "text": "Functional Programming\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nOct 7, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nObject Oriented Programming\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nOct 14, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nMeta-Programming\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nOct 21, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nMeasuring and Improving Performance\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nOct 28, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#learning-objectives",
+    "href": "presentations/DataScience/program.html#learning-objectives",
+    "title": "Program",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of today’s session, you should be able to:\n\nExplain why writing reusable functions saves you time and prevents mistakes\nCreate simple functions with inputs and outputs\nUnderstand why variables inside a function stay inside a function\nWrite functions that work on our study data using { }\nRepeat a task across many participants or variables using for loops and purrr\nRecognize when a loop is the right tool versus a simpler approach\nRecognize a few common base R patterns you’ll see in other people’s code"
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#the-programming-toolkit",
+    "href": "presentations/DataScience/program.html#the-programming-toolkit",
+    "title": "Program",
+    "section": "The Programming Toolkit",
+    "text": "The Programming Toolkit\nThis section shifts from wrangling data to writing your own tools.\nThink of it like the difference between:\n\nFollowing someone else’s recipe every time (what we’ve done so far)\nWriting your own recipe card once, so you (or a labmate) can reuse it anytime\n\n\n\n\n\n\n\nTip\n\n\nThe goal isn’t to turn you into a software engineer — it’s to save you time and reduce copy-paste mistakes in your own analysis scripts."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#chapters-2527",
+    "href": "presentations/DataScience/program.html#chapters-2527",
+    "title": "Program",
+    "section": "Chapters 25–27",
+    "text": "Chapters 25–27\n\n\n\nChapter\nTopic\n\n\n\n\n25\nFunctions\n\n\n26\nIteration\n\n\n27\nA field guide to base R\n\n\n\n\nWe’ll spend most of our time in Chapter 25, since functions are the foundation everything else builds on."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#why-write-functions",
+    "href": "presentations/DataScience/program.html#why-write-functions",
+    "title": "Program",
+    "section": "Why Write Functions?",
+    "text": "Why Write Functions?\nImagine a study where each participant has four measures: steps, sleep hours, mood score, and memory score. You want to rescale each one to a 0-1 scale so they’re comparable.\n\nsleep_study &lt;- tibble::tibble(\n  steps = rnorm(10, 8000, 1500),\n  sleep_hours = rnorm(10, 7, 1),\n  mood_score = rnorm(10, 50, 10),\n  memory_score = rnorm(10, 75, 8)\n)\n\nsleep_study$steps &lt;- (sleep_study$steps -\n  min(sleep_study$steps, na.rm = TRUE)) /\n  (max(sleep_study$steps, na.rm = TRUE) - min(sleep_study$steps, na.rm = TRUE))\nsleep_study$sleep_hours &lt;- (sleep_study$sleep_hours -\n  min(sleep_study$sleep_hours, na.rm = TRUE)) /\n  (max(sleep_study$sleep_hours, na.rm = TRUE) -\n    min(sleep_study$sleep_hours, na.rm = TRUE))\nsleep_study$mood_score &lt;- (sleep_study$mood_score -\n  min(sleep_study$mood_score, na.rm = TRUE)) /\n  (max(sleep_study$mood_score, na.rm = TRUE) -\n    min(sleep_study$mood_score, na.rm = TRUE))\nsleep_study$memory_score &lt;- (sleep_study$memory_score -\n  min(sleep_study$memory_score, na.rm = TRUE)) /\n  (max(sleep_study$memory_score, na.rm = TRUE) -\n    min(sleep_study$memory_score, na.rm = TRUE))\n\n\n\n\n\n\n\nTip\n\n\nThink of this like writing the same reminder note on four different sticky notes, instead of writing it once and photocopying it. If the reminder needs to change, you now have to update all four notes by hand and it’s easy to miss one."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#benefits-of-functions",
+    "href": "presentations/DataScience/program.html#benefits-of-functions",
+    "title": "Program",
+    "section": "Benefits of Functions",
+    "text": "Benefits of Functions\nA function is like a labeled button on a remote control. Instead of explaining “press this specific sequence of buttons” every time, you just press “Power.”\n\nGive the process a name you can reuse\nFix it in one place if something’s wrong\nAvoid copy-paste mistakes (like updating 3 of the 4 lines and forgetting the 4th)\nMake your script easier for a labmate (or future-you) to read\n\n\nrescale01 &lt;- function(x) {\n  (x - min(x, na.rm = TRUE)) /\n    (max(x, na.rm = TRUE) - min(x, na.rm = TRUE))\n}\n\nrescale01(c(0, 5, 10))\n#&gt; [1] 0.0 0.5 1.0"
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#vector-functions-think-recipe-card",
+    "href": "presentations/DataScience/program.html#vector-functions-think-recipe-card",
+    "title": "Program",
+    "section": "Vector Functions – Think: Recipe Card",
+    "text": "Vector Functions – Think: Recipe Card\nA function is just a recipe card:\n\nName – the name of the dish (e.g., “Rescale a Score”)\nIngredients – the arguments you need (e.g., “a column of numbers”)\nSteps – what to do with those ingredients\n\nYou write the card once. After that, you never have to re-explain the recipe – you just say the name.\n\nrescale01 &lt;- function(x) {\n  # &lt;- the \"name\" and \"ingredient\" (x)\n  rng &lt;- range(x, na.rm = TRUE) # &lt;- step 1: find the smallest & largest values\n  (x - rng[1]) / (rng[2] - rng[1]) # &lt;- step 2: rescale using those two values\n}\n\nrescale01(c(-10, 0, 10, 30))\n#&gt; [1] 0.00 0.25 0.50 1.00"
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#applying-your-function",
+    "href": "presentations/DataScience/program.html#applying-your-function",
+    "title": "Program",
+    "section": "Applying Your Function",
+    "text": "Applying Your Function\nOnce your function exists, use it on all four of your study measures at once – no more copy-pasting the same line four times.\n\nsleep_study |&gt;\n  dplyr::mutate(\n    dplyr::across(steps:memory_score, rescale01)\n  )\n\n\ndplyr::across() says “apply this function to every column I list” – one line replaces four repeated ones."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#naming-functions",
+    "href": "presentations/DataScience/program.html#naming-functions",
+    "title": "Program",
+    "section": "Naming Functions",
+    "text": "Naming Functions\nThink of function names like labels on file folders in a filing cabinet. If all your folders about “measuring” start with measure_, you can find them instantly.\n\n# Good -- easy to find every \"check\" function later\ncheck_steps()\ncheck_sleep()\ncheck_mood()\n\n# Harder to search for -- the shared word is buried at the end\nsteps_check()\nsleep_check()\nmood_check()\n\n\nUse verbs (actions): check_, measure_, summarize_\nUse snake_case, not camelCase\nGroup related functions with a shared prefix"
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#data-arguments-vs.-detail-arguments",
+    "href": "presentations/DataScience/program.html#data-arguments-vs.-detail-arguments",
+    "title": "Program",
+    "section": "Data Arguments vs. Detail Arguments",
+    "text": "Data Arguments vs. Detail Arguments\nThink of ordering matcha: the type of drink is the main thing you’re ordering (data argument). Milk and sweetness level are details you can adjust, and the barista already has a default in mind if you don’t specify.\n\nmean_ci &lt;- function(x, conf = 0.95) {\n  se &lt;- sd(x) / sqrt(length(x))\n  alpha &lt;- 1 - conf\n  mean(x) + se * qnorm(c(alpha / 2, 1 - alpha / 2))\n}\n\nmean_ci(sleep_study$mood_score)\n#&gt; [1] 45.2 54.8\n\n# ask for a wider confidence interval\nmean_ci(sleep_study$mood_score, conf = 0.99)\n#&gt; [1] 42.1 57.9"
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#checking-argument-values",
+    "href": "presentations/DataScience/program.html#checking-argument-values",
+    "title": "Program",
+    "section": "Checking Argument Values",
+    "text": "Checking Argument Values\nBefore running a calculation, it’s worth checking that the inputs actually go together – the same instinct as checking you have a lid for every container before you start packing lunches. Mismatched counts mean stop, not guess.\n\nwt_mean &lt;- function(x, w) {\n  if (length(x) != length(w)) {\n    stop(\"`x` and `w` must be the same length\")\n  }\n  sum(w * x) / sum(w)\n}\n\nwt_mean(sleep_study$mood_score, w = c(1, 1, 1, 2, 1, 1, 1, 1, 1, 1))\n#&gt; [1] 51.4\n\nwt_mean(sleep_study$mood_score[1:5], w = 1:6)\n#&gt; Error: `x` and `w` must be the same length"
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#stopifnot",
+    "href": "presentations/DataScience/program.html#stopifnot",
+    "title": "Program",
+    "section": "stopifnot()",
+    "text": "stopifnot()\nSame idea, fewer words. stopifnot() lets you write the same check in one line instead of a full if/stop() block.\n\nwt_mean &lt;- function(x, w) {\n  stopifnot(length(x) == length(w))\n  sum(w * x) / sum(w)\n}\n\nwt_mean(sleep_study$mood_score[1:5], w = 1:6)\n#&gt; Error: length(x) == length(w) is not TRUE\n\n\n\n\n\n\n\nTip\n\n\nstopifnot() trades a custom error message for brevity – great for quick, internal sanity checks."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#dot-dot-dot-...-think-a-forwarding-address",
+    "href": "presentations/DataScience/program.html#dot-dot-dot-...-think-a-forwarding-address",
+    "title": "Program",
+    "section": "Dot-Dot-Dot (...) – Think: A Forwarding Address",
+    "text": "Dot-Dot-Dot (...) – Think: A Forwarding Address\nThink of ... as a message from your boss that isn’t meant for you. Your job isn’t to read or use the message—you simply pass it along to the person who needs it.\nThe problem ... solves: say you write a function that wraps round(), but you also want the user to be able to control round()’s digits argument – without you having to type out digits = digits by hand.\n\n# Without ...  you'd have to name every possible extra argument yourself\nsummarize_score &lt;- function(x, digits) {\n  round(mean(x, na.rm = TRUE), digits)\n}\n\n# With ...   any extra arguments the user supplies get forwarded to round()\nsummarize_score &lt;- function(x, ...) {\n  round(mean(x, na.rm = TRUE), ...)\n}\n\nsummarize_score(sleep_study$mood_score)\n#&gt; [1] 50   (round() used its own default, digits = 0)\n\nsummarize_score(sleep_study$mood_score, digits = 2)\n#&gt; [1] 50.24   (digits = 2 traveled through `...` straight into round())\n\n\n\n\n\n\n\nTip\n\n\n\nYou call summarize_score(..., digits = 2).\nsummarize_score() doesn’t use digits, so it stores it in ....\nWhen round() is called, ... passes digits = 2 along.\nround() knows what digits means, so it rounds to 2 decimal places.\n\n\n\n\n\n“I don’t need this argument, but I’ll pass it to the next function that does.”"
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#return-values-think-vending-machine",
+    "href": "presentations/DataScience/program.html#return-values-think-vending-machine",
+    "title": "Program",
+    "section": "Return Values – Think: Vending Machine",
+    "text": "Return Values – Think: Vending Machine\nA function is like a vending machine: you put something in, and it gives back the last thing it computed – unless it stops early (like a machine flashing “sold out”).\n\nsame_two &lt;- function(x1, x2, x3, x4) {\n  if (!is.finite(x1) || !is.finite(x2)) {\n    return(NA) # &lt;- stops early, like the machine flashing \"can't process this\"\n  }\n  (x1 == x2) & (x3 == x4)\n}\n\nsame_two(1, 1, 2, 2)\n#&gt; [1] TRUE\n\nsame_two(NA, 1, 2, 2)\n#&gt; [1] NA"
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#writing-pipeable-functions",
+    "href": "presentations/DataScience/program.html#writing-pipeable-functions",
+    "title": "Program",
+    "section": "Writing Pipeable Functions",
+    "text": "Writing Pipeable Functions\nThink of this like an assembly line: each station passes the box along without opening it and announcing what’s inside. A pipeable function passes the data frame along, rather than printing or plotting partway through.\n\nstandardize &lt;- function(df) {\n  df |&gt;\n    dplyr::mutate(dplyr::across(dplyr::where(is.numeric), rescale01))\n}\n\nsleep_study |&gt; standardize()\n\n\nReturning a data frame (instead of printing it) means you can keep piping more steps afterward."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#environment-and-scoping",
+    "href": "presentations/DataScience/program.html#environment-and-scoping",
+    "title": "Program",
+    "section": "Environment and Scoping",
+    "text": "Environment and Scoping\nIf a friend texts you “can you grab mine?” it only makes sense if you were just talking about a specific thing, like a sweatshirt, a few messages earlier. Outside that context, “mine” doesn’t mean anything.\nR works the same way with variables inside a function: it looks up a name’s value based on the immediate context (the function) where it’s written, not some unrelated part of your script.\n\nmood_baseline &lt;- 10\n\nf &lt;- function(x) {\n  mood_baseline &lt;- 1 # &lt;- only means something inside this function\n  x + mood_baseline\n}\n\nf(5)\n#&gt; [1] 6\n\nmood_baseline\n#&gt; [1] 10   # &lt;- untouched outside the function\n\n\nThis is called lexical scoping – R looks up variables based on where a function was written, not where it happens to be called from."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#scoping-take-two-why-it-actually-matters",
+    "href": "presentations/DataScience/program.html#scoping-take-two-why-it-actually-matters",
+    "title": "Program",
+    "section": "Scoping, Take Two – Why It Actually Matters",
+    "text": "Scoping, Take Two – Why It Actually Matters\nA second example, with the direction reversed – notice that a function can see variables that already exist outside it, it just can’t permanently change them.\n\nadjustment &lt;- 5\n\nadd_adjustment &lt;- function(x) {\n  x + adjustment # &lt;- reads `adjustment` from outside, since it wasn't defined inside\n}\n\nadd_adjustment(10)\n#&gt; [1] 15\n\n# Now the function tries to update it...\nadd_adjustment &lt;- function(x) {\n  adjustment &lt;- adjustment + 1 # &lt;- creates a NEW local `adjustment`, doesn't touch the outside one\n  x + adjustment\n}\n\nadd_adjustment(10)\n#&gt; [1] 16\n\nadjustment\n#&gt; [1] 5   # &lt;- still 5! The outside copy was never touched"
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#the-indirection-problem",
+    "href": "presentations/DataScience/program.html#the-indirection-problem",
+    "title": "Program",
+    "section": "The Indirection Problem",
+    "text": "The Indirection Problem\nWhen you use the tidyverse interactively, you can type column names directly into functions:\n\nsleep_study |&gt;\n  dplyr::group_by(group) |&gt;\n  dplyr::summarize(mean(mood_score))\n\nBut when you write your own functions, R needs to know whether you mean: - the name of the column you provided, or - the name of the argument inside your function.\nThis creates an indirection problem: the column name is being passed through another variable.\n\ngrouped_mean &lt;- function(df, group_var, mean_var) {\n  df |&gt;\n    dplyr::group_by(group_var) |&gt;\n    dplyr::summarize(mean(mean_var))\n}\n\ngrouped_mean(sleep_study, group, mood_score)\n# Error: Column `group_var` is not found.\n\n\n\n\n\n\n\nTip\n\n\nThink of it this way: You typed group, but inside the function, R only sees the name group_var. So instead of looking for a column named group, it looks for a column literally named group_var—which does not exist. That’s why the function fails. On the next slide, we’ll see how { } tells R to use the column the user actually supplied."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#embracing-with-pointing-not-spelling-it-out",
+    "href": "presentations/DataScience/program.html#embracing-with-pointing-not-spelling-it-out",
+    "title": "Program",
+    "section": "Embracing with { } – Pointing, Not Spelling It Out",
+    "text": "Embracing with { } – Pointing, Not Spelling It Out\nThink of { } like pointing at something instead of spelling its name out letter by letter. It tells the function “treat this as the actual column the user means,” not a generic placeholder.\n\ngrouped_mean &lt;- function(df, group_var, mean_var) {\n  df |&gt;\n    dplyr::group_by({{ group_var }}) |&gt;\n    dplyr::summarize(mean = mean({{ mean_var }}, na.rm = TRUE))\n}\n\ngrouped_mean(sleep_study, group, mood_score)\n\n#&gt; # A tibble: 2 x 2\n#&gt;   group      mean\n#&gt;   &lt;chr&gt;     &lt;dbl&gt;\n#&gt; 1 control    48.3\n#&gt; 2 treatment  53.1\n\n\nRule of thumb: if you wrote { } around it, ask “am I passing this argument straight into a tidyverse verb like group_by(), summarize(), filter(), or aes()?” If yes, it needs { }. If you’re just using the value directly in arithmetic (like x + 1), it doesn’t."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#when-to-embrace",
+    "href": "presentations/DataScience/program.html#when-to-embrace",
+    "title": "Program",
+    "section": "When to Embrace",
+    "text": "When to Embrace\n\nEmbrace ({ }) when the argument is a column name from the data\nDon’t embrace when the argument is a plain value, like TRUE/FALSE or a number\n\n\ncount_prop &lt;- function(df, var, sort = FALSE) {\n  df |&gt;\n    dplyr::count({{ var }}, sort = sort) |&gt;\n    dplyr::mutate(prop = n / sum(n))\n}\n\nsleep_study |&gt; count_prop(group, sort = TRUE)\n\n\nsort is just TRUE or FALSE – a plain value, so it’s passed through normally, no pointing required."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#style-conventions-for-functions",
+    "href": "presentations/DataScience/program.html#style-conventions-for-functions",
+    "title": "Program",
+    "section": "Style Conventions for Functions",
+    "text": "Style Conventions for Functions\nThink of clean function style like legible handwriting – it’s not just about being “correct,” it’s about someone else (or you, in six months) being able to read it quickly.\n\n# Easy to read\nadd_full_name &lt;- function(data, first, last) {\n  data |&gt;\n    dplyr::mutate(name = paste(first, last))\n}\n\n# Hard to read -- same logic, but cramped\naddFullName &lt;- function(data, first, last) {\n  data |&gt; dplyr::mutate(name = paste(first, last))\n}"
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#chapter-25-summary",
+    "href": "presentations/DataScience/program.html#chapter-25-summary",
+    "title": "Program",
+    "section": "Chapter 25 Summary",
+    "text": "Chapter 25 Summary\n\nWrite a function whenever you’d otherwise copy-paste the same code more than twice\nA function is a recipe card: name, ingredients (arguments), steps (body)\nUse stopifnot() or if/stop() as an alarm bell for bad inputs\n... forwards extra arguments to another function inside yours, unopened\nVariables inside a function only mean something inside that function (scope)\nUse { } to point at a column name passed into your function"
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#why-iterate",
+    "href": "presentations/DataScience/program.html#why-iterate",
+    "title": "Program",
+    "section": "Why Iterate?",
+    "text": "Why Iterate?\nImagine checking ten participants’ files one at a time, writing down the median steps for each. Iteration is like having a helper who does the same repetitive task for you, one participant at a time, without you copy-pasting the same line ten times.\n\nsleep_study &lt;- tibble::tibble(\n  p1 = rnorm(10),\n  p2 = rnorm(10),\n  p3 = rnorm(10),\n  p4 = rnorm(10)\n)\n\n# Copy-paste approach -- tedious and easy to mess up\nmedian(sleep_study$p1)\nmedian(sleep_study$p2)\nmedian(sleep_study$p3)\nmedian(sleep_study$p4)\n\n\n\n\n\n\n\nTip\n\n\nJust like with functions, repeated code is your cue that a loop (or purrr) could help."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#for-loops-think-a-checklist",
+    "href": "presentations/DataScience/program.html#for-loops-think-a-checklist",
+    "title": "Program",
+    "section": "for Loops – Think: A Checklist",
+    "text": "for Loops – Think: A Checklist\nA for loop is like working through a checklist: you have a list of items (the sequence), something you do to each one (the body), and somewhere you record the result (the output).\n\noutput &lt;- vector(\"double\", ncol(sleep_study))\n\nfor (i in seq_along(sleep_study)) {\n  output[[i]] &lt;- median(sleep_study[[i]])\n}\n\noutput\n#&gt; [1] -0.245  0.281 -0.123  0.132\n\n\nseq_along(sleep_study) is safer than 1:ncol(sleep_study) – it behaves correctly even if there are zero columns, the same way a checklist with zero items shouldn’t crash your morning."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#for-loop-variation-modifying-in-place",
+    "href": "presentations/DataScience/program.html#for-loop-variation-modifying-in-place",
+    "title": "Program",
+    "section": "For Loop Variation: Modifying in Place",
+    "text": "For Loop Variation: Modifying in Place\nSometimes, instead of writing new results elsewhere, you want to edit your own notes directly – like updating a participant’s chart in place rather than starting a new one.\n\nsleep_study &lt;- tibble::tibble(\n  p1 = rnorm(10),\n  p2 = rnorm(10),\n  p3 = rnorm(10),\n  p4 = rnorm(10)\n)\n\nfor (i in seq_along(sleep_study)) {\n  sleep_study[[i]] &lt;- rescale01(sleep_study[[i]])\n}"
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#for-loop-variation-unknown-output-length",
+    "href": "presentations/DataScience/program.html#for-loop-variation-unknown-output-length",
+    "title": "Program",
+    "section": "For Loop Variation: Unknown Output Length",
+    "text": "For Loop Variation: Unknown Output Length\nIf you don’t know how much output you’ll end up with, it’s like catching rain in a bucket – you don’t know how much will fall, so you use a flexible container (a list) rather than a rigid one you’d have to keep resizing.\n\nout &lt;- list()\ni &lt;- 1\n\nwhile (length(some_vector &lt;- rnorm(1)) &gt; 0 && i &lt;= 5) {\n  out[[i]] &lt;- some_vector\n  i &lt;- i + 1\n}\n\nstr(out)\n\n\n\n\n\n\n\nTip\n\n\nGrowing a vector with c() inside a loop is slow – collecting results in a list and combining once at the end is much faster."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#for-loop-variation-unknown-sequence-length",
+    "href": "presentations/DataScience/program.html#for-loop-variation-unknown-sequence-length",
+    "title": "Program",
+    "section": "For Loop Variation: Unknown Sequence Length",
+    "text": "For Loop Variation: Unknown Sequence Length\nA for loop always needs to know how many times to repeat before it starts. A while loop is for when you don’t know that number in advance – you just know the condition that should make it stop.\nSimplest possible example first:\n\ncount &lt;- 0\n\nwhile (count &lt; 5) {\n  count &lt;- count + 1\n}\n\ncount\n#&gt; [1] 5\n\nRead it like a sentence: “while count is less than 5, add 1 to it.” Every while loop needs something inside it (here, count &lt;- count + 1) that eventually makes the condition false – otherwise it never stops.\nA more realistic study example: taking a participant’s blood pressure repeatedly until it settles below a threshold, rather than after a fixed number of attempts.\n\ncheck_reading &lt;- function() sample(c(\"high\", \"normal\"), 1)\n\nattempts &lt;- 0\nnormal_in_a_row &lt;- 0\n\nwhile (normal_in_a_row &lt; 3) {\n  if (check_reading() == \"normal\") {\n    normal_in_a_row &lt;- normal_in_a_row + 1\n  } else {\n    normal_in_a_row &lt;- 0\n  }\n  attempts &lt;- attempts + 1\n}\n\nattempts\n#&gt; [1] 7\n\n\nUse a for loop when you know the number of items ahead of time (10 participants, 4 columns). Use a while loop when you’re waiting for something to happen and don’t know how many tries it’ll take."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#introducing-purrr-the-assembly-line-robot",
+    "href": "presentations/DataScience/program.html#introducing-purrr-the-assembly-line-robot",
+    "title": "Program",
+    "section": "Introducing purrr – The Assembly-Line Robot",
+    "text": "Introducing purrr – The Assembly-Line Robot\npurrr is like an assembly-line robot: tell it once what to do to one item, and it applies that same action to every item in the box – no loop needed.\n\npurrr::map_dbl(sleep_study, median)\n#&gt;      p1     p2     p3     p4\n#&gt; -0.245  0.281 -0.123  0.132\n\npurrr::map_dbl(sleep_study, mean)\npurrr::map_dbl(sleep_study, sd)\n\n\nEvery map_*() function takes a set of items and a function, and applies the function to each one – just like our helper working through a checklist, but in one line."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#the-map-family-different-bins-for-different-outputs",
+    "href": "presentations/DataScience/program.html#the-map-family-different-bins-for-different-outputs",
+    "title": "Program",
+    "section": "The map() Family – Different Bins for Different Outputs",
+    "text": "The map() Family – Different Bins for Different Outputs\nThink of each map_*() variant as a different colored bin for the result you’re expecting to come out. Choosing the right bin isn’t optional decoration – it’s what makes purrr more predictable than sapply() (more on that in Chapter 27).\n\n\n\n\n\n\n\n\nFunction\nReturns\nExample use\n\n\n\n\nmap()\nlist (a mixed bin – always works, but output isn’t simplified)\npulling out model objects\n\n\nmap_lgl()\nTRUE/FALSE values\n“is this column numeric?”\n\n\nmap_int()\nwhole numbers\ncounts, row numbers\n\n\nmap_dbl()\ndecimal numbers\nmeans, medians, SDs\n\n\nmap_chr()\ntext\nlabels, formatted strings\n\n\n\n\npurrr::map_chr(sleep_study, \\(x) round(mean(x), 2) |&gt; as.character())\n\n\n\n\n\n\n\nTip\n\n\nIf the function you’re applying doesn’t actually return the type you asked for (e.g. you use map_dbl() but the function sometimes returns text), purrr throws an error right away instead of silently giving you a mismatched result – that’s the whole point of picking a specific bin."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#iterating-over-multiple-vectors-map2",
+    "href": "presentations/DataScience/program.html#iterating-over-multiple-vectors-map2",
+    "title": "Program",
+    "section": "Iterating over Multiple Vectors: map2()",
+    "text": "Iterating over Multiple Vectors: map2()\nThink of map2() like matching pairs of socks – it lines up two lists side by side and processes them together, one pair at a time (for example, each participant’s baseline score paired with their follow-up score).\n\nsims &lt;- tibble::tibble(n = c(10, 20, 30), sd = c(1, 5, 10))\n\nsims |&gt;\n  dplyr::mutate(\n    sample = purrr::map2(n, sd, \\(n, sd) rnorm(n, sd = sd))\n  )\n\n\nNotice the pattern: map() walks one list and hands your function one value at a time. map2() walks two lists in lockstep and hands your function two values at a time (matched by position – item 1 with item 1, item 2 with item 2, and so on)."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#iterating-over-many-arguments-pmap",
+    "href": "presentations/DataScience/program.html#iterating-over-many-arguments-pmap",
+    "title": "Program",
+    "section": "Iterating over Many Arguments: pmap()",
+    "text": "Iterating over Many Arguments: pmap()\nWhen you have three or more lists to line up together, pmap() works like coordinating three ingredient lists at once, matched row by row. The lists get bundled into a single list() so pmap() knows how many there are.\n\nparams &lt;- tibble::tribble(\n  ~mean , ~sd , ~n ,\n      1 ,   1 , 10 ,\n      2 ,   5 , 20 ,\n      3 ,  10 , 30\n)\n\nparams |&gt;\n  dplyr::mutate(sim = purrr::pmap(list(mean, sd, n), rnorm))\n\n\n\n\n\n\n\nTip\n\n\nSame family, same idea, just more inputs: map() = 1 list in, map2() = 2 lists in, pmap() = however many lists you bundle into list(...). You’ll almost always use pmap() with a data frame like params above, where each row is one full set of arguments."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#chapter-26-summary",
+    "href": "presentations/DataScience/program.html#chapter-26-summary",
+    "title": "Program",
+    "section": "Chapter 26 Summary",
+    "text": "Chapter 26 Summary\n\nA for loop needs a checklist (sequence), a task (body), and a place to record results (output)\nUse a while loop when you don’t know how many tries it will take\npurrr::map_*() replaces many common loops with a single line\nmap2() and pmap() line up multiple lists together, item by item\nPrefer map() variants over for loops when possible – less code, fewer places to make a mistake"
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#why-learn-base-r",
+    "href": "presentations/DataScience/program.html#why-learn-base-r",
+    "title": "Program",
+    "section": "Why Learn Base R?",
+    "text": "Why Learn Base R?\nEven if you write tidyverse code day-to-day, you’ll run into base R – in older scripts, Stack Overflow answers, or a colleague’s code. Think of it like learning to read an older cookbook’s instructions, even if you cook differently yourself.\n\n\n\n\n\n\nTip\n\n\nThe goal isn’t to switch back to base R – it’s to be able to read it without getting stuck."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#selecting-elements",
+    "href": "presentations/DataScience/program.html#selecting-elements",
+    "title": "Program",
+    "section": "Selecting Elements: [",
+    "text": "Selecting Elements: [\nThink of [ like grabbing a handful of jellybeans from a jar – whatever you pull out is still the same type of thing (still jellybeans, still a vector).\n\nx &lt;- c(10, 20, 30, 40, 50)\n\nx[c(1, 3)]\n#&gt; [1] 10 30\n\nx[x &gt; 25]\n#&gt; [1] 30 40 50\n\nx[-c(1, 2)]\n#&gt; [1] 30 40 50"
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#selecting-elements-and",
+    "href": "presentations/DataScience/program.html#selecting-elements-and",
+    "title": "Program",
+    "section": "Selecting Elements: [[ and $",
+    "text": "Selecting Elements: [[ and $\nThink of [[ and $ like reaching into a labeled folder and pulling out one specific document by name – you get just that one thing, not the whole folder.\n\nsleep_study[[\"mood_score\"]]\nsleep_study$mood_score\n\n# Difference with [ vs [[ on a list\nl &lt;- list(a = 1, b = \"text\")\nl[\"a\"] # still a small folder containing the number\nl[[\"a\"]] # just the number itself, 1\n\n\n[ keeps the folder; [[/$ reach inside and hand you the single item."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#the-apply-family",
+    "href": "presentations/DataScience/program.html#the-apply-family",
+    "title": "Program",
+    "section": "The apply Family",
+    "text": "The apply Family\nBase R’s apply functions are the older version of the assembly-line robot we met with purrr::map() – same idea, slightly different tools.\n\nsleep_study &lt;- tibble::tibble(\n  p1 = rnorm(10),\n  p2 = rnorm(10),\n  p3 = rnorm(10),\n  p4 = rnorm(10)\n)\n\nlapply(sleep_study, mean) # returns a list\nsapply(sleep_study, mean) # tries to simplify to a plain vector\n\n\n\n\n\n\n\nTip\n\n\nsapply()’s automatic simplifying is convenient but unpredictable – purrr’s typed map_*() functions were designed to fix that unpredictability."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#for-loops-in-base-r",
+    "href": "presentations/DataScience/program.html#for-loops-in-base-r",
+    "title": "Program",
+    "section": "for Loops in Base R",
+    "text": "for Loops in Base R\nA base R for loop works exactly like the checklist we saw in Chapter 26 – no extra packages required, like a manual tally counter you click by hand.\n\ntotal &lt;- 0\n\nfor (i in 1:10) {\n  total &lt;- total + i\n}\n\ntotal\n#&gt; [1] 55"
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#chapter-27-summary",
+    "href": "presentations/DataScience/program.html#chapter-27-summary",
+    "title": "Program",
+    "section": "Chapter 27 Summary",
+    "text": "Chapter 27 Summary\n\n[ grabs a handful and keeps the same container type; [[/$ pull out one labeled item\nlapply()/sapply() are base R’s version of purrr::map()\nBase R for loops work the same everywhere, with or without extra packages\nBeing able to read base R helps when you run into older code or documentation"
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#wrap-up",
+    "href": "presentations/DataScience/program.html#wrap-up",
+    "title": "Program",
+    "section": "Wrap-Up",
+    "text": "Wrap-Up\n\nChapter 25: Functions are recipe cards – write once, reuse anywhere. Master { } for functions that work on your study data\nChapter 26: Iteration with for loops and purrr::map() automates repetitive tasks across participants, columns, or files\nChapter 27: Base R subsetting and the apply family are worth recognizing, even if you write mostly tidyverse code day-to-day\n\n\nNow let’s put functions and iteration into practice with our own study data."
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#practice-exercise-build-a-function-then-automate-it",
+    "href": "presentations/DataScience/program.html#practice-exercise-build-a-function-then-automate-it",
+    "title": "Program",
+    "section": "Practice Exercise: Build a Function, Then Automate It",
+    "text": "Practice Exercise: Build a Function, Then Automate It\nNow use what you have learned to build some functions!\n\nsleep_study &lt;- tibble::tibble(\n  steps = rnorm(10, 8000, 1500),\n  sleep_hours = rnorm(10, 7, 1),\n  mood_score = rnorm(10, 50, 10),\n  memory_score = rnorm(10, 75, 8)\n)"
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#tier-1-write-a-one-step-function",
+    "href": "presentations/DataScience/program.html#tier-1-write-a-one-step-function",
+    "title": "Program",
+    "section": "Tier 1: Write a One-Step Function",
+    "text": "Tier 1: Write a One-Step Function\nMany temperature readings during clinic visits or studies report temperature in Fahrenheit, but we often need Celsius for analysis. Write a function called f_to_c() that converts a temperature from Fahrenheit to Celsius.\nFormula: C = (F - 32) * 5/9\n\nf_to_c &lt;- function(temp_f) {\n  # your code here\n}\n\nf_to_c(98.6)\nf_to_c(32)"
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#tier-2-add-one-more-step",
+    "href": "presentations/DataScience/program.html#tier-2-add-one-more-step",
+    "title": "Program",
+    "section": "Tier 2: Add One More Step",
+    "text": "Tier 2: Add One More Step\nPhysical activity trackers usually log steps, but it’s often more useful to talk about distance walked. Write a function called steps_to_miles() that estimates miles walked from a step count, then adds a second step and a default argument round the result, and let the user choose how many decimal places (defaulting to 1 if they don’t say).\nFormula: assume an average stride length of 2.5 feet, and that there are 5,280 feet in a mile: miles = steps * 2.5 / 5280\n\nsteps_to_miles &lt;- function(steps, digits = 1) {\n  # your code here\n  # step 1: convert steps to miles using the formula above\n  # step 2: round the result to `digits` decimal places\n}\n\nsteps_to_miles(8000)\nsteps_to_miles(8000, digits = 3)"
+  },
+  {
+    "objectID": "presentations/DataScience/program.html#tier-3-apply-it-to-many-values-with-purrr",
+    "href": "presentations/DataScience/program.html#tier-3-apply-it-to-many-values-with-purrr",
+    "title": "Program",
+    "section": "Tier 3: Apply It to Many Values with purrr",
+    "text": "Tier 3: Apply It to Many Values with purrr\nReal study data isn’t a single step count – it’s a whole column of them, one per participant. Instead of calling steps_to_miles() once per person, use purrr::map_dbl() to apply it to an entire vector at once, the same way you saw with median() and mean() in Chapter 26.\n\ndaily_steps &lt;- c(4200, 6100, 8000, 9800, 11500)\n\n# your code here\n# use purrr::map_dbl() to apply steps_to_miles() to every value in daily_steps\n\n# or, inside a data frame:\ntibble::tibble(steps = daily_steps) |&gt;\n  dplyr::mutate(\n    miles = # your code here\n  )\n\nStretch goal: try passing digits = 3 as an extra argument to your map_dbl() call – extra arguments after the function name get forwarded to steps_to_miles() for every value, the same forwarding idea as ... from Chapter 25."
   }
 ]
