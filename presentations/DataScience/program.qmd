@@ -4,7 +4,7 @@ subtitle: "R for Data Science Chapters 25-27"
 author: "Julianne G. Clina, PhD"
 institute: "University of Kansas Medical Center"
 date: 2026-07-23
-image: "../../images/thumbnails/whole-game.png"
+image: "../../images/thumbnails/program.png"
 format:
   revealjs:
     theme: [default, "../../styles/styleReveal.scss"]
