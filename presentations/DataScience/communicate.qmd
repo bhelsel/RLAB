@@ -1,9 +1,9 @@
 ---
 title: "Communicate"
 subtitle: "Introduction to Quarto"
-author: "Morgan Brucks"
+author: "Morgan Brucks, CCRP"
 institute: "University of Kansas Medical Center"
-date: 2026-07-08
+date: 2026-07-29
 image: "../../images/thumbnails/image-template.png"
 format:
   revealjs:
@@ -52,9 +52,8 @@ Spend 2-3 minutes discussing.
 This creates buy-in for reproducibility.
 :::
 
----
 
-# Why Communication Matters
+## Why Communication Matters
 
 R4DS argues that communication is part of data science.
 
@@ -70,7 +69,6 @@ Data → Analysis → Communication → Impact
 Ask: "If nobody understands your work, did the analysis accomplish its goal?"
 :::
 
----
 
 ## Three Audiences for Quarto
 
@@ -80,7 +78,6 @@ According to R4DS:
 2. Collaborators
 3. Future you
 
----
 
 ## Decision Makers
 
@@ -100,7 +97,6 @@ Examples:
 Department chairs, grant reviewers, clinicians, leadership.
 :::
 
----
 
 ## Collaborators
 
@@ -113,7 +109,6 @@ Need:
 
 Goal: transparency.
 
----
 
 ## Future You
 
@@ -124,8 +119,6 @@ Questions future-you asks:
 - What did I do?
 - Why did I do it?
 - Can I reproduce it?
-
----
 
 ## Brain Health Example
 
@@ -147,7 +140,6 @@ Reproducible workflow:
 - rerun code
 - render report
 
----
 
 # What is Quarto?
 
@@ -161,7 +153,6 @@ Quarto combines:
 
 into a single document.
 
----
 
 # Why Quarto?
 
@@ -172,7 +163,6 @@ Benefits:
 - efficiency
 - flexibility
 
----
 
 # One Source, Many Outputs
 
@@ -189,7 +179,6 @@ A single `.qmd` file can create:
 This idea becomes important in Chapter 29.
 :::
 
----
 
 # Anatomy of a Quarto File
 
@@ -199,7 +188,6 @@ Three pieces:
 2. Markdown
 3. Code chunks
 
----
 
 # YAML
 
@@ -213,8 +201,6 @@ format: html
 ---
 ```
 
----
-
 # Markdown
 
 Think of markdown as storytelling.
@@ -227,8 +213,6 @@ Think of markdown as storytelling.
 **Important finding**
 ```
 
----
-
 # Code Chunks
 
 Think of code chunks as analysis.
@@ -238,8 +222,6 @@ Think of code chunks as analysis.
 summary(mtcars)
 ```
 ````
-
----
 
 # Rendering Workflow
 
@@ -259,7 +241,6 @@ final output
 Many people click Render for years without understanding this workflow.
 :::
 
----
 
 # Demo #1
 
@@ -277,7 +258,6 @@ Switch to RStudio here.
 5 minutes.
 :::
 
----
 
 # Visual Editor
 
@@ -287,8 +267,6 @@ Advantages:
 - Word-like
 - point and click
 
----
-
 # Source Editor
 
 Advantages:
@@ -297,13 +275,6 @@ Advantages:
 - more flexible
 - easier debugging
 
----
-
-# Discussion
-
-Which editor would you choose and why?
-
----
 
 # Markdown Basics
 
@@ -315,9 +286,7 @@ Headers:
 ### Smaller Header
 ```
 
----
-
-# Text Formatting
+Text Formatting
 
 ```markdown
 **bold**
@@ -326,8 +295,6 @@ Headers:
 
 `code`
 ```
-
----
 
 # Lists
 
@@ -343,23 +310,11 @@ and
 2. second
 ```
 
----
-
 # Links
 
 ```markdown
 [Posit](https://posit.co)
 ```
-
----
-
-# Block Quotes
-
-```markdown
-> Reproducibility matters.
-```
-
----
 
 # Why Markdown?
 
@@ -370,8 +325,6 @@ Advantages:
 - portable
 - fast
 
----
-
 # Code Chunks
 
 Basic example:
@@ -380,15 +333,12 @@ Basic example:
 summary(cars)
 ```
 
----
-
 # Running Code
 
 ```{r}
 summary(mtcars)
 ```
 
----
 
 # Chunk Labels
 
@@ -402,8 +352,6 @@ Benefits:
 - references
 - navigation
 
----
-
 # Chunk Options
 
 ```r
@@ -412,25 +360,11 @@ Benefits:
 
 Hide code.
 
----
-
-# Additional Options
-
 ```r
 #| warning: false
 #| message: false
 ```
 
----
-
-# Figure Size
-
-```r
-#| fig-width: 8
-#| fig-height: 5
-```
-
----
 
 # Global Options
 
@@ -441,8 +375,6 @@ knitr::opts_chunk$set(
   message = FALSE
 )
 ```
-
----
 
 # Inline Code
 
@@ -456,7 +388,6 @@ Result:
 
 There are `r nrow(mtcars)` observations.
 
----
 
 # Why Inline Code Matters
 
@@ -469,24 +400,6 @@ Examples:
 
 Automatically updates.
 
----
-
-# Demo #2
-
-Add:
-
-```{r}
-summary(cars)
-```
-
-Render.
-
-::: notes
-Show code/output relationship.
-:::
-
----
-
 # Figures
 
 ```{r}
@@ -495,8 +408,6 @@ library(ggplot2)
 ggplot(mpg, aes(class)) +
   geom_bar()
 ```
-
----
 
 # Why Figures in Quarto?
 
@@ -512,26 +423,12 @@ Quarto:
 - update code
 - render
 
----
 
 # Tables
 
 ```{r}
 knitr::kable(head(mtcars))
 ```
-
----
-
-# Research Examples
-
-Possible tables:
-
-- demographics
-- recruitment
-- cognition outcomes
-- intervention adherence
-
----
 
 # Citations
 
@@ -543,51 +440,6 @@ YAML:
 bibliography: references.bib
 ```
 
----
-
-# Cross References
-
-Example:
-
-```markdown
-See @fig-recruitment.
-```
-
-Useful for manuscripts.
-
----
-
-# Callouts
-
-```markdown
-::: {.callout-note}
-Important point.
-:::
-```
-
----
-
-# Parameters
-
-```yaml
-params:
-  visit: baseline
-```
-
----
-
-# Why Parameters Matter
-
-Generate:
-
-- participant reports
-- visit reports
-- study reports
-
-from one template.
-
----
-
 # Common Errors
 
 - missing package
@@ -595,22 +447,13 @@ from one template.
 - missing parentheses
 - unclosed chunks
 
----
-
-# Debugging Advice
+Debugging Advice
 
 1. Read the error
 2. Find the line
 3. Fix one thing
 4. Render again
 
----
-
-# Discussion
-
-What feature seems most useful for your work?
-
----
 
 # Chapter 29: Formats
 
@@ -618,7 +461,6 @@ Core idea:
 
 One source → many outputs
 
----
 
 # HTML
 
@@ -631,7 +473,6 @@ Best for:
 - interactivity
 - online sharing
 
----
 
 # PDF
 
@@ -644,8 +485,6 @@ Best for:
 - printing
 - manuscripts
 
----
-
 # Word
 
 ```yaml
@@ -656,8 +495,6 @@ Best for:
 
 - tracked changes
 - collaborators
-
----
 
 # RevealJS
 
@@ -671,7 +508,6 @@ Best for:
 - conference talks
 - lab meetings
 
----
 
 # Multiple Formats
 
@@ -682,27 +518,7 @@ format:
   docx: default
 ```
 
----
-
-# Websites
-
-```yaml
-project:
-  type: website
-```
-
----
-
-# Books
-
-```yaml
-project:
-  type: book
-```
-
----
-
-# Brain Health Applications
+# Quarto Discussion
 
 Potential uses:
 
@@ -713,11 +529,11 @@ Potential uses:
 - conference presentations
 
 ::: notes
-Customize with GETActive examples.
-This is where your own examples will shine.
+Highligh Brian's Disclosure report
+Give an example of a use case for my lab.
+Ask: What other use cases can you think of?
 :::
 
----
 
 # Best Practices
 
@@ -727,13 +543,11 @@ This is where your own examples will shine.
 - document decisions
 - embrace reproducibility
 
----
 
 # Transition to Workshop
 
 Now let's build a Quarto presentation.
 
----
 
 # Workshop Activity 1
 
@@ -745,7 +559,6 @@ Tasks:
 - change title
 - change theme
 
----
 
 # Workshop Activity 2
 
@@ -756,7 +569,6 @@ Create slides with:
 - italic text
 - bullets
 
----
 
 # Workshop Activity 3
 
@@ -765,8 +577,6 @@ Add:
 ```{r}
 summary(cars)
 ```
-
----
 
 # Workshop Activity 4
 
@@ -779,8 +589,6 @@ ggplot(mpg, aes(class)) +
   geom_bar()
 ```
 
----
-
 # Workshop Activity 5
 
 Create:
@@ -790,8 +598,6 @@ Create:
 - table
 - interpretation sentence
 
----
-
 # Reflection
 
 Discuss:
@@ -799,8 +605,6 @@ Discuss:
 - What surprised you?
 - What seems useful?
 - Where could you use Quarto?
-
----
 
 # Final Takeaways
 
@@ -811,7 +615,5 @@ Quarto helps us:
 - automate
 - collaborate
 - publish
-
----
 
 # Questions
