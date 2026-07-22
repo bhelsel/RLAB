@@ -630,6 +630,13 @@
     "text": "Opening Question\nHow many of you have:\n\ncopied a figure from R into PowerPoint?\ncopied a table into Word?\nhad to recreate a figure months later?\nstruggled to remember how results were generated?\n\n\nSpend 2-3 minutes discussing. This creates buy-in for reproducibility."
   },
   {
+    "objectID": "presentations/DataScience/communicate.html#why-communication-matters",
+    "href": "presentations/DataScience/communicate.html#why-communication-matters",
+    "title": "Communicate",
+    "section": "Why Communication Matters",
+    "text": "Why Communication Matters\nR4DS argues that communication is part of data science.\nData science is not:\nData → Analysis → Done\nIt is:\nData → Analysis → Communication → Impact\n\nAsk: “If nobody understands your work, did the analysis accomplish its goal?”"
+  },
+  {
     "objectID": "presentations/DataScience/communicate.html#three-audiences-for-quarto",
     "href": "presentations/DataScience/communicate.html#three-audiences-for-quarto",
     "title": "Communicate",
