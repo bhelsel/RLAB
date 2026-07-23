@@ -3463,5 +3463,194 @@
     "title": "Program",
     "section": "Tier 3: Apply It to Many Values with purrr",
     "text": "Tier 3: Apply It to Many Values with purrr\nReal study data isn’t a single step count – it’s a whole column of them, one per participant. Instead of calling steps_to_miles() once per person, use purrr::map_dbl() to apply it to an entire vector at once, the same way you saw with median() and mean() in Chapter 26.\n\ndaily_steps &lt;- c(4200, 6100, 8000, 9800, 11500)\n\n# your code here\n# use purrr::map_dbl() to apply steps_to_miles() to every value in daily_steps\n\n# or, inside a data frame:\ntibble::tibble(steps = daily_steps) |&gt;\n  dplyr::mutate(\n    miles = # your code here\n  )\n\nStretch goal: try passing digits = 3 as an extra argument to your map_dbl() call – extra arguments after the function name get forwarded to steps_to_miles() for every value, the same forwarding idea as ... from Chapter 25."
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#why-communication-matters",
+    "href": "presentations/DataScience/communicate.html#why-communication-matters",
+    "title": "Communicate",
+    "section": "Why Communication Matters",
+    "text": "Why Communication Matters\nR4DS argues that communication is part of data science.\nData science is not:\nData → Analysis → Done\nIt is:\nData → Analysis → Communication → Impact\n\nAsk: “If nobody understands your work, did the analysis accomplish its goal?”"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#learning-objectives",
+    "href": "presentations/DataScience/communicate.html#learning-objectives",
+    "title": "Communicate",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of today’s session, you should be able to understand:\n\nhow Quarto documents are structured\nhow code and narrative work together\nhow to render documents into polished outputs\nthe foundations for reproducible research communication\n\n\nKey teaching goal: Communication and reproducibility, not memorization of syntax. Many participants will remember concepts better than commands."
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#research-communication",
+    "href": "presentations/DataScience/communicate.html#research-communication",
+    "title": "Communicate",
+    "section": "Research Communication",
+    "text": "Research Communication\n\n\nHow many of you have:\n\ncopied a figure from R into PowerPoint?\ncopied a table into Word?\nhad to recreate a figure months later?\nstruggled to remember how results were generated? Spend 2-3 minutes discussing. This creates buy-in for reproducibility."
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#communicate",
+    "href": "presentations/DataScience/communicate.html#communicate",
+    "title": "Communicate",
+    "section": "Communicate",
+    "text": "Communicate\n\nChapters 28-29\n\n\n\nChapter\nTopic\n\n\n\n\n28\nQuarto\n\n\n29\nQuarto formats\n\n\n\n\nR4DS argues that communication is part of data science.\nData science is not:\nData → Analysis → Done\nIt is:\nData → Analysis → Communication → Impact Lucky for you, this section focuses on the technial mechanics of Communication, not the act of conveying your thoughts and ideas to other people. That’s up to you and your skills. How many of you have:\n\ncopied a figure from R into PowerPoint?\ncopied a table into Word?\nhad to recreate a figure months later?\nstruggled to remember how results were generated? Spend 2-3 minutes discussing. This creates buy-in for reproducibility. Ask: “If nobody understands your work, did the analysis accomplish its goal?”"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#communicate---chapters-28-29",
+    "href": "presentations/DataScience/communicate.html#communicate---chapters-28-29",
+    "title": "Communicate",
+    "section": "Communicate - Chapters 28-29",
+    "text": "Communicate - Chapters 28-29\n\n\n\n\nChapter\nTopic\n\n\n\n\n28\nQuarto\n\n\n29\nQuarto formats\n\n\n\n\nLucky for you, this section focuses on the technial mechanics of Communication, not the act of conveying your thoughts and ideas to other people. That’s up to you and your skills. How many of you have:\n\ncopied a figure from R into PowerPoint?\ncopied a table into Word?\nhad to recreate a figure months later?\nstruggled to remember how results were generated? Spend 2-3 minutes discussing. This creates buy-in for reproducibility."
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#chapter-28-quarto",
+    "href": "presentations/DataScience/communicate.html#chapter-28-quarto",
+    "title": "Communicate",
+    "section": "Chapter 28: Quarto",
+    "text": "Chapter 28: Quarto"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#basics",
+    "href": "presentations/DataScience/communicate.html#basics",
+    "title": "Communicate",
+    "section": "Basics",
+    "text": "Basics\nWhat is Quarto? A publishing system for creating reproducible documents by combining code, text, and visualizations."
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#code-chunks",
+    "href": "presentations/DataScience/communicate.html#code-chunks",
+    "title": "Communicate",
+    "section": "Code Chunks",
+    "text": "Code Chunks\nChunk Labels\n#| label: demographics-summary\nChunk Options\n#| echo: false\nHide code.\n#| warning: false\n#| message: false\nGlobal Options\nknitr::opts_chunk$set(\n  echo = FALSE,\n  warning = FALSE,\n  message = FALSE\n)\n\nInline Code Matters because you receive automatic output instead of needing to handwrite or manualing provide updates."
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#editors",
+    "href": "presentations/DataScience/communicate.html#editors",
+    "title": "Communicate",
+    "section": "Editors",
+    "text": "Editors\nQuarto provides two ways to edit your documents: the Visual Editor for a word processor-like experience and the Source Editor for writing directly in Markdown. Both produce the same final document, so you can choose the workflow that best fits your needs.\nVisual \nSource\n## Text formatting\n\n*italic* **bold** ~~strikeout~~ `code`\n\nsuperscript^2^ subscript~2~\n\n[underline]{.underline} [small caps]{.smallcaps}\n\n## Headings\n\n# 1st Level Header\n\n## 2nd Level Header\n\n### 3rd Level Header\n\n## Lists\n\n-   Bulleted list item 1\n\n-   Item 2\n\n    -   Item 2a\n\n    -   Item 2b\n\n1.  Numbered list item 1\n\n2.  Item 2.\n    The numbers are incremented automatically in the output.\n\n## Links and images\n\n&lt;http://example.com&gt;\n\n[linked phrase](http://example.com)\n\n![optional caption text](quarto.png){fig-alt=\"Quarto logo and the word quarto spelled in small case letters\"}\n\n## Tables\n\n| First Header | Second Header |\n|--------------|---------------|\n| Content Cell | Content Cell  |\n| Content Cell | Content Cell  |\nMarkdown and HTML\n\nMarkdown is simpler, easier to read, and ideal for collaboration and version control.\nHTML allows formatting that Markdown doesn’t support, such as more detailed styling, but it’s more verbose and harder to edit manually.\n\n\n\n\nFormatting\nMarkdown\nHTML\n\n\n\n\nBold\n**text**\n&lt;strong&gt;text&lt;/strong&gt;\n\n\nItalic\n*text*\n&lt;em&gt;text&lt;/em&gt;\n\n\nHeading\n## Heading\n&lt;h2&gt;Heading&lt;/h2&gt;\n\n\n\n\nThe Source Editor always displays the document as text. You can store formatting using either concise Markdown syntax or more detailed HTML tags, depending on your editing preferences and formatting needs."
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#lists",
+    "href": "presentations/DataScience/communicate.html#lists",
+    "title": "Communicate",
+    "section": "Lists",
+    "text": "Lists\n- item 1\n- item 2\nand\n1. first\n2. second"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#links",
+    "href": "presentations/DataScience/communicate.html#links",
+    "title": "Communicate",
+    "section": "Links",
+    "text": "Links\n[Posit](https://posit.co)"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#code-chunks-1",
+    "href": "presentations/DataScience/communicate.html#code-chunks-1",
+    "title": "Communicate",
+    "section": "Code Chunks",
+    "text": "Code Chunks\nChunk Labels\n#| label: demographics-summary\nChunk Options\n#| echo: false\nHide code.\n#| warning: false\n#| message: false\nGlobal Options\nknitr::opts_chunk$set(\n  echo = FALSE,\n  warning = FALSE,\n  message = FALSE\n)\n\nInline Code Matters because you receive automatic output instead of needing to handwrite or manualing provide updates."
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#figures-and-tables",
+    "href": "presentations/DataScience/communicate.html#figures-and-tables",
+    "title": "Communicate",
+    "section": "Figures and Tables",
+    "text": "Figures and Tables\nInsert example of figure and table here provide the following examples: set eval to false - code set eval to true - name plot\n\n\nWhy figures/tables in Quarto? Traditional:\n\ncreate\nsave\ncopy\npaste\n\nQuarto:\n\nupdate code\nrender"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#yaml-1",
+    "href": "presentations/DataScience/communicate.html#yaml-1",
+    "title": "Communicate",
+    "section": "YAML",
+    "text": "YAML\nOverview incorporate this section from mb’s notes\nStyling Extensions\nCitations"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#common-errors",
+    "href": "presentations/DataScience/communicate.html#common-errors",
+    "title": "Communicate",
+    "section": "Common Errors",
+    "text": "Common Errors\n\nmissing package\nYAML spacing\nmissing parentheses\nunclosed chunks\n\nDebugging Advice\n\nRead the error\nFind the line\nFix one thing\nRender again"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#chapter-28-summary",
+    "href": "presentations/DataScience/communicate.html#chapter-28-summary",
+    "title": "Communicate",
+    "section": "Chapter 28 Summary",
+    "text": "Chapter 28 Summary"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#output-options",
+    "href": "presentations/DataScience/communicate.html#output-options",
+    "title": "Communicate",
+    "section": "Output options",
+    "text": "Output options\nDocuments\n\npdf - makes a PDF with LaTeX\ndocx - for Microsoft Word\n\nPresentations\n\nrevealjs - HTML presentation\npptx - Powerpoint presentation"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#interactivity",
+    "href": "presentations/DataScience/communicate.html#interactivity",
+    "title": "Communicate",
+    "section": "Interactivity",
+    "text": "Interactivity\nShiny apps"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#chapter-29-summary",
+    "href": "presentations/DataScience/communicate.html#chapter-29-summary",
+    "title": "Communicate",
+    "section": "Chapter 29 Summary",
+    "text": "Chapter 29 Summary\nPotential uses:\n\nstudy reports\nMRI summaries\ngrant updates\nrecruitment tracking\nconference presentations\n\n\nHighligh Brian’s Disclosure report Give an example of a use case for my lab. Ask: What other use cases can you think of?"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#best-practices",
+    "href": "presentations/DataScience/communicate.html#best-practices",
+    "title": "Communicate",
+    "section": "Best Practices",
+    "text": "Best Practices\nIt is best practice to save and review often.\n\nrender often\nkeep files organized\nwrite narrative\ndocument decisions\nembrace reproducibility"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#wrap-up",
+    "href": "presentations/DataScience/communicate.html#wrap-up",
+    "title": "Communicate",
+    "section": "Wrap-Up",
+    "text": "Wrap-Up\nQuarto helps us:\n\ncommunicate\nreproduce\nautomate\ncollaborate\npublish\n\nNow let’s build a Quarto presentation."
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#troubleshooting",
+    "href": "presentations/DataScience/communicate.html#troubleshooting",
+    "title": "Communicate",
+    "section": "Troubleshooting",
+    "text": "Troubleshooting\nCommon errors include:\n\nmissing package\nYAML spacing\nmissing parentheses\nunclosed chunks\n\n\n\n\n\n\n\nTip\n\n\nUseful debugging advice includes:\n\nRead the error\nFind the line\nFix one thing\nRender again"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#headings",
+    "href": "presentations/DataScience/communicate.html#headings",
+    "title": "Communicate",
+    "section": "Headings",
+    "text": "Headings"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#nd-level-header",
+    "href": "presentations/DataScience/communicate.html#nd-level-header",
+    "title": "Communicate",
+    "section": "2nd Level Header",
+    "text": "2nd Level Header\n3rd Level Header"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#links-and-images",
+    "href": "presentations/DataScience/communicate.html#links-and-images",
+    "title": "Communicate",
+    "section": "Links and images",
+    "text": "Links and images\nhttp://example.com\nlinked phrase\n\noptional caption text"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#tables",
+    "href": "presentations/DataScience/communicate.html#tables",
+    "title": "Communicate",
+    "section": "Tables",
+    "text": "Tables\n\n\n\nFirst Header\nSecond Header\n\n\n\n\nContent Cell\nContent Cell\n\n\nContent Cell\nContent Cell\n\n\n\n\n-Diff btwn html and markdown\n\n| Formatting | Markdown| HTML |\n|--------------|---------------|---------------|\n| Bold | **text**  | &lt;strong&gt;text&lt;/strong&gt; |\n| Italic | *text*  | &lt;em&gt;text&lt;/em&gt; |\n| Heading | ## Heading | &lt;h2&gt;Heading&lt;/h2&gt; |\n\n\n## Lists\n\n```markdown\n- item 1\n- item 2\nand\n1. first\n2. second"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#yaml",
+    "href": "presentations/DataScience/communicate.html#yaml",
+    "title": "Communicate",
+    "section": "YAML",
+    "text": "YAML\nOverview incorporate this section from mb’s notes\nStyling Extensions\nCitations"
   }
 ]

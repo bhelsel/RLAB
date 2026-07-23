@@ -24,13 +24,14 @@ execute:
   freeze: auto
 ---
 
-## Instructor Notes
+## Learning Objectives
 
-This deck is designed for:
-- 45-minute lecture
-- 45-minute hands-on workshop
-- Mixed audience (beginner to advanced researchers)
-- Brain health and health sciences examples
+By the end of today's session, you should be able to understand:
+
+- how Quarto documents are structured
+- how code and narrative work together
+- how to render documents into polished outputs
+- the foundations for reproducible research communication
 
 ::: notes
 Key teaching goal: Communication and reproducibility, not memorization of syntax.
@@ -38,23 +39,20 @@ Many participants will remember concepts better than commands.
 :::
 
 
-## Opening Question
+## Communicate 
+ 
 
-How many of you have:
+<img src="https://r4ds.hadley.nz/diagrams/data-science/communicate.png"/>
 
-- copied a figure from R into PowerPoint?
-- copied a table into Word?
-- had to recreate a figure months later?
-- struggled to remember how results were generated?
+  **Chapters 28-29**
+
+| Chapter | Topic |
+|----------|-------|
+| 28 | Quarto |
+| 29 | Quarto formats |
+
 
 ::: notes
-Spend 2-3 minutes discussing.
-This creates buy-in for reproducibility.
-:::
-
-
-## Why Communication Matters
-
 R4DS argues that communication is part of data science.
 
 Data science is not:
@@ -64,239 +62,107 @@ Data → Analysis → Done
 It is:
 
 Data → Analysis → Communication → Impact
+Lucky for you, this section focuses on the technial mechanics of Communication, not the act of conveying your thoughts and ideas to other people. That's up to you and your skills. 
+How many of you have:
 
-::: notes
+- copied a figure from R into PowerPoint?
+- copied a table into Word?
+- had to recreate a figure months later?
+- struggled to remember how results were generated?
+Spend 2-3 minutes discussing.
+This creates buy-in for reproducibility.
 Ask: "If nobody understands your work, did the analysis accomplish its goal?"
 :::
 
 
-## Three Audiences for Quarto
+# Chapter 28: Quarto
 
-According to R4DS:
+## Basics
 
-1. Decision makers
-2. Collaborators
-3. Future you
+**What is Quarto?**
+A publishing system for creating reproducible documents by combining code, text, and visualizations.
 
-
-## Decision Makers
-
-Need:
-
-- conclusions
-- recommendations
-- key findings
-
-Usually do NOT need:
-
-- every line of code
-- every model output
+Add basic structure here
 
 ::: notes
-Examples:
-Department chairs, grant reviewers, clinicians, leadership.
+
 :::
 
 
-## Collaborators
+## Editors
 
-Need:
+Quarto provides two ways to edit your documents: the Visual Editor for a word processor-like experience and the Source Editor for writing directly in Markdown. Both produce the same final document, so you can choose the workflow that best fits your needs.
 
-- code
-- methods
-- assumptions
-- outputs
-
-Goal: transparency.
+**Visual**
+<img src="https://r4ds.hadley.nz/quarto/quarto-visual-editor.png"/>
 
 
-## Future You
-
-Perhaps the most important audience.
-
-Questions future-you asks:
-
-- What did I do?
-- Why did I do it?
-- Can I reproduce it?
-
-## Brain Health Example
-
-Imagine updating:
-
-- recruitment reports
-- cognitive outcomes
-- MRI summaries
-- grant progress reports
-
-Manual workflow:
-
-- find figure
-- recreate figure
-- update figure
-
-Reproducible workflow:
-
-- rerun code
-- render report
-
-
-# What is Quarto?
-
-Quarto combines:
-
-- narrative
-- code
-- figures
-- tables
-- citations
-
-into a single document.
-
-
-# Why Quarto?
-
-Benefits:
-
-- reproducibility
-- transparency
-- efficiency
-- flexibility
-
-
-# One Source, Many Outputs
-
-A single `.qmd` file can create:
-
-- HTML
-- PDF
-- Word
-- presentations
-- websites
-- books
-
-::: notes
-This idea becomes important in Chapter 29.
-:::
-
-
-# Anatomy of a Quarto File
-
-Three pieces:
-
-1. YAML
-2. Markdown
-3. Code chunks
-
-
-# YAML
-
-Think of YAML as settings.
-
-```yaml
----
-title: "Brain Health Report"
-author: "Morgan Brucks"
-format: html
----
-```
-
-# Markdown
-
-Think of markdown as storytelling.
-
-```markdown
-# Results
-
-## Recruitment
-
-**Important finding**
-```
-
-# Code Chunks
-
-Think of code chunks as analysis.
+**Source**
 
 ````markdown
-```{r}
-summary(mtcars)
-```
+## Text formatting
+
+*italic* **bold** ~~strikeout~~ `code`
+
+superscript^2^ subscript~2~
+
+[underline]{.underline} [small caps]{.smallcaps}
+
+## Headings
+
+# 1st Level Header
+
+## 2nd Level Header
+
+### 3rd Level Header
+
+## Lists
+
+-   Bulleted list item 1
+
+-   Item 2
+
+    -   Item 2a
+
+    -   Item 2b
+
+1.  Numbered list item 1
+
+2.  Item 2.
+    The numbers are incremented automatically in the output.
+
+## Links and images
+
+<http://example.com>
+
+[linked phrase](http://example.com)
+
+![optional caption text](quarto.png){fig-alt="Quarto logo and the word quarto spelled in small case letters"}
+
+## Tables
+
+| First Header | Second Header |
+|--------------|---------------|
+| Content Cell | Content Cell  |
+| Content Cell | Content Cell  |
 ````
 
-# Rendering Workflow
+**Markdown and HTML**
 
-```text
-.qmd
- ↓
-knitr
- ↓
-markdown
- ↓
-pandoc
- ↓
-final output
-```
+- Markdown is simpler, easier to read, and ideal for collaboration and version control.
+- HTML allows formatting that Markdown doesn't support, such as more detailed styling, but it's more verbose and harder to edit manually.
 
-::: notes
-Many people click Render for years without understanding this workflow.
+| Formatting | Markdown| HTML |
+|--------------|---------------|---------------|
+| Bold | `**text**`  | `<strong>text</strong>` |
+| Italic | `*text*`  | `<em>text</em>` |
+| Heading | `## Heading` | `<h2>Heading</h2>` |
+
+::: {.highlight-box}
+The Source Editor always displays the document as text. You can store formatting using either concise Markdown syntax or more detailed HTML tags, depending on your editing preferences and formatting needs.
 :::
 
-
-# Demo #1
-
-Open a blank Quarto document.
-
-Show:
-
-- YAML
-- markdown
-- chunk
-- Render button
-
-::: notes
-Switch to RStudio here.
-5 minutes.
-:::
-
-
-# Visual Editor
-
-Advantages:
-
-- beginner friendly
-- Word-like
-- point and click
-
-# Source Editor
-
-Advantages:
-
-- faster
-- more flexible
-- easier debugging
-
-
-# Markdown Basics
-
-Headers:
-
-```markdown
-# Header
-## Subheader
-### Smaller Header
-```
-
-Text Formatting
-
-```markdown
-**bold**
-
-*italic*
-
-`code`
-```
-
-# Lists
+## Lists
 
 ```markdown
 - item 1
@@ -310,49 +176,21 @@ and
 2. second
 ```
 
-# Links
+## Links
 
 ```markdown
 [Posit](https://posit.co)
 ```
 
-# Why Markdown?
+## Code Chunks
 
-Advantages:
-
-- simple
-- readable
-- portable
-- fast
-
-# Code Chunks
-
-Basic example:
-
-```{r}
-summary(cars)
-```
-
-# Running Code
-
-```{r}
-summary(mtcars)
-```
-
-
-# Chunk Labels
+**Chunk Labels**
 
 ```r
 #| label: demographics-summary
 ```
 
-Benefits:
-
-- organization
-- references
-- navigation
-
-# Chunk Options
+**Chunk Options**
 
 ```r
 #| echo: false
@@ -365,8 +203,7 @@ Hide code.
 #| message: false
 ```
 
-
-# Global Options
+**Global Options**
 
 ```r
 knitr::opts_chunk$set(
@@ -376,31 +213,17 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Inline Code
-
-Source:
-
-```markdown
-There are `r nrow(mtcars)` observations.
-```
-
-Result:
-
-There are `r nrow(mtcars)` observations.
+::: notes
+Inline Code Matters because you receive automatic output instead of needing to handwrite or manualing provide updates. 
+:::
 
 
-# Why Inline Code Matters
+## Figures and Tables
 
-Examples:
-
-- sample size
-- mean age
-- enrollment counts
-- dates
-
-Automatically updates.
-
-# Figures
+Insert example of figure and table here
+provide the following examples:
+set eval to false - code
+set eval to true - name plot
 
 ```{r}
 library(ggplot2)
@@ -409,8 +232,8 @@ ggplot(mpg, aes(class)) +
   geom_bar()
 ```
 
-# Why Figures in Quarto?
-
+::: notes
+Why figures/tables in Quarto? 
 Traditional:
 
 - create
@@ -422,103 +245,65 @@ Quarto:
 
 - update code
 - render
+:::
 
+## YAML
 
-# Tables
+**Overview**
+incorporate this section from mb's notes
 
-```{r}
-knitr::kable(head(mtcars))
-```
+**Styling Extensions**
 
-# Citations
+**Citations**
 
-Chapter 28 introduces references.
+## Troubleshooting
 
-YAML:
-
-```yaml
-bibliography: references.bib
-```
-
-# Common Errors
+Common errors include:
 
 - missing package
 - YAML spacing
 - missing parentheses
 - unclosed chunks
 
-Debugging Advice
+::: {.callout-tip}
+Useful debugging advice includes:
 
 1. Read the error
 2. Find the line
 3. Fix one thing
 4. Render again
+:::
+
+## Chapter 28 Summary
 
 
 # Chapter 29: Formats
 
+::: notes
 Core idea:
 
 One source → many outputs
+:::
+
+## Output options
+
+**Documents**
+
+- pdf - makes a PDF with LaTeX
+- docx - for Microsoft Word
+
+**Presentations**
+
+- revealjs - HTML presentation 
+- pptx - Powerpoint presentation
 
 
-# HTML
+## Interactivity
 
-```yaml
-format: html
-```
-
-Best for:
-
-- interactivity
-- online sharing
+**Shiny apps**
 
 
-# PDF
-
-```yaml
-format: pdf
-```
-
-Best for:
-
-- printing
-- manuscripts
-
-# Word
-
-```yaml
-format: docx
-```
-
-Best for:
-
-- tracked changes
-- collaborators
-
-# RevealJS
-
-```yaml
-format: revealjs
-```
-
-Best for:
-
-- teaching
-- conference talks
-- lab meetings
-
-
-# Multiple Formats
-
-```yaml
-format:
-  html: default
-  pdf: default
-  docx: default
-```
-
-# Quarto Discussion
+## Chapter 29 Summary
 
 Potential uses:
 
@@ -534,8 +319,9 @@ Give an example of a use case for my lab.
 Ask: What other use cases can you think of?
 :::
 
+## Best Practices
 
-# Best Practices
+It is best practice to save and review often.
 
 - render often
 - keep files organized
@@ -544,69 +330,7 @@ Ask: What other use cases can you think of?
 - embrace reproducibility
 
 
-# Transition to Workshop
-
-Now let's build a Quarto presentation.
-
-
-# Workshop Activity 1
-
-Create a RevealJS presentation.
-
-Tasks:
-
-- render
-- change title
-- change theme
-
-
-# Workshop Activity 2
-
-Create slides with:
-
-- heading
-- bold text
-- italic text
-- bullets
-
-
-# Workshop Activity 3
-
-Add:
-
-```{r}
-summary(cars)
-```
-
-# Workshop Activity 4
-
-Add a plot.
-
-```{r}
-library(ggplot2)
-
-ggplot(mpg, aes(class)) +
-  geom_bar()
-```
-
-# Workshop Activity 5
-
-Create:
-
-- title
-- plot
-- table
-- interpretation sentence
-
-# Reflection
-
-Discuss:
-
-- What surprised you?
-- What seems useful?
-- Where could you use Quarto?
-
-# Final Takeaways
+## Wrap-Up
 
 Quarto helps us:
 
@@ -616,4 +340,11 @@ Quarto helps us:
 - collaborate
 - publish
 
-# Questions
+Now let's build a Quarto presentation.
+
+# Time to Practice!
+
+
+
+
+
