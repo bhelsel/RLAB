@@ -3,7 +3,6 @@ title: "R for Data Science"
 listing:
   contents: 
     - DataScience
-    - "!DataScience/communicate.qmd"
   sort: "date asc"
   type: default
   categories: true
