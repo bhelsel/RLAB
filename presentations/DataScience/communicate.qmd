@@ -82,10 +82,42 @@ Ask: "If nobody understands your work, did the analysis accomplish its goal?"
 **What is Quarto?**
 A publishing system for creating reproducible documents by combining code, text, and visualizations.
 
-Add basic structure here
+**Every Quarto document contains four building blocks:**
 
-::: notes
+- **YAML** – document settings (title, author, output)
+- **Markdown** – narrative text
+- **Code chunks** – R code that performs analyses
+- **Rendered output** – tables, figures, and results
 
+Example:
+
+````markdown
+```text
+---
+title: "Exercise Intervention Results"
+author: "Morgan Brucks"
+format: html
+---
+
+## Participant Characteristics
+
+This report summarizes baseline demographics.
+```{r}
+#| echo: true
+#| eval: false
+summary(demographics)
+```
+````
+
+
+
+::: {.callout-note}
+Think of Quarto as a recipe:
+
+- YAML tells Quarto what to make.
+- Markdown explains the story.
+- Code performs the analysis.
+- Rendering produces the finished document.
 :::
 
 
@@ -147,65 +179,91 @@ superscript^2^ subscript~2~
 | Content Cell | Content Cell  |
 ````
 
-**Markdown and HTML**
+## Markdown vs. HTML
 
-- Markdown is simpler, easier to read, and ideal for collaboration and version control.
-- HTML allows formatting that Markdown doesn't support, such as more detailed styling, but it's more verbose and harder to edit manually.
+Both Markdown and HTML can be used to format Quarto documents. **Markdown is the preferred syntax for most writing tasks because it is concise, readable, and easy to maintain.** HTML is available when you need additional formatting or customization.
 
-| Formatting | Markdown| HTML |
-|--------------|---------------|---------------|
-| Bold | `**text**`  | `<strong>text</strong>` |
-| Italic | `*text*`  | `<em>text</em>` |
-| Heading | `## Heading` | `<h2>Heading</h2>` |
+| Feature | Markdown | HTML |
+|:--------|:---------|:-----|
+| **Bold** | `**text**` | `<strong>text</strong>` |
+| **Italic** | `*text*` | `<em>text</em>` |
+| **Heading** | `## Heading` | `<h2>Heading</h2>` |
+| **Bullet List** | `- Item` | `<ul><li>Item</li></ul>` |
+| **Numbered List** | `1. Item` | `<ol><li>Item</li></ol>` |
+| **Link** | `[Posit](https://posit.co)` | `<a href="https://posit.co">Posit</a>` |
+| **Image** | `![Logo](logo.png)` | `<img src="logo.png">` |
 
-::: {.highlight-box}
-The Source Editor always displays the document as text. You can store formatting using either concise Markdown syntax or more detailed HTML tags, depending on your editing preferences and formatting needs.
+
+
+**Example: Custom HTML Styling**
+
+```html
+<span style="color:#0055A4; font-weight:bold;">
+Important Result
+</span>
+```
+
+Markdown cannot easily apply custom colors or styles, but HTML can.
+
+
+::: {.callout-note title="Hadley's Philosophy"}
+
+**Use Markdown for almost everything.** It is easier to read, write, and collaborate on.
+
+Use **HTML only when you need formatting that Markdown doesn't support**, such as custom styling, colors, layouts, or embedded web content.
+
 :::
 
-## Lists
+::: {.callout-tip title="Take-Home Message"}
 
-```markdown
-- item 1
-- item 2
-```
+You do **not** need to learn HTML to be productive in Quarto. Markdown covers the vast majority of everyday writing tasks, while HTML is there when you need more control over the appearance of your document.
 
-and
-
-```markdown
-1. first
-2. second
-```
-
-## Links
-
-```markdown
-[Posit](https://posit.co)
-```
+:::
 
 ## Code Chunks
 
+Code chunks execute your analysis and insert the results directly into your document. Chunk labels and options help organize your work and control what appears in the final output.
+
 **Chunk Labels**
 
-```r
-#| label: demographics-summary
+Meaningful labels make documents easier to navigate and troubleshoot.
+
+```{r}
+#| echo: false
+
+library(ggplot2)
+
+ggplot(diamonds, aes(carat, price)) +
+  geom_point(alpha = 0.1)
 ```
 
 **Chunk Options**
 
-```r
+Chunk options control **what your audience sees**, not what your code does.
+
+| Option | Purpose |
+|---------|---------|
+| `echo: false` | Hide code, show results |
+| `eval: false` | Show code, don't run it |
+| `warning: false` | Hide warnings |
+| `message: false` | Hide package messages |
+
+Example:
+
+```{r}
+#| label: diamonds-summary
 #| echo: false
-```
-
-Hide code.
-
-```r
 #| warning: false
 #| message: false
+
+summary(diamonds)
 ```
 
 **Global Options**
 
-```r
+Instead of repeating options in every chunk, set them once at the beginning of your document.
+
+```{r}
 knitr::opts_chunk$set(
   echo = FALSE,
   warning = FALSE,
@@ -213,8 +271,46 @@ knitr::opts_chunk$set(
 )
 ```
 
+::: {.callout-note}
+Chunk options affect a **single chunk**, while global options become the **default for every chunk** in the document.
+:::
+
+**Inline Code**
+
+Inline code inserts **individual values** directly into your narrative.
+
+Instead of typing:
+
+> We enrolled **53940** participants.
+
+Use:
+
+```markdown
+We enrolled `r nrow(diamonds)` participants.
+```
+
+which renders as:
+
+> We enrolled **53940** participants.
+
+Another example:
+
+```markdown
+The average diamond price was
+`r scales::dollar(mean(diamonds$price))`.
+```
+
+renders as:
+
+> The average diamond price was **$3,933**.
+
 ::: notes
-Inline Code Matters because you receive automatic output instead of needing to handwrite or manualing provide updates. 
+**Why use inline code?**
+
+If your data change, your text updates automatically the next time you render the document. This eliminates copy-and-paste errors and helps keep reports reproducible.
+
+How many of you have ever updated a figure but forgotten to update the number in the paragraph above it?
+Inline code solves exactly that problem.
 :::
 
 
