@@ -620,21 +620,21 @@
     "href": "presentations/DataScience/communicate.html#learning-objectives",
     "title": "Communicate",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\nBy the end of today’s session, you should be able to understand:\n\nhow Quarto documents are structured\nhow code and narrative work together\nhow to render documents into polished outputs\nthe foundations for reproducible research communication\n\n\nKey teaching goal: Communication and reproducibility, not memorization of syntax. Many participants will remember concepts better than commands."
+    "text": "Learning Objectives\nBy the end of today’s session, you should be able to:\n\nunderstand how Quarto connects text, code, and results\nuse Markdown, code chunks, and YAML to structure reproducible documents\ngenerate and customize figures, tables, citations, and outputs\nrecognize how Quarto supports reproducible research communication\n\n\nKey teaching goal: Communication and reproducibility, not memorization of syntax.\nParticipants do not need to memorize every option or command. The goal is understanding the workflow and knowing where to find additional tools when needed.\nEmphasize:\nWrite → Analyze → Render → Communicate"
   },
   {
     "objectID": "presentations/DataScience/communicate.html#communicate",
     "href": "presentations/DataScience/communicate.html#communicate",
     "title": "Communicate",
     "section": "Communicate",
-    "text": "Communicate\n\nChapters 28-29\n\n\n\nChapter\nTopic\n\n\n\n\n28\nQuarto\n\n\n29\nQuarto formats\n\n\n\n\nR4DS argues that communication is part of data science.\nData science is not:\nData → Analysis → Done\nIt is:\nData → Analysis → Communication → Impact Lucky for you, this section focuses on the technial mechanics of Communication, not the act of conveying your thoughts and ideas to other people. That’s up to you and your skills. How many of you have:\n\ncopied a figure from R into PowerPoint?\ncopied a table into Word?\nhad to recreate a figure months later?\nstruggled to remember how results were generated? Spend 2-3 minutes discussing. This creates buy-in for reproducibility. Ask: “If nobody understands your work, did the analysis accomplish its goal?”"
+    "text": "Communicate\n\nR4DS Chapters 28-29\n\n\n\nChapter\nFocus\n\n\n\n\n28\nBuilding reproducible Quarto documents\n\n\n29\nCreating different outputs and formats\n\n\n\n\nR4DS argues that communication is an essential part of the data science workflow.\nData science is not:\nData → Analysis → Done\nInstead:\nData → Analysis → Communication → Impact\nThe goal of this section is not learning how to communicate ideas effectively. That comes from practice and experience.\nInstead, we are focusing on the technical tools that allow us to communicate our analyses reproducibly.\nAsk:\n\nHow many of you have copied a figure from R into PowerPoint?\nHow many have copied a table into Word?\nHow many have had to recreate a figure months later?\nHow many have struggled to remember how a result was generated?\n\nQuarto helps address these problems by keeping the analysis and communication connected.\nKey question:\n“If nobody can understand or reproduce your work, did the analysis accomplish its goal?”"
   },
   {
     "objectID": "presentations/DataScience/communicate.html#basics",
     "href": "presentations/DataScience/communicate.html#basics",
     "title": "Communicate",
     "section": "Basics",
-    "text": "Basics\nWhat is Quarto? A publishing system for creating reproducible documents by combining code, text, and visualizations.\nEvery Quarto document contains four building blocks:\n\nYAML – document settings (title, author, output)\nMarkdown – narrative text\nCode chunks – R code that performs analyses\nRendered output – tables, figures, and results\n\nExample:\n```text\n---\ntitle: \"Exercise Intervention Results\"\nauthor: \"Morgan Brucks\"\nformat: html\n---\n\n## Participant Characteristics\n\nThis report summarizes baseline demographics.\n\n::: {.cell}\n\n```{.r .cell-code}\nsummary(demographics)\n```\n:::\n\n\n\n\n\n\nNote\n\n\nThink of Quarto as a recipe:\n\nYAML tells Quarto what to make.\nMarkdown explains the story.\nCode performs the analysis.\nRendering produces the finished document."
+    "text": "Basics\nWhat is Quarto? A publishing system for creating reproducible documents by combining code, text, and visualizations.\nEvery Quarto document contains four building blocks:\n\nYAML – document settings (title, author, output)\nMarkdown – narrative text\nCode chunks – R code that performs analyses\nRendered output – tables, figures, and results\n\nExample:\n```text\n---\ntitle: \"Exercise Intervention Results\"\nauthor: \"Morgan Brucks\"\nformat: html\n---\n\n## Participant Characteristics\n\nThis report summarizes baseline demographics.\n\n::: {.cell}\n\n```{.r .cell-code}\nsummary(demographics)\n```\n:::\n\n\n\n\n\n\nNote\n\n\nThink of Quarto as a recipe:\n\nYAML tells Quarto what to make.\nMarkdown explains the steps to make the recipe.\nCode performs the steps or analysis.\nRendering produces the finished meal or document."
   },
   {
     "objectID": "presentations/DataScience/communicate.html#editors",
@@ -655,70 +655,98 @@
     "href": "presentations/DataScience/communicate.html#code-chunks",
     "title": "Communicate",
     "section": "Code Chunks",
-    "text": "Code Chunks\nCode chunks execute your analysis and insert the results directly into your document. Chunk labels and options help organize your work and control what appears in the final output.\nChunk Labels\nMeaningful labels make documents easier to navigate and troubleshoot.\n\nChunk Options\nChunk options control what your audience sees, not what your code does.\n\n\n\nOption\nPurpose\n\n\n\n\necho: false\nHide code, show results\n\n\neval: false\nShow code, don’t run it\n\n\nwarning: false\nHide warnings\n\n\nmessage: false\nHide package messages\n\n\n\nExample:\n\n\n     carat               cut        color        clarity          depth      \n Min.   :0.2000   Fair     : 1610   D: 6775   SI1    :13065   Min.   :43.00  \n 1st Qu.:0.4000   Good     : 4906   E: 9797   VS2    :12258   1st Qu.:61.00  \n Median :0.7000   Very Good:12082   F: 9542   SI2    : 9194   Median :61.80  \n Mean   :0.7979   Premium  :13791   G:11292   VS1    : 8171   Mean   :61.75  \n 3rd Qu.:1.0400   Ideal    :21551   H: 8304   VVS2   : 5066   3rd Qu.:62.50  \n Max.   :5.0100                     I: 5422   VVS1   : 3655   Max.   :79.00  \n                                    J: 2808   (Other): 2531                  \n     table           price             x                y         \n Min.   :43.00   Min.   :  326   Min.   : 0.000   Min.   : 0.000  \n 1st Qu.:56.00   1st Qu.:  950   1st Qu.: 4.710   1st Qu.: 4.720  \n Median :57.00   Median : 2401   Median : 5.700   Median : 5.710  \n Mean   :57.46   Mean   : 3933   Mean   : 5.731   Mean   : 5.735  \n 3rd Qu.:59.00   3rd Qu.: 5324   3rd Qu.: 6.540   3rd Qu.: 6.540  \n Max.   :95.00   Max.   :18823   Max.   :10.740   Max.   :58.900  \n                                                                  \n       z         \n Min.   : 0.000  \n 1st Qu.: 2.910  \n Median : 3.530  \n Mean   : 3.539  \n 3rd Qu.: 4.040  \n Max.   :31.800  \n                 \n\n\nGlobal Options\nInstead of repeating options in every chunk, set them once at the beginning of your document.\n\n\n\n\n\n\nNote\n\n\nChunk options affect a single chunk, while global options become the default for every chunk in the document.\n\n\n\nInline Code\nInline code inserts individual values directly into your narrative.\nInstead of typing:\n\nWe enrolled 53940 participants.\n\nUse:\nWe enrolled 53940 participants.\nwhich renders as:\n\nWe enrolled 53940 participants.\n\nAnother example:\nThe average diamond price was\n$3,932.80.\nrenders as:\n\nThe average diamond price was $3,933.\n\n\nWhy use inline code?\nIf your data change, your text updates automatically the next time you render the document. This eliminates copy-and-paste errors and helps keep reports reproducible.\nHow many of you have ever updated a figure but forgotten to update the number in the paragraph above it? Inline code solves exactly that problem."
+    "text": "Code Chunks\nCode chunks execute your analysis and insert the results directly into your document. Chunk labels and options help organize your work while controlling what appears in the final output.\nChunk Labels\nGive chunks meaningful names so they are easier to identify, troubleshoot, and reference.\n#| label: participant-demographics\nChunk Options\nChunk options control what your audience sees, not what your code does.\n\n\n\nOption\nPurpose\n\n\n\n\necho: false\nHide code, show output\n\n\neval: false\nShow code, don’t run it\n\n\nwarning: false\nHide warnings\n\n\nmessage: false\nHide package startup messages\n\n\n\n\n\n\n\n\n\nTip\n\n\nRemember:\n\necho controls whether the code is displayed.\neval controls whether the code is executed.\n\nThese options can be combined. For example, echo: true with eval: false displays the code without running it, while echo: false with eval: true runs the code but only displays the results.\n\n\n\nGlobal Options\nSet default chunk behavior once using a setup chunk.\n#| label: setup\n#| include: false\n\nknitr::opts_chunk$set(\n  echo = FALSE,\n  warning = FALSE,\n  message = FALSE\n)\n\n\n\n\n\n\nNote\n\n\nChunk options apply to a single chunk, while global options become the default for every chunk in your document.\n\n\n\nInline Code\nInline code inserts individual values directly into your narrative, helping keep reports accurate as your data change.\nThe dataset contains `` 32 `` observations.\n\nInline code is one of Quarto’s most useful features for research reporting.\nRather than manually typing values into your report, Quarto calculates them automatically every time the document is rendered.\nThis greatly reduces copy-and-paste errors and keeps text synchronized with tables and figures.\nHow many of you have ever updated a figure but forgotten to update the number in the paragraph above it? Inline code solves exactly that problem."
   },
   {
     "objectID": "presentations/DataScience/communicate.html#figures-and-tables",
     "href": "presentations/DataScience/communicate.html#figures-and-tables",
     "title": "Communicate",
     "section": "Figures and Tables",
-    "text": "Figures and Tables\nInsert example of figure and table here provide the following examples: set eval to false - code set eval to true - name plot\n\n\nWhy figures/tables in Quarto? Traditional:\n\ncreate\nsave\ncopy\npaste\n\nQuarto:\n\nupdate code\nrender"
+    "text": "Figures and Tables\nQuarto automatically creates publication-ready figures and tables directly from your analysis. Update your code, render the document, and every result stays synchronized.\n\n\nDisplay Code Only\n\nlibrary(ggplot2)\n\nggplot(mpg, aes(class)) +\n  geom_bar()\n\neval: false displays the code without running it.\n\nDisplay Figure\n\n\n\n\n\n\n\n\n\necho: false hides the code and displays only the figure.\n\nTables in Quarto\nQuarto supports several table packages depending on your desired output. Here are two of the most commonly used.\n\n\ngt\nSource\n\nlibrary(gt)\n\nmtcars |&gt;\n  head() |&gt;\n  gt() |&gt;\n  fmt_number(\n    columns = mpg,\n    decimals = 1\n  ) |&gt;\n  tab_header(\n    title = \"Vehicle Characteristics\"\n  )\n\nOutput\n\n\n\n\n\n\n\n\nVehicle Characteristics\n\n\nmpg\ncyl\ndisp\nhp\ndrat\nwt\nqsec\nvs\nam\ngear\ncarb\n\n\n\n\n21.0\n6\n160\n110\n3.90\n2.620\n16.46\n0\n1\n4\n4\n\n\n21.0\n6\n160\n110\n3.90\n2.875\n17.02\n0\n1\n4\n4\n\n\n22.8\n4\n108\n93\n3.85\n2.320\n18.61\n1\n1\n4\n1\n\n\n21.4\n6\n258\n110\n3.08\n3.215\n19.44\n1\n0\n3\n1\n\n\n18.7\n8\n360\n175\n3.15\n3.440\n17.02\n0\n0\n3\n2\n\n\n18.1\n6\n225\n105\n2.76\n3.460\n20.22\n1\n0\n3\n1\n\n\n\n\n\n\n\n\nflextable\nSource\n\nlibrary(flextable)\n\nmtcars |&gt;\n  head() |&gt;\n  flextable() |&gt;\n  colformat_num(\n    j = \"mpg\",\n    digits = 1\n  ) |&gt;\n  autofit()\n\nOutput\n\n\nmpgcyldisphpdratwtqsecvsamgearcarb21.061601103.902.62016.46014421.061601103.902.87517.02014422.84108933.852.32018.61114121.462581103.083.21519.44103118.783601753.153.44017.02003218.162251052.763.46020.221031\n\n\n\n\n\n\n\n\n\nNote\n\n\nChoosing a table package\n\ngt creates polished, publication-quality tables and works especially well for HTML reports.\nflextable is designed for Microsoft Word and PowerPoint, making it a great choice for collaborators and manuscripts.\n\n\n\n\n\nTraditional workflow:\n\nCreate figure\nSave figure\nCopy into Word or PowerPoint\nRepeat whenever the analysis changes\n\nQuarto workflow:\n\nUpdate code\nRender document\nEvery figure and table updates automatically\n\nPoint out that gt excels for HTML reports and websites, while flextable integrates especially well with Word and PowerPoint."
   },
   {
-    "objectID": "presentations/DataScience/communicate.html#yaml",
-    "href": "presentations/DataScience/communicate.html#yaml",
+    "objectID": "presentations/DataScience/communicate.html#yaml-configuring-your-document",
+    "href": "presentations/DataScience/communicate.html#yaml-configuring-your-document",
     "title": "Communicate",
-    "section": "YAML",
-    "text": "YAML\nOverview incorporate this section from mb’s notes\nStyling Extensions\nCitations"
+    "section": "YAML: Configuring Your Document",
+    "text": "YAML: Configuring Your Document\nYAML is the header section of a Quarto document that provides instructions for how your document should be created and formatted.\nThink of YAML as the configuration file for your document.\nYAML can:\n\ndefine document information\ncustomize appearance\nadd extensions and functionality\ncontrol formatting behavior\n\nExample:\n---\ntitle: \"Exercise Intervention Results\"\nauthor: \"Morgan Brucks\"\nformat: html\n---\n\n\n\n\n\n\nNote\n\n\nYAML is processed before your R code runs. It tells Quarto how to build your final document.\n\n\n\n\nIf Markdown is the content of your document and R code is the analysis, YAML is the instruction manual telling Quarto how to assemble everything."
   },
   {
-    "objectID": "presentations/DataScience/communicate.html#troubleshooting",
-    "href": "presentations/DataScience/communicate.html#troubleshooting",
+    "objectID": "presentations/DataScience/communicate.html#extending-and-styling-quarto",
+    "href": "presentations/DataScience/communicate.html#extending-and-styling-quarto",
     "title": "Communicate",
-    "section": "Troubleshooting",
-    "text": "Troubleshooting\nCommon errors include:\n\nmissing package\nYAML spacing\nmissing parentheses\nunclosed chunks\n\n\n\n\n\n\n\nTip\n\n\nUseful debugging advice includes:\n\nRead the error\nFind the line\nFix one thing\nRender again"
+    "section": "Extending and Styling Quarto",
+    "text": "Extending and Styling Quarto\nQuarto provides multiple ways to customize your documents beyond the default settings.\n\n\n\n\n\n\n\n\nTool\nPurpose\nExample Uses\n\n\n\n\nQuarto extensions\nAdd reusable functionality\ntemplates, themes, publishing workflows\n\n\nCSS\nCustomize HTML appearance\ncolors, fonts, spacing, layouts\n\n\nSCSS\nBuild advanced CSS styles\nreusable style systems\n\n\nLua filters\nModify document behavior\ncustom formatting rules\n\n\nLaTeX\nCustomize PDF output\nmanuscript formatting\n\n\n\n\n\n\n\n\n\nTip\n\n\nMost users will customize Quarto through YAML, themes, and CSS. Advanced tools like Lua filters and LaTeX provide additional control when needed."
   },
   {
-    "objectID": "presentations/DataScience/communicate.html#chapter-28-summary",
-    "href": "presentations/DataScience/communicate.html#chapter-28-summary",
+    "objectID": "presentations/DataScience/communicate.html#example-styling-with-yaml",
+    "href": "presentations/DataScience/communicate.html#example-styling-with-yaml",
     "title": "Communicate",
-    "section": "Chapter 28 Summary",
-    "text": "Chapter 28 Summary"
+    "section": "Example: Styling with YAML",
+    "text": "Example: Styling with YAML\nYAML can connect your document to themes, stylesheets, and other custom resources.\nformat:\n  html:\n    theme: cosmo\n    css: styles.css\nThis allows you to customize:\n\nfonts\ncolors\nspacing\npage appearance\ndocument branding\n\n\nYou can think of these tools as different levels of customization. YAML tells Quarto what you want. CSS changes how HTML looks. LaTeX controls PDF styling. Lua filters are for more advanced document transformations."
   },
   {
-    "objectID": "presentations/DataScience/communicate.html#output-options",
-    "href": "presentations/DataScience/communicate.html#output-options",
+    "objectID": "presentations/DataScience/communicate.html#citations-in-quarto",
+    "href": "presentations/DataScience/communicate.html#citations-in-quarto",
     "title": "Communicate",
-    "section": "Output options",
-    "text": "Output options\nDocuments\n\npdf - makes a PDF with LaTeX\ndocx - for Microsoft Word\n\nPresentations\n\nrevealjs - HTML presentation\npptx - Powerpoint presentation"
+    "section": "Citations in Quarto",
+    "text": "Citations in Quarto\nQuarto can automatically manage citations and references using a bibliography file.\nThe bibliography is connected through the YAML header:\n---\ntitle: \"Exercise Intervention Results\"\nauthor: \"Morgan Brucks\"\nformat: html\nbibliography: references.bib\ncsl: https://www.zotero.org/styles/apa\n---\n\nThe YAML header tells Quarto where to find citation information and which citation style to use.\nHere we are using APA formatting, which is common in behavioral science and health research.\n\nAdding Citations\nCitations are added directly within the text using the author-year citation key.\nExample:\nRegular physical activity is associated with improved health outcomes \n[@piercy2018].\nQuarto automatically formats the citation:\n\nRegular physical activity is associated with improved health outcomes (Piercy et al., 2018).\n\nReference List\nAt the end of the document, Quarto automatically generates:\n## References\nfrom the entries stored in:\nreferences.bib\n\n\n\n\n\n\nNote\n\n\nReferences are stored separately from the document content, making citations reusable and automatically updated across projects.\n\n\n\n\nQuarto separates the writing from the references. The .qmd contains the narrative, the .bib file contains citation information, and the YAML header tells Quarto how to format everything."
   },
   {
-    "objectID": "presentations/DataScience/communicate.html#interactivity",
-    "href": "presentations/DataScience/communicate.html#interactivity",
+    "objectID": "presentations/DataScience/communicate.html#troubleshooting-quarto",
+    "href": "presentations/DataScience/communicate.html#troubleshooting-quarto",
     "title": "Communicate",
-    "section": "Interactivity",
-    "text": "Interactivity\nShiny apps"
+    "section": "Troubleshooting Quarto",
+    "text": "Troubleshooting Quarto\nMost Quarto errors come from three places:\n\n\n\n\n\n\n\n\nError Type\nCommon Causes\nWhere to Check\n\n\n\n\nR code\nMissing package, object not found, syntax errors\nCode chunk\n\n\nQuarto/YAML\nIncorrect indentation, missing :, invalid options\nYAML header\n\n\nMarkdown\nUnclosed chunks, missing brackets, formatting issues\nDocument text\n\n\n\nCommon Errors\n\npackage not installed or loaded\nobject does not exist\nYAML indentation errors\nmissing parentheses or quotation marks\nunclosed code chunks\n\n\n\n\n\n\n\nTip\n\n\nDebugging workflow\n\nRead the error message\n\nFind the line where the error occurred\n\nIdentify whether it is R, YAML, or Markdown\n\nFix one issue at a time\n\nRender again\n\n\n\n\nExample: Object Not Found\nError:\nobject 'demographics' not found\nPossible causes:\nsummary(demographics)\n\nDataset was never loaded\nDataset name is misspelled\nCode chunk creating the object did not run\n\n\nThe most important troubleshooting skill is learning to classify the error. If the message mentions YAML, look at the header. If it says could not find function, think package. If it says object not found, think about whether the object exists and whether the previous code ran. Rendering is not just creating the final document. It is also a test that your workflow can be reproduced from start to finish. A successful render is a reproducibility check. Render early and often."
   },
   {
-    "objectID": "presentations/DataScience/communicate.html#chapter-29-summary",
-    "href": "presentations/DataScience/communicate.html#chapter-29-summary",
+    "objectID": "presentations/DataScience/communicate.html#chapter-28-summary-quarto",
+    "href": "presentations/DataScience/communicate.html#chapter-28-summary-quarto",
     "title": "Communicate",
-    "section": "Chapter 29 Summary",
-    "text": "Chapter 29 Summary\nPotential uses:\n\nstudy reports\nMRI summaries\ngrant updates\nrecruitment tracking\nconference presentations\n\n\nHighligh Brian’s Disclosure report Give an example of a use case for my lab. Ask: What other use cases can you think of?"
+    "section": "Chapter 28 Summary: Quarto",
+    "text": "Chapter 28 Summary: Quarto\nQuarto combines text, code, and results into reproducible documents.\nKey Concepts\n\n\n\n\n\n\n\nConcept\nPurpose\n\n\n\n\nQuarto documents\nCombine narrative, analysis, and outputs in one place\n\n\nMarkdown\nCreate readable, structured documents using simple syntax\n\n\nCode chunks\nExecute R code and insert results automatically\n\n\nChunk options\nControl what code and output appear\n\n\nFigures & tables\nGenerate reproducible, publication-ready outputs\n\n\nYAML\nConfigure document settings and customization\n\n\nCitations\nManage references automatically through bibliography files\n\n\n\n\n\n\n\n\n\nTip\n\n\nThe Quarto workflow\nWrite → Analyze → Render → Communicate\nWhen your data or code change, your document updates with them.\n\n\n\n\nKey message:\nQuarto is not just a way to make pretty documents. It creates a reproducible connection between:\n\nthe code you write\nthe analysis you perform\nthe results you communicate\n\nReview:\n\nDocuments are structured using Markdown and YAML.\nCode chunks allow analysis and communication to happen together.\nChunk options control what the audience sees.\nFigures and tables update automatically when code changes.\nCitations and references can be managed reproducibly.\n\nTransition:\nThe important idea from Chapter 28 is not memorizing YAML options or chunk syntax. The important idea is that Quarto creates a reproducible pipeline from analysis to communication. Now that we understand how Quarto documents are created and customized, Chapter 29 focuses on the different formats we can create from the same source document."
   },
   {
-    "objectID": "presentations/DataScience/communicate.html#best-practices",
-    "href": "presentations/DataScience/communicate.html#best-practices",
+    "objectID": "presentations/DataScience/communicate.html#chapter-29-quarto-formats-1",
+    "href": "presentations/DataScience/communicate.html#chapter-29-quarto-formats-1",
     "title": "Communicate",
-    "section": "Best Practices",
-    "text": "Best Practices\nIt is best practice to save and review often.\n\nrender often\nkeep files organized\nwrite narrative\ndocument decisions\nembrace reproducibility"
+    "section": "Chapter 29: Quarto Formats",
+    "text": "Chapter 29: Quarto Formats\nOne Quarto document can be transformed into multiple output formats.\nThe content and analysis stay the same, while the final product changes based on the audience and purpose.\n\n\n\n\n\n\nNote\n\n\nOne source → many outputs\n\n\n\n\n\n\n\n\n\n\n\nFormat\nBest For\nExample Uses\n\n\n\n\nHTML\nInteractive web documents\nReports, dashboards, online supplements\n\n\nPDF\nFixed-layout documents\nManuscripts, formal reports\n\n\nDOCX\nEditable documents\nCollaborator drafts, reviews\n\n\nRevealjs\nHTML presentations\nResearch talks, workshops\n\n\nPPTX\nPowerPoint slides\nMeetings, presentations\n\n\n\n\nThe important concept is that we are not recreating the same information in multiple programs.\nInstead:\nSame analysis + same narrative + different output format.\nFor example:\n\nA researcher could create an HTML report for collaborators.\nA PDF version for documentation.\nA presentation version for a conference.\n\nAll from the same Quarto source file."
   },
   {
-    "objectID": "presentations/DataScience/communicate.html#wrap-up",
-    "href": "presentations/DataScience/communicate.html#wrap-up",
+    "objectID": "presentations/DataScience/communicate.html#changing-formats-with-yaml",
+    "href": "presentations/DataScience/communicate.html#changing-formats-with-yaml",
     "title": "Communicate",
-    "section": "Wrap-Up",
-    "text": "Wrap-Up\nQuarto helps us:\n\ncommunicate\nreproduce\nautomate\ncollaborate\npublish\n\nNow let’s build a Quarto presentation."
+    "section": "Changing Formats with YAML",
+    "text": "Changing Formats with YAML\nThe output format is controlled in the YAML header.\nHTML:\nformat: html\nPDF:\nformat: pdf\nWord:\nformat: docx\nPresentation:\nformat: revealjs\nThe analysis and narrative remain the same. Only the output changes."
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#interactivity-with-shiny",
+    "href": "presentations/DataScience/communicate.html#interactivity-with-shiny",
+    "title": "Communicate",
+    "section": "Interactivity with Shiny",
+    "text": "Interactivity with Shiny\nQuarto can also create interactive applications using Shiny.\nInstead of a static report:\nData → Analysis → Report\nInteractive workflows allow:\nData → Analysis → User Exploration\nExamples:\n\ninteractive dashboards\ndata exploration tools\ndecision-support tools\nparticipant tracking systems\n\n\n\n\n\n\n\nTip\n\n\nShiny allows users to interact with results without needing to write R code.\n\n\n\n\nExample:\nA static figure shows intervention outcomes.\nA Shiny application could allow a user to:\n\nselect a participant group\nadjust variables\nexplore trends\nfilter results\n\nThe researcher builds the tool; the end user interacts with the results."
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#chapter-29-summary-formats",
+    "href": "presentations/DataScience/communicate.html#chapter-29-summary-formats",
+    "title": "Communicate",
+    "section": "Chapter 29 Summary: Formats",
+    "text": "Chapter 29 Summary: Formats\nQuarto allows researchers to communicate the same work in different ways.\nOne Source → Many Outputs\nA single .qmd file can become:\n\nresearch reports\nmanuscripts\npresentations\ninteractive dashboards\ncollaborator documents\n\n\n\n\n\n\n\nNote\n\n\nThe goal is not creating more documents.\nThe goal is creating one reproducible source that can be shared in many formats.\n\n\n\n\nHighlight Brian’s Disclosure report A disclosure report is not just a PDF. It is a reproducible report where the data, analysis, figures, tables, and formatting are all connected. If the data update, the report can update. Give an example of a use case for my lab. Ask: What other use cases can you think of?"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#best-practices-for-quarto",
+    "href": "presentations/DataScience/communicate.html#best-practices-for-quarto",
+    "title": "Communicate",
+    "section": "Best Practices for Quarto",
+    "text": "Best Practices for Quarto\nA reproducible workflow requires more than code.\n✓ Render often\n✓ Keep files organized\n✓ Write narrative alongside analysis\n✓ Document decisions\n✓ Use meaningful chunk labels\n✓ Save source files with projects\n✓ Embrace reproducibility"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#wrap-up-key-takeaways",
+    "href": "presentations/DataScience/communicate.html#wrap-up-key-takeaways",
+    "title": "Communicate",
+    "section": "Wrap-Up: Key Takeaways",
+    "text": "Wrap-Up: Key Takeaways\nChapter 28: Quarto\nQuarto brings together:\n\nNarrative → explain your work using Markdown\nCode → integrate analysis directly into documents\nResults → automatically generate figures and tables\nConfiguration → customize documents through YAML\nCitations → manage references reproducibly\n\nKey idea:\n\nA Quarto document connects the analysis process with the final communication product.\n\nChapter 29: Quarto Formats\nQuarto allows one source document to become many outputs:\n\nreports\nmanuscripts\npresentations\nWord documents\ninteractive applications\n\nKey idea:\n\nWrite once. Render many ways.\n\n\n\n\n\n\n\nTip\n\n\nQuarto is not just a document creation tool. It is a reproducible workflow for communicating research.\n\n\n\nNow let’s build a Quarto presentation."
   },
   {
     "objectID": "presentations/AdvancedR/SpecialTopics/performance.html#measuring-performance",
