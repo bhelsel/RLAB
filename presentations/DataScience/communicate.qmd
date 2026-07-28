@@ -101,34 +101,14 @@ A publishing system for creating reproducible documents by combining code, text,
 - **Code chunks** – R code that performs analyses
 - **Rendered output** – tables, figures, and results
 
-Example:
-
-````markdown
-```yaml
----
-title: "Exercise Intervention Results"
-author: "Morgan Brucks"
-format: html
----
-
-## Participant Characteristics
-
-This report summarizes baseline demographics.
-```{r}
-#| echo: true
-#| eval: false
-summary(demographics)
-```
-```
-````
 
 ::: {.callout-note}
 Think of Quarto as a recipe:
 
-- YAML tells Quarto what to make.
-- Markdown explains the steps to make the recipe.
-- Code performs the steps or analysis.
-- Rendering produces the finished meal or document.
+- YAML decides what kind of meal you're making (HTML report, PDF, presentation).
+- Markdown provides the recipe and explanations.
+- Code chunks prepare the ingredients and do the cooking (analysis).
+- Rendering plates everything into the finished dish (your final document).
 :::
 
 ::: notes
@@ -143,13 +123,9 @@ Whenever the analysis changes, you simply render the document again and every fi
 This is one of the biggest reasons Quarto has become popular for reproducible research.
 :::
 
-## Editors
+## Editors - Source
 
 Quarto provides two ways to edit your documents: the Visual Editor for a word processor-like experience and the Source Editor for writing directly in Markdown. Both produce the same final document, so you can choose the workflow that best fits your needs.
-
-**Visual**
-<img src="https://r4ds.hadley.nz/quarto/quarto-visual-editor.png"/>
-
 
 **Source**
 
@@ -201,6 +177,13 @@ superscript^2^ subscript~2~
 | Content Cell | Content Cell  |
 ````
 
+## Editors - Visual
+
+The visual editor is designed for users who prefer a graphical interface, making it easier to format documents, insert code, and create polished reports without needing to write all Markdown syntax manually.
+
+**Visual**
+<img src="https://r4ds.hadley.nz/quarto/quarto-visual-editor.png"/>
+
 ::: notes
 People often ask which editor they should use.
 
@@ -233,9 +216,10 @@ Both Markdown and HTML can be used to format Quarto documents. **Markdown is the
 **Example: Custom HTML Styling**
 
 ```html
-<span style="color:#0055A4; font-weight:bold;">
-Important Result
-</span>
+<a href="https://posit.co"
+   style="color:#0055A4; font-weight:bold; text-decoration:none;">
+Visit Posit
+</a>
 ```
 
 Markdown cannot easily apply custom colors or styles, but HTML can.
@@ -253,6 +237,15 @@ Use **HTML only when you need formatting that Markdown doesn't support**, such a
 
 You do **not** need to learn HTML to be productive in Quarto. Markdown covers the vast majority of everyday writing tasks, while HTML is there when you need more control over the appearance of your document.
 
+:::
+
+::: notes
+< a> creates a hyperlink.
+href specifies the destination URL.
+style lets you customize the appearance.
+color changes the text color.
+font-weight:bold makes the link bold.
+text-decoration:none removes the default underline.
 :::
 
 ## Code Chunks
@@ -289,30 +282,13 @@ These options can be combined. For example, `echo: true` with `eval: false` disp
 
 ### Global Options
 
-Set default chunk behavior once using a setup chunk.
+Set default chunk behavior once using global execution options in the YAML header.
 
-```r
-#| label: setup
-#| include: false
-
-knitr::opts_chunk$set(
-  echo = FALSE,
-  warning = FALSE,
-  message = FALSE
-)
-```
 
 ::: {.callout-note}
 **Chunk options** apply to a single chunk, while **global options** become the default for every chunk in your document.
 :::
 
-### Inline Code
-
-Inline code inserts **individual values** directly into your narrative, helping keep reports accurate as your data change.
-
-````markdown
-The dataset contains `` `r nrow(mtcars)` `` observations.
-````
 
 ::: notes
 So far we've focused on writing.
@@ -320,15 +296,6 @@ So far we've focused on writing.
 Now we're shifting to computation.
 
 Code chunks are what make Quarto different from a traditional document—they allow analysis and communication to happen in the same place.
-
-Inline code is one of Quarto's most useful features for research reporting.
-
-Rather than manually typing values into your report, Quarto calculates them automatically every time the document is rendered.
-
-This greatly reduces copy-and-paste errors and keeps text synchronized with tables and figures.
-
-How many of you have ever updated a figure but forgotten to update the number in the paragraph above it?
-Inline code solves exactly that problem.
 
 :::
 
@@ -400,9 +367,6 @@ mtcars |>
   fmt_number(
     columns = mpg,
     decimals = 1
-  ) |>
-  tab_header(
-    title = "Vehicle Characteristics"
   )
 ```
 
@@ -419,9 +383,6 @@ mtcars |>
   fmt_number(
     columns = mpg,
     decimals = 1
-  ) |>
-  tab_header(
-    title = "Vehicle Characteristics"
   )
 ```
 
@@ -445,8 +406,7 @@ mtcars |>
   colformat_num(
     j = "mpg",
     digits = 1
-  ) |>
-  autofit()
+  )
 ```
 
 **Output**
@@ -462,8 +422,7 @@ mtcars |>
   colformat_num(
     j = "mpg",
     digits = 1
-  ) |>
-  autofit()
+  )
 ```
 
 :::
@@ -562,13 +521,12 @@ format:
     css: styles.css
 ```
 
-This allows you to customize:
-
-- fonts
-- colors
-- spacing
-- page appearance
-- document branding
+Quarto extensions allow you to customize fonts, colors, spacing, page layout, and document branding to create a consistent look and feel across projects. Explore the
+<a href="https://github.com/bhelsel/quarto-kansas"
+   style="color:#0055A4; font-weight:bold;">
+quarto-kansas
+</a>
+repository for an example of a custom Quarto extension.
 
 ::: notes
 You can think of these tools as different levels of customization. YAML tells Quarto what you want. CSS changes how HTML looks. LaTeX controls PDF styling. Lua filters are for more advanced document transformations.
@@ -630,6 +588,13 @@ references.bib
 References are stored separately from the document content, making citations reusable and automatically updated across projects.
 :::
 
+For a complete example of manuscript writing and citation management in Quarto, explore the
+<a href="https://github.com/bhelsel/quarto-manuscript"
+   style="color:#0055A4; font-weight:bold;">
+quarto-manuscript
+</a>
+template.
+
 ::: notes
 Quarto separates the writing from the references. The .qmd contains the narrative, the .bib file contains citation information, and the YAML header tells Quarto how to format everything.
 :::
@@ -638,47 +603,22 @@ Quarto separates the writing from the references. The .qmd contains the narrativ
 
 Most Quarto errors come from three places:
 
-| Error Type | Common Causes | Where to Check |
+
+| Error Type | Common Errors | Check Here |
 |------------|---------------|----------------|
-| **R code** | Missing package, object not found, syntax errors | Code chunk |
-| **Quarto/YAML** | Incorrect indentation, missing `:`, invalid options | YAML header |
-| **Markdown** | Unclosed chunks, missing brackets, formatting issues | Document text |
-
-**Common Errors**
-
-- package not installed or loaded
-- object does not exist
-- YAML indentation errors
-- missing parentheses or quotation marks
-- unclosed code chunks
+| **R Code** | Package not installed, object not found, syntax errors | Code chunk |
+| **Quarto / YAML** | Incorrect indentation, missing `:`, invalid YAML options | YAML header |
+| **Markdown** | Unclosed code chunks, missing brackets, missing parentheses or quotation marks | Document text |
 
 ::: {.callout-tip}
 **Debugging workflow**
 
 1. Read the error message  
 2. Find the line where the error occurred  
-3. Identify whether it is R, YAML, or Markdown  
+3. Determine whether it's an R, YAML, or Markdown error 
 4. Fix one issue at a time  
 5. Render again
 :::
-
-**Example: Object Not Found**
-
-Error:
-
-```text
-object 'demographics' not found
-```
-
-Possible causes:
-
-```r
-summary(demographics)
-```
-
-- Dataset was never loaded
-- Dataset name is misspelled
-- Code chunk creating the object did not run
 
 ::: notes
 The most important troubleshooting skill is learning to classify the error. If the message mentions YAML, look at the header. If it says could not find function, think package. If it says object not found, think about whether the object exists and whether the previous code ran.
@@ -774,58 +714,13 @@ All from the same Quarto source file.
 **One source → many outputs**
 :::
 
-## Changing Formats with YAML
-
-The output format is controlled in the YAML header.
-
-HTML:
-
-```yaml
-format: html
-```
-
-PDF:
-
-```yaml
-format: pdf
-```
-
-Word:
-
-```yaml
-format: docx
-```
-
-Presentation:
-
-```yaml
-format: revealjs
-```
-
-The analysis and narrative remain the same. Only the output changes.
-
 ## Interactivity with Shiny
 
-Quarto can also create interactive applications using Shiny.
+Quarto can also create interactive applications using Shiny. Instead of a static report, interactive workflows allow user exploration. 
 
-Instead of a static report:
-
-```
-Data → Analysis → Report
-```
-
-Interactive workflows allow:
-
-```
-Data → Analysis → User Exploration
-```
-
-Examples:
-
-- interactive dashboards
-- data exploration tools
-- decision-support tools
-- participant tracking systems
+<video data-autoplay controls="controls" width="900" height="500" name="Shiny RevealJS">
+  <source src="https://bhelsel.github.io/presentationsR/inst/videos/ShinyRevealJS.mp4">
+</video>
 
 ::: {.callout-tip}
 Shiny allows users to interact with results without needing to write R code.
@@ -869,7 +764,6 @@ The goal is creating **one reproducible source that can be shared in many format
 :::
 
 ::: notes
-Highlight Brian's Disclosure report
 A disclosure report is not just a PDF. It is a reproducible report where the data, analysis, figures, tables, and formatting are all connected. If the data update, the report can update.
 Give an example of a use case for my lab.
 Ask: What other use cases can you think of?
@@ -935,7 +829,11 @@ Quarto allows one source document to become many outputs:
 Quarto is not just a document creation tool. It is a reproducible workflow for communicating research.
 :::
 
-Now let's build a Quarto presentation.
+🎉 **Congratulations!**
+
+You've learned the foundations of Quarto.
+
+Now let's put it all together and build your own presentation! 🚀
 
 # Time to Practice!
 
@@ -943,7 +841,7 @@ Now let's build a Quarto presentation.
 
 Today you will combine the concepts from R4DS:
 
-**Import → Transform → Visualize → Program → Communicate**
+**Import → Transform → Program → Visualize → Communicate**
 
 Your goal:
 
@@ -974,13 +872,13 @@ Now we are going to build a small project that uses all of those ideas together.
 
 ## Activity 1: Create Your Own Quarto Extension
 
-1. Navigate to the code folder under your name in the 2026-RLAB-Practical-Exercises folder.
+**Step 1:** Navigate to the code folder under your name in the 2026-RLAB-Practical-Exercises folder.
 
-2. Create an _extensions folder and a rlab folder inside extensions.
+**Step 2:** Create an _extensions folder and a rlab folder inside extensions.
 
-3. Create an _extensions.yml and custom.css file inside the rlab folder.
+**Step 3:** Create an <code>_extensions.yml</code> and <code>custom.css</code> file inside the rlab folder.
 
-4. Add the following yaml to _extensions.yml:
+**Step 4:** Add the following yaml to <code>_extensions.yml</code>:
 
 ```yaml
 ---
@@ -998,7 +896,7 @@ contributes:
 ---
 ```
 
-5. Add the format and extension to the yaml of the communication.qmd file.
+**Step 5:** Add the format and extension to the yaml of the <code>communication.qmd</code> file.
 ```yaml
 ---
 format:
@@ -1006,16 +904,21 @@ format:
 ---
 ```
 
-6. Copy the css from this custom.css file into the custom.css file that you just created.
+**Step 6:** Copy the CSS from
+<a href="https://github.com/bhelsel/2026-RLAB-Practical-Exercises/tree/main/attendees/MorganBrucks/code/_extensions/rlab/custom.css"
+   style="color:#0055A4; font-weight:bold;">
+this <code>custom.css</code> file
+</a>
+into the <code>custom.css</code> file that you just created.
 
-7. *Optional*. Experiment with ths css styling in custom.css by changing the images, colors, font sizes, etc. to make it your own.
+**Step 7:** *Optional*. Experiment with ths css styling in <code>custom.css</code> by changing the images, colors, font sizes, etc. to make it your own.
 
 ## Activity 2: Data Science Review
 
 **Import Data**
 In this exercise, you will create an in-memory DuckDB database, copy the nycflights13 datasets into it, and use dplyr to create a new data frame for analysis.
 
-**Step 1**
+**Step 1:**
 
 Create an in-memory DuckDB database by:
 
@@ -1026,7 +929,7 @@ con <- DBI::dbConnect(duckdb::duckdb(), dbdir = ":memory:")
 
 dbplyr::copy_nycflights13(con)
 
-**Step 2**
+**Step 2:**
 
 Using the tables stored in DuckDB, create a new object named flights that:
 
@@ -1064,7 +967,7 @@ If your function is written correctly, you should be able to call it by supplyin
 
 In this exercise, you will create a reusable function that produces a scatterplot using ggplot2. Your function should allow the user to choose the dataset, the variables to plot, and any optional arguments supported by ggplot2::geom_point().
 
-**Step 1**
+**Step 1:**
 
 Create a function named custom_visualization() with four arguments:
 
@@ -1073,7 +976,7 @@ Create a function named custom_visualization() with four arguments:
 3. yvar: the variable to display on the y-axis.
 4. … additional arguments that will be passed directly to ggplot2::geom_point().
 
-**Step 2**
+**Step 2:**
 
 Before creating the plot, remove any rows where both the x and y variables are missing (NA).
 
@@ -1084,7 +987,7 @@ Before creating the plot, remove any rows where both the x and y variables are m
 
 **Hint**: The expression inside if_any() should refer to the range from xvar to yvar, and the predicate should be is.na.
 
-**Step 3**
+**Step 3:**
 
 Pipe the filtered data into ggplot2::ggplot().
 
@@ -1094,13 +997,13 @@ Use ggplot2::aes() to map:
 - y to yvar
 - Remember to use embracing ({{ }}) for both variables.
 
-**Step 4**
+**Step 4:**
 
 Add a scatterplot layer using ggplot2::geom_point().
 
 Instead of specifying arguments like color or size yourself, forward all optional arguments using .... This allows users to customize the points by passing any arguments accepted by geom_point(), such as: color, size, shape, fill, alpha, stroke, etc.
 
-**Step 5**
+**Step 5:**
 
 Test your function using the filtered_flights data frame. Create a scatterplot of:
 
