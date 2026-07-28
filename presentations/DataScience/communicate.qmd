@@ -104,7 +104,7 @@ A publishing system for creating reproducible documents by combining code, text,
 Example:
 
 ````markdown
-```text
+```yaml
 ---
 title: "Exercise Intervention Results"
 author: "Morgan Brucks"
@@ -119,9 +119,8 @@ This report summarizes baseline demographics.
 #| eval: false
 summary(demographics)
 ```
+```
 ````
-
-
 
 ::: {.callout-note}
 Think of Quarto as a recipe:
@@ -132,6 +131,17 @@ Think of Quarto as a recipe:
 - Rendering produces the finished meal or document.
 :::
 
+::: notes
+Quarto is essentially a publishing system.
+
+Instead of writing your analysis in one program, copying figures into another, and formatting everything manually, Quarto lets you combine narrative, code, and results in one document.
+
+As you work, your code and your writing stay connected.
+
+Whenever the analysis changes, you simply render the document again and every figure, table, and inline result updates automatically.
+
+This is one of the biggest reasons Quarto has become popular for reproducible research.
+:::
 
 ## Editors
 
@@ -190,6 +200,19 @@ superscript^2^ subscript~2~
 | Content Cell | Content Cell  |
 | Content Cell | Content Cell  |
 ````
+
+::: notes
+People often ask which editor they should use.
+
+The answer is whichever helps you write.
+
+If you're new to Markdown, the Visual Editor feels very similar to Microsoft Word.
+
+As you become more comfortable, many people switch to the Source Editor because it's faster, easier to version control, and gives you complete control over the document.
+
+The important point is that both editors create exactly the same Quarto document.
+
+:::
 
 ## Markdown vs. HTML
 
@@ -292,6 +315,12 @@ The dataset contains `` `r nrow(mtcars)` `` observations.
 ````
 
 ::: notes
+So far we've focused on writing.
+
+Now we're shifting to computation.
+
+Code chunks are what make Quarto different from a traditional document—they allow analysis and communication to happen in the same place.
+
 Inline code is one of Quarto's most useful features for research reporting.
 
 Rather than manually typing values into your report, Quarto calculates them automatically every time the document is rendered.
@@ -300,6 +329,7 @@ This greatly reduces copy-and-paste errors and keeps text synchronized with tabl
 
 How many of you have ever updated a figure but forgotten to update the number in the paragraph above it?
 Inline code solves exactly that problem.
+
 :::
 
 
@@ -494,6 +524,14 @@ YAML is processed before your R code runs. It tells Quarto how to build your fin
 :::
 
 ::: notes
+Everything we've looked at so far happens inside the document.
+
+YAML is different.
+
+Instead of controlling the content, YAML controls how the entire document is built.
+
+Think of it as the document's configuration file.
+
 If Markdown is the content of your document and R code is the analysis, YAML is the instruction manual telling Quarto how to assemble everything.
 :::
 
@@ -646,6 +684,14 @@ summary(demographics)
 The most important troubleshooting skill is learning to classify the error. If the message mentions YAML, look at the header. If it says could not find function, think package. If it says object not found, think about whether the object exists and whether the previous code ran.
 Rendering is not just creating the final document. It is also a test that your workflow can be reproduced from start to finish.
 A successful render is a reproducibility check. Render early and often.
+
+One final piece of advice.
+
+Don't try to fix five errors at once.
+
+Render often while you're building your document.
+
+Small, incremental renders make errors much easier to identify than waiting until the very end.
 :::
 
 ## Chapter 28 Summary: Quarto
@@ -703,10 +749,6 @@ One Quarto document can be transformed into multiple output formats.
 
 The content and analysis stay the same, while the final product changes based on the audience and purpose.
 
-::: {.callout-note}
-**One source → many outputs**
-:::
-
 | Format | Best For | Example Uses |
 |--------|----------|--------------|
 | **HTML** | Interactive web documents | Reports, dashboards, online supplements |
@@ -729,6 +771,7 @@ For example:
 - A presentation version for a conference.
 
 All from the same Quarto source file.
+**One source → many outputs**
 :::
 
 ## Changing Formats with YAML
@@ -844,6 +887,19 @@ A reproducible workflow requires more than code.
 ✓ Save source files with projects  
 ✓ Embrace reproducibility
 
+::: notes
+
+These aren't Quarto requirements—they're habits that make projects easier to maintain.
+
+Future you will appreciate meaningful chunk labels.
+
+Future collaborators will appreciate clear narrative.
+
+And your future self will definitely appreciate rendering frequently instead of waiting until the end.
+
+The goal is reproducibility, not perfection.
+
+:::
 
 ## Wrap-Up: Key Takeaways
 
@@ -883,7 +939,198 @@ Now let's build a Quarto presentation.
 
 # Time to Practice!
 
+## Build a Reproducible Quarto Workflow
 
+Today you will combine the concepts from R4DS:
 
+**Import → Transform → Visualize → Program → Communicate**
+
+Your goal:
+
+1. Create your own Quarto extension
+2. Customize your document appearance
+3. Import and transform data
+4. Write reusable functions
+5. Create a visualization
+
+::: {.callout-tip}
+The goal is not just to make a plot.
+
+The goal is to create a reproducible workflow that can be reused and shared.
+:::
+
+::: notes
+
+Connect this back to the entire presentation:
+
+Earlier we learned:
+- Quarto connects analysis and communication.
+- YAML controls customization.
+- Code chunks automate reproducibility.
+
+Now we are going to build a small project that uses all of those ideas together.
+
+:::
+
+## Activity 1: Create Your Own Quarto Extension
+
+1. Navigate to the code folder under your name in the 2026-RLAB-Practical-Exercises folder.
+
+2. Create an _extensions folder and a rlab folder inside extensions.
+
+3. Create an _extensions.yml and custom.css file inside the rlab folder.
+
+4. Add the following yaml to _extensions.yml:
+
+```yaml
+---
+title: RLAB Quarto Format
+author: Morgan Brucks
+contributes:
+  formats:
+    html: 
+      title-block-banner: true
+      theme: lumen
+      css: custom.css
+      embed-resources: true
+      date-format: long
+      code-copy: false
+---
+```
+
+5. Add the format and extension to the yaml of the communication.qmd file.
+```yaml
+---
+format:
+  rlab-html: default
+---
+```
+
+6. Copy the css from this custom.css file into the custom.css file that you just created.
+
+7. *Optional*. Experiment with ths css styling in custom.css by changing the images, colors, font sizes, etc. to make it your own.
+
+## Activity 2: Data Science Review
+
+**Import Data**
+In this exercise, you will create an in-memory DuckDB database, copy the nycflights13 datasets into it, and use dplyr to create a new data frame for analysis.
+
+**Step 1**
+
+Create an in-memory DuckDB database by:
+
+Connecting to DuckDB with DBI::dbConnect().
+Using “:memory:” as the database location.
+Copying the nycflights13 datasets into the database with dbplyr::copy_nycflights13().
+con <- DBI::dbConnect(duckdb::duckdb(), dbdir = ":memory:")
+
+dbplyr::copy_nycflights13(con)
+
+**Step 2**
+
+Using the tables stored in DuckDB, create a new object named flights that:
+
+- Starts with the weather table.
+- Selects only the origin, time_hour, temp, and wind_speed columns.
+- Joins the flights table using both origin and time_hour as the matching variables.
+- Collects the resulting data into your R session using collect().
+
+After completing these steps, the flights object should contain the selected weather variables along with the matching flight information, ready for use in later exercises.
+
+## Activity 2 (ctd.): Data Science Review
+
+**Write Your Own Filter Function**
+
+Create a function named custom_filter() that filters a data frame based on a user-specified variable and value.
+
+Your function should have three arguments:
+
+- data: the data frame to filter.
+- filter_by: the variable to use for filtering.
+- value: the value to compare against.
+
+Inside the function:
+
+- Use dplyr::filter() to keep observations where the selected variable is greater than or equal to value.
+- Use embracing ({{ }}) so that filter_by accepts an unquoted column name.
+
+After writing your function, test it by creating a new object named filtered_flights that contains only rows where wind_speed is greater than or equal to 30 miles per hour.
+
+If your function is written correctly, you should be able to call it by supplying a data frame, an unquoted variable name, and a comparison value.
+
+## Activity 2 (ctd.): Data Science Review
+
+**Write Your Own Visualization Function**
+
+In this exercise, you will create a reusable function that produces a scatterplot using ggplot2. Your function should allow the user to choose the dataset, the variables to plot, and any optional arguments supported by ggplot2::geom_point().
+
+**Step 1**
+
+Create a function named custom_visualization() with four arguments:
+
+1. data: the data frame to plot.
+2. xvar: the variable to display on the x-axis.
+3. yvar: the variable to display on the y-axis.
+4. … additional arguments that will be passed directly to ggplot2::geom_point().
+
+**Step 2**
+
+Before creating the plot, remove any rows where both the x and y variables are missing (NA).
+
+- Use dplyr::filter().
+- Inside filter(), use dplyr::if_any().
+- Use embracing ({{ }}) so that the function accepts unquoted variable names.
+- The condition should only keep rows that do not have an NA.
+
+**Hint**: The expression inside if_any() should refer to the range from xvar to yvar, and the predicate should be is.na.
+
+**Step 3**
+
+Pipe the filtered data into ggplot2::ggplot().
+
+Use ggplot2::aes() to map:
+
+- x to xvar
+- y to yvar
+- Remember to use embracing ({{ }}) for both variables.
+
+**Step 4**
+
+Add a scatterplot layer using ggplot2::geom_point().
+
+Instead of specifying arguments like color or size yourself, forward all optional arguments using .... This allows users to customize the points by passing any arguments accepted by geom_point(), such as: color, size, shape, fill, alpha, stroke, etc.
+
+**Step 5**
+
+Test your function using the filtered_flights data frame. Create a scatterplot of:
+
+- temp on the x-axis
+- wind_speed on the y-axis
+
+Customize the points by passing several optional arguments through …, for example:
+
+color = “blue” size = 4 shape = 21 stroke = 2 fill = “red”
+
+If your function is written correctly, these arguments should be passed automatically to ggplot2::geom_point() without modifying the function itself.
+
+::: notes
+
+Take a step back and look at everything you've built.
+
+You imported data.
+
+You transformed it.
+
+You wrote reusable functions.
+
+You customized a Quarto document.
+
+And you communicated your results.
+
+That's the complete data science workflow from R4DS.
+
+Hopefully today's workshop showed that Quarto isn't just another document format—it's the tool that connects all of those pieces together.
+
+:::
 
 
