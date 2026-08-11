@@ -1,7 +1,7 @@
 ---
 title: "Subsetting"
 subtitle: "Applying R to Lifestyle and Brain Health Research"
-author: "Julianne Clina, PhD"
+author: "Julianne G. Clina, PhD"
 institute: "University of Kansas Medical Center"
 date: 2026-08-26
 image: "../../../images/thumbnails/subsetting.png"

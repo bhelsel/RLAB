@@ -60,7 +60,7 @@
     "href": "presentations/Foundations.html",
     "title": "Advanced R Foundations",
     "section": "",
-    "text": "Names and Values\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nAug 12, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nVectors\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nAug 19, 2026\n\n\nMorgan Brucks, CCRP\n\n\n\n\n\n\n\n\n\n\n\n\nSubsetting\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nAug 26, 2026\n\n\nJulianne Clina, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nControl Flow\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 2, 2026\n\n\nJulianne G. Clina, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nFunctions\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 9, 2026\n\n\nAshlyn Barry\n\n\n\n\n\n\n\n\n\n\n\n\nEnvironments\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 16, 2026\n\n\nIan Weidling, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nConditions\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 23, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\nNo matching items"
+    "text": "Names and Values\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nAug 12, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nVectors\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nAug 19, 2026\n\n\nMorgan Brucks, CCRP\n\n\n\n\n\n\n\n\n\n\n\n\nSubsetting\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nAug 26, 2026\n\n\nJulianne G. Clina, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nControl Flow\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 2, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nFunctions\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 9, 2026\n\n\nAshlyn Barry\n\n\n\n\n\n\n\n\n\n\n\n\nEnvironments\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 16, 2026\n\n\nIan Weidling, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nConditions\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 23, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "presentations/DataScience/visualization.html#what-is-ggplot2",
@@ -620,112 +620,168 @@
     "href": "presentations/DataScience/communicate.html#learning-objectives",
     "title": "Communicate",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\nBy the end of today’s session, you should be able to understand:\n\nhow Quarto documents are structured\nhow code and narrative work together\nhow to render documents into polished outputs\nthe foundations for reproducible research communication\n\n\nKey teaching goal: Communication and reproducibility, not memorization of syntax. Many participants will remember concepts better than commands."
+    "text": "Learning Objectives\nBy the end of today’s session, you should be able to:\n\nunderstand how Quarto connects text, code, and results\nuse Markdown, code chunks, and YAML to structure reproducible documents\ngenerate and customize figures, tables, citations, and outputs\nrecognize how Quarto supports reproducible research communication\n\n\nKey teaching goal: Communication and reproducibility, not memorization of syntax.\nParticipants do not need to memorize every option or command. The goal is understanding the workflow and knowing where to find additional tools when needed.\nEmphasize:\nWrite → Analyze → Render → Communicate"
   },
   {
     "objectID": "presentations/DataScience/communicate.html#communicate",
     "href": "presentations/DataScience/communicate.html#communicate",
     "title": "Communicate",
     "section": "Communicate",
-    "text": "Communicate\n\nChapters 28-29\n\n\n\nChapter\nTopic\n\n\n\n\n28\nQuarto\n\n\n29\nQuarto formats\n\n\n\n\nR4DS argues that communication is part of data science.\nData science is not:\nData → Analysis → Done\nIt is:\nData → Analysis → Communication → Impact Lucky for you, this section focuses on the technial mechanics of Communication, not the act of conveying your thoughts and ideas to other people. That’s up to you and your skills. How many of you have:\n\ncopied a figure from R into PowerPoint?\ncopied a table into Word?\nhad to recreate a figure months later?\nstruggled to remember how results were generated? Spend 2-3 minutes discussing. This creates buy-in for reproducibility. Ask: “If nobody understands your work, did the analysis accomplish its goal?”"
+    "text": "Communicate\n\nR4DS Chapters 28-29\n\n\n\nChapter\nFocus\n\n\n\n\n28\nBuilding reproducible Quarto documents\n\n\n29\nCreating different outputs and formats\n\n\n\n\nR4DS argues that communication is an essential part of the data science workflow.\nData science is not:\nData → Analysis → Done\nInstead:\nData → Analysis → Communication → Impact\nThe goal of this section is not learning how to communicate ideas effectively. That comes from practice and experience.\nInstead, we are focusing on the technical tools that allow us to communicate our analyses reproducibly.\nAsk:\n\nHow many of you have copied a figure from R into PowerPoint?\nHow many have copied a table into Word?\nHow many have had to recreate a figure months later?\nHow many have struggled to remember how a result was generated?\n\nQuarto helps address these problems by keeping the analysis and communication connected.\nKey question:\n“If nobody can understand or reproduce your work, did the analysis accomplish its goal?”"
   },
   {
     "objectID": "presentations/DataScience/communicate.html#basics",
     "href": "presentations/DataScience/communicate.html#basics",
     "title": "Communicate",
     "section": "Basics",
-    "text": "Basics\nWhat is Quarto? A publishing system for creating reproducible documents by combining code, text, and visualizations.\nAdd basic structure here"
+    "text": "Basics\nWhat is Quarto? A publishing system for creating reproducible documents by combining code, text, and visualizations.\nEvery Quarto document contains four building blocks:\n\nYAML – document settings (title, author, output)\nMarkdown – narrative text\nCode chunks – R code that performs analyses\nRendered output – tables, figures, and results\n\n\n\n\n\n\n\nNote\n\n\nThink of Quarto as a recipe:\n\nYAML decides what kind of meal you’re making (HTML report, PDF, presentation).\nMarkdown provides the recipe and explanations.\nCode chunks prepare the ingredients and do the cooking (analysis).\nRendering plates everything into the finished dish (your final document).\n\n\n\n\n\nQuarto is essentially a publishing system.\nInstead of writing your analysis in one program, copying figures into another, and formatting everything manually, Quarto lets you combine narrative, code, and results in one document.\nAs you work, your code and your writing stay connected.\nWhenever the analysis changes, you simply render the document again and every figure, table, and inline result updates automatically.\nThis is one of the biggest reasons Quarto has become popular for reproducible research."
   },
   {
-    "objectID": "presentations/DataScience/communicate.html#editors",
-    "href": "presentations/DataScience/communicate.html#editors",
+    "objectID": "presentations/DataScience/communicate.html#editors---source",
+    "href": "presentations/DataScience/communicate.html#editors---source",
     "title": "Communicate",
-    "section": "Editors",
-    "text": "Editors\nQuarto provides two ways to edit your documents: the Visual Editor for a word processor-like experience and the Source Editor for writing directly in Markdown. Both produce the same final document, so you can choose the workflow that best fits your needs.\nVisual \nSource\n## Text formatting\n\n*italic* **bold** ~~strikeout~~ `code`\n\nsuperscript^2^ subscript~2~\n\n[underline]{.underline} [small caps]{.smallcaps}\n\n## Headings\n\n# 1st Level Header\n\n## 2nd Level Header\n\n### 3rd Level Header\n\n## Lists\n\n-   Bulleted list item 1\n\n-   Item 2\n\n    -   Item 2a\n\n    -   Item 2b\n\n1.  Numbered list item 1\n\n2.  Item 2.\n    The numbers are incremented automatically in the output.\n\n## Links and images\n\n&lt;http://example.com&gt;\n\n[linked phrase](http://example.com)\n\n![optional caption text](quarto.png){fig-alt=\"Quarto logo and the word quarto spelled in small case letters\"}\n\n## Tables\n\n| First Header | Second Header |\n|--------------|---------------|\n| Content Cell | Content Cell  |\n| Content Cell | Content Cell  |\nMarkdown and HTML\n\nMarkdown is simpler, easier to read, and ideal for collaboration and version control.\nHTML allows formatting that Markdown doesn’t support, such as more detailed styling, but it’s more verbose and harder to edit manually.\n\n\n\n\nFormatting\nMarkdown\nHTML\n\n\n\n\nBold\n**text**\n&lt;strong&gt;text&lt;/strong&gt;\n\n\nItalic\n*text*\n&lt;em&gt;text&lt;/em&gt;\n\n\nHeading\n## Heading\n&lt;h2&gt;Heading&lt;/h2&gt;\n\n\n\n\nThe Source Editor always displays the document as text. You can store formatting using either concise Markdown syntax or more detailed HTML tags, depending on your editing preferences and formatting needs."
+    "section": "Editors - Source",
+    "text": "Editors - Source\nQuarto provides two ways to edit your documents: the Visual Editor for a word processor-like experience and the Source Editor for writing directly in Markdown. Both produce the same final document, so you can choose the workflow that best fits your needs.\nSource\n## Text formatting\n\n*italic* **bold** ~~strikeout~~ `code`\n\nsuperscript^2^ subscript~2~\n\n[underline]{.underline} [small caps]{.smallcaps}\n\n## Headings\n\n# 1st Level Header\n\n## 2nd Level Header\n\n### 3rd Level Header\n\n## Lists\n\n-   Bulleted list item 1\n\n-   Item 2\n\n    -   Item 2a\n\n    -   Item 2b\n\n1.  Numbered list item 1\n\n2.  Item 2.\n    The numbers are incremented automatically in the output.\n\n## Links and images\n\n&lt;http://example.com&gt;\n\n[linked phrase](http://example.com)\n\n![optional caption text](quarto.png){fig-alt=\"Quarto logo and the word quarto spelled in small case letters\"}\n\n## Tables\n\n| First Header | Second Header |\n|--------------|---------------|\n| Content Cell | Content Cell  |\n| Content Cell | Content Cell  |"
   },
   {
-    "objectID": "presentations/DataScience/communicate.html#lists",
-    "href": "presentations/DataScience/communicate.html#lists",
+    "objectID": "presentations/DataScience/communicate.html#editors---visual",
+    "href": "presentations/DataScience/communicate.html#editors---visual",
     "title": "Communicate",
-    "section": "Lists",
-    "text": "Lists\n- item 1\n- item 2\nand\n1. first\n2. second"
+    "section": "Editors - Visual",
+    "text": "Editors - Visual\nThe visual editor is designed for users who prefer a graphical interface, making it easier to format documents, insert code, and create polished reports without needing to write all Markdown syntax manually.\nVisual \n\nPeople often ask which editor they should use.\nThe answer is whichever helps you write.\nIf you’re new to Markdown, the Visual Editor feels very similar to Microsoft Word.\nAs you become more comfortable, many people switch to the Source Editor because it’s faster, easier to version control, and gives you complete control over the document.\nThe important point is that both editors create exactly the same Quarto document."
   },
   {
-    "objectID": "presentations/DataScience/communicate.html#links",
-    "href": "presentations/DataScience/communicate.html#links",
+    "objectID": "presentations/DataScience/communicate.html#markdown-vs.-html",
+    "href": "presentations/DataScience/communicate.html#markdown-vs.-html",
     "title": "Communicate",
-    "section": "Links",
-    "text": "Links\n[Posit](https://posit.co)"
+    "section": "Markdown vs. HTML",
+    "text": "Markdown vs. HTML\nBoth Markdown and HTML can be used to format Quarto documents. Markdown is the preferred syntax for most writing tasks because it is concise, readable, and easy to maintain. HTML is available when you need additional formatting or customization.\n\n\n\n\n\n\n\n\nFeature\nMarkdown\nHTML\n\n\n\n\nBold\n**text**\n&lt;strong&gt;text&lt;/strong&gt;\n\n\nItalic\n*text*\n&lt;em&gt;text&lt;/em&gt;\n\n\nHeading\n## Heading\n&lt;h2&gt;Heading&lt;/h2&gt;\n\n\nBullet List\n- Item\n&lt;ul&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ul&gt;\n\n\nNumbered List\n1. Item\n&lt;ol&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ol&gt;\n\n\nLink\n[Posit](https://posit.co)\n&lt;a href=\"https://posit.co\"&gt;Posit&lt;/a&gt;\n\n\nImage\n![Logo](logo.png)\n&lt;img src=\"logo.png\"&gt;\n\n\n\nExample: Custom HTML Styling\n&lt;a href=\"https://posit.co\"\n   style=\"color:#0055A4; font-weight:bold; text-decoration:none;\"&gt;\nVisit Posit\n&lt;/a&gt;\nMarkdown cannot easily apply custom colors or styles, but HTML can.\n\n\n\n\n\n\n\nHadley’s Philosophy\n\n\nUse Markdown for almost everything. It is easier to read, write, and collaborate on.\nUse HTML only when you need formatting that Markdown doesn’t support, such as custom styling, colors, layouts, or embedded web content.\n\n\n\n\n\n\n\n\n\n\n\nTake-Home Message\n\n\nYou do not need to learn HTML to be productive in Quarto. Markdown covers the vast majority of everyday writing tasks, while HTML is there when you need more control over the appearance of your document.\n\n\n\n\n\n&lt; a&gt; creates a hyperlink. href specifies the destination URL. style lets you customize the appearance. color changes the text color. font-weight:bold makes the link bold. text-decoration:none removes the default underline."
   },
   {
     "objectID": "presentations/DataScience/communicate.html#code-chunks",
     "href": "presentations/DataScience/communicate.html#code-chunks",
     "title": "Communicate",
     "section": "Code Chunks",
-    "text": "Code Chunks\nChunk Labels\n#| label: demographics-summary\nChunk Options\n#| echo: false\nHide code.\n#| warning: false\n#| message: false\nGlobal Options\nknitr::opts_chunk$set(\n  echo = FALSE,\n  warning = FALSE,\n  message = FALSE\n)\n\nInline Code Matters because you receive automatic output instead of needing to handwrite or manualing provide updates."
+    "text": "Code Chunks\nCode chunks execute your analysis and insert the results directly into your document. Chunk labels and options help organize your work while controlling what appears in the final output.\nChunk Labels\nGive chunks meaningful names so they are easier to identify, troubleshoot, and reference.\n#| label: participant-demographics\nChunk Options\nChunk options control what your audience sees, not what your code does.\n\n\n\nOption\nPurpose\n\n\n\n\necho: false\nHide code, show output\n\n\neval: false\nShow code, don’t run it\n\n\nwarning: false\nHide warnings\n\n\nmessage: false\nHide package startup messages\n\n\n\n\n\n\n\n\n\nTip\n\n\nRemember:\n\necho controls whether the code is displayed.\neval controls whether the code is executed.\n\nThese options can be combined. For example, echo: true with eval: false displays the code without running it, while echo: false with eval: true runs the code but only displays the results.\n\n\n\nGlobal Options\nSet default chunk behavior once using global execution options in the YAML header.\n\n\n\n\n\n\nNote\n\n\nChunk options apply to a single chunk, while global options become the default for every chunk in your document.\n\n\n\n\nSo far we’ve focused on writing.\nNow we’re shifting to computation.\nCode chunks are what make Quarto different from a traditional document—they allow analysis and communication to happen in the same place."
   },
   {
     "objectID": "presentations/DataScience/communicate.html#figures-and-tables",
     "href": "presentations/DataScience/communicate.html#figures-and-tables",
     "title": "Communicate",
     "section": "Figures and Tables",
-    "text": "Figures and Tables\nInsert example of figure and table here provide the following examples: set eval to false - code set eval to true - name plot\n\n\nWhy figures/tables in Quarto? Traditional:\n\ncreate\nsave\ncopy\npaste\n\nQuarto:\n\nupdate code\nrender"
+    "text": "Figures and Tables\nQuarto automatically creates publication-ready figures and tables directly from your analysis. Update your code, render the document, and every result stays synchronized.\n\n\nDisplay Code Only\n\nlibrary(ggplot2)\n\nggplot(mpg, aes(class)) +\n  geom_bar()\n\neval: false displays the code without running it.\n\nDisplay Figure\n\n\n\n\n\n\n\n\n\necho: false hides the code and displays only the figure.\n\nTables in Quarto\nQuarto supports several table packages depending on your desired output. Here are two of the most commonly used.\n\n\ngt\nSource\n\nlibrary(gt)\n\nmtcars |&gt;\n  head() |&gt;\n  gt() |&gt;\n  fmt_number(\n    columns = mpg,\n    decimals = 1\n  )\n\nOutput\n\n\n\n\n\n\n\n\nmpg\ncyl\ndisp\nhp\ndrat\nwt\nqsec\nvs\nam\ngear\ncarb\n\n\n\n\n21.0\n6\n160\n110\n3.90\n2.620\n16.46\n0\n1\n4\n4\n\n\n21.0\n6\n160\n110\n3.90\n2.875\n17.02\n0\n1\n4\n4\n\n\n22.8\n4\n108\n93\n3.85\n2.320\n18.61\n1\n1\n4\n1\n\n\n21.4\n6\n258\n110\n3.08\n3.215\n19.44\n1\n0\n3\n1\n\n\n18.7\n8\n360\n175\n3.15\n3.440\n17.02\n0\n0\n3\n2\n\n\n18.1\n6\n225\n105\n2.76\n3.460\n20.22\n1\n0\n3\n1\n\n\n\n\n\n\n\n\nflextable\nSource\n\nlibrary(flextable)\n\nmtcars |&gt;\n  head() |&gt;\n  flextable() |&gt;\n  colformat_num(\n    j = \"mpg\",\n    digits = 1\n  )\n\nOutput\n\n\nmpgcyldisphpdratwtqsecvsamgearcarb21.061601103.902.62016.46014421.061601103.902.87517.02014422.84108933.852.32018.61114121.462581103.083.21519.44103118.783601753.153.44017.02003218.162251052.763.46020.221031\n\n\n\n\n\n\n\n\n\nNote\n\n\nChoosing a table package\n\ngt creates polished, publication-quality tables and works especially well for HTML reports.\nflextable is designed for Microsoft Word and PowerPoint, making it a great choice for collaborators and manuscripts.\n\n\n\n\n\nTraditional workflow:\n\nCreate figure\nSave figure\nCopy into Word or PowerPoint\nRepeat whenever the analysis changes\n\nQuarto workflow:\n\nUpdate code\nRender document\nEvery figure and table updates automatically\n\nPoint out that gt excels for HTML reports and websites, while flextable integrates especially well with Word and PowerPoint."
   },
   {
-    "objectID": "presentations/DataScience/communicate.html#yaml",
-    "href": "presentations/DataScience/communicate.html#yaml",
+    "objectID": "presentations/DataScience/communicate.html#yaml-configuring-your-document",
+    "href": "presentations/DataScience/communicate.html#yaml-configuring-your-document",
     "title": "Communicate",
-    "section": "YAML",
-    "text": "YAML\nOverview incorporate this section from mb’s notes\nStyling Extensions\nCitations"
+    "section": "YAML: Configuring Your Document",
+    "text": "YAML: Configuring Your Document\nYAML is the header section of a Quarto document that provides instructions for how your document should be created and formatted.\nThink of YAML as the configuration file for your document.\nYAML can:\n\ndefine document information\ncustomize appearance\nadd extensions and functionality\ncontrol formatting behavior\n\nExample:\n---\ntitle: \"Exercise Intervention Results\"\nauthor: \"Morgan Brucks\"\nformat: html\n---\n\n\n\n\n\n\nNote\n\n\nYAML is processed before your R code runs. It tells Quarto how to build your final document.\n\n\n\n\nEverything we’ve looked at so far happens inside the document.\nYAML is different.\nInstead of controlling the content, YAML controls how the entire document is built.\nThink of it as the document’s configuration file.\nIf Markdown is the content of your document and R code is the analysis, YAML is the instruction manual telling Quarto how to assemble everything."
   },
   {
-    "objectID": "presentations/DataScience/communicate.html#troubleshooting",
-    "href": "presentations/DataScience/communicate.html#troubleshooting",
+    "objectID": "presentations/DataScience/communicate.html#extending-and-styling-quarto",
+    "href": "presentations/DataScience/communicate.html#extending-and-styling-quarto",
     "title": "Communicate",
-    "section": "Troubleshooting",
-    "text": "Troubleshooting\nCommon errors include:\n\nmissing package\nYAML spacing\nmissing parentheses\nunclosed chunks\n\n\n\n\n\n\n\nTip\n\n\nUseful debugging advice includes:\n\nRead the error\nFind the line\nFix one thing\nRender again"
+    "section": "Extending and Styling Quarto",
+    "text": "Extending and Styling Quarto\nQuarto provides multiple ways to customize your documents beyond the default settings.\n\n\n\n\n\n\n\n\nTool\nPurpose\nExample Uses\n\n\n\n\nQuarto extensions\nAdd reusable functionality\ntemplates, themes, publishing workflows\n\n\nCSS\nCustomize HTML appearance\ncolors, fonts, spacing, layouts\n\n\nSCSS\nBuild advanced CSS styles\nreusable style systems\n\n\nLua filters\nModify document behavior\ncustom formatting rules\n\n\nLaTeX\nCustomize PDF output\nmanuscript formatting\n\n\n\n\n\n\n\n\n\nTip\n\n\nMost users will customize Quarto through YAML, themes, and CSS. Advanced tools like Lua filters and LaTeX provide additional control when needed."
   },
   {
-    "objectID": "presentations/DataScience/communicate.html#chapter-28-summary",
-    "href": "presentations/DataScience/communicate.html#chapter-28-summary",
+    "objectID": "presentations/DataScience/communicate.html#example-styling-with-yaml",
+    "href": "presentations/DataScience/communicate.html#example-styling-with-yaml",
     "title": "Communicate",
-    "section": "Chapter 28 Summary",
-    "text": "Chapter 28 Summary"
+    "section": "Example: Styling with YAML",
+    "text": "Example: Styling with YAML\nYAML can connect your document to themes, stylesheets, and other custom resources.\nformat:\n  html:\n    theme: cosmo\n    css: styles.css\nQuarto extensions allow you to customize fonts, colors, spacing, page layout, and document branding to create a consistent look and feel across projects. Explore the  quarto-kansas  repository for an example of a custom Quarto extension.\n\nYou can think of these tools as different levels of customization. YAML tells Quarto what you want. CSS changes how HTML looks. LaTeX controls PDF styling. Lua filters are for more advanced document transformations."
   },
   {
-    "objectID": "presentations/DataScience/communicate.html#output-options",
-    "href": "presentations/DataScience/communicate.html#output-options",
+    "objectID": "presentations/DataScience/communicate.html#citations-in-quarto",
+    "href": "presentations/DataScience/communicate.html#citations-in-quarto",
     "title": "Communicate",
-    "section": "Output options",
-    "text": "Output options\nDocuments\n\npdf - makes a PDF with LaTeX\ndocx - for Microsoft Word\n\nPresentations\n\nrevealjs - HTML presentation\npptx - Powerpoint presentation"
+    "section": "Citations in Quarto",
+    "text": "Citations in Quarto\nQuarto can automatically manage citations and references using a bibliography file.\nThe bibliography is connected through the YAML header:\n---\ntitle: \"Exercise Intervention Results\"\nauthor: \"Morgan Brucks\"\nformat: html\nbibliography: references.bib\ncsl: https://www.zotero.org/styles/apa\n---\n\nThe YAML header tells Quarto where to find citation information and which citation style to use.\nHere we are using APA formatting, which is common in behavioral science and health research.\n\nAdding Citations\nCitations are added directly within the text using the author-year citation key.\nExample:\nRegular physical activity is associated with improved health outcomes \n[@piercy2018].\nQuarto automatically formats the citation:\n\nRegular physical activity is associated with improved health outcomes (Piercy et al., 2018).\n\nReference List\nAt the end of the document, Quarto automatically generates:\n## References\nfrom the entries stored in:\nreferences.bib\n\n\n\n\n\n\nNote\n\n\nReferences are stored separately from the document content, making citations reusable and automatically updated across projects.\n\n\n\nFor a complete example of manuscript writing and citation management in Quarto, explore the  quarto-manuscript  template.\n\nQuarto separates the writing from the references. The .qmd contains the narrative, the .bib file contains citation information, and the YAML header tells Quarto how to format everything."
   },
   {
-    "objectID": "presentations/DataScience/communicate.html#interactivity",
-    "href": "presentations/DataScience/communicate.html#interactivity",
+    "objectID": "presentations/DataScience/communicate.html#troubleshooting-quarto",
+    "href": "presentations/DataScience/communicate.html#troubleshooting-quarto",
     "title": "Communicate",
-    "section": "Interactivity",
-    "text": "Interactivity\nShiny apps"
+    "section": "Troubleshooting Quarto",
+    "text": "Troubleshooting Quarto\nMost Quarto errors come from three places:\n\n\n\n\n\n\n\n\nError Type\nCommon Errors\nCheck Here\n\n\n\n\nR Code\nPackage not installed, object not found, syntax errors\nCode chunk\n\n\nQuarto / YAML\nIncorrect indentation, missing :, invalid YAML options\nYAML header\n\n\nMarkdown\nUnclosed code chunks, missing brackets, missing parentheses or quotation marks\nDocument text\n\n\n\n\n\n\n\n\n\nTip\n\n\nDebugging workflow\n\nRead the error message\n\nFind the line where the error occurred\n\nDetermine whether it’s an R, YAML, or Markdown error\nFix one issue at a time\n\nRender again\n\n\n\n\n\nThe most important troubleshooting skill is learning to classify the error. If the message mentions YAML, look at the header. If it says could not find function, think package. If it says object not found, think about whether the object exists and whether the previous code ran. Rendering is not just creating the final document. It is also a test that your workflow can be reproduced from start to finish. A successful render is a reproducibility check. Render early and often.\nOne final piece of advice.\nDon’t try to fix five errors at once.\nRender often while you’re building your document.\nSmall, incremental renders make errors much easier to identify than waiting until the very end."
   },
   {
-    "objectID": "presentations/DataScience/communicate.html#chapter-29-summary",
-    "href": "presentations/DataScience/communicate.html#chapter-29-summary",
+    "objectID": "presentations/DataScience/communicate.html#chapter-28-summary-quarto",
+    "href": "presentations/DataScience/communicate.html#chapter-28-summary-quarto",
     "title": "Communicate",
-    "section": "Chapter 29 Summary",
-    "text": "Chapter 29 Summary\nPotential uses:\n\nstudy reports\nMRI summaries\ngrant updates\nrecruitment tracking\nconference presentations\n\n\nHighligh Brian’s Disclosure report Give an example of a use case for my lab. Ask: What other use cases can you think of?"
+    "section": "Chapter 28 Summary: Quarto",
+    "text": "Chapter 28 Summary: Quarto\nQuarto combines text, code, and results into reproducible documents.\nKey Concepts\n\n\n\n\n\n\n\nConcept\nPurpose\n\n\n\n\nQuarto documents\nCombine narrative, analysis, and outputs in one place\n\n\nMarkdown\nCreate readable, structured documents using simple syntax\n\n\nCode chunks\nExecute R code and insert results automatically\n\n\nChunk options\nControl what code and output appear\n\n\nFigures & tables\nGenerate reproducible, publication-ready outputs\n\n\nYAML\nConfigure document settings and customization\n\n\nCitations\nManage references automatically through bibliography files\n\n\n\n\n\n\n\n\n\nTip\n\n\nThe Quarto workflow\nWrite → Analyze → Render → Communicate\nWhen your data or code change, your document updates with them.\n\n\n\n\nKey message:\nQuarto is not just a way to make pretty documents. It creates a reproducible connection between:\n\nthe code you write\nthe analysis you perform\nthe results you communicate\n\nReview:\n\nDocuments are structured using Markdown and YAML.\nCode chunks allow analysis and communication to happen together.\nChunk options control what the audience sees.\nFigures and tables update automatically when code changes.\nCitations and references can be managed reproducibly.\n\nTransition:\nThe important idea from Chapter 28 is not memorizing YAML options or chunk syntax. The important idea is that Quarto creates a reproducible pipeline from analysis to communication. Now that we understand how Quarto documents are created and customized, Chapter 29 focuses on the different formats we can create from the same source document."
   },
   {
-    "objectID": "presentations/DataScience/communicate.html#best-practices",
-    "href": "presentations/DataScience/communicate.html#best-practices",
+    "objectID": "presentations/DataScience/communicate.html#chapter-29-quarto-formats-1",
+    "href": "presentations/DataScience/communicate.html#chapter-29-quarto-formats-1",
     "title": "Communicate",
-    "section": "Best Practices",
-    "text": "Best Practices\nIt is best practice to save and review often.\n\nrender often\nkeep files organized\nwrite narrative\ndocument decisions\nembrace reproducibility"
+    "section": "Chapter 29: Quarto Formats",
+    "text": "Chapter 29: Quarto Formats\nOne Quarto document can be transformed into multiple output formats.\nThe content and analysis stay the same, while the final product changes based on the audience and purpose.\n\n\n\n\n\n\n\n\nFormat\nBest For\nExample Uses\n\n\n\n\nHTML\nInteractive web documents\nReports, dashboards, online supplements\n\n\nPDF\nFixed-layout documents\nManuscripts, formal reports\n\n\nDOCX\nEditable documents\nCollaborator drafts, reviews\n\n\nRevealjs\nHTML presentations\nResearch talks, workshops\n\n\nPPTX\nPowerPoint slides\nMeetings, presentations\n\n\n\n\nThe important concept is that we are not recreating the same information in multiple programs.\nInstead:\nSame analysis + same narrative + different output format.\nFor example:\n\nA researcher could create an HTML report for collaborators.\nA PDF version for documentation.\nA presentation version for a conference.\n\nAll from the same Quarto source file. One source → many outputs"
   },
   {
-    "objectID": "presentations/DataScience/communicate.html#wrap-up",
-    "href": "presentations/DataScience/communicate.html#wrap-up",
+    "objectID": "presentations/DataScience/communicate.html#interactivity-with-shiny",
+    "href": "presentations/DataScience/communicate.html#interactivity-with-shiny",
     "title": "Communicate",
-    "section": "Wrap-Up",
-    "text": "Wrap-Up\nQuarto helps us:\n\ncommunicate\nreproduce\nautomate\ncollaborate\npublish\n\nNow let’s build a Quarto presentation."
+    "section": "Interactivity with Shiny",
+    "text": "Interactivity with Shiny\nQuarto can also create interactive applications using Shiny. Instead of a static report, interactive workflows allow user exploration.\n\n\n\n\n\n\n\n\n\nTip\n\n\nShiny allows users to interact with results without needing to write R code.\n\n\n\n\nExample:\nA static figure shows intervention outcomes.\nA Shiny application could allow a user to:\n\nselect a participant group\nadjust variables\nexplore trends\nfilter results\n\nThe researcher builds the tool; the end user interacts with the results."
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#chapter-29-summary-formats",
+    "href": "presentations/DataScience/communicate.html#chapter-29-summary-formats",
+    "title": "Communicate",
+    "section": "Chapter 29 Summary: Formats",
+    "text": "Chapter 29 Summary: Formats\nQuarto allows researchers to communicate the same work in different ways.\nOne Source → Many Outputs\nA single .qmd file can become:\n\nresearch reports\nmanuscripts\npresentations\ninteractive dashboards\ncollaborator documents\n\n\n\n\n\n\n\nNote\n\n\nThe goal is not creating more documents.\nThe goal is creating one reproducible source that can be shared in many formats.\n\n\n\n\nA disclosure report is not just a PDF. It is a reproducible report where the data, analysis, figures, tables, and formatting are all connected. If the data update, the report can update. Give an example of a use case for my lab. Ask: What other use cases can you think of?"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#best-practices-for-quarto",
+    "href": "presentations/DataScience/communicate.html#best-practices-for-quarto",
+    "title": "Communicate",
+    "section": "Best Practices for Quarto",
+    "text": "Best Practices for Quarto\nA reproducible workflow requires more than code.\n✓ Render often\n✓ Keep files organized\n✓ Write narrative alongside analysis\n✓ Document decisions\n✓ Use meaningful chunk labels\n✓ Save source files with projects\n✓ Embrace reproducibility\n\nThese aren’t Quarto requirements—they’re habits that make projects easier to maintain.\nFuture you will appreciate meaningful chunk labels.\nFuture collaborators will appreciate clear narrative.\nAnd your future self will definitely appreciate rendering frequently instead of waiting until the end.\nThe goal is reproducibility, not perfection."
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#wrap-up-key-takeaways",
+    "href": "presentations/DataScience/communicate.html#wrap-up-key-takeaways",
+    "title": "Communicate",
+    "section": "Wrap-Up: Key Takeaways",
+    "text": "Wrap-Up: Key Takeaways\nChapter 28: Quarto\nQuarto brings together:\n\nNarrative → explain your work using Markdown\nCode → integrate analysis directly into documents\nResults → automatically generate figures and tables\nConfiguration → customize documents through YAML\nCitations → manage references reproducibly\n\nKey idea:\n\nA Quarto document connects the analysis process with the final communication product.\n\nChapter 29: Quarto Formats\nQuarto allows one source document to become many outputs:\n\nreports\nmanuscripts\npresentations\nWord documents\ninteractive applications\n\nKey idea:\n\nWrite once. Render many ways.\n\n\n\n\n\n\n\nTip\n\n\nQuarto is not just a document creation tool. It is a reproducible workflow for communicating research.\n\n\n\n🎉 Congratulations!\nYou’ve learned the foundations of Quarto.\nNow let’s put it all together and build your own presentation! 🚀"
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#build-a-reproducible-quarto-workflow",
+    "href": "presentations/DataScience/communicate.html#build-a-reproducible-quarto-workflow",
+    "title": "Communicate",
+    "section": "Build a Reproducible Quarto Workflow",
+    "text": "Build a Reproducible Quarto Workflow\nToday you will combine the concepts from R4DS:\nImport → Transform → Program → Visualize → Communicate\nYour goal:\n\nCreate your own Quarto extension\nCustomize your document appearance\nImport and transform data\nWrite reusable functions\nCreate a visualization\n\n\n\n\n\n\n\nTip\n\n\nThe goal is not just to make a plot.\nThe goal is to create a reproducible workflow that can be reused and shared.\n\n\n\n\nConnect this back to the entire presentation:\nEarlier we learned: - Quarto connects analysis and communication. - YAML controls customization. - Code chunks automate reproducibility.\nNow we are going to build a small project that uses all of those ideas together."
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#activity-1-create-your-own-quarto-extension",
+    "href": "presentations/DataScience/communicate.html#activity-1-create-your-own-quarto-extension",
+    "title": "Communicate",
+    "section": "Activity 1: Create Your Own Quarto Extension",
+    "text": "Activity 1: Create Your Own Quarto Extension\nStep 1: Navigate to the code folder under your name in the 2026-RLAB-Practical-Exercises folder.\nStep 2: Create an _extensions folder and a rlab folder inside extensions.\nStep 3: Create an _extensions.yml and custom.css file inside the rlab folder.\nStep 4: Add the following yaml to _extensions.yml:\n---\ntitle: RLAB Quarto Format\nauthor: Morgan Brucks\ncontributes:\n  formats:\n    html: \n      title-block-banner: true\n      theme: lumen\n      css: custom.css\n      embed-resources: true\n      date-format: long\n      code-copy: false\n---\nStep 5: Add the format and extension to the yaml of the communication.qmd file.\n---\nformat:\n  rlab-html: default\n---\nStep 6: Copy the CSS from  this custom.css file  into the custom.css file that you just created.\nStep 7: Optional. Experiment with ths css styling in custom.css by changing the images, colors, font sizes, etc. to make it your own."
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#activity-2-data-science-review",
+    "href": "presentations/DataScience/communicate.html#activity-2-data-science-review",
+    "title": "Communicate",
+    "section": "Activity 2: Data Science Review",
+    "text": "Activity 2: Data Science Review\nImport Data In this exercise, you will create an in-memory DuckDB database, copy the nycflights13 datasets into it, and use dplyr to create a new data frame for analysis.\nStep 1:\nCreate an in-memory DuckDB database by:\nConnecting to DuckDB with DBI::dbConnect(). Using “:memory:” as the database location. Copying the nycflights13 datasets into the database with dbplyr::copy_nycflights13(). con &lt;- DBI::dbConnect(duckdb::duckdb(), dbdir = “:memory:”)\ndbplyr::copy_nycflights13(con)\nStep 2:\nUsing the tables stored in DuckDB, create a new object named flights that:\n\nStarts with the weather table.\nSelects only the origin, time_hour, temp, and wind_speed columns.\nJoins the flights table using both origin and time_hour as the matching variables.\nCollects the resulting data into your R session using collect().\n\nAfter completing these steps, the flights object should contain the selected weather variables along with the matching flight information, ready for use in later exercises."
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#activity-2-ctd.-data-science-review",
+    "href": "presentations/DataScience/communicate.html#activity-2-ctd.-data-science-review",
+    "title": "Communicate",
+    "section": "Activity 2 (ctd.): Data Science Review",
+    "text": "Activity 2 (ctd.): Data Science Review\nWrite Your Own Filter Function\nCreate a function named custom_filter() that filters a data frame based on a user-specified variable and value.\nYour function should have three arguments:\n\ndata: the data frame to filter.\nfilter_by: the variable to use for filtering.\nvalue: the value to compare against.\n\nInside the function:\n\nUse dplyr::filter() to keep observations where the selected variable is greater than or equal to value.\nUse embracing ({{ }}) so that filter_by accepts an unquoted column name.\n\nAfter writing your function, test it by creating a new object named filtered_flights that contains only rows where wind_speed is greater than or equal to 30 miles per hour.\nIf your function is written correctly, you should be able to call it by supplying a data frame, an unquoted variable name, and a comparison value."
+  },
+  {
+    "objectID": "presentations/DataScience/communicate.html#activity-2-ctd.-data-science-review-1",
+    "href": "presentations/DataScience/communicate.html#activity-2-ctd.-data-science-review-1",
+    "title": "Communicate",
+    "section": "Activity 2 (ctd.): Data Science Review",
+    "text": "Activity 2 (ctd.): Data Science Review\nWrite Your Own Visualization Function\nIn this exercise, you will create a reusable function that produces a scatterplot using ggplot2. Your function should allow the user to choose the dataset, the variables to plot, and any optional arguments supported by ggplot2::geom_point().\nStep 1:\nCreate a function named custom_visualization() with four arguments:\n\ndata: the data frame to plot.\nxvar: the variable to display on the x-axis.\nyvar: the variable to display on the y-axis.\n… additional arguments that will be passed directly to ggplot2::geom_point().\n\nStep 2:\nBefore creating the plot, remove any rows where both the x and y variables are missing (NA).\n\nUse dplyr::filter().\nInside filter(), use dplyr::if_any().\nUse embracing ({{ }}) so that the function accepts unquoted variable names.\nThe condition should only keep rows that do not have an NA.\n\nHint: The expression inside if_any() should refer to the range from xvar to yvar, and the predicate should be is.na.\nStep 3:\nPipe the filtered data into ggplot2::ggplot().\nUse ggplot2::aes() to map:\n\nx to xvar\ny to yvar\nRemember to use embracing ({{ }}) for both variables.\n\nStep 4:\nAdd a scatterplot layer using ggplot2::geom_point().\nInstead of specifying arguments like color or size yourself, forward all optional arguments using …. This allows users to customize the points by passing any arguments accepted by geom_point(), such as: color, size, shape, fill, alpha, stroke, etc.\nStep 5:\nTest your function using the filtered_flights data frame. Create a scatterplot of:\n\ntemp on the x-axis\nwind_speed on the y-axis\n\nCustomize the points by passing several optional arguments through …, for example:\ncolor = “blue” size = 4 shape = 21 stroke = 2 fill = “red”\nIf your function is written correctly, these arguments should be passed automatically to ggplot2::geom_point() without modifying the function itself.\n\nTake a step back and look at everything you’ve built.\nYou imported data.\nYou transformed it.\nYou wrote reusable functions.\nYou customized a Quarto document.\nAnd you communicated your results.\nThat’s the complete data science workflow from R4DS.\nHopefully today’s workshop showed that Quarto isn’t just another document format—it’s the tool that connects all of those pieces together."
   },
   {
     "objectID": "presentations/AdvancedR/SpecialTopics/performance.html#measuring-performance",
@@ -1250,21 +1306,21 @@
     "href": "presentations/AdvancedR/Foundations/names-values.html#copy-on-modify",
     "title": "Names and Values",
     "section": "Copy-on-modify",
-    "text": "Copy-on-modify\n\ny[[3]] &lt;- 4\nobj_addr(y)\n#&gt; 0x8d56e6968\n\nModifying y creates a new object that is a copy of 0x8d526b868 and has a new object address of 0x8d56e6968.\n\nWe can see when an object gets copied with base::tracemem()\n\ny &lt;- x\ntracemem(x)\ny[[3]] &lt;- 4\nuntracemem(x)\n\n\n# echo: false\n\npaste0(\"&lt;\", obj_addr(x), \"&gt;\")\n\n\n# echo: false\n\npaste0(\"tracemem[\", obj_addr(x), \" -&gt; \", obj_addr(y), \"]:\")"
+    "text": "Copy-on-modify\n\ny[[3]] &lt;- 4\nobj_addr(y)\n#&gt; 0x8d56e6968\n\nModifying y creates a new object that is a copy of 0x8d526b868 and has a new object address of 0x8d56e6968.\n\nWe can see when an object gets copied with base::tracemem()\n\ny &lt;- x\ntracemem(x)\n#&gt; [1] \"&lt;0x8d526b868&gt;\"\ny[[3]] &lt;- 4\n#&gt; [1] \"tracemem[0x8d526b868 -&gt; 0x8d56e6968]:\"\nuntracemem(x)"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/names-values.html#function-calls",
     "href": "presentations/AdvancedR/Foundations/names-values.html#function-calls",
     "title": "Names and Values",
     "section": "Function Calls",
-    "text": "Function Calls\nThe same rules for copying apply to function calls.\n\nf &lt;- function(a) {\n  a\n}\n\ntracemem(x)\n\nz &lt;- f(x)\n\nuntracemem(x)\n\n\n\n# echo: false\n\npaste0(\"&lt;\", obj_addr(x), \"&gt;\")\n\nOnce f() completes, x and z will point to the same object.\n\n\n# echo: false\n\nf &lt;- function(a) {\n  a\n}\n\nz &lt;- f(x)\n\npaste0(\"tracemem[\", obj_addr(x), \" -&gt; \", obj_addr(z), \"]:\")"
+    "text": "Function Calls\nThe same rules for copying apply to function calls.\n\nf &lt;- function(a) {\n  a\n}\n\ntracemem(x)\n#&gt; \"&lt;0xb82219c28&gt;\"\n\nz &lt;- f(x)\n\nuntracemem(x)\n\n\nOnce f() completes, x and z will point to the same object.\n\n\nobj_addr(x)\n#&gt; [1] 0xb82219c28\n\nobj_addr(z)\n#&gt; [1] 0xb82219c28"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/names-values.html#lists",
     "href": "presentations/AdvancedR/Foundations/names-values.html#lists",
     "title": "Names and Values",
     "section": "Lists",
-    "text": "Lists\nElements of lists can also point to objects, but copy-on-modify differs from variables in that a shallow copy is created.\n\nl1 &lt;- list(1, 2, 3)\n\nA list stores references to the values rather than the values. This is important to know for understanding what happens when we modify a list.\n\n\nl2 &lt;- l1\n\n\n\nl2[[3]] &lt;- 4\n\n\nUsing the ref() function from the lobstr package shows the shared bindings across l1 and l2.\n\nref(l1, l2)"
+    "text": "Lists\nElements of lists can also point to objects, but copy-on-modify differs from variables in that a shallow copy is created.\n\nl1 &lt;- list(1, 2, 3)\n\nA list stores references to the values rather than the values. This is important to know for understanding what happens when we modify a list.\n\n\nl2 &lt;- l1\n\n\n\nl2[[3]] &lt;- 4\n\n\nUsing the ref() function from the lobstr package shows the shared bindings across l1 and l2.\n\nref(l1, l2)\n\n#&gt; █ [1:0xb7b9c0c38] &lt;list&gt;\n#&gt; ├─[2:0xb7965c2e0] &lt;dbl&gt;\n#&gt; ├─[3:0xb7965c2a8] &lt;dbl&gt;\n#&gt; └─[4:0xb7965c270] &lt;dbl&gt;\n\n#&gt; █ [5:0xb7b99caf8] &lt;list&gt;\n#&gt; ├─[2:0xb7965c2e0]\n#&gt; ├─[3:0xb7965c2a8]\n#&gt; └─[6:0xb796a54d0] &lt;dbl&gt;"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/names-values.html#data-frames",
@@ -1278,42 +1334,42 @@
     "href": "presentations/AdvancedR/Foundations/names-values.html#character-vectors",
     "title": "Names and Values",
     "section": "Character Vectors",
-    "text": "Character Vectors\nR uses a global string pool where each element in a character vector points to a unique string in the pool.\n\nx &lt;- c(\"a\", \"a\", \"abc\", \"d\")\n\n\nref(x, character = TRUE)\n\n\n\n\n\n\n\nThe global string pool has an impact on the amount of memory a character vector uses, but can otherwise be thought of similarly to numeric vectors."
+    "text": "Character Vectors\nR uses a global string pool where each element in a character vector points to a unique string in the pool.\n\nx &lt;- c(\"a\", \"a\", \"abc\", \"d\")\nref(x, character = TRUE)\n\n#&gt; █ [1:0xb81432af8] &lt;chr&gt;\n#&gt; ├─[2:0xb86933428] &lt;string: \"a\"&gt;\n#&gt; ├─[2:0xb86933428]\n#&gt; ├─[3:0xb784853b8] &lt;string: \"abc\"&gt;\n#&gt; └─[4:0xb86b28040] &lt;string: \"d\"&gt;\n\n\n\nThe global string pool has an impact on the amount of memory a character vector uses, but can otherwise be thought of similarly to numeric vectors."
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/names-values.html#object-size",
     "href": "presentations/AdvancedR/Foundations/names-values.html#object-size",
     "title": "Names and Values",
     "section": "Object Size",
-    "text": "Object Size\nUse lobstr::obj_size to find out how much memory an object takes.\n\nx &lt;- rnorm(1000, mean = 35, sd = 5)\ny &lt;- list(x, x, x)\nx_size &lt;- obj_size(x)\ny_size &lt;- obj_size(y)\n\nsprintf(\n  \"y (size: %s B) is only %s B larger than x (size: %s B)\",\n  y_size,\n  y_size - x_size,\n  x_size\n)\n\n\n\nThe elements of a list are references to the values. Storing x three times is the size of an empty list with three NULL elements.\n\n\n\n\nobj_size(list(NULL, NULL, NULL))\n\n\nCharacter vectors also take up less memory than expected.\n\nfruits &lt;- c(\"apple\", \"apple\", \"apple\")\n\nsprintf(\n  \"Repeating fruit 100 times takes up %s B more in memory\",\n  obj_size(rep(fruits, 100)) - obj_size(fruits)\n)"
+    "text": "Object Size\nUse lobstr::obj_size to find out how much memory an object takes.\n\nset.seed(123)\nx &lt;- rnorm(1000, mean = 35, sd = 5)\ny &lt;- list(x, x, x)\n\nobj_size(x)\n#&gt; 8.05 kB\n\nobj_size(y)\n#&gt; 8.13 kB\n\n\n\nThe elements of a list are references to the values. Storing x three times is the size of an empty list with three NULL elements.\n\n\n\n\n\n\n\n\n\n\n\n\nobj_size(list(NULL, NULL, NULL)) + obj_size(x)\n#&gt; 8.13 kB\n\n\nCharacter vectors also take up less memory than expected.\n\nfruits &lt;- c(\"apple\", \"apple\", \"apple\")\n\n# Repeating Apple 3 Times\nobj_size(fruits)\n#&gt; 136 B\n\n# Repeating Apple 30 Times\nobj_size(rep(fruits, 10))\n#&gt; 344 B\n\n# Repeating Apple 75 Times\nobj_size(rep(fruits, 25))\n#&gt; 704 B"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/names-values.html#object-size-for-shared-values",
     "href": "presentations/AdvancedR/Foundations/names-values.html#object-size-for-shared-values",
     "title": "Names and Values",
     "section": "Object Size for Shared Values",
-    "text": "Object Size for Shared Values\nReferences make it more challenging to think about the size of individual objects. The object size only equals the combined object size if there are no shared values.\n\nvegetables &lt;- c(\"broccoli\", \"broccoli\", \"broccoli\")\nfruits_or_vegetables &lt;- c(\"apple\", \"broccoli\", \"apple\")\n\nobj_size(fruits, vegetables)\n#&gt; 280 B\nobj_size(fruits) + obj_size(vegetables)\n#&gt; 280 B\nobj_size(fruits, fruits_or_vegetables)\n#&gt; 280 B\nobj_size(fruits) + obj_size(fruits_or_vegetables)\n#&gt; 336 B"
+    "text": "Object Size for Shared Values\nReferences make it more challenging to think about the size of individual objects. The object size only equals the combined object size if there are no shared values.\n\nfruits &lt;- c(\"apple\", \"apple\", \"apple\")\nvegetables &lt;- c(\"broccoli\", \"broccoli\", \"broccoli\")\nfruits_or_vegetables &lt;- c(\"apple\", \"broccoli\", \"apple\")\n\nobj_size(fruits, vegetables)\n#&gt; 280 B\nobj_size(fruits) + obj_size(vegetables)\n#&gt; 280 B\nobj_size(fruits, fruits_or_vegetables)\n#&gt; 280 B\nobj_size(fruits) + obj_size(fruits_or_vegetables)\n#&gt; 336 B"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/names-values.html#alternative-representation",
     "href": "presentations/AdvancedR/Foundations/names-values.html#alternative-representation",
     "title": "Names and Values",
     "section": "Alternative Representation",
-    "text": "Alternative Representation\nR has the ability to represent some vectors compactly. For example, using the : when providing a numeric range stores the first and last number only such that every sequence is always the same size.\n\nprint(1:10)\n\n\nobj_size(1:10)\n#&gt; 680 B\nobj_size(1:1000)\n#&gt; 680 B\nobj_size(1:1000000)\n#&gt; 680 B"
+    "text": "Alternative Representation\nR has the ability to represent some vectors compactly. For example, using the : when providing a numeric range stores the first and last number only such that every sequence is always the same size.\n\nprint(1:10)\n#&gt; [1] 1 2 3 4 5 6 7 8 9 10\n\n\nobj_size(1:10)\n#&gt; 680 B\nobj_size(1:1000)\n#&gt; 680 B\nobj_size(1:1000000)\n#&gt; 680 B"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/names-values.html#environments",
     "href": "presentations/AdvancedR/Foundations/names-values.html#environments",
     "title": "Names and Values",
     "section": "Environments",
-    "text": "Environments\nR environments are modified-in-place rather than copied-on-modify. When you modify an environment, all existing bindings to that environment continue to have the same reference.\n\ne1 &lt;- rlang::env(a = 1, b = 2, c = 3)\ne2 &lt;- e1\n\n# e2$c changes with the modification of e1$c\ne1$c &lt;- 4\n\nprint(e2$c)\n#&gt;  4"
+    "text": "Environments\nR environments are modified-in-place rather than copied-on-modify. When you modify an environment, all existing bindings to that environment continue to have the same reference.\n\ne1 &lt;- rlang::env(a = 1, b = 2, c = 3)\ne2 &lt;- e1\n\n# e2$c changes with the modification of e1$c\ne1$c &lt;- 4\n\nprint(e2$c)\n#&gt; [1] 4"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/names-values.html#unbinding-and-the-garbage-collector",
     "href": "presentations/AdvancedR/Foundations/names-values.html#unbinding-and-the-garbage-collector",
     "title": "Names and Values",
     "section": "Unbinding and the garbage collector",
-    "text": "Unbinding and the garbage collector\n\n\n\n# Assigns x to\n# numeric object\nx &lt;- 1:3\n\n\n\n\n# Reassigns x to new\n# numeric object\nx &lt;- 2:4\n\n\n\n\n# Unbinds x from\n# numeric objects\nrm(x)\n\n\n\nAfter running this code, we have two numeric objects not bound to a name. The garbage collector (GC) frees up memory by deleting R objects that are no longer used. The garbage collector runs automatically when R needs more memory to create new objects or manually using the gc function. You can also check the memory used using the lobstr::mem_used function.\n\ngc()\n\nmem_used()"
+    "text": "Unbinding and the garbage collector\n\n# [1] Assigns x to numeric object\nx &lt;- 1:3\n\n# [2] Reassigns x to new numeric object\nx &lt;- 2:4\n\n# [3] Unbinds x from numeric objects\nrm(x)\n\n\n\n\n[1]\n\n\n\n\n[2]\n\n\n\n\n[3]\n\n\n\nAfter running this code, we have two numeric objects not bound to a name. The garbage collector (GC) frees up memory by deleting R objects that are no longer used. The garbage collector runs manually using the gc function or automatically when R needs more memory to create new objects. You can also check the memory used using the lobstr::mem_used function."
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/environments.html#environment-basics",
@@ -3526,498 +3582,5 @@
     "title": "Advanced R Special Topics",
     "section": "",
     "text": "Functional Programming\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nOct 7, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nObject Oriented Programming\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nOct 14, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nMeta-Programming\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nOct 21, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nMeasuring and Improving Performance\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nOct 28, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\nNo matching items"
-<<<<<<< HEAD
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#learning-objectives",
-    "href": "presentations/DataScience/program.html#learning-objectives",
-    "title": "Program",
-    "section": "Learning Objectives",
-    "text": "Learning Objectives\nBy the end of today’s session, you should be able to:\n\nExplain why writing reusable functions saves you time and prevents mistakes\nCreate simple functions with inputs and outputs\nUnderstand why variables inside a function stay inside a function\nWrite functions that work on our study data using { }\nRepeat a task across many participants or variables using for loops and purrr\nRecognize when a loop is the right tool versus a simpler approach\nRecognize a few common base R patterns you’ll see in other people’s code"
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#the-programming-toolkit",
-    "href": "presentations/DataScience/program.html#the-programming-toolkit",
-    "title": "Program",
-    "section": "The Programming Toolkit",
-    "text": "The Programming Toolkit\nThis section shifts from wrangling data to writing your own tools.\nThink of it like the difference between:\n\nFollowing someone else’s recipe every time (what we’ve done so far)\nWriting your own recipe card once, so you (or a labmate) can reuse it anytime\n\n\n\n\n\n\n\nTip\n\n\nThe goal isn’t to turn you into a software engineer — it’s to save you time and reduce copy-paste mistakes in your own analysis scripts."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#chapters-2527",
-    "href": "presentations/DataScience/program.html#chapters-2527",
-    "title": "Program",
-    "section": "Chapters 25–27",
-    "text": "Chapters 25–27\n\n\n\nChapter\nTopic\n\n\n\n\n25\nFunctions\n\n\n26\nIteration\n\n\n27\nA field guide to base R\n\n\n\n\nWe’ll spend most of our time in Chapter 25, since functions are the foundation everything else builds on."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#why-write-functions",
-    "href": "presentations/DataScience/program.html#why-write-functions",
-    "title": "Program",
-    "section": "Why Write Functions?",
-    "text": "Why Write Functions?\nImagine a study where each participant has four measures: steps, sleep hours, mood score, and memory score. You want to rescale each one to a 0-1 scale so they’re comparable.\n\nsleep_study &lt;- tibble::tibble(\n  steps = rnorm(10, 8000, 1500),\n  sleep_hours = rnorm(10, 7, 1),\n  mood_score = rnorm(10, 50, 10),\n  memory_score = rnorm(10, 75, 8)\n)\n\nsleep_study$steps &lt;- (sleep_study$steps -\n  min(sleep_study$steps, na.rm = TRUE)) /\n  (max(sleep_study$steps, na.rm = TRUE) - min(sleep_study$steps, na.rm = TRUE))\nsleep_study$sleep_hours &lt;- (sleep_study$sleep_hours -\n  min(sleep_study$sleep_hours, na.rm = TRUE)) /\n  (max(sleep_study$sleep_hours, na.rm = TRUE) -\n    min(sleep_study$sleep_hours, na.rm = TRUE))\nsleep_study$mood_score &lt;- (sleep_study$mood_score -\n  min(sleep_study$mood_score, na.rm = TRUE)) /\n  (max(sleep_study$mood_score, na.rm = TRUE) -\n    min(sleep_study$mood_score, na.rm = TRUE))\nsleep_study$memory_score &lt;- (sleep_study$memory_score -\n  min(sleep_study$memory_score, na.rm = TRUE)) /\n  (max(sleep_study$memory_score, na.rm = TRUE) -\n    min(sleep_study$memory_score, na.rm = TRUE))\n\n\n\n\n\n\n\nTip\n\n\nThink of this like writing the same reminder note on four different sticky notes, instead of writing it once and photocopying it. If the reminder needs to change, you now have to update all four notes by hand and it’s easy to miss one."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#benefits-of-functions",
-    "href": "presentations/DataScience/program.html#benefits-of-functions",
-    "title": "Program",
-    "section": "Benefits of Functions",
-    "text": "Benefits of Functions\nA function is like a labeled button on a remote control. Instead of explaining “press this specific sequence of buttons” every time, you just press “Power.”\n\nGive the process a name you can reuse\nFix it in one place if something’s wrong\nAvoid copy-paste mistakes (like updating 3 of the 4 lines and forgetting the 4th)\nMake your script easier for a labmate (or future-you) to read\n\n\nrescale01 &lt;- function(x) {\n  (x - min(x, na.rm = TRUE)) /\n    (max(x, na.rm = TRUE) - min(x, na.rm = TRUE))\n}\n\nrescale01(c(0, 5, 10))\n#&gt; [1] 0.0 0.5 1.0"
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#vector-functions-think-recipe-card",
-    "href": "presentations/DataScience/program.html#vector-functions-think-recipe-card",
-    "title": "Program",
-    "section": "Vector Functions – Think: Recipe Card",
-    "text": "Vector Functions – Think: Recipe Card\nA function is just a recipe card:\n\nName – the name of the dish (e.g., “Rescale a Score”)\nIngredients – the arguments you need (e.g., “a column of numbers”)\nSteps – what to do with those ingredients\n\nYou write the card once. After that, you never have to re-explain the recipe – you just say the name.\n\nrescale01 &lt;- function(x) {\n  # &lt;- the \"name\" and \"ingredient\" (x)\n  rng &lt;- range(x, na.rm = TRUE) # &lt;- step 1: find the smallest & largest values\n  (x - rng[1]) / (rng[2] - rng[1]) # &lt;- step 2: rescale using those two values\n}\n\nrescale01(c(-10, 0, 10, 30))\n#&gt; [1] 0.00 0.25 0.50 1.00"
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#applying-your-function",
-    "href": "presentations/DataScience/program.html#applying-your-function",
-    "title": "Program",
-    "section": "Applying Your Function",
-    "text": "Applying Your Function\nOnce your function exists, use it on all four of your study measures at once – no more copy-pasting the same line four times.\n\nsleep_study |&gt;\n  dplyr::mutate(\n    dplyr::across(steps:memory_score, rescale01)\n  )\n\n\ndplyr::across() says “apply this function to every column I list” – one line replaces four repeated ones."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#naming-functions",
-    "href": "presentations/DataScience/program.html#naming-functions",
-    "title": "Program",
-    "section": "Naming Functions",
-    "text": "Naming Functions\nThink of function names like labels on file folders in a filing cabinet. If all your folders about “measuring” start with measure_, you can find them instantly.\n\n# Good -- easy to find every \"check\" function later\ncheck_steps()\ncheck_sleep()\ncheck_mood()\n\n# Harder to search for -- the shared word is buried at the end\nsteps_check()\nsleep_check()\nmood_check()\n\n\nUse verbs (actions): check_, measure_, summarize_\nUse snake_case, not camelCase\nGroup related functions with a shared prefix"
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#data-arguments-vs.-detail-arguments",
-    "href": "presentations/DataScience/program.html#data-arguments-vs.-detail-arguments",
-    "title": "Program",
-    "section": "Data Arguments vs. Detail Arguments",
-    "text": "Data Arguments vs. Detail Arguments\nThink of ordering matcha: the type of drink is the main thing you’re ordering (data argument). Milk and sweetness level are details you can adjust, and the barista already has a default in mind if you don’t specify.\n\nmean_ci &lt;- function(x, conf = 0.95) {\n  se &lt;- sd(x) / sqrt(length(x))\n  alpha &lt;- 1 - conf\n  mean(x) + se * qnorm(c(alpha / 2, 1 - alpha / 2))\n}\n\nmean_ci(sleep_study$mood_score)\n#&gt; [1] 45.2 54.8\n\n# ask for a wider confidence interval\nmean_ci(sleep_study$mood_score, conf = 0.99)\n#&gt; [1] 42.1 57.9"
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#checking-argument-values",
-    "href": "presentations/DataScience/program.html#checking-argument-values",
-    "title": "Program",
-    "section": "Checking Argument Values",
-    "text": "Checking Argument Values\nBefore running a calculation, it’s worth checking that the inputs actually go together – the same instinct as checking you have a lid for every container before you start packing lunches. Mismatched counts mean stop, not guess.\n\nwt_mean &lt;- function(x, w) {\n  if (length(x) != length(w)) {\n    stop(\"`x` and `w` must be the same length\")\n  }\n  sum(w * x) / sum(w)\n}\n\nwt_mean(sleep_study$mood_score, w = c(1, 1, 1, 2, 1, 1, 1, 1, 1, 1))\n#&gt; [1] 51.4\n\nwt_mean(sleep_study$mood_score[1:5], w = 1:6)\n#&gt; Error: `x` and `w` must be the same length"
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#stopifnot",
-    "href": "presentations/DataScience/program.html#stopifnot",
-    "title": "Program",
-    "section": "stopifnot()",
-    "text": "stopifnot()\nSame idea, fewer words. stopifnot() lets you write the same check in one line instead of a full if/stop() block.\n\nwt_mean &lt;- function(x, w) {\n  stopifnot(length(x) == length(w))\n  sum(w * x) / sum(w)\n}\n\nwt_mean(sleep_study$mood_score[1:5], w = 1:6)\n#&gt; Error: length(x) == length(w) is not TRUE\n\n\n\n\n\n\n\nTip\n\n\nstopifnot() trades a custom error message for brevity – great for quick, internal sanity checks."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#dot-dot-dot-...-think-a-forwarding-address",
-    "href": "presentations/DataScience/program.html#dot-dot-dot-...-think-a-forwarding-address",
-    "title": "Program",
-    "section": "Dot-Dot-Dot (...) – Think: A Forwarding Address",
-    "text": "Dot-Dot-Dot (...) – Think: A Forwarding Address\nThink of ... as a message from your boss that isn’t meant for you. Your job isn’t to read or use the message—you simply pass it along to the person who needs it.\nThe problem ... solves: say you write a function that wraps round(), but you also want the user to be able to control round()’s digits argument – without you having to type out digits = digits by hand.\n\n# Without ...  you'd have to name every possible extra argument yourself\nsummarize_score &lt;- function(x, digits) {\n  round(mean(x, na.rm = TRUE), digits)\n}\n\n# With ...   any extra arguments the user supplies get forwarded to round()\nsummarize_score &lt;- function(x, ...) {\n  round(mean(x, na.rm = TRUE), ...)\n}\n\nsummarize_score(sleep_study$mood_score)\n#&gt; [1] 50   (round() used its own default, digits = 0)\n\nsummarize_score(sleep_study$mood_score, digits = 2)\n#&gt; [1] 50.24   (digits = 2 traveled through `...` straight into round())\n\n\n\n\n\n\n\nTip\n\n\n\nYou call summarize_score(..., digits = 2).\nsummarize_score() doesn’t use digits, so it stores it in ....\nWhen round() is called, ... passes digits = 2 along.\nround() knows what digits means, so it rounds to 2 decimal places.\n\n\n\n\n\n“I don’t need this argument, but I’ll pass it to the next function that does.”"
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#return-values-think-vending-machine",
-    "href": "presentations/DataScience/program.html#return-values-think-vending-machine",
-    "title": "Program",
-    "section": "Return Values – Think: Vending Machine",
-    "text": "Return Values – Think: Vending Machine\nA function is like a vending machine: you put something in, and it gives back the last thing it computed – unless it stops early (like a machine flashing “sold out”).\n\nsame_two &lt;- function(x1, x2, x3, x4) {\n  if (!is.finite(x1) || !is.finite(x2)) {\n    return(NA) # &lt;- stops early, like the machine flashing \"can't process this\"\n  }\n  (x1 == x2) & (x3 == x4)\n}\n\nsame_two(1, 1, 2, 2)\n#&gt; [1] TRUE\n\nsame_two(NA, 1, 2, 2)\n#&gt; [1] NA"
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#writing-pipeable-functions",
-    "href": "presentations/DataScience/program.html#writing-pipeable-functions",
-    "title": "Program",
-    "section": "Writing Pipeable Functions",
-    "text": "Writing Pipeable Functions\nThink of this like an assembly line: each station passes the box along without opening it and announcing what’s inside. A pipeable function passes the data frame along, rather than printing or plotting partway through.\n\nstandardize &lt;- function(df) {\n  df |&gt;\n    dplyr::mutate(dplyr::across(dplyr::where(is.numeric), rescale01))\n}\n\nsleep_study |&gt; standardize()\n\n\nReturning a data frame (instead of printing it) means you can keep piping more steps afterward."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#environment-and-scoping",
-    "href": "presentations/DataScience/program.html#environment-and-scoping",
-    "title": "Program",
-    "section": "Environment and Scoping",
-    "text": "Environment and Scoping\nIf a friend texts you “can you grab mine?” it only makes sense if you were just talking about a specific thing, like a sweatshirt, a few messages earlier. Outside that context, “mine” doesn’t mean anything.\nR works the same way with variables inside a function: it looks up a name’s value based on the immediate context (the function) where it’s written, not some unrelated part of your script.\n\nmood_baseline &lt;- 10\n\nf &lt;- function(x) {\n  mood_baseline &lt;- 1 # &lt;- only means something inside this function\n  x + mood_baseline\n}\n\nf(5)\n#&gt; [1] 6\n\nmood_baseline\n#&gt; [1] 10   # &lt;- untouched outside the function\n\n\nThis is called lexical scoping – R looks up variables based on where a function was written, not where it happens to be called from."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#scoping-take-two-why-it-actually-matters",
-    "href": "presentations/DataScience/program.html#scoping-take-two-why-it-actually-matters",
-    "title": "Program",
-    "section": "Scoping, Take Two – Why It Actually Matters",
-    "text": "Scoping, Take Two – Why It Actually Matters\nA second example, with the direction reversed – notice that a function can see variables that already exist outside it, it just can’t permanently change them.\n\nadjustment &lt;- 5\n\nadd_adjustment &lt;- function(x) {\n  x + adjustment # &lt;- reads `adjustment` from outside, since it wasn't defined inside\n}\n\nadd_adjustment(10)\n#&gt; [1] 15\n\n# Now the function tries to update it...\nadd_adjustment &lt;- function(x) {\n  adjustment &lt;- adjustment + 1 # &lt;- creates a NEW local `adjustment`, doesn't touch the outside one\n  x + adjustment\n}\n\nadd_adjustment(10)\n#&gt; [1] 16\n\nadjustment\n#&gt; [1] 5   # &lt;- still 5! The outside copy was never touched"
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#the-indirection-problem",
-    "href": "presentations/DataScience/program.html#the-indirection-problem",
-    "title": "Program",
-    "section": "The Indirection Problem",
-    "text": "The Indirection Problem\nWhen you use the tidyverse interactively, you can type column names directly into functions:\n\nsleep_study |&gt;\n  dplyr::group_by(group) |&gt;\n  dplyr::summarize(mean(mood_score))\n\nBut when you write your own functions, R needs to know whether you mean: - the name of the column you provided, or - the name of the argument inside your function.\nThis creates an indirection problem: the column name is being passed through another variable.\n\ngrouped_mean &lt;- function(df, group_var, mean_var) {\n  df |&gt;\n    dplyr::group_by(group_var) |&gt;\n    dplyr::summarize(mean(mean_var))\n}\n\ngrouped_mean(sleep_study, group, mood_score)\n# Error: Column `group_var` is not found.\n\n\n\n\n\n\n\nTip\n\n\nThink of it this way: You typed group, but inside the function, R only sees the name group_var. So instead of looking for a column named group, it looks for a column literally named group_var—which does not exist. That’s why the function fails. On the next slide, we’ll see how { } tells R to use the column the user actually supplied."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#embracing-with-pointing-not-spelling-it-out",
-    "href": "presentations/DataScience/program.html#embracing-with-pointing-not-spelling-it-out",
-    "title": "Program",
-    "section": "Embracing with { } – Pointing, Not Spelling It Out",
-    "text": "Embracing with { } – Pointing, Not Spelling It Out\nThink of { } like pointing at something instead of spelling its name out letter by letter. It tells the function “treat this as the actual column the user means,” not a generic placeholder.\n\ngrouped_mean &lt;- function(df, group_var, mean_var) {\n  df |&gt;\n    dplyr::group_by({{ group_var }}) |&gt;\n    dplyr::summarize(mean = mean({{ mean_var }}, na.rm = TRUE))\n}\n\ngrouped_mean(sleep_study, group, mood_score)\n\n#&gt; # A tibble: 2 x 2\n#&gt;   group      mean\n#&gt;   &lt;chr&gt;     &lt;dbl&gt;\n#&gt; 1 control    48.3\n#&gt; 2 treatment  53.1\n\n\nRule of thumb: if you wrote { } around it, ask “am I passing this argument straight into a tidyverse verb like group_by(), summarize(), filter(), or aes()?” If yes, it needs { }. If you’re just using the value directly in arithmetic (like x + 1), it doesn’t."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#when-to-embrace",
-    "href": "presentations/DataScience/program.html#when-to-embrace",
-    "title": "Program",
-    "section": "When to Embrace",
-    "text": "When to Embrace\n\nEmbrace ({ }) when the argument is a column name from the data\nDon’t embrace when the argument is a plain value, like TRUE/FALSE or a number\n\n\ncount_prop &lt;- function(df, var, sort = FALSE) {\n  df |&gt;\n    dplyr::count({{ var }}, sort = sort) |&gt;\n    dplyr::mutate(prop = n / sum(n))\n}\n\nsleep_study |&gt; count_prop(group, sort = TRUE)\n\n\nsort is just TRUE or FALSE – a plain value, so it’s passed through normally, no pointing required."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#style-conventions-for-functions",
-    "href": "presentations/DataScience/program.html#style-conventions-for-functions",
-    "title": "Program",
-    "section": "Style Conventions for Functions",
-    "text": "Style Conventions for Functions\nThink of clean function style like legible handwriting – it’s not just about being “correct,” it’s about someone else (or you, in six months) being able to read it quickly.\n\n# Easy to read\nadd_full_name &lt;- function(data, first, last) {\n  data |&gt;\n    dplyr::mutate(name = paste(first, last))\n}\n\n# Hard to read -- same logic, but cramped\naddFullName &lt;- function(data, first, last) {\n  data |&gt; dplyr::mutate(name = paste(first, last))\n}"
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#chapter-25-summary",
-    "href": "presentations/DataScience/program.html#chapter-25-summary",
-    "title": "Program",
-    "section": "Chapter 25 Summary",
-    "text": "Chapter 25 Summary\n\nWrite a function whenever you’d otherwise copy-paste the same code more than twice\nA function is a recipe card: name, ingredients (arguments), steps (body)\nUse stopifnot() or if/stop() as an alarm bell for bad inputs\n... forwards extra arguments to another function inside yours, unopened\nVariables inside a function only mean something inside that function (scope)\nUse { } to point at a column name passed into your function"
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#why-iterate",
-    "href": "presentations/DataScience/program.html#why-iterate",
-    "title": "Program",
-    "section": "Why Iterate?",
-    "text": "Why Iterate?\nImagine checking ten participants’ files one at a time, writing down the median steps for each. Iteration is like having a helper who does the same repetitive task for you, one participant at a time, without you copy-pasting the same line ten times.\n\nsleep_study &lt;- tibble::tibble(\n  p1 = rnorm(10),\n  p2 = rnorm(10),\n  p3 = rnorm(10),\n  p4 = rnorm(10)\n)\n\n# Copy-paste approach -- tedious and easy to mess up\nmedian(sleep_study$p1)\nmedian(sleep_study$p2)\nmedian(sleep_study$p3)\nmedian(sleep_study$p4)\n\n\n\n\n\n\n\nTip\n\n\nJust like with functions, repeated code is your cue that a loop (or purrr) could help."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#for-loops-think-a-checklist",
-    "href": "presentations/DataScience/program.html#for-loops-think-a-checklist",
-    "title": "Program",
-    "section": "for Loops – Think: A Checklist",
-    "text": "for Loops – Think: A Checklist\nA for loop is like working through a checklist: you have a list of items (the sequence), something you do to each one (the body), and somewhere you record the result (the output).\n\noutput &lt;- vector(\"double\", ncol(sleep_study))\n\nfor (i in seq_along(sleep_study)) {\n  output[[i]] &lt;- median(sleep_study[[i]])\n}\n\noutput\n#&gt; [1] -0.245  0.281 -0.123  0.132\n\n\nseq_along(sleep_study) is safer than 1:ncol(sleep_study) – it behaves correctly even if there are zero columns, the same way a checklist with zero items shouldn’t crash your morning."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#for-loop-variation-modifying-in-place",
-    "href": "presentations/DataScience/program.html#for-loop-variation-modifying-in-place",
-    "title": "Program",
-    "section": "For Loop Variation: Modifying in Place",
-    "text": "For Loop Variation: Modifying in Place\nSometimes, instead of writing new results elsewhere, you want to edit your own notes directly – like updating a participant’s chart in place rather than starting a new one.\n\nsleep_study &lt;- tibble::tibble(\n  p1 = rnorm(10),\n  p2 = rnorm(10),\n  p3 = rnorm(10),\n  p4 = rnorm(10)\n)\n\nfor (i in seq_along(sleep_study)) {\n  sleep_study[[i]] &lt;- rescale01(sleep_study[[i]])\n}"
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#for-loop-variation-unknown-output-length",
-    "href": "presentations/DataScience/program.html#for-loop-variation-unknown-output-length",
-    "title": "Program",
-    "section": "For Loop Variation: Unknown Output Length",
-    "text": "For Loop Variation: Unknown Output Length\nIf you don’t know how much output you’ll end up with, it’s like catching rain in a bucket – you don’t know how much will fall, so you use a flexible container (a list) rather than a rigid one you’d have to keep resizing.\n\nout &lt;- list()\ni &lt;- 1\n\nwhile (length(some_vector &lt;- rnorm(1)) &gt; 0 && i &lt;= 5) {\n  out[[i]] &lt;- some_vector\n  i &lt;- i + 1\n}\n\nstr(out)\n\n\n\n\n\n\n\nTip\n\n\nGrowing a vector with c() inside a loop is slow – collecting results in a list and combining once at the end is much faster."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#for-loop-variation-unknown-sequence-length",
-    "href": "presentations/DataScience/program.html#for-loop-variation-unknown-sequence-length",
-    "title": "Program",
-    "section": "For Loop Variation: Unknown Sequence Length",
-    "text": "For Loop Variation: Unknown Sequence Length\nA for loop always needs to know how many times to repeat before it starts. A while loop is for when you don’t know that number in advance – you just know the condition that should make it stop.\nSimplest possible example first:\n\ncount &lt;- 0\n\nwhile (count &lt; 5) {\n  count &lt;- count + 1\n}\n\ncount\n#&gt; [1] 5\n\nRead it like a sentence: “while count is less than 5, add 1 to it.” Every while loop needs something inside it (here, count &lt;- count + 1) that eventually makes the condition false – otherwise it never stops.\nA more realistic study example: taking a participant’s blood pressure repeatedly until it settles below a threshold, rather than after a fixed number of attempts.\n\ncheck_reading &lt;- function() sample(c(\"high\", \"normal\"), 1)\n\nattempts &lt;- 0\nnormal_in_a_row &lt;- 0\n\nwhile (normal_in_a_row &lt; 3) {\n  if (check_reading() == \"normal\") {\n    normal_in_a_row &lt;- normal_in_a_row + 1\n  } else {\n    normal_in_a_row &lt;- 0\n  }\n  attempts &lt;- attempts + 1\n}\n\nattempts\n#&gt; [1] 7\n\n\nUse a for loop when you know the number of items ahead of time (10 participants, 4 columns). Use a while loop when you’re waiting for something to happen and don’t know how many tries it’ll take."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#introducing-purrr-the-assembly-line-robot",
-    "href": "presentations/DataScience/program.html#introducing-purrr-the-assembly-line-robot",
-    "title": "Program",
-    "section": "Introducing purrr – The Assembly-Line Robot",
-    "text": "Introducing purrr – The Assembly-Line Robot\npurrr is like an assembly-line robot: tell it once what to do to one item, and it applies that same action to every item in the box – no loop needed.\n\npurrr::map_dbl(sleep_study, median)\n#&gt;      p1     p2     p3     p4\n#&gt; -0.245  0.281 -0.123  0.132\n\npurrr::map_dbl(sleep_study, mean)\npurrr::map_dbl(sleep_study, sd)\n\n\nEvery map_*() function takes a set of items and a function, and applies the function to each one – just like our helper working through a checklist, but in one line."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#the-map-family-different-bins-for-different-outputs",
-    "href": "presentations/DataScience/program.html#the-map-family-different-bins-for-different-outputs",
-    "title": "Program",
-    "section": "The map() Family – Different Bins for Different Outputs",
-    "text": "The map() Family – Different Bins for Different Outputs\nThink of each map_*() variant as a different colored bin for the result you’re expecting to come out. Choosing the right bin isn’t optional decoration – it’s what makes purrr more predictable than sapply() (more on that in Chapter 27).\n\n\n\n\n\n\n\n\nFunction\nReturns\nExample use\n\n\n\n\nmap()\nlist (a mixed bin – always works, but output isn’t simplified)\npulling out model objects\n\n\nmap_lgl()\nTRUE/FALSE values\n“is this column numeric?”\n\n\nmap_int()\nwhole numbers\ncounts, row numbers\n\n\nmap_dbl()\ndecimal numbers\nmeans, medians, SDs\n\n\nmap_chr()\ntext\nlabels, formatted strings\n\n\n\n\npurrr::map_chr(sleep_study, \\(x) round(mean(x), 2) |&gt; as.character())\n\n\n\n\n\n\n\nTip\n\n\nIf the function you’re applying doesn’t actually return the type you asked for (e.g. you use map_dbl() but the function sometimes returns text), purrr throws an error right away instead of silently giving you a mismatched result – that’s the whole point of picking a specific bin."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#iterating-over-multiple-vectors-map2",
-    "href": "presentations/DataScience/program.html#iterating-over-multiple-vectors-map2",
-    "title": "Program",
-    "section": "Iterating over Multiple Vectors: map2()",
-    "text": "Iterating over Multiple Vectors: map2()\nThink of map2() like matching pairs of socks – it lines up two lists side by side and processes them together, one pair at a time (for example, each participant’s baseline score paired with their follow-up score).\n\nsims &lt;- tibble::tibble(n = c(10, 20, 30), sd = c(1, 5, 10))\n\nsims |&gt;\n  dplyr::mutate(\n    sample = purrr::map2(n, sd, \\(n, sd) rnorm(n, sd = sd))\n  )\n\n\nNotice the pattern: map() walks one list and hands your function one value at a time. map2() walks two lists in lockstep and hands your function two values at a time (matched by position – item 1 with item 1, item 2 with item 2, and so on)."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#iterating-over-many-arguments-pmap",
-    "href": "presentations/DataScience/program.html#iterating-over-many-arguments-pmap",
-    "title": "Program",
-    "section": "Iterating over Many Arguments: pmap()",
-    "text": "Iterating over Many Arguments: pmap()\nWhen you have three or more lists to line up together, pmap() works like coordinating three ingredient lists at once, matched row by row. The lists get bundled into a single list() so pmap() knows how many there are.\n\nparams &lt;- tibble::tribble(\n  ~mean , ~sd , ~n ,\n      1 ,   1 , 10 ,\n      2 ,   5 , 20 ,\n      3 ,  10 , 30\n)\n\nparams |&gt;\n  dplyr::mutate(sim = purrr::pmap(list(mean, sd, n), rnorm))\n\n\n\n\n\n\n\nTip\n\n\nSame family, same idea, just more inputs: map() = 1 list in, map2() = 2 lists in, pmap() = however many lists you bundle into list(...). You’ll almost always use pmap() with a data frame like params above, where each row is one full set of arguments."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#chapter-26-summary",
-    "href": "presentations/DataScience/program.html#chapter-26-summary",
-    "title": "Program",
-    "section": "Chapter 26 Summary",
-    "text": "Chapter 26 Summary\n\nA for loop needs a checklist (sequence), a task (body), and a place to record results (output)\nUse a while loop when you don’t know how many tries it will take\npurrr::map_*() replaces many common loops with a single line\nmap2() and pmap() line up multiple lists together, item by item\nPrefer map() variants over for loops when possible – less code, fewer places to make a mistake"
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#why-learn-base-r",
-    "href": "presentations/DataScience/program.html#why-learn-base-r",
-    "title": "Program",
-    "section": "Why Learn Base R?",
-    "text": "Why Learn Base R?\nEven if you write tidyverse code day-to-day, you’ll run into base R – in older scripts, Stack Overflow answers, or a colleague’s code. Think of it like learning to read an older cookbook’s instructions, even if you cook differently yourself.\n\n\n\n\n\n\nTip\n\n\nThe goal isn’t to switch back to base R – it’s to be able to read it without getting stuck."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#selecting-elements",
-    "href": "presentations/DataScience/program.html#selecting-elements",
-    "title": "Program",
-    "section": "Selecting Elements: [",
-    "text": "Selecting Elements: [\nThink of [ like grabbing a handful of jellybeans from a jar – whatever you pull out is still the same type of thing (still jellybeans, still a vector).\n\nx &lt;- c(10, 20, 30, 40, 50)\n\nx[c(1, 3)]\n#&gt; [1] 10 30\n\nx[x &gt; 25]\n#&gt; [1] 30 40 50\n\nx[-c(1, 2)]\n#&gt; [1] 30 40 50"
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#selecting-elements-and",
-    "href": "presentations/DataScience/program.html#selecting-elements-and",
-    "title": "Program",
-    "section": "Selecting Elements: [[ and $",
-    "text": "Selecting Elements: [[ and $\nThink of [[ and $ like reaching into a labeled folder and pulling out one specific document by name – you get just that one thing, not the whole folder.\n\nsleep_study[[\"mood_score\"]]\nsleep_study$mood_score\n\n# Difference with [ vs [[ on a list\nl &lt;- list(a = 1, b = \"text\")\nl[\"a\"] # still a small folder containing the number\nl[[\"a\"]] # just the number itself, 1\n\n\n[ keeps the folder; [[/$ reach inside and hand you the single item."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#the-apply-family",
-    "href": "presentations/DataScience/program.html#the-apply-family",
-    "title": "Program",
-    "section": "The apply Family",
-    "text": "The apply Family\nBase R’s apply functions are the older version of the assembly-line robot we met with purrr::map() – same idea, slightly different tools.\n\nsleep_study &lt;- tibble::tibble(\n  p1 = rnorm(10),\n  p2 = rnorm(10),\n  p3 = rnorm(10),\n  p4 = rnorm(10)\n)\n\nlapply(sleep_study, mean) # returns a list\nsapply(sleep_study, mean) # tries to simplify to a plain vector\n\n\n\n\n\n\n\nTip\n\n\nsapply()’s automatic simplifying is convenient but unpredictable – purrr’s typed map_*() functions were designed to fix that unpredictability."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#for-loops-in-base-r",
-    "href": "presentations/DataScience/program.html#for-loops-in-base-r",
-    "title": "Program",
-    "section": "for Loops in Base R",
-    "text": "for Loops in Base R\nA base R for loop works exactly like the checklist we saw in Chapter 26 – no extra packages required, like a manual tally counter you click by hand.\n\ntotal &lt;- 0\n\nfor (i in 1:10) {\n  total &lt;- total + i\n}\n\ntotal\n#&gt; [1] 55"
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#chapter-27-summary",
-    "href": "presentations/DataScience/program.html#chapter-27-summary",
-    "title": "Program",
-    "section": "Chapter 27 Summary",
-    "text": "Chapter 27 Summary\n\n[ grabs a handful and keeps the same container type; [[/$ pull out one labeled item\nlapply()/sapply() are base R’s version of purrr::map()\nBase R for loops work the same everywhere, with or without extra packages\nBeing able to read base R helps when you run into older code or documentation"
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#wrap-up",
-    "href": "presentations/DataScience/program.html#wrap-up",
-    "title": "Program",
-    "section": "Wrap-Up",
-    "text": "Wrap-Up\n\nChapter 25: Functions are recipe cards – write once, reuse anywhere. Master { } for functions that work on your study data\nChapter 26: Iteration with for loops and purrr::map() automates repetitive tasks across participants, columns, or files\nChapter 27: Base R subsetting and the apply family are worth recognizing, even if you write mostly tidyverse code day-to-day\n\n\nNow let’s put functions and iteration into practice with our own study data."
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#practice-exercise-build-a-function-then-automate-it",
-    "href": "presentations/DataScience/program.html#practice-exercise-build-a-function-then-automate-it",
-    "title": "Program",
-    "section": "Practice Exercise: Build a Function, Then Automate It",
-    "text": "Practice Exercise: Build a Function, Then Automate It\nNow use what you have learned to build some functions!\n\nsleep_study &lt;- tibble::tibble(\n  steps = rnorm(10, 8000, 1500),\n  sleep_hours = rnorm(10, 7, 1),\n  mood_score = rnorm(10, 50, 10),\n  memory_score = rnorm(10, 75, 8)\n)"
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#tier-1-write-a-one-step-function",
-    "href": "presentations/DataScience/program.html#tier-1-write-a-one-step-function",
-    "title": "Program",
-    "section": "Tier 1: Write a One-Step Function",
-    "text": "Tier 1: Write a One-Step Function\nMany temperature readings during clinic visits or studies report temperature in Fahrenheit, but we often need Celsius for analysis. Write a function called f_to_c() that converts a temperature from Fahrenheit to Celsius.\nFormula: C = (F - 32) * 5/9\n\nf_to_c &lt;- function(temp_f) {\n  # your code here\n}\n\nf_to_c(98.6)\nf_to_c(32)"
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#tier-2-add-one-more-step",
-    "href": "presentations/DataScience/program.html#tier-2-add-one-more-step",
-    "title": "Program",
-    "section": "Tier 2: Add One More Step",
-    "text": "Tier 2: Add One More Step\nPhysical activity trackers usually log steps, but it’s often more useful to talk about distance walked. Write a function called steps_to_miles() that estimates miles walked from a step count, then adds a second step and a default argument round the result, and let the user choose how many decimal places (defaulting to 1 if they don’t say).\nFormula: assume an average stride length of 2.5 feet, and that there are 5,280 feet in a mile: miles = steps * 2.5 / 5280\n\nsteps_to_miles &lt;- function(steps, digits = 1) {\n  # your code here\n  # step 1: convert steps to miles using the formula above\n  # step 2: round the result to `digits` decimal places\n}\n\nsteps_to_miles(8000)\nsteps_to_miles(8000, digits = 3)"
-  },
-  {
-    "objectID": "presentations/DataScience/program.html#tier-3-apply-it-to-many-values-with-purrr",
-    "href": "presentations/DataScience/program.html#tier-3-apply-it-to-many-values-with-purrr",
-    "title": "Program",
-    "section": "Tier 3: Apply It to Many Values with purrr",
-    "text": "Tier 3: Apply It to Many Values with purrr\nReal study data isn’t a single step count – it’s a whole column of them, one per participant. Instead of calling steps_to_miles() once per person, use purrr::map_dbl() to apply it to an entire vector at once, the same way you saw with median() and mean() in Chapter 26.\n\ndaily_steps &lt;- c(4200, 6100, 8000, 9800, 11500)\n\n# your code here\n# use purrr::map_dbl() to apply steps_to_miles() to every value in daily_steps\n\n# or, inside a data frame:\ntibble::tibble(steps = daily_steps) |&gt;\n  dplyr::mutate(\n    miles = # your code here\n  )\n\nStretch goal: try passing digits = 3 as an extra argument to your map_dbl() call – extra arguments after the function name get forwarded to steps_to_miles() for every value, the same forwarding idea as ... from Chapter 25."
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#why-communication-matters",
-    "href": "presentations/DataScience/communicate.html#why-communication-matters",
-    "title": "Communicate",
-    "section": "Why Communication Matters",
-    "text": "Why Communication Matters\nR4DS argues that communication is part of data science.\nData science is not:\nData → Analysis → Done\nIt is:\nData → Analysis → Communication → Impact\n\nAsk: “If nobody understands your work, did the analysis accomplish its goal?”"
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#learning-objectives",
-    "href": "presentations/DataScience/communicate.html#learning-objectives",
-    "title": "Communicate",
-    "section": "Learning Objectives",
-    "text": "Learning Objectives\nBy the end of today’s session, you should be able to understand:\n\nhow Quarto documents are structured\nhow code and narrative work together\nhow to render documents into polished outputs\nthe foundations for reproducible research communication\n\n\nKey teaching goal: Communication and reproducibility, not memorization of syntax. Many participants will remember concepts better than commands."
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#research-communication",
-    "href": "presentations/DataScience/communicate.html#research-communication",
-    "title": "Communicate",
-    "section": "Research Communication",
-    "text": "Research Communication\n\n\nHow many of you have:\n\ncopied a figure from R into PowerPoint?\ncopied a table into Word?\nhad to recreate a figure months later?\nstruggled to remember how results were generated? Spend 2-3 minutes discussing. This creates buy-in for reproducibility."
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#communicate",
-    "href": "presentations/DataScience/communicate.html#communicate",
-    "title": "Communicate",
-    "section": "Communicate",
-    "text": "Communicate\n\nChapters 28-29\n\n\n\nChapter\nTopic\n\n\n\n\n28\nQuarto\n\n\n29\nQuarto formats\n\n\n\n\nR4DS argues that communication is part of data science.\nData science is not:\nData → Analysis → Done\nIt is:\nData → Analysis → Communication → Impact Lucky for you, this section focuses on the technial mechanics of Communication, not the act of conveying your thoughts and ideas to other people. That’s up to you and your skills. How many of you have:\n\ncopied a figure from R into PowerPoint?\ncopied a table into Word?\nhad to recreate a figure months later?\nstruggled to remember how results were generated? Spend 2-3 minutes discussing. This creates buy-in for reproducibility. Ask: “If nobody understands your work, did the analysis accomplish its goal?”"
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#communicate---chapters-28-29",
-    "href": "presentations/DataScience/communicate.html#communicate---chapters-28-29",
-    "title": "Communicate",
-    "section": "Communicate - Chapters 28-29",
-    "text": "Communicate - Chapters 28-29\n\n\n\n\nChapter\nTopic\n\n\n\n\n28\nQuarto\n\n\n29\nQuarto formats\n\n\n\n\nLucky for you, this section focuses on the technial mechanics of Communication, not the act of conveying your thoughts and ideas to other people. That’s up to you and your skills. How many of you have:\n\ncopied a figure from R into PowerPoint?\ncopied a table into Word?\nhad to recreate a figure months later?\nstruggled to remember how results were generated? Spend 2-3 minutes discussing. This creates buy-in for reproducibility."
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#chapter-28-quarto",
-    "href": "presentations/DataScience/communicate.html#chapter-28-quarto",
-    "title": "Communicate",
-    "section": "Chapter 28: Quarto",
-    "text": "Chapter 28: Quarto"
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#basics",
-    "href": "presentations/DataScience/communicate.html#basics",
-    "title": "Communicate",
-    "section": "Basics",
-    "text": "Basics\nWhat is Quarto? A publishing system for creating reproducible documents by combining code, text, and visualizations.\nEvery Quarto document contains four building blocks:\n\nYAML – document settings (title, author, output)\nMarkdown – narrative text\nCode chunks – R code that performs analyses\nRendered output – tables, figures, and results\n\nExample:\n```text\n---\ntitle: \"Exercise Intervention Results\"\nauthor: \"Morgan Brucks\"\nformat: html\n---\n\n## Participant Characteristics\n\nThis report summarizes baseline demographics.\n\n::: {.cell}\n\n```{.r .cell-code}\nsummary(demographics)\n```\n:::\n\n\n\n\n\n\nNote\n\n\nThink of Quarto as a recipe:\n\nYAML tells Quarto what to make.\nMarkdown explains the story.\nCode performs the analysis.\nRendering produces the finished document."
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#code-chunks",
-    "href": "presentations/DataScience/communicate.html#code-chunks",
-    "title": "Communicate",
-    "section": "Code Chunks",
-    "text": "Code Chunks\nCode chunks execute your analysis and insert the results directly into your document. Chunk labels and options help organize your work and control what appears in the final output.\nChunk Labels\nMeaningful labels make documents easier to navigate and troubleshoot.\n\nChunk Options\nChunk options control what your audience sees, not what your code does.\n\n\n\nOption\nPurpose\n\n\n\n\necho: false\nHide code, show results\n\n\neval: false\nShow code, don’t run it\n\n\nwarning: false\nHide warnings\n\n\nmessage: false\nHide package messages\n\n\n\nExample:\n\n\n     carat               cut        color        clarity          depth      \n Min.   :0.2000   Fair     : 1610   D: 6775   SI1    :13065   Min.   :43.00  \n 1st Qu.:0.4000   Good     : 4906   E: 9797   VS2    :12258   1st Qu.:61.00  \n Median :0.7000   Very Good:12082   F: 9542   SI2    : 9194   Median :61.80  \n Mean   :0.7979   Premium  :13791   G:11292   VS1    : 8171   Mean   :61.75  \n 3rd Qu.:1.0400   Ideal    :21551   H: 8304   VVS2   : 5066   3rd Qu.:62.50  \n Max.   :5.0100                     I: 5422   VVS1   : 3655   Max.   :79.00  \n                                    J: 2808   (Other): 2531                  \n     table           price             x                y         \n Min.   :43.00   Min.   :  326   Min.   : 0.000   Min.   : 0.000  \n 1st Qu.:56.00   1st Qu.:  950   1st Qu.: 4.710   1st Qu.: 4.720  \n Median :57.00   Median : 2401   Median : 5.700   Median : 5.710  \n Mean   :57.46   Mean   : 3933   Mean   : 5.731   Mean   : 5.735  \n 3rd Qu.:59.00   3rd Qu.: 5324   3rd Qu.: 6.540   3rd Qu.: 6.540  \n Max.   :95.00   Max.   :18823   Max.   :10.740   Max.   :58.900  \n                                                                  \n       z         \n Min.   : 0.000  \n 1st Qu.: 2.910  \n Median : 3.530  \n Mean   : 3.539  \n 3rd Qu.: 4.040  \n Max.   :31.800  \n                 \n\n\nGlobal Options\nInstead of repeating options in every chunk, set them once at the beginning of your document.\n\n\n\n\n\n\nNote\n\n\nChunk options affect a single chunk, while global options become the default for every chunk in the document.\n\n\n\nInline Code\nInline code inserts individual values directly into your narrative.\nInstead of typing:\n\nWe enrolled 53940 participants.\n\nUse:\nWe enrolled 53940 participants.\nwhich renders as:\n\nWe enrolled 53940 participants.\n\nAnother example:\nThe average diamond price was\n$3,932.80.\nrenders as:\n\nThe average diamond price was $3,933.\n\n\nWhy use inline code?\nIf your data change, your text updates automatically the next time you render the document. This eliminates copy-and-paste errors and helps keep reports reproducible.\nHow many of you have ever updated a figure but forgotten to update the number in the paragraph above it? Inline code solves exactly that problem."
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#editors",
-    "href": "presentations/DataScience/communicate.html#editors",
-    "title": "Communicate",
-    "section": "Editors",
-    "text": "Editors\nQuarto provides two ways to edit your documents: the Visual Editor for a word processor-like experience and the Source Editor for writing directly in Markdown. Both produce the same final document, so you can choose the workflow that best fits your needs.\nVisual \nSource\n## Text formatting\n\n*italic* **bold** ~~strikeout~~ `code`\n\nsuperscript^2^ subscript~2~\n\n[underline]{.underline} [small caps]{.smallcaps}\n\n## Headings\n\n# 1st Level Header\n\n## 2nd Level Header\n\n### 3rd Level Header\n\n## Lists\n\n-   Bulleted list item 1\n\n-   Item 2\n\n    -   Item 2a\n\n    -   Item 2b\n\n1.  Numbered list item 1\n\n2.  Item 2.\n    The numbers are incremented automatically in the output.\n\n## Links and images\n\n&lt;http://example.com&gt;\n\n[linked phrase](http://example.com)\n\n![optional caption text](quarto.png){fig-alt=\"Quarto logo and the word quarto spelled in small case letters\"}\n\n## Tables\n\n| First Header | Second Header |\n|--------------|---------------|\n| Content Cell | Content Cell  |\n| Content Cell | Content Cell  |"
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#lists",
-    "href": "presentations/DataScience/communicate.html#lists",
-    "title": "Communicate",
-    "section": "Lists",
-    "text": "Lists\n- item 1\n- item 2\nand\n1. first\n2. second"
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#links",
-    "href": "presentations/DataScience/communicate.html#links",
-    "title": "Communicate",
-    "section": "Links",
-    "text": "Links\n[Posit](https://posit.co)"
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#code-chunks-1",
-    "href": "presentations/DataScience/communicate.html#code-chunks-1",
-    "title": "Communicate",
-    "section": "Code Chunks",
-    "text": "Code Chunks\nChunk Labels\n#| label: demographics-summary\nChunk Options\n#| echo: false\nHide code.\n#| warning: false\n#| message: false\nGlobal Options\nknitr::opts_chunk$set(\n  echo = FALSE,\n  warning = FALSE,\n  message = FALSE\n)\n\nInline Code Matters because you receive automatic output instead of needing to handwrite or manualing provide updates."
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#figures-and-tables",
-    "href": "presentations/DataScience/communicate.html#figures-and-tables",
-    "title": "Communicate",
-    "section": "Figures and Tables",
-    "text": "Figures and Tables\nInsert example of figure and table here provide the following examples: set eval to false - code set eval to true - name plot\n\n\nWhy figures/tables in Quarto? Traditional:\n\ncreate\nsave\ncopy\npaste\n\nQuarto:\n\nupdate code\nrender"
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#yaml-1",
-    "href": "presentations/DataScience/communicate.html#yaml-1",
-    "title": "Communicate",
-    "section": "YAML",
-    "text": "YAML\nOverview incorporate this section from mb’s notes\nStyling Extensions\nCitations"
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#common-errors",
-    "href": "presentations/DataScience/communicate.html#common-errors",
-    "title": "Communicate",
-    "section": "Common Errors",
-    "text": "Common Errors\n\nmissing package\nYAML spacing\nmissing parentheses\nunclosed chunks\n\nDebugging Advice\n\nRead the error\nFind the line\nFix one thing\nRender again"
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#chapter-28-summary",
-    "href": "presentations/DataScience/communicate.html#chapter-28-summary",
-    "title": "Communicate",
-    "section": "Chapter 28 Summary",
-    "text": "Chapter 28 Summary"
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#output-options",
-    "href": "presentations/DataScience/communicate.html#output-options",
-    "title": "Communicate",
-    "section": "Output options",
-    "text": "Output options\nDocuments\n\npdf - makes a PDF with LaTeX\ndocx - for Microsoft Word\n\nPresentations\n\nrevealjs - HTML presentation\npptx - Powerpoint presentation"
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#interactivity",
-    "href": "presentations/DataScience/communicate.html#interactivity",
-    "title": "Communicate",
-    "section": "Interactivity",
-    "text": "Interactivity\nShiny apps"
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#chapter-29-summary",
-    "href": "presentations/DataScience/communicate.html#chapter-29-summary",
-    "title": "Communicate",
-    "section": "Chapter 29 Summary",
-    "text": "Chapter 29 Summary\nPotential uses:\n\nstudy reports\nMRI summaries\ngrant updates\nrecruitment tracking\nconference presentations\n\n\nHighligh Brian’s Disclosure report Give an example of a use case for my lab. Ask: What other use cases can you think of?"
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#best-practices",
-    "href": "presentations/DataScience/communicate.html#best-practices",
-    "title": "Communicate",
-    "section": "Best Practices",
-    "text": "Best Practices\nIt is best practice to save and review often.\n\nrender often\nkeep files organized\nwrite narrative\ndocument decisions\nembrace reproducibility"
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#wrap-up",
-    "href": "presentations/DataScience/communicate.html#wrap-up",
-    "title": "Communicate",
-    "section": "Wrap-Up",
-    "text": "Wrap-Up\nQuarto helps us:\n\ncommunicate\nreproduce\nautomate\ncollaborate\npublish\n\nNow let’s build a Quarto presentation."
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#troubleshooting",
-    "href": "presentations/DataScience/communicate.html#troubleshooting",
-    "title": "Communicate",
-    "section": "Troubleshooting",
-    "text": "Troubleshooting\nCommon errors include:\n\nmissing package\nYAML spacing\nmissing parentheses\nunclosed chunks\n\n\n\n\n\n\n\nTip\n\n\nUseful debugging advice includes:\n\nRead the error\nFind the line\nFix one thing\nRender again"
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#headings",
-    "href": "presentations/DataScience/communicate.html#headings",
-    "title": "Communicate",
-    "section": "Headings",
-    "text": "Headings"
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#nd-level-header",
-    "href": "presentations/DataScience/communicate.html#nd-level-header",
-    "title": "Communicate",
-    "section": "2nd Level Header",
-    "text": "2nd Level Header\n3rd Level Header"
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#links-and-images",
-    "href": "presentations/DataScience/communicate.html#links-and-images",
-    "title": "Communicate",
-    "section": "Links and images",
-    "text": "Links and images\nhttp://example.com\nlinked phrase\n\noptional caption text"
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#tables",
-    "href": "presentations/DataScience/communicate.html#tables",
-    "title": "Communicate",
-    "section": "Tables",
-    "text": "Tables\n\n\n\nFirst Header\nSecond Header\n\n\n\n\nContent Cell\nContent Cell\n\n\nContent Cell\nContent Cell\n\n\n\n\n-Diff btwn html and markdown\n\n| Formatting | Markdown| HTML |\n|--------------|---------------|---------------|\n| Bold | **text**  | &lt;strong&gt;text&lt;/strong&gt; |\n| Italic | *text*  | &lt;em&gt;text&lt;/em&gt; |\n| Heading | ## Heading | &lt;h2&gt;Heading&lt;/h2&gt; |\n\n\n## Lists\n\n```markdown\n- item 1\n- item 2\nand\n1. first\n2. second"
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#yaml",
-    "href": "presentations/DataScience/communicate.html#yaml",
-    "title": "Communicate",
-    "section": "YAML",
-    "text": "YAML\nOverview incorporate this section from mb’s notes\nStyling Extensions\nCitations"
-  },
-  {
-    "objectID": "presentations/DataScience/communicate.html#markdown-vs.-html",
-    "href": "presentations/DataScience/communicate.html#markdown-vs.-html",
-    "title": "Communicate",
-    "section": "Markdown vs. HTML",
-    "text": "Markdown vs. HTML\nBoth Markdown and HTML can be used to format Quarto documents. Markdown is the preferred syntax for most writing tasks because it is concise, readable, and easy to maintain. HTML is available when you need additional formatting or customization.\n\n\n\n\n\n\n\n\nFeature\nMarkdown\nHTML\n\n\n\n\nBold\n**text**\n&lt;strong&gt;text&lt;/strong&gt;\n\n\nItalic\n*text*\n&lt;em&gt;text&lt;/em&gt;\n\n\nHeading\n## Heading\n&lt;h2&gt;Heading&lt;/h2&gt;\n\n\nBullet List\n- Item\n&lt;ul&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ul&gt;\n\n\nNumbered List\n1. Item\n&lt;ol&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ol&gt;\n\n\nLink\n[Posit](https://posit.co)\n&lt;a href=\"https://posit.co\"&gt;Posit&lt;/a&gt;\n\n\nImage\n![Logo](logo.png)\n&lt;img src=\"logo.png\"&gt;\n\n\n\nExample: Custom HTML Styling\n&lt;span style=\"color:#0055A4; font-weight:bold;\"&gt;\nImportant Result\n&lt;/span&gt;\nMarkdown cannot easily apply custom colors or styles, but HTML can.\n\n\n\n\n\n\n\nHadley’s Philosophy\n\n\nUse Markdown for almost everything. It is easier to read, write, and collaborate on.\nUse HTML only when you need formatting that Markdown doesn’t support, such as custom styling, colors, layouts, or embedded web content.\n\n\n\n\n\n\n\n\n\n\n\nTake-Home Message\n\n\nYou do not need to learn HTML to be productive in Quarto. Markdown covers the vast majority of everyday writing tasks, while HTML is there when you need more control over the appearance of your document."
-=======
->>>>>>> c5e086c344e298ca7cf2cc1a524d112506d6ff51
   }
 ]

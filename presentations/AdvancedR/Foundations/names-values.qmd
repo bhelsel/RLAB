@@ -29,7 +29,7 @@ execute:
 ## Binding Basics
 
 ```{r}
-#| echo: true
+
 library(lobstr)
 x <- c(1, 2, 3)
 obj_addr(x)
@@ -49,7 +49,7 @@ to a name `x` with an object address of **`0x8d526b868`**.
 . . .
 
 ```{r}
-#| echo: true
+
 # Creates another binding to the same object
 y <- x
 obj_addr(y)
@@ -61,7 +61,7 @@ obj_addr(y)
 ## Copy-on-modify
 
 ```{r}
-#| echo: true
+
 y[[3]] <- 4
 obj_addr(y)
 #> 0x8d56e6968
@@ -75,24 +75,12 @@ and has a new object address of **`0x8d56e6968`**.
 We can see when an object gets copied with `base::tracemem()`
 
 ```{r}
-#| echo: true
-#| eval: false
 y <- x
 tracemem(x)
+#> [1] "<0x8d526b868>"
 y[[3]] <- 4
+#> [1] "tracemem[0x8d526b868 -> 0x8d56e6968]:"
 untracemem(x)
-```
-
-```{r}
-# echo: false
-
-paste0("<", obj_addr(x), ">")
-```
-
-```{r}
-# echo: false
-
-paste0("tracemem[", obj_addr(x), " -> ", obj_addr(y), "]:")
 ```
 
 ## Function Calls {.pattern-grid}
@@ -100,13 +88,13 @@ paste0("tracemem[", obj_addr(x), " -> ", obj_addr(y), "]:")
 The same rules for copying apply to function calls.
 
 ```{r}
-#| echo: true
-#| eval: false
+
 f <- function(a) {
   a
 }
 
 tracemem(x)
+#> "<0xb82219c28>"
 
 z <- f(x)
 
@@ -115,26 +103,16 @@ untracemem(x)
 
 ![](https://adv-r.hadley.nz/diagrams/name-value/binding-f1.png){width="40%" .nostretch}
 
-```{r}
-# echo: false
-
-paste0("<", obj_addr(x), ">")
-```
-
 Once `f()` completes, `x` and `z` will point to the same object.
 
 ![](https://adv-r.hadley.nz/diagrams/name-value/binding-f2.png){width="35%" .nostretch}
 
 ```{r}
-# echo: false
+obj_addr(x)
+#> [1] 0xb82219c28
 
-f <- function(a) {
-  a
-}
-
-z <- f(x)
-
-paste0("tracemem[", obj_addr(x), " -> ", obj_addr(z), "]:")
+obj_addr(z)
+#> [1] 0xb82219c28
 ```
 
 ## Lists
@@ -143,7 +121,7 @@ Elements of lists can also point to objects, but copy-on-modify differs from
 variables in that a **shallow copy** is created.
 
 ```{r}
-#| echo: true
+
 l1 <- list(1, 2, 3)
 ```
 
@@ -153,24 +131,34 @@ to know for understanding what happens when we modify a list.
 ![](https://adv-r.hadley.nz/diagrams/name-value/list.png){width="40%" .nostretch}
 
 ```{r}
-#| echo: true
+
 l2 <- l1
 ```
 
 ![](https://adv-r.hadley.nz/diagrams/name-value/l-modify-1.png){width="40%" .nostretch}
 
 ```{r}
-#| echo: true
+
 l2[[3]] <- 4
 ```
 
 ![](https://adv-r.hadley.nz/diagrams/name-value/l-modify-2.png){width="40%" .nostretch}
 
-Using the `ref()` function from the `lobstr` package shows the shared bindings across `l1` and `l2`.
+Using the `ref()` function from the `lobstr` package shows the shared bindings across **l1** and **l2**.
 
 ```{r}
-#| echo: true
+
 ref(l1, l2)
+
+#> █ [1:0xb7b9c0c38] <list>
+#> ├─[2:0xb7965c2e0] <dbl>
+#> ├─[3:0xb7965c2a8] <dbl>
+#> └─[4:0xb7965c270] <dbl>
+
+#> █ [5:0xb7b99caf8] <list>
+#> ├─[2:0xb7965c2e0]
+#> ├─[3:0xb7965c2a8]
+#> └─[6:0xb796a54d0] <dbl>
 ```
 
 ## Data frames {.pattern-dots}
@@ -178,7 +166,7 @@ ref(l1, l2)
 Data frames are lists of vectors and copy-on-modify works differently for columns and rows.
 
 ```{r}
-#| echo: true
+
 d1 <- data.frame(x = c(1, 5, 6), y = c(2, 4, 3))
 ```
 
@@ -187,7 +175,7 @@ d1 <- data.frame(x = c(1, 5, 6), y = c(2, 4, 3))
 Only the modified column is changed.
 
 ```{r}
-#| echo: true
+
 d2 <- d1
 d2[, 2] <- d2[, 2] * 2
 ```
@@ -206,7 +194,7 @@ d2[, 2] <- d2[, 2] * 2
 Every column is modified and must be copied.
 
 ```{r}
-#| echo: true
+
 d3 <- d1
 d3[1, ] <- d3[1, ] * 3
 ```
@@ -218,23 +206,24 @@ d3[1, ] <- d3[1, ] * 3
 R uses a **global string pool** where each element in a character vector points to a unique string in the pool.
 
 ```{r}
-#| echo: true
-x <- c("a", "a", "abc", "d")
-```
 
-```{r}
-#| echo: true
-#| eval: false
+x <- c("a", "a", "abc", "d")
 ref(x, character = TRUE)
+
+#> █ [1:0xb81432af8] <chr>
+#> ├─[2:0xb86933428] <string: "a">
+#> ├─[2:0xb86933428]
+#> ├─[3:0xb784853b8] <string: "abc">
+#> └─[4:0xb86b28040] <string: "d">
 ```
 
 ::: {.columns}
 ::: {.column}
 
-```{r}
-#| echo: false
-ref(x, character = TRUE)
-```
+The **global string pool** has an impact on the amount of memory a character
+vector uses, but can otherwise be thought of similarly to numeric vectors.
+
+![](https://adv-r.hadley.nz/diagrams/name-value/character.png){width="100%" .nostretch}
 
 :::
 
@@ -244,29 +233,21 @@ ref(x, character = TRUE)
 :::
 :::
 
-The **global string pool** has an impact on the amount of memory a character
-vector uses, but can otherwise be thought of similarly to numeric vectors.
-
-![](https://adv-r.hadley.nz/diagrams/name-value/character.png){width="50%" .nostretch}
-
 ## Object Size
 
 Use `lobstr::obj_size` to find out how much memory an object takes.
 
 
 ```{r}
-#| echo: true
+set.seed(123)
 x <- rnorm(1000, mean = 35, sd = 5)
 y <- list(x, x, x)
-x_size <- obj_size(x)
-y_size <- obj_size(y)
 
-sprintf(
-  "y (size: %s B) is only %s B larger than x (size: %s B)",
-  y_size,
-  y_size - x_size,
-  x_size
-)
+obj_size(x)
+#> 8.05 kB
+
+obj_size(y)
+#> 8.13 kB
 ```
 
 ::: {.columns}
@@ -280,6 +261,9 @@ The elements of a list are references to the values. Storing `x` three times is 
 
 ```{r}
 #| echo: false
+#| eval: true
+set.seed(123)
+x <- rnorm(1000, mean = 35, sd = 5)
 hist(x, breaks = 20, col = "#1f4788")
 ```
 
@@ -288,8 +272,9 @@ hist(x, breaks = 20, col = "#1f4788")
 
 
 ```{r}
-#| echo: true
-obj_size(list(NULL, NULL, NULL))
+
+obj_size(list(NULL, NULL, NULL)) + obj_size(x)
+#> 8.13 kB
 ```
 
 . . .
@@ -298,13 +283,20 @@ obj_size(list(NULL, NULL, NULL))
 
 
 ```{r}
-#| echo: true
+
 fruits <- c("apple", "apple", "apple")
 
-sprintf(
-  "Repeating fruit 100 times takes up %s B more in memory",
-  obj_size(rep(fruits, 100)) - obj_size(fruits)
-)
+# Repeating Apple 3 Times
+obj_size(fruits)
+#> 136 B
+
+# Repeating Apple 30 Times
+obj_size(rep(fruits, 10))
+#> 344 B
+
+# Repeating Apple 75 Times
+obj_size(rep(fruits, 25))
+#> 704 B
 ```
 
 ## Object Size for Shared Values
@@ -313,8 +305,8 @@ References make it more challenging to think about the size of individual object
 The object size only equals the combined object size if there are no shared values.
 
 ```{r}
-#| echo: true
-#| eval: false
+
+fruits <- c("apple", "apple", "apple")
 vegetables <- c("broccoli", "broccoli", "broccoli")
 fruits_or_vegetables <- c("apple", "broccoli", "apple")
 
@@ -335,13 +327,13 @@ providing a numeric range stores the first and last number only such that every 
 is always the same size.
 
 ```{r}
-#| echo: true
+
 print(1:10)
+#> [1] 1 2 3 4 5 6 7 8 9 10
 ```
 
 ```{r}
-#| echo: true
-#| eval: false
+
 obj_size(1:10)
 #> 680 B
 obj_size(1:1000)
@@ -357,8 +349,7 @@ environment, all existing bindings to that environment continue to have the same
 
 
 ```{r}
-#| echo: true
-#| eval: false
+
 e1 <- rlang::env(a = 1, b = 2, c = 3)
 e2 <- e1
 
@@ -366,7 +357,7 @@ e2 <- e1
 e1$c <- 4
 
 print(e2$c)
-#>  4
+#> [1] 4
 ```
 
 ::: {.columns}
@@ -380,42 +371,35 @@ print(e2$c)
 
 ## Unbinding and the garbage collector
 
+```{r}
+# [1] Assigns x to numeric object
+x <- 1:3
+
+# [2] Reassigns x to new numeric object
+x <- 2:4
+
+# [3] Unbinds x from numeric objects
+rm(x)
+```
+
 ::: {.columns}
 ::: {.column}
 
-```{r}
-#| echo: true
-#| eval: false
-# Assigns x to
-# numeric object
-x <- 1:3
-```
+<div style="text-align: center; font-size: 44px;"><strong>[1]</strong></div>
 
 ![](https://adv-r.hadley.nz/diagrams/name-value/unbinding-1.png){.nostretch}
 
 :::
 ::: {.column}
 
-```{r}
-#| echo: true
-#| eval: false
-# Reassigns x to new
-# numeric object
-x <- 2:4
-```
+<div style="text-align: center; font-size: 44px;"><strong>[2]</strong></div>
 
 ![](https://adv-r.hadley.nz/diagrams/name-value/unbinding-2.png){.nostretch}
 
 :::
 ::: {.column}
 
-```{r}
-#| echo: true
-#| eval: false
-# Unbinds x from
-# numeric objects
-rm(x)
-```
+<div style="text-align: center; font-size: 44px;"><strong>[3]</strong></div>
 
 ![](https://adv-r.hadley.nz/diagrams/name-value/unbinding-3.png){.nostretch}
 
@@ -424,13 +408,6 @@ rm(x)
 
 After running this code, we have two numeric objects not bound to a name. The
 **garbage collector** (GC) frees up memory by deleting R objects that are no
-longer used. The garbage collector runs automatically when R needs more memory
-to create new objects or manually using the `gc` function. You can also check
+longer used. The garbage collector runs manually using the `gc` function or
+automatically when R needs more memory to create new objects. You can also check
 the memory used using the `lobstr::mem_used` function.
-
-```{r}
-#| echo: true
-gc()
-
-mem_used()
-```
