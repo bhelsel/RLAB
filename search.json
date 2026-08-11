@@ -60,7 +60,7 @@
     "href": "presentations/Foundations.html",
     "title": "Advanced R Foundations",
     "section": "",
-    "text": "Names and Values\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nAug 12, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nVectors\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nAug 19, 2026\n\n\nMorgan Brucks, CCRP\n\n\n\n\n\n\n\n\n\n\n\n\nSubsetting\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nAug 26, 2026\n\n\nJulianne Clina, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nControl Flow\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 2, 2026\n\n\nJulianne G. Clina, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nFunctions\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 9, 2026\n\n\nAshlyn Barry\n\n\n\n\n\n\n\n\n\n\n\n\nEnvironments\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 16, 2026\n\n\nIan Weidling, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nConditions\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 23, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\nNo matching items"
+    "text": "Names and Values\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nAug 12, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nVectors\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nAug 19, 2026\n\n\nMorgan Brucks, CCRP\n\n\n\n\n\n\n\n\n\n\n\n\nSubsetting\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nAug 26, 2026\n\n\nJulianne G. Clina, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nControl Flow\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 2, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nFunctions\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 9, 2026\n\n\nAshlyn Barry\n\n\n\n\n\n\n\n\n\n\n\n\nEnvironments\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 16, 2026\n\n\nIan Weidling, PhD\n\n\n\n\n\n\n\n\n\n\n\n\nConditions\n\n\nApplying R to Lifestyle and Brain Health Research\n\n\n\n\n\n\n\n\nSep 23, 2026\n\n\nBrian C. Helsel, PhD\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "presentations/DataScience/visualization.html#what-is-ggplot2",
@@ -1306,21 +1306,21 @@
     "href": "presentations/AdvancedR/Foundations/names-values.html#copy-on-modify",
     "title": "Names and Values",
     "section": "Copy-on-modify",
-    "text": "Copy-on-modify\n\ny[[3]] &lt;- 4\nobj_addr(y)\n#&gt; 0x8d56e6968\n\nModifying y creates a new object that is a copy of 0x8d526b868 and has a new object address of 0x8d56e6968.\n\nWe can see when an object gets copied with base::tracemem()\n\ny &lt;- x\ntracemem(x)\ny[[3]] &lt;- 4\nuntracemem(x)\n\n\n# echo: false\n\npaste0(\"&lt;\", obj_addr(x), \"&gt;\")\n\n\n# echo: false\n\npaste0(\"tracemem[\", obj_addr(x), \" -&gt; \", obj_addr(y), \"]:\")"
+    "text": "Copy-on-modify\n\ny[[3]] &lt;- 4\nobj_addr(y)\n#&gt; 0x8d56e6968\n\nModifying y creates a new object that is a copy of 0x8d526b868 and has a new object address of 0x8d56e6968.\n\nWe can see when an object gets copied with base::tracemem()\n\ny &lt;- x\ntracemem(x)\n#&gt; [1] \"&lt;0x8d526b868&gt;\"\ny[[3]] &lt;- 4\n#&gt; [1] \"tracemem[0x8d526b868 -&gt; 0x8d56e6968]:\"\nuntracemem(x)"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/names-values.html#function-calls",
     "href": "presentations/AdvancedR/Foundations/names-values.html#function-calls",
     "title": "Names and Values",
     "section": "Function Calls",
-    "text": "Function Calls\nThe same rules for copying apply to function calls.\n\nf &lt;- function(a) {\n  a\n}\n\ntracemem(x)\n\nz &lt;- f(x)\n\nuntracemem(x)\n\n\n\n# echo: false\n\npaste0(\"&lt;\", obj_addr(x), \"&gt;\")\n\nOnce f() completes, x and z will point to the same object.\n\n\n# echo: false\n\nf &lt;- function(a) {\n  a\n}\n\nz &lt;- f(x)\n\npaste0(\"tracemem[\", obj_addr(x), \" -&gt; \", obj_addr(z), \"]:\")"
+    "text": "Function Calls\nThe same rules for copying apply to function calls.\n\nf &lt;- function(a) {\n  a\n}\n\ntracemem(x)\n#&gt; \"&lt;0xb82219c28&gt;\"\n\nz &lt;- f(x)\n\nuntracemem(x)\n\n\nOnce f() completes, x and z will point to the same object.\n\n\nobj_addr(x)\n#&gt; [1] 0xb82219c28\n\nobj_addr(z)\n#&gt; [1] 0xb82219c28"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/names-values.html#lists",
     "href": "presentations/AdvancedR/Foundations/names-values.html#lists",
     "title": "Names and Values",
     "section": "Lists",
-    "text": "Lists\nElements of lists can also point to objects, but copy-on-modify differs from variables in that a shallow copy is created.\n\nl1 &lt;- list(1, 2, 3)\n\nA list stores references to the values rather than the values. This is important to know for understanding what happens when we modify a list.\n\n\nl2 &lt;- l1\n\n\n\nl2[[3]] &lt;- 4\n\n\nUsing the ref() function from the lobstr package shows the shared bindings across l1 and l2.\n\nref(l1, l2)"
+    "text": "Lists\nElements of lists can also point to objects, but copy-on-modify differs from variables in that a shallow copy is created.\n\nl1 &lt;- list(1, 2, 3)\n\nA list stores references to the values rather than the values. This is important to know for understanding what happens when we modify a list.\n\n\nl2 &lt;- l1\n\n\n\nl2[[3]] &lt;- 4\n\n\nUsing the ref() function from the lobstr package shows the shared bindings across l1 and l2.\n\nref(l1, l2)\n\n#&gt; █ [1:0xb7b9c0c38] &lt;list&gt;\n#&gt; ├─[2:0xb7965c2e0] &lt;dbl&gt;\n#&gt; ├─[3:0xb7965c2a8] &lt;dbl&gt;\n#&gt; └─[4:0xb7965c270] &lt;dbl&gt;\n\n#&gt; █ [5:0xb7b99caf8] &lt;list&gt;\n#&gt; ├─[2:0xb7965c2e0]\n#&gt; ├─[3:0xb7965c2a8]\n#&gt; └─[6:0xb796a54d0] &lt;dbl&gt;"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/names-values.html#data-frames",
@@ -1334,42 +1334,42 @@
     "href": "presentations/AdvancedR/Foundations/names-values.html#character-vectors",
     "title": "Names and Values",
     "section": "Character Vectors",
-    "text": "Character Vectors\nR uses a global string pool where each element in a character vector points to a unique string in the pool.\n\nx &lt;- c(\"a\", \"a\", \"abc\", \"d\")\n\n\nref(x, character = TRUE)\n\n\n\n\n\n\n\nThe global string pool has an impact on the amount of memory a character vector uses, but can otherwise be thought of similarly to numeric vectors."
+    "text": "Character Vectors\nR uses a global string pool where each element in a character vector points to a unique string in the pool.\n\nx &lt;- c(\"a\", \"a\", \"abc\", \"d\")\nref(x, character = TRUE)\n\n#&gt; █ [1:0xb81432af8] &lt;chr&gt;\n#&gt; ├─[2:0xb86933428] &lt;string: \"a\"&gt;\n#&gt; ├─[2:0xb86933428]\n#&gt; ├─[3:0xb784853b8] &lt;string: \"abc\"&gt;\n#&gt; └─[4:0xb86b28040] &lt;string: \"d\"&gt;\n\n\n\nThe global string pool has an impact on the amount of memory a character vector uses, but can otherwise be thought of similarly to numeric vectors."
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/names-values.html#object-size",
     "href": "presentations/AdvancedR/Foundations/names-values.html#object-size",
     "title": "Names and Values",
     "section": "Object Size",
-    "text": "Object Size\nUse lobstr::obj_size to find out how much memory an object takes.\n\nx &lt;- rnorm(1000, mean = 35, sd = 5)\ny &lt;- list(x, x, x)\nx_size &lt;- obj_size(x)\ny_size &lt;- obj_size(y)\n\nsprintf(\n  \"y (size: %s B) is only %s B larger than x (size: %s B)\",\n  y_size,\n  y_size - x_size,\n  x_size\n)\n\n\n\nThe elements of a list are references to the values. Storing x three times is the size of an empty list with three NULL elements.\n\n\n\n\nobj_size(list(NULL, NULL, NULL))\n\n\nCharacter vectors also take up less memory than expected.\n\nfruits &lt;- c(\"apple\", \"apple\", \"apple\")\n\nsprintf(\n  \"Repeating fruit 100 times takes up %s B more in memory\",\n  obj_size(rep(fruits, 100)) - obj_size(fruits)\n)"
+    "text": "Object Size\nUse lobstr::obj_size to find out how much memory an object takes.\n\nset.seed(123)\nx &lt;- rnorm(1000, mean = 35, sd = 5)\ny &lt;- list(x, x, x)\n\nobj_size(x)\n#&gt; 8.05 kB\n\nobj_size(y)\n#&gt; 8.13 kB\n\n\n\nThe elements of a list are references to the values. Storing x three times is the size of an empty list with three NULL elements.\n\n\n\n\n\n\n\n\n\n\n\n\nobj_size(list(NULL, NULL, NULL)) + obj_size(x)\n#&gt; 8.13 kB\n\n\nCharacter vectors also take up less memory than expected.\n\nfruits &lt;- c(\"apple\", \"apple\", \"apple\")\n\n# Repeating Apple 3 Times\nobj_size(fruits)\n#&gt; 136 B\n\n# Repeating Apple 30 Times\nobj_size(rep(fruits, 10))\n#&gt; 344 B\n\n# Repeating Apple 75 Times\nobj_size(rep(fruits, 25))\n#&gt; 704 B"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/names-values.html#object-size-for-shared-values",
     "href": "presentations/AdvancedR/Foundations/names-values.html#object-size-for-shared-values",
     "title": "Names and Values",
     "section": "Object Size for Shared Values",
-    "text": "Object Size for Shared Values\nReferences make it more challenging to think about the size of individual objects. The object size only equals the combined object size if there are no shared values.\n\nvegetables &lt;- c(\"broccoli\", \"broccoli\", \"broccoli\")\nfruits_or_vegetables &lt;- c(\"apple\", \"broccoli\", \"apple\")\n\nobj_size(fruits, vegetables)\n#&gt; 280 B\nobj_size(fruits) + obj_size(vegetables)\n#&gt; 280 B\nobj_size(fruits, fruits_or_vegetables)\n#&gt; 280 B\nobj_size(fruits) + obj_size(fruits_or_vegetables)\n#&gt; 336 B"
+    "text": "Object Size for Shared Values\nReferences make it more challenging to think about the size of individual objects. The object size only equals the combined object size if there are no shared values.\n\nfruits &lt;- c(\"apple\", \"apple\", \"apple\")\nvegetables &lt;- c(\"broccoli\", \"broccoli\", \"broccoli\")\nfruits_or_vegetables &lt;- c(\"apple\", \"broccoli\", \"apple\")\n\nobj_size(fruits, vegetables)\n#&gt; 280 B\nobj_size(fruits) + obj_size(vegetables)\n#&gt; 280 B\nobj_size(fruits, fruits_or_vegetables)\n#&gt; 280 B\nobj_size(fruits) + obj_size(fruits_or_vegetables)\n#&gt; 336 B"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/names-values.html#alternative-representation",
     "href": "presentations/AdvancedR/Foundations/names-values.html#alternative-representation",
     "title": "Names and Values",
     "section": "Alternative Representation",
-    "text": "Alternative Representation\nR has the ability to represent some vectors compactly. For example, using the : when providing a numeric range stores the first and last number only such that every sequence is always the same size.\n\nprint(1:10)\n\n\nobj_size(1:10)\n#&gt; 680 B\nobj_size(1:1000)\n#&gt; 680 B\nobj_size(1:1000000)\n#&gt; 680 B"
+    "text": "Alternative Representation\nR has the ability to represent some vectors compactly. For example, using the : when providing a numeric range stores the first and last number only such that every sequence is always the same size.\n\nprint(1:10)\n#&gt; [1] 1 2 3 4 5 6 7 8 9 10\n\n\nobj_size(1:10)\n#&gt; 680 B\nobj_size(1:1000)\n#&gt; 680 B\nobj_size(1:1000000)\n#&gt; 680 B"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/names-values.html#environments",
     "href": "presentations/AdvancedR/Foundations/names-values.html#environments",
     "title": "Names and Values",
     "section": "Environments",
-    "text": "Environments\nR environments are modified-in-place rather than copied-on-modify. When you modify an environment, all existing bindings to that environment continue to have the same reference.\n\ne1 &lt;- rlang::env(a = 1, b = 2, c = 3)\ne2 &lt;- e1\n\n# e2$c changes with the modification of e1$c\ne1$c &lt;- 4\n\nprint(e2$c)\n#&gt;  4"
+    "text": "Environments\nR environments are modified-in-place rather than copied-on-modify. When you modify an environment, all existing bindings to that environment continue to have the same reference.\n\ne1 &lt;- rlang::env(a = 1, b = 2, c = 3)\ne2 &lt;- e1\n\n# e2$c changes with the modification of e1$c\ne1$c &lt;- 4\n\nprint(e2$c)\n#&gt; [1] 4"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/names-values.html#unbinding-and-the-garbage-collector",
     "href": "presentations/AdvancedR/Foundations/names-values.html#unbinding-and-the-garbage-collector",
     "title": "Names and Values",
     "section": "Unbinding and the garbage collector",
-    "text": "Unbinding and the garbage collector\n\n\n\n# Assigns x to\n# numeric object\nx &lt;- 1:3\n\n\n\n\n# Reassigns x to new\n# numeric object\nx &lt;- 2:4\n\n\n\n\n# Unbinds x from\n# numeric objects\nrm(x)\n\n\n\nAfter running this code, we have two numeric objects not bound to a name. The garbage collector (GC) frees up memory by deleting R objects that are no longer used. The garbage collector runs automatically when R needs more memory to create new objects or manually using the gc function. You can also check the memory used using the lobstr::mem_used function.\n\ngc()\n\nmem_used()"
+    "text": "Unbinding and the garbage collector\n\n# [1] Assigns x to numeric object\nx &lt;- 1:3\n\n# [2] Reassigns x to new numeric object\nx &lt;- 2:4\n\n# [3] Unbinds x from numeric objects\nrm(x)\n\n\n\n\n[1]\n\n\n\n\n[2]\n\n\n\n\n[3]\n\n\n\nAfter running this code, we have two numeric objects not bound to a name. The garbage collector (GC) frees up memory by deleting R objects that are no longer used. The garbage collector runs manually using the gc function or automatically when R needs more memory to create new objects. You can also check the memory used using the lobstr::mem_used function."
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/environments.html#environment-basics",
