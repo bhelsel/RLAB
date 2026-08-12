@@ -1,7 +1,7 @@
 ---
 title: "Control Flow"
 subtitle: "Applying R to Lifestyle and Brain Health Research"
-author: "Brian C. Helsel, PhD"
+author: "Julianne G. Clina, PhD"
 institute: "University of Kansas Medical Center"
 date: 2026-09-02
 image: "../../../images/thumbnails/control-flow.png"
