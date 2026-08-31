@@ -25,69 +25,98 @@ execute:
   eval: false
   freeze: auto
 ---
-
 ## Functions
+::: {.highlight-box}
+A function is a machine that takes something in, does a job to it, and gives something back out. For example, think about a blender:
+:::
 
-Functions include three components: arguments, body, and environment.
+- Input  → "ingredients" you put into the function (e.g., fruit)
+- Function → what the machine actual does; blend the ingredients together
+- Output → resulting product: smoothie!
 
-- The arguments or `formals()` control parts of the function
-- The `body()` is the code inside the function
-- The `environment()` contains values associated with the names.
+```{r}
+blender <- function(fruit) {
+  smoothie <- blend(fruit)
+  return(smoothie)
+}
+```
+
+
+## Functions Have Three Main Parts
+
+A function is a machine (in our example, a blender): input (fruit) goes in, the machine (blender) completes a task, and output (smoothie) comes out. But what actually happens inside the machine?
+
+::: {.highlight-box}
+Every function is built from three parts: *arguments*, *body*, and *environment*
+:::
+
+
+- **Arguments** (`formals()`) → input, or ingredients you feed in (e.g., fruit)
+- **Body** (`body()`) → provides instructions for the machine, or actual steps of how fruit gets blended
+- **Environment** (`environment()`) → 'kitchen' the blender sits in, or everything else it can access while it runs
 
 
 ```{r}
-formals(sd)
-#> $x
-#>
-#>
-#> $na.rm
-#> [1] FALSE
+# Environment example: adding milk to smoothie
 
-body(sd)
-#> sqrt(var(if (is.vector(x) || is.factor(x)) x else as.double(x),
-#>     na.rm = na.rm))
+milk <- "Half cup of milk" 
+# milk accessible to blender in environment (in other words, R knows what you mean by milk)
 
-environment(sd)
-#> <environment: namespace:stats>
+blender <- function(fruit) { # fruit assigned as an argument
+  smoothie <- blend(fruit, milk) # milk is not an argument, but available in environment
+  return(smoothie) # smoothie made from fruit and milk
+}
 ```
 
 ::: {.tip-box}
 
-Unlike the formals and body, the environment is specified implicitly based on
-where you define the function. The function's environment always exists.
+Milk was never passed in as an argument, but the blender can "grab" the milk because it is in the 'blender's kitchen', or the 'function's environment'.
 
 :::
 
+The function (blender) is assigned its environment (kitchen) automatically when it is built and never forgets it. R calls this *lexical scoping* (more on this later).
+
 ## Attributes
 
-Functions may have different attributes like `srcref` short for <strong>source
-reference</strong>. It points to the source code used to create the function and
-is used for printing because it contains code comments and other formatting.
+Beyond the three main components, functions also have extra 'labels' of information called *attributes* `attr()`. In our example, think of sticky notes attached to the blender.
+
+One particularly useful attribute is `srcref` (*source reference*), which is like a sticky note with the smoothie recipe.
 
 ```{r}
-f02 <- function(x, y) {
-  # A comment
-  x + y
+blender <- function(fruit) {
+  # Blend the fruit into a smoothie
+  smoothie <- blend(fruit)
+  return(smoothie)
 }
 
-attr(f02, "srcref")
+attr(blender, "srcref")
 
-#> function(x, y){
-#>   # A comment
-#>   x + y
+#> function(fruit) {
+#>   # Blend the fruit into a smoothie
+#>   smoothie <- blend(fruit)
+#>   return(smoothie)
 #> }
 ```
 
 ## Primitive functions {.pattern-dots}
 
-Primitive functions exist in the base package and call C code directly. These
-functions have either type <strong>builtin</strong> or <strong>special</strong>.
-In this case, the functions exist primarily in C so their formals, body, and
-environment are NULL.
+::: {.highlight-box}
+Our first main concept was that every function is built from three parts: *arguments*, *body*, and *environment*. **Primitive functions break this rule (sigh!)**
+:::
+
+- Small set of functions that skip the traditional three-part structure
+- Instead of running R code, they connect to **C code**: language R itself is built on
+- Since primitive functions are not "build" the normal way, arguments, body, and environments are all `NULL`
+
+::: {.tip-box}
+Think of these as functions with no visible "recipe" at all; they are wired
+straight into R's engine rather than written out like the functions we've
+been building.
+:::
 
 <div data-audio-src="audio/birds.ogg"></div>
 
-
+Primitive functions come in two types: **builtin** or **special**
 
 ```{r}
 sum
@@ -101,14 +130,18 @@ typeof(`[`)
 #> [1] "special"
 ```
 
-## First-class functions
+## First-class functions: They are just objects!
+
+::: {.highlight-box}
+So far we've treated functions like special machines. But in R, a function
+is just another type of **object**.
+:::
 
 ::: {.columns}
 ::: {.column}
 
-R functions are objects without a special syntax for defining and naming a
-function. You simply create a function object using <strong>function</strong>
-and bind it to a name with `<-`.
+- There's no special syntax needed to "declare" a function
+- You create it with `function()`, then give it a name with `<-` — just like assigning a number to a name
 
 :::
 ::: {.column}
@@ -124,44 +157,53 @@ f01 <- function(x) {
 }
 ```
 
-Nearly all functions are bound to a name, but there are times where
-<strong>anonymous</strong> or <strong>list</strong> functions are preferred.
+Because functions are just objects, they don't *need* a name at all. **Anonymous functions** run the same way but are never assigned a name. This is useful if you only plan on running the analysis once, defeating the purpose of assigning it a long-term name.
 
 ```{r}
 unlist(lapply(mtcars, function(x) length(unique(x))))
 #>   mpg  cyl disp  hp  drat  wt  qsec   vs  am  gear carb
 #>   25    3   27   22   22   29   30    2    2    3    6
+```
 
+Functions can also be stroed inside other objects, like a *list*.
+
+```{r}
 funs <- list(
   half = function(x) x / 2,
   double = function(x) x * 2
 )
-
-funs$double(10)
-#> [1] 20
-funs$half(10)
-#> [1] 5
 ```
 
 ## Invoking a function {.pattern-grid}
 
 A function is usually called by placing the arguments inside parentheses next to
-the function name. In some instances, the arguments are contained within a data
-structure and it is easier to use `do.call` and pass a list containing the
-function arguments.
+the function name. 
+```{r}
+mean(1:10, na.rm = TRUE)
+#> [1] 5.5
+```
+
+In some instances, the arguments are contained within an existing list or data
+structure. You can use `do.call` to get the arguments from a list instead of typing them all out by hand.
 
 ```{r}
 args <- list(1:10, na.rm = TRUE)
 
-do.call(mean, args)
+do.call(mean, args) # do.call(function, arguments list)
 #> [1] 5.5
 ```
 
 ## Function composition
 
-Base R provides two ways to compose multiple function calls. You can either save
-the intermediate results as variables or nest the function calls.
+::: {.highlight-box}
+Most analyses you will engage in as a researcher likely involves more than one function. **Composition** refers to chaining functions together so the output of one becomes the input of the next.
+:::
 
+Base R gives you two main ways to achieve this:
+
+*Option 1: Save each step as its own variable (Intermediate Results)*
+- Pros: easy to read and write, especially if sharing code with others
+- Cons: can create a lot of unnecessary intermediate objects
 ```{r}
 square <- function(x) x^2
 deviation <- function(x) x - mean(x)
@@ -173,15 +215,25 @@ out <- deviation(x)
 out <- square(out)
 out <- mean(out)
 out <- sqrt(out)
+```
 
+*Option 2: Nest the functions inside each other (Nested)*
+- Pros: No extra variables
+- Cons: 'inside out' reading, which can be difficult to follow
+```{r}
 # Nested
 sqrt(mean(square(deviation(x))))
 ```
 
-The `magrittr` package provides a third option using the binary operator `%>%`
-which is called a pipe and pronounced as "and then". Base R developed a
-comparable solution with `|>`; however, it lacks some of the advanced features
-of `%>%` like being able to use a placeholder `.` in multiple locations.
+::: {.tip-box}
+Both versions calculate the exact same thing; they're just two different
+ways of writing the same sequence of steps.
+:::
+
+*Option 3: `magrittr` package*
+The `magrittr` package uses binary operator called the pipe `%>%`, which read as "and then". The basic idea is to take what is on the left and then feed it into the function on the right.
+- Pros: read code in straightforward fashion without intermediate objects
+- Cons: requires additional package and slightly more advanced understanding of R
 
 ```{r}
 library(magrittr)
