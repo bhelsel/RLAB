@@ -117,3 +117,8 @@ body {
 .footer strong {
   font-size: 20px;
 }
+
+.thumbnail img {
+  width: 100% !important;
+  height: 100% !important;
+}

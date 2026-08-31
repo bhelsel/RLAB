@@ -3,8 +3,8 @@ title: "Transform"
 subtitle: "Tools to Work with Common Variable Types"
 author: "Brian C. Helsel, PhD"
 institute: "University of Kansas Medical Center"
-date: 2026-07-08
-image: "../../images/thumbnails/image-template.png"
+date: 2026-07-01
+image: "../../images/thumbnails/transform.png"
 format:
   revealjs:
     theme: [default, "../../styles/styleReveal.scss"]
@@ -544,3 +544,973 @@ stringr::str_view(x)
 #> [2] │ "
 #> [3] │ \
 ```
+
+## Raw Strings
+
+Complex strings requiring multiple quotes or backslashes can get confusing with
+all the escape characters. Using a raw string can help make the code more
+readable.
+
+```{r}
+tricky <- "double_quote <- \"\\\"\" # or '\"' single_quote <- '\\'' # or \"'\""
+stringr::str_view(tricky)
+#> [1] │ double_quote <- "\"" # or '"' single_quote <- '\'' # or "'"
+
+raw_string <- r"(double_quote <- "\"" # or '"' single_quote <- '\'' # or "'")"
+stringr::str_view(raw_string)
+#> [1] │ double_quote <- "\"" # or '"' single_quote <- '\'' # or "'"
+```
+
+::: {.tip-box}
+
+A raw string usually starts with `r"(` and ends with `)"`, but you can also use
+`r"[]"` or `r"{}"` if your string contains **)"**.
+
+:::
+
+## Creating Strings from Data
+
+The `stringr::str_c` function is like **paste0** but designed to be used within
+**dplyr::mutate**. It combines strings with a variable inside your dataset. You
+can also use `stringr::glue` which avoids the need to separate the string into
+parts with multiple quotation marks.
+
+
+```{r}
+df <- tibble::tibble(name = c("Jonathan", "David", "Susan"))
+
+df |>
+  dplyr::mutate(
+    greeting = stringr::str_c("Hi ", name, "!"),
+    question = stringr::str_glue("{name}, what is your favorite color?")
+  )
+
+#> # A tibble: 3 × 3
+#>   name     greeting     question
+#>   <chr>    <chr>        <glue>
+#> 1 Jonathan Hi Jonathan! Jonathan, what is your favorite color?
+#> 2 David    Hi David!    David, what is your favorite color?
+#> 3 Susan    Hi Susan!    Susan, what is your favorite color?
+```
+
+The `stringr::str_flatten` function works with **dplyr::summarize** to return a
+single string from a character vector.
+
+```{r}
+df <- tibble::tribble(
+  ~name      , ~color   ,
+  "Jonathan" , "blue"   ,
+  "Jonathan" , "red"    ,
+  "David"    , "green"  ,
+  "David"    , "yellow" ,
+  "David"    , "orange" ,
+  "Susan"    , "purple" ,
+  "Susan"    , "red"
+)
+
+df |>
+  dplyr::summarise(
+    color = stringr::str_flatten(color, ", "),
+    .by = name
+  )
+
+#> # A tibble: 3 × 2
+#>   name     color
+#>   <chr>    <chr>
+#> 1 Jonathan blue, red
+#> 2 David    green, yellow, orange
+#> 3 Susan    purple, red
+```
+
+## Extracting Data from Strings
+
+Functions in the **tidyr** package can help you separate a single string into
+multiple rows or columns.
+
+**Separating into Rows**
+
+```{r}
+tibble::tibble(x = c("a,b,c", "d,e", "f")) |>
+  tidyr::separate_longer_delim(x, delim = ",")
+
+#> # A tibble: 6 × 1
+#>   x
+#>   <chr>
+#> 1 a
+#> 2 b
+#> 3 c
+#> 4 d
+#> 5 e
+#> 6 f
+```
+
+**Separating into Columns**
+
+```{r}
+# By delimiter
+tibble::tibble(x = c("07.01.2026", "07.02.2026", "07.03.2026")) |>
+  tidyr::separate_wider_delim(
+    x,
+    delim = ".",
+    names = c("month", "day", "year")
+  )
+
+# By widths
+tibble::tibble(x = c("07012026", "07022026", "07032026")) |>
+  tidyr::separate_wider_position(
+    x,
+    widths = c(month = 2, day = 2, year = 4)
+  )
+
+#>   month day   year
+#>   <chr> <chr> <chr>
+#> 1 07    01    2026
+#> 2 07    02    2026
+#> 3 07    03    2026
+```
+
+## Regular Expressions
+
+A conncise and powerful language for describing patterns within strings (often
+abbreviated as regex or regexp). The simplest regex patterns consist of letters
+or numbers that are a direct match.
+
+```{r}
+fruit <- stringr::fruit
+stringr::str_view(fruit, "berry")
+
+#>  [6] │ bil<berry>
+#>  [7] │ black<berry>
+#> [10] │ blue<berry>
+#> [11] │ boysen<berry>
+#> [19] │ cloud<berry>
+#> [21] │ cran<berry>
+#> [29] │ elder<berry>
+#> [32] │ goji <berry>
+#> [33] │ goose<berry>
+#> [38] │ huckle<berry>
+#> [50] │ mul<berry>
+#> [70] │ rasp<berry>
+#> [73] │ salal <berry>
+#> [76] │ straw<berry>
+```
+
+## Metacharacters
+
+Most punctuation characters like `.`, `+`, `*`, `[`, `]`, and `?` have special
+meanings in regex. For example, "a...e" will match any string that contains an
+"a" followed by 3 letters and then an "e".
+
+```{r}
+stringr::str_view(fruit, "a...e")
+
+#>  [1] │ <apple>
+#>  [7] │ bl<ackbe>rry
+#> [48] │ mand<arine>
+#> [51] │ nect<arine>
+#> [62] │ pine<apple>
+#> [64] │ pomegr<anate>
+#> [70] │ r<aspbe>rry
+#> [73] │ sal<al be>rry
+```
+
+## Quantifiers
+
+Control how many times a pattern can match:
+
+- `?` makes a pattern optional (i.e., it matches 0 or 1 times)
+- `+` lets a pattern repeat (i.e., it matches it at least once)
+- `*` lets a pattern be optional or repeat
+
+```{r}
+# Matches an ap, optionally followed by an r
+stringr::str_view(fruit, "apr?")
+
+#>  [1] │ <ap>ple
+#>  [2] │ <apr>icot
+#> [34] │ gr<ap>e
+#> [35] │ gr<ap>efruit
+#> [56] │ p<ap>aya
+#> [62] │ pine<ap>ple
+
+# Matches an ap, followed by at least one r
+stringr::str_view(fruit, "apr+")
+#>  [2] │ <apr>icot
+```
+
+::: {.tip-box}
+
+You can use `{n}`, `{n,}`, and `{n,m}` to match **exactly** n times, **at least** 
+n times, or **between** n and m times.
+
+:::
+
+## Character Classes
+
+Defined by `[]` and lets you match a set of characters. You can also invert the
+match by starting with `^`. This matches anything except the listed characters.
+
+
+```{r}
+words <- stringr::words
+
+# Find an x surrounded by vowels
+stringr::str_view(words, "[aeiou]x[aeiou]")
+#> [284] │ <exa>ct
+#> [285] │ <exa>mple
+#> [288] │ <exe>rcise
+#> [289] │ <exi>st
+
+# Find a y surrounded by consonants
+stringr::str_view(words, "[^aeiou]y[^aeiou]")
+#> [836] │ <sys>tem
+#> [901] │ <typ>e
+```
+
+You can also use a `-` to define a range of letters or numbers.
+
+```{r}
+x <- "abcd ABCD 12345 -!@#%."
+
+stringr::str_view(x, "[A-Z]")
+#> [1] │ abcd <A><B><C><D> 12345 -!@#%.
+
+stringr::str_view(x, "[0-9]")
+#> [1] | abcd ABCD <1><2><3><4><5> -!@#%.
+```
+
+## Character Class Shortcuts
+
+- `\d` matches any digit
+- `\D` matches anything that is not a digit
+- `\s` matches any whitespace (e.g., space, tab, newline)
+- `\S` matches anything that is not a whitespace
+- `\w` matches any "word" character (i.e., letters or numbers)
+- `\W` matches any non-word character
+
+```{r}
+stringr::str_view(x, "\\W+")
+#> [1] │ abcd< >ABCD< >12345< -!@#%.>
+
+stringr::str_view(x, "\\d+")
+#> [1] │ abcd ABCD <12345> -!@#%.
+
+stringr::str_view(x, "\\D+")
+#> [1] │ <abcd ABCD >12345< -!@#%.>
+```
+
+## Alteration
+
+You can use `|` to pick between one or more alternative patterns.
+
+```{r}
+stringr::str_view(fruit, "aa|ee|ii|oo|uu")
+
+#>  [9] │ bl<oo>d orange
+#> [33] │ g<oo>seberry
+#> [47] │ lych<ee>
+#> [66] │ purple mangost<ee>n
+```
+
+## Detecting Strings in a Dataset
+
+```{r}
+tibble::tibble(fruit = fruit) |>
+  dplyr::mutate(berry = stringr::str_detect(fruit, "berry")) |>
+  dplyr::count(berry)
+
+#> # A tibble: 2 × 2
+#>   berry     n
+#>   <lgl> <int>
+#> 1 FALSE    66
+#> 2 TRUE     14
+```
+
+The `stringr::str_detect` function can also be used with **dplyr::filter** and
+**dplyr::summarize**. For example, the code below calculates the total number
+and proportion of fruits containing the word "berry".
+
+```{r}
+tibble::tibble(fruit = fruit) |>
+  dplyr::summarize(
+    berry_sum = sum(stringr::str_detect(fruit, "berry")),
+    berry_prop = mean(stringr::str_detect(fruit, "berry")) * 100
+  )
+
+#> # A tibble: 1 × 2
+#>   berry_sum berry_prop
+#>       <int>      <dbl>
+#> 1        14       17.5
+```
+
+::: {.highlight-box}
+
+The `stringr::str_subset` and `stringr::str_which` functions are closely related
+to **stringr::str_detect**. The **stringr::str_subset** function returns a
+character vector with the strings that match and **stringr::str_which** returns
+an integer vector with the positions of the strings that match.
+
+:::
+
+## Counting Matches
+
+```{r}
+tibble::tibble(fruit = fruit) |>
+  dplyr::mutate(
+    vowels = stringr::str_count(fruit, "[aeiou]"),
+    consonants = stringr::str_count(fruit, "[^aeiou]")
+  )
+
+#> # A tibble: 80 × 3
+#>    fruit        vowels consonants
+#>    <chr>         <int>      <int>
+#>  1 apple             2          3
+#>  2 apricot           3          4
+#>  3 avocado           4          3
+#>  4 banana            3          3
+#>  5 bell pepper       3          8
+#>  6 bilberry          2          6
+#>  7 blackberry        2          8
+#>  8 blackcurrant      3          9
+#>  9 blood orange      5          7
+#> 10 blueberry         3          6
+#> # ℹ 70 more rows
+#> # ℹ Use `print(n = ...)` to see more rows
+```
+
+## Removing and Replacing Values
+
+```{r}
+tibble::tibble(fruit = fruit) |>
+  dplyr::filter(stringr::str_detect(fruit, "berry")) |>
+  dplyr::mutate(
+    prefix = stringr::str_remove(fruit, "berry"),
+    asterisk = stringr::str_replace(fruit, "berry", "*")
+  )
+```
+
+::: {.tip-box}
+
+Use `stringr::str_remove_all` and `stringr::str_replace_all` to remove or
+replace all matches as **str_remove** and **str_replace** only remove or replace
+the first match.
+
+:::
+
+## Anchors
+
+Matching the start or end of the string requires an anchor. Use `^` to match the
+start or `$` to match the end of the string.
+
+
+```{r}
+# All fruits that start with an a
+stringr::str_view(fruit, "^a")
+#> [1] │ <a>pple
+#> [2] │ <a>pricot
+#> [3] │ <a>vocado
+
+# All fruits that end with an a
+stringr::str_view(fruit, "a$")
+#>  [4] │ banan<a>
+#> [15] │ cherimoy<a>
+#> [30] │ feijo<a>
+#> [36] │ guav<a>
+#> [56] │ papay<a>
+#> [74] │ satsum<a>
+```
+
+## Capturing Groups
+
+Allow you to use sub-components of the match by referring back to it with a back
+references (e.g., `\1` refers to the match contained in the first parenthesis,
+`\2` in the second parenthesis, etc.)
+
+```{r}
+# Finds all fruits with a repeated pair of letters
+stringr::str_view(fruit, "(..)\\1")
+#>  [4] │ b<anan>a
+#> [20] │ <coco>nut
+#> [22] │ <cucu>mber
+#> [41] │ <juju>be
+#> [56] │ <papa>ya
+#> [73] │ s<alal> berry
+
+# Finds all words that start and end with the same pair of letters
+stringr::str_view(words, "^(..).*\\1$")
+#> [152] │ <church>
+#> [217] │ <decide>
+#> [617] │ <photograph>
+#> [699] │ <require>
+#> [739] │ <sense>
+```
+
+## Factors
+
+Factors are used for categorical variables. The **forcats** package is part of
+tidyverse and provides tools for dealing with factors.
+
+
+```{r}
+# Create a vector of valid levels
+weekdays <- c(
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+)
+
+weekday_levels <- substr(weekdays, 1, 3)
+
+x <- c("Tue", "Thu", "Fri")
+
+factor(x, levels = weekday_levels, labels = weekdays)
+#> [1] Tuesday  Thursday Friday
+#> Levels: Sunday Monday Tuesday Wednesday Thursday Friday Saturday
+```
+
+## Missing Factor Levels
+
+Any values that are not in the level will be silently converted to NA. The
+`forcats::fct` function turns this into an error message and may be preferred.
+
+```{r}
+x <- c(x, "Satur")
+
+factor(x, levels = weekday_levels, labels = weekdays)
+#> [1] Tuesday  Thursday Friday <NA>
+#> Levels: Sunday Monday Tuesday Wednesday Thursday Friday Saturday
+
+forcats::fct(x, levels = weekday_levels)
+#> Error in `forcats::fct()` at presentations/DataScience/transform.qmd:987:1:
+#> ! All values of `x` must appear in `levels` or `na`
+#> ℹ Missing level: "Satur"
+```
+
+::: {.tip-box}
+
+Removing levels in **factor(x)** will take the unique values in alphabetical
+order. The **forcats::fct** function will order by first appearance.
+
+:::
+
+## Modifying Factor Order
+
+You can use `forcats::fct_reorder` to reorder the factor by a numeric vector.
+For example, we may want to plot miles per gallon for cats in the **mtcars**
+dataset that is ordered miles per gallon.
+
+```{r}
+#| eval: true
+mtcars_df <- tibble::tibble(model = factor(rownames(mtcars)), mtcars)
+
+mtcars_df_ordered <- mtcars_df |>
+  dplyr::mutate(model = forcats::fct_reorder(model, mpg))
+```
+
+::: {.columns}
+
+::: {.column}
+
+Not Ordered by Miles Per Gallon
+
+```{r}
+#| eval: true
+#| echo: false
+mtcars_df |>
+  dplyr::filter(mpg > 23) |>
+  ggplot2::ggplot() +
+  ggplot2::geom_point(
+    ggplot2::aes(x = mpg, y = model)
+  ) +
+  ggplot2::labs(x = "Miles Per Gallon", y = "Model") +
+  ggplot2::theme_bw(base_size = 28)
+```
+
+:::
+
+::: {.column}
+
+Ordered by Miles Per Gallon
+
+```{r}
+#| eval: true
+#| echo: false
+mtcars_df_ordered |>
+  dplyr::filter(mpg > 23) |>
+  ggplot2::ggplot() +
+  ggplot2::geom_point(
+    ggplot2::aes(x = mpg, y = model)
+  ) +
+  ggplot2::labs(x = "Miles Per Gallon", y = "Model") +
+  ggplot2::theme_bw(base_size = 28)
+```
+
+:::
+
+:::
+
+## Other Useful Functions for Factors
+
+| Function | Purpose |
+|----------|---------|
+| `fct_reorder2(.f, .x., .y)` | Reorder the factor **.f** by the **.y** values associated with the largest **.x** values |
+| `fct_infreq(f)` | Order factor levels by frequency (most common first) |
+| `fct_rev(f)` | Reverse the order of factor levels |
+| `fct_recode(.f, ...)` | Rename factor levels |
+| `fct_collapse(.f, ...)` | Combine multiple levels into broader categories |
+| `fct_lump(f, n, prop)` | Combine infrequent levels into `"Other"` |
+| `fct_lump_n(f, n)` | Keep the top `n` levels by frequency and lump the rest |
+| `fct_lump_min(f, min)` | Lump levels occurring fewer than a minimum count |
+| `fct_lump_prop(f, prop)` | Lump levels whose proportion is below a threshold |
+| `fct_lump_lowfreq(f)` | Lump the lowest-frequency levels into `"Other"` |
+
+## Dates and Times
+
+**ISO8601** is the international standard for writing dates where the components
+of the dates are organized from largest to smallest and separated with a `-`
+(e.g., 2026-07-01). This format can also include times where the hour, minute,
+and second are separated by a `:` (e.g., 2026-07-01 09:00:00).
+
+## Describing Date and Time Formats
+
+You can describe a date or time format with a `%` followed by a single character.
+
+- **Year**: `%Y` (four digits) or `%y` (two digits)
+- **Month**: `%m` (number), `%b` (abbreviated name like Jul), `%B` (full name)
+- **Day**: `%d` (one or two digits) or `%e` (two digits like 07)
+- **Time**: `%H` (24-hour hour), `%I` (12-hour hour), `%M` (minute), `%S` (second)
+- **Other Time**: `%p` (AM/PM), `%Z` (time zone name), `%z` (time zone offset)
+
+## Creating Dates from Strings
+
+The **lubridate** package is designed to make working with dates and times
+easier and more intuitive.
+
+```{r}
+lubridate::ymd("2026-07-01")
+#> [1] "2026-07-01"
+
+lubridate::mdy("July 1, 2026")
+#> [1] "2026-07-01"
+
+lubridate::mdy_hm("07/01/2026 09:00")
+#> [1] "2026-07-01 09:00:00 UTC"
+```
+
+## Creating Dates from Components
+
+```{r}
+flights <- nycflights13::flights
+
+flights |>
+  dplyr::select(year, month, day, hour, minute) |>
+  dplyr::mutate(
+    departure = lubridate::make_datetime(year, month, day, hour, minute)
+  )
+
+#> # A tibble: 336,776 × 6
+#>     year month   day  hour minute departure
+#>    <int> <int> <int> <dbl>  <dbl> <dttm>
+#>  1  2013     1     1     5     15 2013-01-01 05:15:00
+#>  2  2013     1     1     5     29 2013-01-01 05:29:00
+#>  3  2013     1     1     5     40 2013-01-01 05:40:00
+#>  4  2013     1     1     5     45 2013-01-01 05:45:00
+#>  5  2013     1     1     6      0 2013-01-01 06:00:00
+#>  6  2013     1     1     5     58 2013-01-01 05:58:00
+#>  7  2013     1     1     6      0 2013-01-01 06:00:00
+#>  8  2013     1     1     6      0 2013-01-01 06:00:00
+#>  9  2013     1     1     6      0 2013-01-01 06:00:00
+#> 10  2013     1     1     6      0 2013-01-01 06:00:00
+#> # ℹ 336,766 more rows
+#> # ℹ Use `print(n = ...)` to see more rows
+```
+
+## Retrieving Components from a Date
+
+You can extract indiviudal components from a date or time with functions like
+**year**, **month**, **mday** (day of the month), **yday** (day of the year),
+**wday** (day of the week), **hour**, **minute**, and **second**. You can also
+use `label` and `abbr` to return labels instead of numeric values.
+
+```{r}
+datetime <- lubridate::ymd_hms("2026-07-01 09:00:00")
+
+lubridate::year(datetime)
+#> [1] 2026
+
+lubridate::month(datetime, label = TRUE)
+#> [1] Jul
+#> Levels: Jan < Feb < Mar < Apr < May < Jun < Jul < Aug < Sep < Oct < Nov < Dec
+
+lubridate::yday(datetime)
+#> [1] 182
+
+lubridate::wday(datetime, label = TRUE, abbr = FALSE)
+#> [1] Wednesday
+#> Levels: Sunday < Monday < Tuesday < Wednesday < Thursday < Friday < Saturday
+```
+
+## Rounding
+
+The **lubridate** package also has `round_date`, `floor_date`, and
+`ceiling_date` to adjust the date to the nearest second, minute, hour, day,
+week, month, bimonth, quarter, season, halfyear and year.
+
+```{r}
+lubridate::round_date(datetime, unit = "week")
+#> [1] "2026-06-28 UTC"
+
+lubridate::floor_date(datetime, unit = "week")
+#> [1] "2026-06-28 UTC"
+
+lubridate::ceiling_date(datetime, unit = "week")
+#> [1] "2026-07-05 UTC"
+```
+
+## Modifying date components
+
+You can also use each accessor function to modify the components of a date or
+time or use `update` to modify multiple components at the same time.
+
+```{r}
+lubridate::day(datetime) <- 8
+
+datetime
+#> [1] "2026-07-08 09:00:00 UTC"
+
+lubridate::hour(datetime) <- lubridate::hour(datetime) + 1
+
+datetime
+#> [1] "2026-07-08 10:00:00 UTC"
+
+update(datetime, day = 7, hour = 9)
+#> [1] "2026-07-07 09:00:00 UTC"
+```
+
+## Time Spans
+
+You can also perform addition, subtraction, and division with date and time
+objects. Time spans can be represented by **durations** (seconds), **periods**
+(weeks and months), and **intervals** (starting and ending points).
+
+```{r}
+# How old is a person born on January 1, 1990 if today is July 1, 2026
+
+age <- lubridate::date(datetime) - lubridate::ymd("1990-01-01")
+
+age
+#> Time difference of 13337 days
+```
+
+A **difftime** class object records a time span in seconds, minutes, hours,
+days, or weeks. The lubridate `as.duration` function always records in seconds.
+The package also includes convenient constructors like **dseconds**,
+**dminutes**, **dhours**, **ddays**, **dweeks**, and **dyears** for adding
+durations and **minutes**, **hours**, **days**, **months**, and **years** for
+adding periods.
+
+```{r}
+lubridate::dyears(3)
+#> [1] "94672800s (~3 years)"
+
+datetime + lubridate::dyears(3)
+#> [1] "2029-07-08 04:00:00 UTC"
+
+datetime + lubridate::years(3)
+#> [1] "2029-07-08 10:00:00 UTC"
+```
+
+::: {.tip-box}
+
+Periods are time spans without a fixed length in seconds and are more likely
+than durations to do what you would expect.
+
+:::
+
+## Intervals
+
+An interval is a pair of starting and ending dates. You can think of it as a
+duration with a starting point.
+
+```{r}
+`%--%` <- lubridate::`%--%`
+y2024 <- lubridate::ymd("2024-01-01") %--% lubridate::ymd("2025-01-01")
+y2026 <- lubridate::ymd("2026-01-01") %--% lubridate::ymd("2027-01-01")
+
+y2024
+#> [1] 2024-01-01 UTC--2025-01-01 UTC
+
+y2026
+#> [1] 2026-01-01 UTC--2027-01-01 UTC
+
+y2024 / lubridate::days(1)
+#> [1] 366
+
+y2026 / lubridate::days(1)
+#> [1] 365
+```
+
+## Missing Values
+
+You can use last observation carried forward with `tidyr::fill` or fill in fixed
+values with `dplyr::coalesce`. An **NA** can be added using `dplyr::na_if`
+if a value like **-99** represents a missing value.
+
+```{r}
+#| echo: false
+anthro <- tibble::tribble(
+  ~subject , ~timepoint , ~height , ~weight ,
+      1001 ,          1 ,     165 ,      65 ,
+      1001 ,          2 , NA      ,      67 ,
+      1001 ,          3 , NA      ,      68 ,
+      1002 ,          1 ,     170 ,      72 ,
+      1002 ,          3 , NA      ,     -99
+)
+```
+
+
+```{r}
+print(anthro)
+
+#> # A tibble: 5 × 4
+#>   subject timepoint height weight
+#>     <dbl>     <dbl>  <dbl>  <dbl>
+#> 1    1001         1    165     65
+#> 2    1001         2     NA     67
+#> 3    1001         3     NA     68
+#> 4    1002         1    170     72
+#> 5    1002         3     NA    -99
+
+tidyr::fill(anthro, height)[["height"]]
+#> [1] 165 165 165 170 170
+
+dplyr::coalesce(data$height, mean(data$height, na.rm = TRUE))
+#> [1] 165.0 167.5 167.5 170.0 167.5
+
+dplyr::na_if(anthro$weight, -99)
+#> [1] 65 67 68 72 NA
+```
+
+## Implicit Missing Values
+
+Explicit missing values are usually represented by **NA**, **NaN**, or a
+negative number like **-99**. Implicit missing values are not in the dataset.
+You can use `tidyr::complete` to add missing rows.
+
+```{r}
+tidyr::complete(anthro, subject, timepoint = 1:3)
+
+#> # A tibble: 6 × 4
+#>   subject timepoint height weight
+#>     <dbl>     <dbl>  <dbl>  <dbl>
+#> 1    1001         1    165     65
+#> 2    1001         2     NA     67
+#> 3    1001         3     NA     68
+#> 4    1002         1    170     72
+#> 5    1002         2     NA     NA
+#> 6    1002         3     NA    -99
+```
+
+## Joins
+
+Multiple data frames can be joined together with **mutating** or **filtering**
+joins. Mutating joins add new variables to one data frame from matching
+observations in another. Filtering joins filter observations from one data frame
+based on whether or not they match an observation in another.
+
+<img src="https://r4ds.hadley.nz/diagrams/join/setup.png"/>
+
+```{r}
+#| echo: false
+x <- tibble::tribble(
+  ~key , ~val_x ,
+     1 , "x1"   ,
+     2 , "x2"   ,
+     3 , "x3"
+)
+y <- tibble::tribble(
+  ~key , ~val_y ,
+     1 , "y1"   ,
+     2 , "y2"   ,
+     4 , "y3"
+)
+```
+
+## Inner Join
+
+Only observations that match in both data frames are kept.
+
+::: {.columns}
+
+::: {.column}
+
+```{r}
+dplyr::inner_join(x, y)
+
+#> # A tibble: 2 × 3
+#>     key val_x val_y
+#>   <dbl> <chr> <chr>
+#> 1     1 x1    y1
+#> 2     2 x2    y2
+```
+
+:::
+
+::: {.column}
+
+<img src="https://r4ds.hadley.nz/diagrams/join/inner.png"/>
+
+:::
+
+:::
+
+An outer join is the opposite of inner join and will keep observations that appear in
+**at least one** of the data frames.
+
+## Left Join
+
+Keeps all observations of X.
+
+::: {.columns}
+
+::: {.column}
+
+```{r}
+dplyr::left_join(x, y)
+
+#> # A tibble: 3 × 3
+#>     key val_x val_y
+#>   <dbl> <chr> <chr>
+#> 1     1 x1    y1
+#> 2     2 x2    y2
+#> 3     3 x3    NA
+```
+
+:::
+
+::: {.column}
+
+<img src="https://r4ds.hadley.nz/diagrams/join/left.png"/>
+
+:::
+
+:::
+
+## Right Join
+
+Keeps all observations of Y.
+
+::: {.columns}
+
+::: {.column}
+
+```{r}
+dplyr::right_join(x, y)
+
+#> # A tibble: 3 × 3
+#>     key val_x val_y
+#>   <dbl> <chr> <chr>
+#> 1     1 x1    y1
+#> 2     2 x2    y2
+#> 3     3 NA    y3
+```
+
+:::
+
+::: {.column}
+
+<img src="https://r4ds.hadley.nz/diagrams/join/right.png"/>
+
+:::
+
+:::
+
+## Full Join
+
+Keeps all observations in X and Y.
+
+::: {.columns}
+
+::: {.column}
+
+```{r}
+dplyr::full_join(x, y)
+
+#> # A tibble: 4 × 3
+#>     key val_x val_y
+#>   <dbl> <chr> <chr>
+#> 1     1 x1    y1
+#> 2     2 x2    y2
+#> 3     3 x3    NA
+#> 4     4 NA    y3
+```
+
+:::
+
+::: {.column}
+
+<img src="https://r4ds.hadley.nz/diagrams/join/full.png"/>
+
+:::
+
+:::
+
+## Semi-Join
+
+Keeps observations in X that appear in Y but does not join Y.
+
+::: {.columns}
+
+::: {.column}
+
+```{r}
+dplyr::semi_join(x, y)
+
+#> # A tibble: 2 × 2
+#>     key val_x
+#>   <dbl> <chr>
+#> 1     1 x1
+#> 2     2 x2
+```
+
+:::
+
+::: {.column}
+
+<img src="https://r4ds.hadley.nz/diagrams/join/semi.png"/>
+
+:::
+
+:::
+
+## Anti-Join
+
+Keeps observations in X that do not appear in Y but does not join Y.
+
+::: {.columns}
+
+::: {.column}
+
+```{r}
+dplyr::anti_join(x, y)
+
+#> # A tibble: 1 × 2
+#>     key val_x
+#>   <dbl> <chr>
+#> 1     3 x3
+```
+
+:::
+
+::: {.column}
+
+<img src="https://r4ds.hadley.nz/diagrams/join/anti.png"/>
+
+:::
+
+:::
+

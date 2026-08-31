@@ -1,0 +1,1039 @@
+---
+title: "Communicate"
+subtitle: "Introduction to Quarto"
+author: "Morgan Brucks, CCRP"
+institute: "University of Kansas Medical Center"
+date: 2026-07-29
+image: "../../images/thumbnails/communicate.png"
+format:
+  revealjs:
+    theme: [default, "../../styles/styleReveal.scss"]
+    slide-number: true
+    preview-links: auto
+    logo: https://brand.ku.edu/sites/brand/files/styles/wide_col_xl_6/public/images/2020/KUMarksLogo.png
+    footer: "R for Lifestyle and Brain Health (R-LAB)"
+    transition: slide
+    background-transition: fade
+    highlight-style: github
+    code-line-numbers: true
+    code-block-bg: true
+    incremental: false
+    date-format: long
+    embed-resources: true
+execute: 
+  freeze: auto
+---
+
+## Learning Objectives
+
+By the end of today's session, you should be able to:
+
+- understand how Quarto connects **text, code, and results**
+- use Markdown, code chunks, and YAML to structure reproducible documents
+- generate and customize figures, tables, citations, and outputs
+- recognize how Quarto supports reproducible research communication
+
+::: notes
+Key teaching goal: Communication and reproducibility, not memorization of syntax.
+
+Participants do not need to memorize every option or command. The goal is understanding the workflow and knowing where to find additional tools when needed.
+
+Emphasize:
+
+Write → Analyze → Render → Communicate
+:::
+
+
+## Communicate
+
+<img src="https://r4ds.hadley.nz/diagrams/data-science/communicate.png"/>
+
+**R4DS Chapters 28-29**
+
+| Chapter | Focus |
+|----------|-------|
+| 28 | Building reproducible Quarto documents |
+| 29 | Creating different outputs and formats |
+
+
+::: notes
+
+R4DS argues that communication is an essential part of the data science workflow.
+
+Data science is not:
+
+Data → Analysis → Done
+
+Instead:
+
+Data → Analysis → Communication → Impact
+
+The goal of this section is not learning how to communicate ideas effectively. That comes from practice and experience.
+
+Instead, we are focusing on the technical tools that allow us to communicate our analyses reproducibly.
+
+Ask:
+
+- How many of you have copied a figure from R into PowerPoint?
+- How many have copied a table into Word?
+- How many have had to recreate a figure months later?
+- How many have struggled to remember how a result was generated?
+
+Quarto helps address these problems by keeping the analysis and communication connected.
+
+Key question:
+
+"If nobody can understand or reproduce your work, did the analysis accomplish its goal?"
+:::
+
+
+# Chapter 28: Quarto
+
+## Basics
+
+**What is Quarto?**
+A publishing system for creating reproducible documents by combining code, text, and visualizations.
+
+**Every Quarto document contains four building blocks:**
+
+- **YAML** – document settings (title, author, output)
+- **Markdown** – narrative text
+- **Code chunks** – R code that performs analyses
+- **Rendered output** – tables, figures, and results
+
+
+::: {.callout-note}
+Think of Quarto as a recipe:
+
+- YAML decides what kind of meal you're making (HTML report, PDF, presentation).
+- Markdown provides the recipe and explanations.
+- Code chunks prepare the ingredients and do the cooking (analysis).
+- Rendering plates everything into the finished dish (your final document).
+:::
+
+::: notes
+Quarto is essentially a publishing system.
+
+Instead of writing your analysis in one program, copying figures into another, and formatting everything manually, Quarto lets you combine narrative, code, and results in one document.
+
+As you work, your code and your writing stay connected.
+
+Whenever the analysis changes, you simply render the document again and every figure, table, and inline result updates automatically.
+
+This is one of the biggest reasons Quarto has become popular for reproducible research.
+:::
+
+## Editors - Source
+
+Quarto provides two ways to edit your documents: the Visual Editor for a word processor-like experience and the Source Editor for writing directly in Markdown. Both produce the same final document, so you can choose the workflow that best fits your needs.
+
+**Source**
+
+````markdown
+## Text formatting
+
+*italic* **bold** ~~strikeout~~ `code`
+
+superscript^2^ subscript~2~
+
+[underline]{.underline} [small caps]{.smallcaps}
+
+## Headings
+
+# 1st Level Header
+
+## 2nd Level Header
+
+### 3rd Level Header
+
+## Lists
+
+-   Bulleted list item 1
+
+-   Item 2
+
+    -   Item 2a
+
+    -   Item 2b
+
+1.  Numbered list item 1
+
+2.  Item 2.
+    The numbers are incremented automatically in the output.
+
+## Links and images
+
+<http://example.com>
+
+[linked phrase](http://example.com)
+
+![optional caption text](quarto.png){fig-alt="Quarto logo and the word quarto spelled in small case letters"}
+
+## Tables
+
+| First Header | Second Header |
+|--------------|---------------|
+| Content Cell | Content Cell  |
+| Content Cell | Content Cell  |
+````
+
+## Editors - Visual
+
+The visual editor is designed for users who prefer a graphical interface, making it easier to format documents, insert code, and create polished reports without needing to write all Markdown syntax manually.
+
+**Visual**
+<img src="https://r4ds.hadley.nz/quarto/quarto-visual-editor.png"/>
+
+::: notes
+People often ask which editor they should use.
+
+The answer is whichever helps you write.
+
+If you're new to Markdown, the Visual Editor feels very similar to Microsoft Word.
+
+As you become more comfortable, many people switch to the Source Editor because it's faster, easier to version control, and gives you complete control over the document.
+
+The important point is that both editors create exactly the same Quarto document.
+
+:::
+
+## Markdown vs. HTML
+
+Both Markdown and HTML can be used to format Quarto documents. **Markdown is the preferred syntax for most writing tasks because it is concise, readable, and easy to maintain.** HTML is available when you need additional formatting or customization.
+
+| Feature | Markdown | HTML |
+|:--------|:---------|:-----|
+| **Bold** | `**text**` | `<strong>text</strong>` |
+| **Italic** | `*text*` | `<em>text</em>` |
+| **Heading** | `## Heading` | `<h2>Heading</h2>` |
+| **Bullet List** | `- Item` | `<ul><li>Item</li></ul>` |
+| **Numbered List** | `1. Item` | `<ol><li>Item</li></ol>` |
+| **Link** | `[Posit](https://posit.co)` | `<a href="https://posit.co">Posit</a>` |
+| **Image** | `![Logo](logo.png)` | `<img src="logo.png">` |
+
+
+
+**Example: Custom HTML Styling**
+
+```html
+<a href="https://posit.co"
+   style="color:#0055A4; font-weight:bold; text-decoration:none;">
+Visit Posit
+</a>
+```
+
+Markdown cannot easily apply custom colors or styles, but HTML can.
+
+
+::: {.callout-note title="Hadley's Philosophy"}
+
+**Use Markdown for almost everything.** It is easier to read, write, and collaborate on.
+
+Use **HTML only when you need formatting that Markdown doesn't support**, such as custom styling, colors, layouts, or embedded web content.
+
+:::
+
+::: {.callout-tip title="Take-Home Message"}
+
+You do **not** need to learn HTML to be productive in Quarto. Markdown covers the vast majority of everyday writing tasks, while HTML is there when you need more control over the appearance of your document.
+
+:::
+
+::: notes
+< a> creates a hyperlink.
+href specifies the destination URL.
+style lets you customize the appearance.
+color changes the text color.
+font-weight:bold makes the link bold.
+text-decoration:none removes the default underline.
+:::
+
+## Code Chunks
+
+Code chunks execute your analysis and insert the results directly into your document. Chunk labels and options help organize your work while controlling what appears in the final output.
+
+### Chunk Labels
+
+Give chunks meaningful names so they are easier to identify, troubleshoot, and reference.
+
+```text
+#| label: participant-demographics
+```
+
+### Chunk Options
+
+Chunk options control **what your audience sees**, not what your code does.
+
+| Option | Purpose |
+|---------|---------|
+| `echo: false` | Hide code, show output |
+| `eval: false` | Show code, don't run it |
+| `warning: false` | Hide warnings |
+| `message: false` | Hide package startup messages |
+
+::: {.callout-tip}
+**Remember:**
+
+- **`echo`** controls whether the **code is displayed**.
+- **`eval`** controls whether the **code is executed**.
+
+These options can be combined. For example, `echo: true` with `eval: false` displays the code without running it, while `echo: false` with `eval: true` runs the code but only displays the results.
+:::
+
+### Global Options
+
+Set default chunk behavior once using global execution options in the YAML header.
+
+
+::: {.callout-note}
+**Chunk options** apply to a single chunk, while **global options** become the default for every chunk in your document.
+:::
+
+
+::: notes
+So far we've focused on writing.
+
+Now we're shifting to computation.
+
+Code chunks are what make Quarto different from a traditional document—they allow analysis and communication to happen in the same place.
+
+:::
+
+
+## Figures and Tables
+
+Quarto automatically creates publication-ready figures and tables directly from your analysis. Update your code, render the document, and every result stays synchronized.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+**Display Code Only**
+
+```{r}
+#| echo: true
+#| eval: false
+
+library(ggplot2)
+
+ggplot(mpg, aes(class)) +
+  geom_bar()
+```
+
+`eval: false` displays the code without running it.
+
+:::
+
+::: {.column width="50%"}
+
+**Display Figure**
+
+```{r}
+#| echo: false
+
+library(ggplot2)
+
+ggplot(mpg, aes(class)) +
+  geom_bar()
+```
+
+`echo: false` hides the code and displays only the figure.
+
+:::
+
+::::
+
+**Tables in Quarto**
+
+Quarto supports several table packages depending on your desired output. Here are two of the most commonly used.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+`gt`
+
+**Source**
+
+```{r}
+#| echo: true
+#| eval: false
+
+library(gt)
+
+mtcars |>
+  head() |>
+  gt() |>
+  fmt_number(
+    columns = mpg,
+    decimals = 1
+  )
+```
+
+**Output**
+
+```{r}
+#| echo: false
+
+library(gt)
+
+mtcars |>
+  head() |>
+  gt() |>
+  fmt_number(
+    columns = mpg,
+    decimals = 1
+  )
+```
+
+:::
+
+::: {.column width="50%"}
+
+`flextable`
+
+**Source**
+
+```{r}
+#| echo: true
+#| eval: false
+
+library(flextable)
+
+mtcars |>
+  head() |>
+  flextable() |>
+  colformat_num(
+    j = "mpg",
+    digits = 1
+  )
+```
+
+**Output**
+
+```{r}
+#| echo: false
+
+library(flextable)
+
+mtcars |>
+  head() |>
+  flextable() |>
+  colformat_num(
+    j = "mpg",
+    digits = 1
+  )
+```
+
+:::
+
+::::
+
+::: {.callout-note}
+**Choosing a table package**
+
+- **`gt`** creates polished, publication-quality tables and works especially well for HTML reports.
+- **`flextable`** is designed for Microsoft Word and PowerPoint, making it a great choice for collaborators and manuscripts.
+:::
+
+::: notes
+
+Traditional workflow:
+
+- Create figure
+- Save figure
+- Copy into Word or PowerPoint
+- Repeat whenever the analysis changes
+
+Quarto workflow:
+
+- Update code
+- Render document
+- Every figure and table updates automatically
+
+Point out that **gt** excels for HTML reports and websites, while **flextable** integrates especially well with Word and PowerPoint.
+
+:::
+
+## YAML: Configuring Your Document
+
+YAML is the header section of a Quarto document that provides instructions for how your document should be created and formatted.
+
+Think of YAML as the **configuration file** for your document.
+
+YAML can:
+
+- define document information
+- customize appearance
+- add extensions and functionality
+- control formatting behavior
+
+Example:
+
+```yaml
+---
+title: "Exercise Intervention Results"
+author: "Morgan Brucks"
+format: html
+---
+```
+
+::: {.callout-note}
+YAML is processed before your R code runs. It tells Quarto how to build your final document.
+:::
+
+::: notes
+Everything we've looked at so far happens inside the document.
+
+YAML is different.
+
+Instead of controlling the content, YAML controls how the entire document is built.
+
+Think of it as the document's configuration file.
+
+If Markdown is the content of your document and R code is the analysis, YAML is the instruction manual telling Quarto how to assemble everything.
+:::
+
+## Extending and Styling Quarto
+
+Quarto provides multiple ways to customize your documents beyond the default settings.
+
+| Tool | Purpose | Example Uses |
+|------|---------|--------------|
+| **Quarto extensions** | Add reusable functionality | templates, themes, publishing workflows |
+| **CSS** | Customize HTML appearance | colors, fonts, spacing, layouts |
+| **SCSS** | Build advanced CSS styles | reusable style systems |
+| **Lua filters** | Modify document behavior | custom formatting rules |
+| **LaTeX** | Customize PDF output | manuscript formatting |
+
+::: {.callout-tip}
+Most users will customize Quarto through YAML, themes, and CSS. Advanced tools like Lua filters and LaTeX provide additional control when needed.
+:::
+
+## Example: Styling with YAML
+
+YAML can connect your document to themes, stylesheets, and other custom resources.
+
+```yaml
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+```
+
+Quarto extensions allow you to customize fonts, colors, spacing, page layout, and document branding to create a consistent look and feel across projects. Explore the
+<a href="https://github.com/bhelsel/quarto-kansas"
+   style="color:#0055A4; font-weight:bold;">
+quarto-kansas
+</a>
+repository for an example of a custom Quarto extension.
+
+::: notes
+You can think of these tools as different levels of customization. YAML tells Quarto what you want. CSS changes how HTML looks. LaTeX controls PDF styling. Lua filters are for more advanced document transformations.
+:::
+
+## Citations in Quarto
+
+Quarto can automatically manage citations and references using a bibliography file.
+
+The bibliography is connected through the YAML header:
+
+```yaml
+---
+title: "Exercise Intervention Results"
+author: "Morgan Brucks"
+format: html
+bibliography: references.bib
+csl: https://www.zotero.org/styles/apa
+---
+```
+
+::: notes
+The YAML header tells Quarto where to find citation information and which citation style to use.
+
+Here we are using APA formatting, which is common in behavioral science and health research.
+:::
+
+**Adding Citations**
+
+Citations are added directly within the text using the author-year citation key.
+
+Example:
+
+```markdown
+Regular physical activity is associated with improved health outcomes 
+[@piercy2018].
+```
+
+Quarto automatically formats the citation:
+
+> Regular physical activity is associated with improved health outcomes (Piercy et al., 2018).
+
+
+**Reference List**
+
+At the end of the document, Quarto automatically generates:
+
+```markdown
+## References
+```
+
+from the entries stored in:
+
+```
+references.bib
+```
+
+::: {.callout-note}
+References are stored separately from the document content, making citations reusable and automatically updated across projects.
+:::
+
+For a complete example of manuscript writing and citation management in Quarto, explore the
+<a href="https://github.com/bhelsel/quarto-manuscript"
+   style="color:#0055A4; font-weight:bold;">
+quarto-manuscript
+</a>
+template.
+
+::: notes
+Quarto separates the writing from the references. The .qmd contains the narrative, the .bib file contains citation information, and the YAML header tells Quarto how to format everything.
+:::
+
+## Troubleshooting Quarto
+
+Most Quarto errors come from three places:
+
+
+| Error Type | Common Errors | Check Here |
+|------------|---------------|----------------|
+| **R Code** | Package not installed, object not found, syntax errors | Code chunk |
+| **Quarto / YAML** | Incorrect indentation, missing `:`, invalid YAML options | YAML header |
+| **Markdown** | Unclosed code chunks, missing brackets, missing parentheses or quotation marks | Document text |
+
+::: {.callout-tip}
+**Debugging workflow**
+
+1. Read the error message  
+2. Find the line where the error occurred  
+3. Determine whether it's an R, YAML, or Markdown error 
+4. Fix one issue at a time  
+5. Render again
+:::
+
+::: notes
+The most important troubleshooting skill is learning to classify the error. If the message mentions YAML, look at the header. If it says could not find function, think package. If it says object not found, think about whether the object exists and whether the previous code ran.
+Rendering is not just creating the final document. It is also a test that your workflow can be reproduced from start to finish.
+A successful render is a reproducibility check. Render early and often.
+
+One final piece of advice.
+
+Don't try to fix five errors at once.
+
+Render often while you're building your document.
+
+Small, incremental renders make errors much easier to identify than waiting until the very end.
+:::
+
+## Chapter 28 Summary: Quarto
+
+Quarto combines **text, code, and results** into reproducible documents.
+
+**Key Concepts**
+
+| Concept | Purpose |
+|---------|---------|
+| **Quarto documents** | Combine narrative, analysis, and outputs in one place |
+| **Markdown** | Create readable, structured documents using simple syntax |
+| **Code chunks** | Execute R code and insert results automatically |
+| **Chunk options** | Control what code and output appear |
+| **Figures & tables** | Generate reproducible, publication-ready outputs |
+| **YAML** | Configure document settings and customization |
+| **Citations** | Manage references automatically through bibliography files |
+
+::: {.callout-tip}
+**The Quarto workflow**
+
+Write → Analyze → Render → Communicate
+
+When your data or code change, your document updates with them.
+:::
+
+::: notes
+Key message:
+
+Quarto is not just a way to make pretty documents. It creates a reproducible connection between:
+
+- the code you write
+- the analysis you perform
+- the results you communicate
+
+Review:
+
+1. Documents are structured using Markdown and YAML.
+2. Code chunks allow analysis and communication to happen together.
+3. Chunk options control what the audience sees.
+4. Figures and tables update automatically when code changes.
+5. Citations and references can be managed reproducibly.
+
+Transition:
+
+The important idea from Chapter 28 is not memorizing YAML options or chunk syntax. The important idea is that Quarto creates a reproducible pipeline from analysis to communication.
+Now that we understand how Quarto documents are created and customized, Chapter 29 focuses on the different formats we can create from the same source document.
+::: 
+
+# Chapter 29: Quarto Formats
+
+## Chapter 29: Quarto Formats
+
+One Quarto document can be transformed into multiple output formats.
+
+The content and analysis stay the same, while the final product changes based on the audience and purpose.
+
+| Format | Best For | Example Uses |
+|--------|----------|--------------|
+| **HTML** | Interactive web documents | Reports, dashboards, online supplements |
+| **PDF** | Fixed-layout documents | Manuscripts, formal reports |
+| **DOCX** | Editable documents | Collaborator drafts, reviews |
+| **Revealjs** | HTML presentations | Research talks, workshops |
+| **PPTX** | PowerPoint slides | Meetings, presentations |
+
+::: notes
+The important concept is that we are not recreating the same information in multiple programs.
+
+Instead:
+
+Same analysis + same narrative + different output format.
+
+For example:
+
+- A researcher could create an HTML report for collaborators.
+- A PDF version for documentation.
+- A presentation version for a conference.
+
+All from the same Quarto source file.
+**One source → many outputs**
+:::
+
+## Interactivity with Shiny
+
+Quarto can also create interactive applications using Shiny. Instead of a static report, interactive workflows allow user exploration. 
+
+<video data-autoplay controls="controls" width="900" height="500" name="Shiny RevealJS">
+  <source src="https://bhelsel.github.io/presentationsR/inst/videos/ShinyRevealJS.mp4">
+</video>
+
+::: {.callout-tip}
+Shiny allows users to interact with results without needing to write R code.
+:::
+
+::: notes
+
+Example:
+
+A static figure shows intervention outcomes.
+
+A Shiny application could allow a user to:
+
+- select a participant group
+- adjust variables
+- explore trends
+- filter results
+
+The researcher builds the tool; the end user interacts with the results.
+
+:::
+
+## Chapter 29 Summary: Formats
+
+Quarto allows researchers to communicate the same work in different ways.
+
+**One Source → Many Outputs**
+
+A single `.qmd` file can become:
+
+- research reports
+- manuscripts
+- presentations
+- interactive dashboards
+- collaborator documents
+
+::: {.callout-note}
+The goal is not creating more documents.
+
+The goal is creating **one reproducible source that can be shared in many formats.**
+:::
+
+::: notes
+A disclosure report is not just a PDF. It is a reproducible report where the data, analysis, figures, tables, and formatting are all connected. If the data update, the report can update.
+Give an example of a use case for my lab.
+Ask: What other use cases can you think of?
+:::
+
+## Best Practices for Quarto
+
+A reproducible workflow requires more than code.
+
+✓ Render often  
+✓ Keep files organized  
+✓ Write narrative alongside analysis  
+✓ Document decisions  
+✓ Use meaningful chunk labels  
+✓ Save source files with projects  
+✓ Embrace reproducibility
+
+::: notes
+
+These aren't Quarto requirements—they're habits that make projects easier to maintain.
+
+Future you will appreciate meaningful chunk labels.
+
+Future collaborators will appreciate clear narrative.
+
+And your future self will definitely appreciate rendering frequently instead of waiting until the end.
+
+The goal is reproducibility, not perfection.
+
+:::
+
+## Wrap-Up: Key Takeaways
+
+**Chapter 28: Quarto**
+
+Quarto brings together:
+
+- **Narrative** → explain your work using Markdown
+- **Code** → integrate analysis directly into documents
+- **Results** → automatically generate figures and tables
+- **Configuration** → customize documents through YAML
+- **Citations** → manage references reproducibly
+
+**Key idea:**
+
+> A Quarto document connects the analysis process with the final communication product.
+
+**Chapter 29: Quarto Formats**
+
+Quarto allows one source document to become many outputs:
+
+- reports
+- manuscripts
+- presentations
+- Word documents
+- interactive applications
+
+**Key idea:**
+
+> Write once. Render many ways.
+
+::: {.callout-tip}
+Quarto is not just a document creation tool. It is a reproducible workflow for communicating research.
+:::
+
+🎉 **Congratulations!**
+
+You've learned the foundations of Quarto.
+
+Now let's put it all together and build your own presentation! 🚀
+
+# Time to Practice!
+
+## Build a Reproducible Quarto Workflow
+
+Today you will combine the concepts from R4DS:
+
+**Import → Transform → Program → Visualize → Communicate**
+
+Your goal:
+
+1. Create your own Quarto extension
+2. Customize your document appearance
+3. Import and transform data
+4. Write reusable functions
+5. Create a visualization
+
+::: {.callout-tip}
+The goal is not just to make a plot.
+
+The goal is to create a reproducible workflow that can be reused and shared.
+:::
+
+::: notes
+
+Connect this back to the entire presentation:
+
+Earlier we learned:
+- Quarto connects analysis and communication.
+- YAML controls customization.
+- Code chunks automate reproducibility.
+
+Now we are going to build a small project that uses all of those ideas together.
+
+:::
+
+## Activity 1: Create Your Own Quarto Extension
+
+**Step 1:** Navigate to the code folder under your name in the 2026-RLAB-Practical-Exercises folder.
+
+**Step 2:** Create an _extensions folder and a rlab folder inside extensions.
+
+**Step 3:** Create an <code>_extensions.yml</code> and <code>custom.css</code> file inside the rlab folder.
+
+**Step 4:** Add the following yaml to <code>_extensions.yml</code>:
+
+```yaml
+---
+title: RLAB Quarto Format
+author: Morgan Brucks
+contributes:
+  formats:
+    html: 
+      title-block-banner: true
+      theme: lumen
+      css: custom.css
+      embed-resources: true
+      date-format: long
+      code-copy: false
+---
+```
+
+**Step 5:** Add the format and extension to the yaml of the <code>communication.qmd</code> file.
+```yaml
+---
+format:
+  rlab-html: default
+---
+```
+
+**Step 6:** Copy the CSS from
+<a href="https://github.com/bhelsel/2026-RLAB-Practical-Exercises/tree/main/attendees/MorganBrucks/code/_extensions/rlab/custom.css"
+   style="color:#0055A4; font-weight:bold;">
+this <code>custom.css</code> file
+</a>
+into the <code>custom.css</code> file that you just created.
+
+**Step 7:** *Optional*. Experiment with ths css styling in <code>custom.css</code> by changing the images, colors, font sizes, etc. to make it your own.
+
+## Activity 2: Data Science Review
+
+**Import Data**
+In this exercise, you will create an in-memory DuckDB database, copy the nycflights13 datasets into it, and use dplyr to create a new data frame for analysis.
+
+**Step 1:**
+
+Create an in-memory DuckDB database by:
+
+Connecting to DuckDB with DBI::dbConnect().
+Using “:memory:” as the database location.
+Copying the nycflights13 datasets into the database with dbplyr::copy_nycflights13().
+con <- DBI::dbConnect(duckdb::duckdb(), dbdir = ":memory:")
+
+dbplyr::copy_nycflights13(con)
+
+**Step 2:**
+
+Using the tables stored in DuckDB, create a new object named flights that:
+
+- Starts with the weather table.
+- Selects only the origin, time_hour, temp, and wind_speed columns.
+- Joins the flights table using both origin and time_hour as the matching variables.
+- Collects the resulting data into your R session using collect().
+
+After completing these steps, the flights object should contain the selected weather variables along with the matching flight information, ready for use in later exercises.
+
+## Activity 2 (ctd.): Data Science Review
+
+**Write Your Own Filter Function**
+
+Create a function named custom_filter() that filters a data frame based on a user-specified variable and value.
+
+Your function should have three arguments:
+
+- data: the data frame to filter.
+- filter_by: the variable to use for filtering.
+- value: the value to compare against.
+
+Inside the function:
+
+- Use dplyr::filter() to keep observations where the selected variable is greater than or equal to value.
+- Use embracing ({{ }}) so that filter_by accepts an unquoted column name.
+
+After writing your function, test it by creating a new object named filtered_flights that contains only rows where wind_speed is greater than or equal to 30 miles per hour.
+
+If your function is written correctly, you should be able to call it by supplying a data frame, an unquoted variable name, and a comparison value.
+
+## Activity 2 (ctd.): Data Science Review
+
+**Write Your Own Visualization Function**
+
+In this exercise, you will create a reusable function that produces a scatterplot using ggplot2. Your function should allow the user to choose the dataset, the variables to plot, and any optional arguments supported by ggplot2::geom_point().
+
+**Step 1:**
+
+Create a function named custom_visualization() with four arguments:
+
+1. data: the data frame to plot.
+2. xvar: the variable to display on the x-axis.
+3. yvar: the variable to display on the y-axis.
+4. … additional arguments that will be passed directly to ggplot2::geom_point().
+
+**Step 2:**
+
+Before creating the plot, remove any rows where both the x and y variables are missing (NA).
+
+- Use dplyr::filter().
+- Inside filter(), use dplyr::if_any().
+- Use embracing ({{ }}) so that the function accepts unquoted variable names.
+- The condition should only keep rows that do not have an NA.
+
+**Hint**: The expression inside if_any() should refer to the range from xvar to yvar, and the predicate should be is.na.
+
+**Step 3:**
+
+Pipe the filtered data into ggplot2::ggplot().
+
+Use ggplot2::aes() to map:
+
+- x to xvar
+- y to yvar
+- Remember to use embracing ({{ }}) for both variables.
+
+**Step 4:**
+
+Add a scatterplot layer using ggplot2::geom_point().
+
+Instead of specifying arguments like color or size yourself, forward all optional arguments using .... This allows users to customize the points by passing any arguments accepted by geom_point(), such as: color, size, shape, fill, alpha, stroke, etc.
+
+**Step 5:**
+
+Test your function using the filtered_flights data frame. Create a scatterplot of:
+
+- temp on the x-axis
+- wind_speed on the y-axis
+
+Customize the points by passing several optional arguments through …, for example:
+
+color = “blue” size = 4 shape = 21 stroke = 2 fill = “red”
+
+If your function is written correctly, these arguments should be passed automatically to ggplot2::geom_point() without modifying the function itself.
+
+::: notes
+
+Take a step back and look at everything you've built.
+
+You imported data.
+
+You transformed it.
+
+You wrote reusable functions.
+
+You customized a Quarto document.
+
+And you communicated your results.
+
+That's the complete data science workflow from R4DS.
+
+Hopefully today's workshop showed that Quarto isn't just another document format—it's the tool that connects all of those pieces together.
+
+:::
+
+

@@ -4,7 +4,7 @@ subtitle: "Applying R to Lifestyle and Brain Health Research"
 author: "Ashlyn Barry"
 institute: "University of Wisconsin - Madison"
 date: 2026-09-09
-image: "../../../images/thumbnails/image-template.png"
+image: "../../../images/thumbnails/functions.png"
 format:
   revealjs:
     theme: [default, "../../../styles/styleReveal.scss"]

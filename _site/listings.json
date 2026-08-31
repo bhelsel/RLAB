@@ -1,12 +1,5 @@
 [
   {
-    "listing": "/presentations/DataScience.html",
-    "items": [
-      "/presentations/DataScience/visualization.html",
-      "/presentations/DataScience/transform.html"
-    ]
-  },
-  {
     "listing": "/presentations/Foundations.html",
     "items": [
       "/presentations/AdvancedR/Foundations/names-values.html",
@@ -16,6 +9,17 @@
       "/presentations/AdvancedR/Foundations/functions.html",
       "/presentations/AdvancedR/Foundations/environments.html",
       "/presentations/AdvancedR/Foundations/conditions.html"
+    ]
+  },
+  {
+    "listing": "/presentations/DataScience.html",
+    "items": [
+      "/presentations/DataScience/whole-game.html",
+      "/presentations/DataScience/transform.html",
+      "/presentations/DataScience/visualization.html",
+      "/presentations/DataScience/import.html",
+      "/presentations/DataScience/program.html",
+      "/presentations/DataScience/communicate.html"
     ]
   },
   {

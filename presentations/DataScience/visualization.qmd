@@ -1,12 +1,13 @@
 ---
-title: "R-LAB: R for Data Science"
-subtitle: "Data Visualization: An Introduction to ggplot2"
+title: "Data Visualization"
+subtitle: "An Introduction to ggplot2"
 author: "Ashlyn Barry"
 institute: "University of Wisconsin-Madison"
-date: today
+date: 2026-07-08
+image: "../../images/thumbnails/visualization.png"
 format:
   revealjs:
-    theme: styleReveal.scss
+    theme: [default, "../../styles/styleReveal.scss"]
     slide-number: true
     preview-links: auto
     logo: https://brand.ku.edu/sites/brand/files/styles/wide_col_xl_6/public/images/2020/KUMarksLogo.png
@@ -19,6 +20,8 @@ format:
     incremental: false
     date-format: long
     embed-resources: true
+execute: 
+  freeze: auto
 ---
 
 ## What is ggplot2? {.title-slide}
@@ -70,8 +73,11 @@ ggplot(data = datasetname, mapping = aes(x = height, y = weight))
 ```{r}
 #| eval: false
 #| echo: true
-ggplot(data = datasetname, mapping = aes(x = height, y = weight)+ 
-  geom_point())
+ggplot(
+  data = datasetname,
+  mapping = aes(x = height, y = weight) +
+    geom_point()
+)
 ```
 
 ## Getting Started
@@ -127,7 +133,7 @@ What is the relationship between flipper length and body mass index of penguins?
 #| echo: true
 #| eval: false
 ggplot(
-  data = penguins, 
+  data = penguins,
   mapping = aes(x = flipper_length_mm, y = body_mass_g)
 )
 ```
@@ -137,7 +143,7 @@ ggplot(
 ```{r}
 #| echo: false
 ggplot(
-  data = penguins, 
+  data = penguins,
   mapping = aes(x = flipper_length_mm, y = body_mass_g)
 )
 ```
@@ -224,7 +230,7 @@ ggplot(
   mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species)
 ) +
   geom_point() +
-  geom_smooth(method = "lm") 
+  geom_smooth(method = "lm")
 
 # geom_smooth(): geometric object representing data with a smooth line
 # method = "lm": line of best fit based on a linear model
@@ -239,7 +245,7 @@ ggplot(
   mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species)
 ) +
   geom_point() +
-  geom_smooth(method = "lm") 
+  geom_smooth(method = "lm")
 ```
 
 ## Single line of best fit
@@ -315,9 +321,11 @@ ggplot(
   labs(
     title = "Body mass and flipper length",
     subtitle = "Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
-    x = "Flipper length (mm)", y = "Body mass (g)",
-    color = "Species", shape = "Species"
-  ) 
+    x = "Flipper length (mm)",
+    y = "Body mass (g)",
+    color = "Species",
+    shape = "Species"
+  )
 ```
 
 ## Clean titles and axes
@@ -333,8 +341,10 @@ ggplot(
   labs(
     title = "Body mass and flipper length",
     subtitle = "Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
-    x = "Flipper length (mm)", y = "Body mass (g)",
-    color = "Species", shape = "Species"
+    x = "Flipper length (mm)",
+    y = "Body mass (g)",
+    color = "Species",
+    shape = "Species"
   )
 ```
 
@@ -353,8 +363,10 @@ my.plot <- ggplot(
   labs(
     title = "Body mass and flipper length",
     subtitle = "Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
-    x = "Flipper length (mm)", y = "Body mass (g)",
-    color = "Species", shape = "Species"
+    x = "Flipper length (mm)",
+    y = "Body mass (g)",
+    color = "Species",
+    shape = "Species"
   )
 ```
 
@@ -401,8 +413,10 @@ ggplot(
   labs(
     title = "Body mass and flipper length",
     subtitle = "Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
-    x = "Flipper length (mm)", y = "Body mass (g)",
-    color = "Species", shape = "Species"
+    x = "Flipper length (mm)",
+    y = "Body mass (g)",
+    color = "Species",
+    shape = "Species"
   ) +
   theme_minimal()
 ```
@@ -435,8 +449,10 @@ ggplot(
   labs(
     title = "Body mass and flipper length",
     subtitle = "Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
-    x = "Flipper length (mm)", y = "Body mass (g)",
-    color = "Species", shape = "Species"
+    x = "Flipper length (mm)",
+    y = "Body mass (g)",
+    color = "Species",
+    shape = "Species"
   ) +
   theme_minimal() +
   theme(
@@ -454,9 +470,9 @@ The function `element_blank()` removes an element entirely. Setting *panel.grid.
 my.plot +
   theme_minimal() +
   theme(
-    plot.title = element_text(hjust = 0.5), 
-    plot.subtitle = element_text(hjust = 0.5), 
-    legend.position = c(0.85, 0.2), 
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    legend.position = c(0.85, 0.2),
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank()
   )
@@ -470,9 +486,9 @@ my.plot +
 my.plot +
   theme_minimal() +
   theme(
-    plot.title = element_text(hjust = 0.5), 
-    plot.subtitle = element_text(hjust = 0.5), 
-    legend.position = c(0.85, 0.2), 
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    legend.position = c(0.85, 0.2),
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank()
   )
@@ -486,9 +502,9 @@ What if you don't want gridlines but still want a solid line to signify your x a
 my.plot +
   theme_minimal() +
   theme(
-    plot.title = element_text(hjust = 0.5), 
-    plot.subtitle = element_text(hjust = 0.5), 
-    legend.position = c(0.85, 0.2), 
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    legend.position = c(0.85, 0.2),
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(),
     axis.line = element_line(color = "black")
@@ -508,14 +524,16 @@ ggplot(
   labs(
     title = "Body mass and flipper length",
     subtitle = "Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
-    x = "Flipper length (mm)", y = "Body mass (g)",
-    color = "Species", shape = "Species"
+    x = "Flipper length (mm)",
+    y = "Body mass (g)",
+    color = "Species",
+    shape = "Species"
   ) +
   theme_minimal() +
   theme(
-    plot.title = element_text(hjust = 0.5), 
-    plot.subtitle = element_text(hjust = 0.5), 
-    legend.position = c(0.85, 0.2), 
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    legend.position = c(0.85, 0.2),
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(),
     axis.line = element_line(color = "black")
@@ -529,9 +547,9 @@ Just like you set your graph as a function, you can also set your theme as a fun
 #| eval: true
 my.theme <- theme_minimal() +
   theme(
-    plot.title = element_text(hjust = 0.5), 
-    plot.subtitle = element_text(hjust = 0.5), 
-    legend.position = c(0.85, 0.2), 
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    legend.position = c(0.85, 0.2),
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(),
     axis.line = element_line(color = "black")
@@ -541,7 +559,7 @@ my.theme <- theme_minimal() +
 #| echo: true
 #| eval: false
 my.plot +
-    my.theme
+  my.theme
 ```
 
 ## Facets
@@ -552,18 +570,18 @@ Facets can be used to separate small multiples or different subsets of data base
 ``` {r}
 #| echo: true
 #| eval: false
-  ggplot(
-    data = penguins,
-    mapping = aes(x = flipper_length_mm, y = body_mass_g)
-  ) +
-    geom_point() +
-    facet_wrap(~ species) +
-    labs(
-      title = "Penguin body mass by flipper length",
-      subtitle = "Faceted by species",
-      x = "Flipper length (mm)",
-      y = "Body Mass (g)"
-    )
+ggplot(
+  data = penguins,
+  mapping = aes(x = flipper_length_mm, y = body_mass_g)
+) +
+  geom_point() +
+  facet_wrap(~species) +
+  labs(
+    title = "Penguin body mass by flipper length",
+    subtitle = "Faceted by species",
+    x = "Flipper length (mm)",
+    y = "Body Mass (g)"
+  )
 ```
 
 ## Facets of body mass by slipper length by species
@@ -571,11 +589,11 @@ Facets can be used to separate small multiples or different subsets of data base
 #| echo: false
 #| eval: true
 ggplot(
-    data = penguins,
-    mapping = aes(x = flipper_length_mm, y = body_mass_g)
-  ) +
-  geom_point() + 
-  facet_wrap(~ species) +
+  data = penguins,
+  mapping = aes(x = flipper_length_mm, y = body_mass_g)
+) +
+  geom_point() +
+  facet_wrap(~species) +
   labs(
     title = "Penguin body mass by flipper length",
     subtitle = "Faceted by species",
@@ -590,18 +608,18 @@ Apply my.theme to your new figure!
 #| echo: true
 #| eval: false
 ggplot(
-    data = penguins,
-    mapping = aes(x = flipper_length_mm, y = body_mass_g)
-  ) +
-  geom_point() + 
-  facet_wrap(~ species) +
+  data = penguins,
+  mapping = aes(x = flipper_length_mm, y = body_mass_g)
+) +
+  geom_point() +
+  facet_wrap(~species) +
   labs(
     title = "Penguin body mass by flipper length",
     subtitle = "Faceted by species",
     x = "Flipper length (mm)",
     y = "Body Mass (g)"
   ) +
-    my.theme
+  my.theme
 ```
 
 ## Facets with my.theme
@@ -609,18 +627,18 @@ ggplot(
 #| echo: false
 #| eval: true
 ggplot(
-    data = penguins,
-    mapping = aes(x = flipper_length_mm, y = body_mass_g)
-  ) +
-  geom_point() + 
-  facet_wrap(~ species) +
+  data = penguins,
+  mapping = aes(x = flipper_length_mm, y = body_mass_g)
+) +
+  geom_point() +
+  facet_wrap(~species) +
   labs(
     title = "Penguin body mass by flipper length",
     subtitle = "Faceted by species",
     x = "Flipper length (mm)",
     y = "Body Mass (g)"
   ) +
-    my.theme
+  my.theme
 ```
 
 ## Extensions: ggpubr
@@ -630,26 +648,36 @@ ggplot(
 ``` {r}
 #| echo: true
 #| eval: false
-
 # Install and load ggpubr package
 install.packages("ggpubr")
 library(ggpubr)
 
 # Density plot
-ggdensity(penguins, x = "body_mass_g",
-  add = "mean", 
-  color = "species", fill = "species")
+ggdensity(
+  penguins,
+  x = "body_mass_g",
+  add = "mean",
+  color = "species",
+  fill = "species"
+)
 
 # Boxplot
-ggboxplot(penguins, x = "flipper_length_mm", y = "body_mass_g",
+ggboxplot(
+  penguins,
+  x = "flipper_length_mm",
+  y = "body_mass_g",
   add = "jitter",
-  color = "species")
+  color = "species"
+)
 
 # Lollipop chart
-ggdotchart(penguins, x = "flipper_length_mm", y = "body_mass_g",
+ggdotchart(
+  penguins,
+  x = "flipper_length_mm",
+  y = "body_mass_g",
   color = "species",
-  sorting = "ascending",    # sorts data in ascending order
-  add = "segments",         # draws lines from y=0 to data point
+  sorting = "ascending", # sorts data in ascending order
+  add = "segments", # draws lines from y=0 to data point
   ggtheme = theme_pubr()
 )
 ```
@@ -661,28 +689,37 @@ Complete description and additional plots: rpkgs.datanovia.com/ggpubr/
 ``` {r}
 #| echo: false
 #| eval: true
-
 # Install and load ggpubr package
 library(ggpubr)
 
 # Density plot
-ggdensity(penguins, x = "body_mass_g",
+ggdensity(
+  penguins,
+  x = "body_mass_g",
   add = "mean",
-  color = "species", fill = "species")
-
-# Boxplot
-ggboxplot(penguins, x = "species", y = "body_mass_g",
-  add = "jitter",
-  color = "species")
-
-# Lollipop chart
-ggdotchart(penguins, x = "flipper_length_mm", y = "body_mass_g",
   color = "species",
-  sorting = "ascending",    # sorts data in ascending order
-  add = "segments",         # draws lines from y=0 to data point
-  ggtheme = theme_pubr()
+  fill = "species"
 )
 
+# Boxplot
+ggboxplot(
+  penguins,
+  x = "species",
+  y = "body_mass_g",
+  add = "jitter",
+  color = "species"
+)
+
+# Lollipop chart
+ggdotchart(
+  penguins,
+  x = "flipper_length_mm",
+  y = "body_mass_g",
+  color = "species",
+  sorting = "ascending", # sorts data in ascending order
+  add = "segments", # draws lines from y=0 to data point
+  ggtheme = theme_pubr()
+)
 ```
 
 ## ggplot2 Hands-On Practice 

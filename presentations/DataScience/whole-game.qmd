@@ -1,0 +1,615 @@
+---
+title: "Whole Game"
+subtitle: "R for Data Science Chapters 1-8"
+author: "Julianne G. Clina, PhD"
+institute: "University of Kansas Medical Center"
+date: 2026-06-24
+image: "../../images/thumbnails/whole-game.png"
+format:
+  revealjs:
+    theme: [default, "../../styles/styleReveal.scss"]
+    slide-number: true
+    preview-links: auto
+    logo: https://brand.ku.edu/sites/brand/files/styles/wide_col_xl_6/public/images/2020/KUMarksLogo.png
+    footer: "R for Lifestyle and Brain Health (R-LAB)"
+    transition: slide
+    background-transition: fade
+    highlight-style: github
+    code-line-numbers: true
+    code-block-bg: true
+    incremental: false
+    date-format: long
+    embed-resources: true
+execute: 
+  freeze: auto
+---
+```{r}
+#| label: setup
+#| include: false
+#| eval: true
+# ---- Core packages used throughout ----
+library(tidyverse)
+library(palmerpenguins)
+library(janitor)
+library(reprex)
+
+# ---- Datasets referenced in examples ----
+library(nycflights13)
+library(tidyr)
+
+# ---- Global options ----
+options(
+  dplyr.summarise.inform = FALSE,
+  ggplot2.continuous.colour = "viridis"
+)
+```
+
+## Welcome to the R-Lab!!! {.title-slide}
+
+::: {.highlight-box}
+**Goal:** get just enough of every major data science tool to tackle a real dataset, start to finish.
+:::
+
+. . .
+
+**The data science cycle:**
+
+Import → Tidy → **Transform ⇄ Visualize ⇄ Model** → Communicate
+
+<img src="https://r4ds.hadley.nz/diagrams/data-science/whole-game.png"/>
+
+## Today's Plan {.pattern-dots}
+
+::: {.columns}
+::: {.column width="50%"}
+**Workflow basics**
+
+- Naming, style, scripts, projects
+- These habits show up in every lesson going forward, so we won't repeat them
+:::
+
+::: {.column width="50%"}
+**The four tools** 
+
+- Import data → readr
+- Tidy data → tidyr
+- Transform data → dplyr
+- Visualize data → ggplot2
+:::
+:::
+
+::: {.tip-box}
+We're covering this in **import → tidy → transform → visualize** order today (rather than the book's order) because that's the order you actually touch a new dataset.
+:::
+
+## The Whole Game, Explained Like a Kitchen {.pattern-dots}
+
+::: {.highlight-box}
+Think of data science like cooking a meal:
+:::
+
+| Data science step | Kitchen analogy |
+|---|---|
+| Import | Grocery shopping |
+| Tidy | Washing & chopping ingredients |
+| Transform | Cooking & seasoning |
+| Visualize | Plating the dish |
+| Communicate | Serving it to others |
+
+You *can’t* plate raw ingredients, and you *shouldn’t* cook before you chop.
+
+# Workflow: The Habits That Make This Easier {background-color="#2c3e50"}
+
+## Naming Things and Writing Code {.pattern-dots}
+::: {.columns}
+::: {.column width="50%"}
+### Who are you writing code for?
+
+- Not your professor  
+- Not your classmates  
+- **Future you (who has forgotten everything)**  
+:::
+
+::: {.column width="50%"}
+::: {.tip-box}
+If code only makes sense *right now*, it will absolutely fail you in 2 weeks.
+:::
+:::
+:::
+
+```{r}
+#| echo: true
+#| eval: true
+# Assignment uses <- (shortcut: Alt/Option + -)
+x <- 3 * 4
+primes <- c(2, 3, 5, 7, 11, 13)
+```
+
+::: {.columns}
+::: {.column width="50%"}
+**Strive for:**
+```{r}
+#| echo: true
+#| eval: false
+short_flights <- flights %>%
+  filter(air_time < 60)
+```
+
+:::
+
+::: {.column width="50%"}
+**Avoid:**
+```{r}
+#| echo: true
+#| eval: false
+SHORTFLIGHTS <- flights %>%
+  filter(air_time < 60)
+
+short.flights <- flights %>%
+  filter(air_time < 60)
+
+ShortFlights <- flights %>%
+  filter(air_time < 60)
+```
+
+:::
+:::
+
+::: {.highlight-box}
+**snake_case**, spaces around `<-` and operators, and ` %>% ` at the **end** of a line (not the start) — these three habits make code dramatically easier to read later.
+:::
+
+## Scripts and Projects
+
+- Write code in the **script editor**, not just the console — Cmd/Ctrl + Enter runs a line, Cmd/Ctrl + Shift + S runs the whole script
+- Keep every project (data, scripts, outputs) together using an **RStudio Project** (`.Rproj`)
+- For those using Positron, this is set up for you by working in a specific workspace (folder)
+- Use **relative paths** (`data/students.csv`), never absolute ones (`/Users/you/...`) — relative paths work on anyone's machine
+
+```{r}
+#| echo: true
+#| eval: false
+# Good — relative to the project folder
+write_csv(diamonds, "data/diamonds.csv")
+```
+
+::: {.tip-box}
+Restart R often (Cmd/Ctrl + Shift + 0) and re-run your script from scratch. If it still works, your **script**, not your environment, is the real source of truth.
+:::
+
+# Importing Data {background-color="#2c3e50"}
+
+## Reading Data In With readr {.pattern-grid}
+
+```{r}
+#| echo: true
+#| eval: false
+library(tidyverse)
+
+students <- read_csv(
+  "data/students.csv",
+  na = c("N/A", "") # treat "N/A" strings as real missing values
+)
+```
+
+readr guesses each column's type (logical → number → date → string) from a sample of rows, and prints what it guessed — always worth a glance.
+
+::: {.highlight-box}
+**Common cleanup after import:**
+
+- `janitor::clean_names()` → tidy up column names to snake_case
+- `mutate(x = factor(x))` → turn categorical text into a factor
+- `parse_number()` → pull a number out of a messy string column
+:::
+
+Other formats: `read_tsv()`, `read_delim()`, multiple files at once with `read_csv(list.files(...), id = "file")`.
+
+# Tidying Data {background-color="#2c3e50"}
+
+## What Makes Data "Tidy"? {.pattern-grid}
+
+> "Tidy datasets are all alike, but every messy dataset is messy in its own way." — Hadley Wickham
+
+::: {.highlight-box}
+**Three rules:**
+
+1. Each variable is a column.
+2. Each observation is a row.
+3. Each value is a cell.
+:::
+
+Tidy data is what lets dplyr and ggplot2 "just work" — most real-world data isn't tidy yet, which is why `tidyr` exists.
+
+## Reshaping With `pivot_longer()` / `pivot_wider()`
+
+::: {.columns}
+::: {.column width="50%"}
+**Too wide** — values trapped in column names (e.g. a column per week)
+
+```{r}
+#| echo: true
+#| eval: false
+billboard %>%
+  pivot_longer(
+    cols = starts_with("wk"),
+    names_to = "week",
+    values_to = "rank",
+    values_drop_na = TRUE
+  )
+```
+:::
+
+::: {.column width="50%"}
+**Too long** — one observation spread across multiple rows
+
+```{r}
+#| echo: true
+#| eval: false
+cms_patient_experience %>%
+  pivot_wider(
+    id_cols = starts_with("org"),
+    names_from = measure_cd,
+    values_from = prf_rate
+  )
+```
+:::
+:::
+
+
+
+# Transforming Data {background-color="#2c3e50"}
+
+## dplyr: One Grammar for Rows, Columns, and Groups {.pattern-dots}
+
+Every dplyr verb: (1) takes a data frame first, (2) refers to columns by bare name, (3) returns a new data frame.
+
+| Acts on | Verbs |
+|---|---|
+| **Rows** | `filter()`, `arrange()`, `distinct()` |
+| **Columns** | `mutate()`, `select()`, `rename()`, `relocate()` |
+| **Groups** | `group_by()`, `summarize()`, `slice_max()` / `slice_min()` |
+
+**Before** — `flights`, untouched:
+
+```{r}
+#| echo: true
+#| eval: true
+head(flights)
+```
+
+## dplyr in Action: Before → After
+
+**The pipeline:**
+
+```{r}
+#| echo: true
+#| eval: true
+fast_iah <- flights |>
+  filter(dest == "IAH") %>%
+  mutate(speed = distance / air_time * 60) %>%
+  select(year:day, dep_time, carrier, speed) %>%
+  arrange(desc(speed))
+```
+
+**After** — filtered to `IAH`, new `speed` column, fewer columns, sorted:
+
+```{r}
+#| echo: true
+#| eval: true
+head(fast_iah)
+```
+
+::: {.highlight-box}
+Read ` %>%` or `|>` as **"then."** This pipeline reads: take flights, *then* filter, *then* mutate, *then* select, *then* arrange.
+:::
+
+## Grouped Summaries
+
+```{r}
+#| echo: true
+#| eval: false
+flights %>%
+  group_by(month) %>%
+  summarize(
+    avg_delay = mean(dep_delay, na.rm = TRUE),
+    n = n()
+  )
+```
+
+::: {.tip-box}
+💡 **Always include `n()`** alongside any summary statistic. A mean from 3 observations and a mean from 3,000 observations look identical in a table — but you should trust them very differently.
+:::
+
+```{r}
+#| echo: true
+#| eval: false
+# Newer shortcut — group for just this one operation
+flights %>%
+  summarize(delay = mean(dep_delay, na.rm = TRUE), n = n(), .by = month)
+```
+
+# Visualizing Data {background-color="#2c3e50"}
+
+## ggplot2: The Grammar of Graphics {.pattern-grid}
+
+> "The simple graph has brought more information to the data analyst's mind than any other device." — John Tukey
+
+Every plot: **data** + **mapping** (`aes()`) + **geom**.
+
+::: {.tip-box}
+Let's build one up layer by layer so you can see exactly what each piece adds.
+:::
+
+## Building a Plot, Layer by Layer (1/4)
+
+Start with **data** + **mapping** — `aes()` just sets up the coordinate system, no geometry yet:
+
+```{r}
+#| echo: true
+#| eval: true
+#| fig-width: 7
+#| fig-height: 4
+library(palmerpenguins)
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))
+```
+
+::: {.tip-box}
+Nothing plots yet — `ggplot()` + `aes()` only declares *what goes where*, not *how to draw it*.
+:::
+
+## Building a Plot, Layer by Layer (2/4)
+
+Add a **geom** — now there's something to look at:
+
+```{r}
+#| echo: true
+#| eval: true
+#| fig-width: 7
+#| fig-height: 4
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point()
+```
+
+## Building a Plot, Layer by Layer (3/4)
+
+Map **species** to `color` and `shape` — a third variable, no new geom required:
+
+```{r}
+#| echo: true
+#| eval: true
+#| fig-width: 7
+#| fig-height: 4
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, shape = species))
+```
+
+## Building a Plot, Layer by Layer (4/4)
+
+Add a second **geom** — `geom_smooth()` layers a trend line on top:
+
+```{r}
+#| echo: true
+#| eval: true
+#| fig-width: 7
+#| fig-height: 4
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, shape = species)) +
+  geom_smooth(method = "lm")
+```
+
+::: {.highlight-box}
+Every plot is **data** + **mapping** (`aes()`) + one or more **geoms** — each `+` stacks another layer on the same coordinate system.
+:::
+
+## Matching Plot Type to Question
+
+| Question | Geom(s) |
+|---|---|
+| One categorical variable | `geom_bar()` |
+| One numerical variable | `geom_histogram()`, `geom_density()` |
+| Numerical vs. categorical | `geom_boxplot()` |
+| Two numerical variables | `geom_point()`, `geom_smooth()` |
+| 3+ variables | extra aesthetics (`color`, `shape`) **or** `facet_wrap()` |
+
+```{r}
+#| echo: true
+#| eval: true
+#| fig-width: 7
+#| fig-height: 4
+# Faceting beats cramming too many aesthetics onto one plot
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species)) +
+  facet_wrap(~island)
+```
+
+::: {.tip-box}
+*map* a variable to an aesthetic when you want it to **vary** by data; *set* it (`color = "blue"`) when you just want a fixed look.
+:::
+
+## Polishing and Saving
+
+```{r}
+#| echo: true
+#| eval: false
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, shape = species)) +
+  geom_smooth(method = "lm") +
+  labs(
+    title = "Body mass and flipper length",
+    x = "Flipper length (mm)",
+    y = "Body mass (g)",
+    color = "Species",
+    shape = "Species"
+  )
+
+ggsave("penguin-plot.png")
+```
+
+::: {.highlight-box}
+Same styling rules from the workflow section apply here: treat `+` like ` %>% ` — space before it, end of the line, one argument per line once it gets long.
+:::
+
+# Bringing It All Together {background-color="#2c3e50"}
+
+## A Realistic Pipeline {.pattern-dots}
+
+```{r}
+#| echo: true
+#| eval: false
+library(tidyverse)
+
+flights_summary <- read_csv("data/flights.csv") %>% # import
+  drop_na(dep_delay, arr_delay) %>% # tidy / clean
+  filter(month %in% 6:8) %>% # transform
+  group_by(carrier) %>%
+  summarize(avg_delay = mean(dep_delay), n = n())
+
+ggplot(flights_summary, aes(x = carrier, y = avg_delay)) + # visualize
+  geom_col()
+```
+
+::: {.highlight-box}
+This is the whole game in five lines: **import → tidy → transform → visualize.** Everything else in the book is depth on one of these four steps.
+:::
+
+# Getting Help {background-color="#2c3e50"}
+
+## When You're Stuck {.pattern-dots}
+
+::: {.highlight-box}
+1. **Google it** — add "R" or a package name to your search
+2. **Search Stack Overflow** — include the `[R]` tag
+3. **Still stuck? Build a reprex** — a minimal, self-contained example someone else can copy, paste, and run
+:::
+
+```{r}
+#| echo: true
+#| eval: false
+reprex::reprex()
+```
+
+::: {.tip-box}
+80% of the time, just *writing* a clean minimal example reveals the bug yourself before anyone has to answer it.
+:::
+
+## Summary
+
+::: {.tip-box}
+**The four tools:** `readr` (import) → `tidyr` (tidy) → `dplyr` (transform) → `ggplot2` (visualize)
+:::
+
+**The habits that make it sustainable:** descriptive names, consistent style, RStudio projects with relative paths, restarting R often, and knowing how to ask for help.
+
+We'll go much deeper on each of these tools in upcoming lessons — today was about seeing how they fit together.
+
+---
+
+## In-Class Activity: Your First GitHub Push {.pattern-dots}
+
+::: {.highlight-box}
+Goal for the remainder of the meeting: Everyone will...
+
+- Edit a file in *their own folder*
+- Push it to GitHub
+- See it render online
+:::
+
+## Step 1: Fork the Repository
+
+Open the class repo on Github:
+
+1. Click **Fork**
+2. Accept all defaults
+3. Wait for GitHub to finish
+
+You should now see the repo under **your username**
+
+## Step 2: Clone Your Fork
+
+From *your fork* on GitHub:
+
+1. Click **Code**
+2. Copy the HTTPS URL or Open it GitHub Desktop
+3. In RStudio or Positron:
+   - Clone repository
+   - Paste the URL
+   - Open the project
+
+## Step 3: Navigate to Your Folder
+
+Inside the project (on your computer in Positron), go to:
+
+- attendees/
+- YourName/
+- code
+
+## Step 4: Create a Simple Quarto Document
+
+Inside your `code/` folder:
+
+Create a file called:
+whole-game.qmd
+
+Paste this: as the YAML
+
+```yaml
+---
+title: "The Whole Game Practice"
+format: html
+---
+```
+
+Create an R Code Chunk and enter:
+```{r}
+#| echo: true
+#| eval: false
+# Hello R-LAB
+
+message("My first GitHub push worked!")
+
+x <- 1:10
+mean(x)
+```
+
+And Save the file! 
+
+## Step 5: Render with Quarto Locally
+- Open your .qmd files
+- In the terminal or console, run:
+
+`quarto render`
+
+- This creates the HTML and confirms it's correct!
+
+## Step 6: Commit & Push!
+- Open GitHub Desktop
+- You should see your  .qmd file listed as a change
+- Add a message and description
+- Click **Commmit to Main**
+- ClicK **Push Origin**
+
+You should now see your file on GitHub! 
+
+## Step 7: Enable GitHub Pages
+Within **your fork** on GitHub.com
+
+1. Click *Settings*
+2. Click *Pages*
+3. Under *Source*  
+ \+ Branch: main  
+ \+ Folder: /(root)  
+4. Click *Save*
+
+You should get a Pages URL, which you can preview. Navigate to your folder to preview it! 
+
+## Step 8: Create a Pull Request
+This will allow you to merge your work into the class repository. 
+From **your fork** on GitHub
+
+1. Click *Contribute*
+2. Click *Open pull request*
+3. Confirm the information is correct
+4. Click *Create pull request*
+5. Add a title and description with a clear message   
+  \+ Title: Whole Game Practice (Your Name)  
+  \+ Description: - added whole-game.qmd 

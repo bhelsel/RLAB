@@ -20,6 +20,8 @@ website:
         text: Presentations
       - href: attendees.qmd
         text: 2026 Attendees
+      - href: https://github.com/bhelsel/2026-RLAB-Practical-Exercises/discussions
+        text: Discussion Board
 
 format:
   html:

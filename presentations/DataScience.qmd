@@ -1,7 +1,8 @@
 ---
 title: "R for Data Science"
 listing:
-  contents: DataScience
+  contents: 
+    - DataScience
   sort: "date asc"
   type: default
   categories: true

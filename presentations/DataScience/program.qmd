@@ -1,0 +1,958 @@
+---
+title: "Program"
+subtitle: "R for Data Science Chapters 25-27"
+author: "Julianne G. Clina, PhD"
+institute: "University of Kansas Medical Center"
+date: 2026-07-23
+image: "../../images/thumbnails/program.png"
+format:
+  revealjs:
+    theme: [default, "../../styles/styleReveal.scss"]
+    slide-number: true
+    preview-links: auto
+    logo: https://brand.ku.edu/sites/brand/files/styles/wide_col_xl_6/public/images/2020/KUMarksLogo.png
+    footer: "R for Lifestyle and Brain Health (R-LAB)"
+    transition: slide
+    background-transition: fade
+    highlight-style: github
+    code-line-numbers: true
+    code-block-bg: true
+    incremental: false
+    date-format: long
+    embed-resources: true
+execute:
+  echo: true
+  eval: false
+  freeze: auto
+---
+
+## Learning Objectives
+
+By the end of today's session, you should be able to:
+
+- Explain why writing reusable functions saves you time and prevents mistakes
+- Create simple functions with inputs and outputs
+- Understand why variables inside a function stay inside a function
+- Write functions that work on our study data using `{{ }}`
+- Repeat a task across many participants or variables using `for` loops and `purrr`
+- Recognize when a loop is the right tool versus a simpler approach
+- Recognize a few common base R patterns you'll see in other people's code
+
+## The Programming Toolkit
+
+This section shifts from **wrangling data** to **writing your own tools**.
+
+Think of it like the difference between:
+
+- Following someone else's recipe every time (what we've done so far)
+- Writing your **own recipe card** once, so you (or a labmate) can reuse it anytime
+
+::: {.callout-tip}
+The goal isn't to turn you into a software engineer — it's to save you time and reduce
+copy-paste mistakes in your own analysis scripts.
+:::
+
+## Chapters 25–27
+
+| Chapter | Topic |
+|----------|-------|
+| 25 | Functions |
+| 26 | Iteration |
+| 27 | A field guide to base R |
+
+::: {.highlight-box}
+
+We'll spend most of our time in **Chapter 25**, since functions are the foundation
+everything else builds on.
+
+:::
+
+# Chapter 25: Functions {background-color="#003B70"}
+
+## Why Write Functions?
+
+Imagine a study where each participant has four measures: **steps**, **sleep hours**,
+**mood score**, and **memory score**. You want to rescale each one to a 0-1 scale so
+they're comparable.
+
+```{r}
+sleep_study <- tibble::tibble(
+  steps = rnorm(10, 8000, 1500),
+  sleep_hours = rnorm(10, 7, 1),
+  mood_score = rnorm(10, 50, 10),
+  memory_score = rnorm(10, 75, 8)
+)
+
+sleep_study$steps <- (sleep_study$steps -
+  min(sleep_study$steps, na.rm = TRUE)) /
+  (max(sleep_study$steps, na.rm = TRUE) - min(sleep_study$steps, na.rm = TRUE))
+sleep_study$sleep_hours <- (sleep_study$sleep_hours -
+  min(sleep_study$sleep_hours, na.rm = TRUE)) /
+  (max(sleep_study$sleep_hours, na.rm = TRUE) -
+    min(sleep_study$sleep_hours, na.rm = TRUE))
+sleep_study$mood_score <- (sleep_study$mood_score -
+  min(sleep_study$mood_score, na.rm = TRUE)) /
+  (max(sleep_study$mood_score, na.rm = TRUE) -
+    min(sleep_study$mood_score, na.rm = TRUE))
+sleep_study$memory_score <- (sleep_study$memory_score -
+  min(sleep_study$memory_score, na.rm = TRUE)) /
+  (max(sleep_study$memory_score, na.rm = TRUE) -
+    min(sleep_study$memory_score, na.rm = TRUE))
+```
+
+::: {.callout-tip}
+Think of this like writing the same reminder note on four different sticky notes,
+instead of writing it once and photocopying it. If the reminder needs to change, you
+now have to update all four notes by hand and it's easy to miss one.
+:::
+
+## Benefits of Functions
+
+A function is like a **labeled button on a remote control**. Instead of explaining
+"press this specific sequence of buttons" every time, you just press "Power."
+
+- Give the process a **name** you can reuse
+- Fix it in **one place** if something's wrong
+- Avoid copy-paste mistakes (like updating 3 of the 4 lines and forgetting the 4th)
+- Make your script easier for a labmate (or future-you) to read
+
+```{r}
+rescale01 <- function(x) {
+  (x - min(x, na.rm = TRUE)) /
+    (max(x, na.rm = TRUE) - min(x, na.rm = TRUE))
+}
+
+rescale01(c(0, 5, 10))
+#> [1] 0.0 0.5 1.0
+```
+
+## Vector Functions -- Think: Recipe Card
+
+A function is just a **recipe card**:
+
+- **Name** -- the name of the dish (e.g., "Rescale a Score")
+- **Ingredients** -- the arguments you need (e.g., "a column of numbers")
+- **Steps** -- what to do with those ingredients
+
+You write the card once. After that, you never have to re-explain the recipe -- you
+just say the name.
+
+```{r}
+rescale01 <- function(x) {
+  # <- the "name" and "ingredient" (x)
+  rng <- range(x, na.rm = TRUE) # <- step 1: find the smallest & largest values
+  (x - rng[1]) / (rng[2] - rng[1]) # <- step 2: rescale using those two values
+}
+
+rescale01(c(-10, 0, 10, 30))
+#> [1] 0.00 0.25 0.50 1.00
+```
+
+## Applying Your Function
+
+Once your function exists, use it on all four of your study measures at once --
+no more copy-pasting the same line four times.
+
+```{r}
+sleep_study |>
+  dplyr::mutate(
+    dplyr::across(steps:memory_score, rescale01)
+  )
+```
+
+::: {.highlight-box}
+
+`dplyr::across()` says "apply this function to every column I list" -- one line
+replaces four repeated ones.
+
+:::
+
+## Naming Functions
+
+Think of function names like **labels on file folders** in a filing cabinet. If all
+your folders about "measuring" start with `measure_`, you can find them instantly.
+
+```{r}
+# Good -- easy to find every "check" function later
+check_steps()
+check_sleep()
+check_mood()
+
+# Harder to search for -- the shared word is buried at the end
+steps_check()
+sleep_check()
+mood_check()
+```
+
+- Use **verbs** (actions): `check_`, `measure_`, `summarize_`
+- Use **snake_case**, not `camelCase`
+- Group related functions with a shared **prefix**
+
+## Data Arguments vs. Detail Arguments
+
+Think of ordering matcha: the **type of drink** is the main thing you're ordering
+(data argument). Milk and sweetness level are **details** you can adjust, and the
+barista already has a default in mind if you don't specify.
+
+```{r}
+mean_ci <- function(x, conf = 0.95) {
+  se <- sd(x) / sqrt(length(x))
+  alpha <- 1 - conf
+  mean(x) + se * qnorm(c(alpha / 2, 1 - alpha / 2))
+}
+
+mean_ci(sleep_study$mood_score)
+#> [1] 45.2 54.8
+
+# ask for a wider confidence interval
+mean_ci(sleep_study$mood_score, conf = 0.99)
+#> [1] 42.1 57.9
+```
+
+## Checking Argument Values
+
+Before running a calculation, it's worth checking that the inputs actually go
+together -- the same instinct as checking you have a lid for every container before
+you start packing lunches. Mismatched counts mean *stop*, not guess.
+
+```{r}
+wt_mean <- function(x, w) {
+  if (length(x) != length(w)) {
+    stop("`x` and `w` must be the same length")
+  }
+  sum(w * x) / sum(w)
+}
+
+wt_mean(sleep_study$mood_score, w = c(1, 1, 1, 2, 1, 1, 1, 1, 1, 1))
+#> [1] 51.4
+
+wt_mean(sleep_study$mood_score[1:5], w = 1:6)
+#> Error: `x` and `w` must be the same length
+```
+
+## `stopifnot()`
+
+Same idea, fewer words. `stopifnot()` lets you write the same check in one line
+instead of a full `if`/`stop()` block.
+
+```{r}
+wt_mean <- function(x, w) {
+  stopifnot(length(x) == length(w))
+  sum(w * x) / sum(w)
+}
+
+wt_mean(sleep_study$mood_score[1:5], w = 1:6)
+#> Error: length(x) == length(w) is not TRUE
+```
+
+::: {.callout-tip}
+`stopifnot()` trades a custom error message for brevity -- great for quick, internal
+sanity checks.
+:::
+
+## Dot-Dot-Dot (`...`) -- Think: A Forwarding Address
+
+Think of `...` as a message from your boss that **isn't meant for you**.
+Your job isn't to read or use the message—you simply **pass it along to the person who needs it**.
+
+
+**The problem `...` solves:** say you write a function that wraps `round()`, but you
+also want the user to be able to control `round()`'s `digits` argument -- without you
+having to type out `digits = digits` by hand.
+
+```{r}
+# Without ...  you'd have to name every possible extra argument yourself
+summarize_score <- function(x, digits) {
+  round(mean(x, na.rm = TRUE), digits)
+}
+
+# With ...   any extra arguments the user supplies get forwarded to round()
+summarize_score <- function(x, ...) {
+  round(mean(x, na.rm = TRUE), ...)
+}
+
+summarize_score(sleep_study$mood_score)
+#> [1] 50   (round() used its own default, digits = 0)
+
+summarize_score(sleep_study$mood_score, digits = 2)
+#> [1] 50.24   (digits = 2 traveled through `...` straight into round())
+```
+
+::: {.callout-tip}
+- You call `summarize_score(..., digits = 2)`.
+- `summarize_score()` doesn't use `digits`, so it stores it in `...`.
+- When `round()` is called, `...` passes `digits = 2` along.
+- `round()` knows what `digits` means, so it rounds to 2 decimal places.
+:::
+
+::: {.tip-box}
+
+**"I don't need this argument, but I'll pass it to the next function that does."**
+:::
+
+## Return Values -- Think: Vending Machine
+
+A function is like a **vending machine**: you put something in, and it gives back
+the last thing it computed -- unless it stops early (like a machine flashing
+"sold out").
+
+```{r}
+same_two <- function(x1, x2, x3, x4) {
+  if (!is.finite(x1) || !is.finite(x2)) {
+    return(NA) # <- stops early, like the machine flashing "can't process this"
+  }
+  (x1 == x2) & (x3 == x4)
+}
+
+same_two(1, 1, 2, 2)
+#> [1] TRUE
+
+same_two(NA, 1, 2, 2)
+#> [1] NA
+```
+
+## Writing Pipeable Functions
+
+Think of this like an **assembly line**: each station passes the box along without
+opening it and announcing what's inside. A pipeable function passes the *data frame*
+along, rather than printing or plotting partway through.
+
+```{r}
+standardize <- function(df) {
+  df |>
+    dplyr::mutate(dplyr::across(dplyr::where(is.numeric), rescale01))
+}
+
+sleep_study |> standardize()
+```
+
+::: {.highlight-box}
+
+Returning a data frame (instead of printing it) means you can keep piping more steps
+afterward.
+
+:::
+
+## Environment and Scoping
+
+If a friend texts you *"can you grab mine?"* it only makes sense if you were just
+talking about a specific thing, like a sweatshirt, a few messages earlier. Outside
+that context, "mine" doesn't mean anything.
+
+R works the same way with variables inside a function: it looks up a name's value
+based on the immediate context (the function) where it's written, not some unrelated
+part of your script.
+
+```{r}
+mood_baseline <- 10
+
+f <- function(x) {
+  mood_baseline <- 1 # <- only means something inside this function
+  x + mood_baseline
+}
+
+f(5)
+#> [1] 6
+
+mood_baseline
+#> [1] 10   # <- untouched outside the function
+```
+
+::: {.tip-box}
+
+This is called **lexical scoping** -- R looks up variables based on where a function
+was *written*, not where it happens to be *called from*.
+
+:::
+
+## Scoping, Take Two -- Why It Actually Matters
+
+A second example, with the direction reversed -- notice that a function *can* see
+variables that already exist outside it, it just can't permanently change them.
+
+```{r}
+adjustment <- 5
+
+add_adjustment <- function(x) {
+  x + adjustment # <- reads `adjustment` from outside, since it wasn't defined inside
+}
+
+add_adjustment(10)
+#> [1] 15
+
+# Now the function tries to update it...
+add_adjustment <- function(x) {
+  adjustment <- adjustment + 1 # <- creates a NEW local `adjustment`, doesn't touch the outside one
+  x + adjustment
+}
+
+add_adjustment(10)
+#> [1] 16
+
+adjustment
+#> [1] 5   # <- still 5! The outside copy was never touched
+```
+
+
+## The Indirection Problem
+
+When you use the tidyverse interactively, you can type column names directly into functions:
+
+```{r}
+sleep_study |>
+  dplyr::group_by(group) |>
+  dplyr::summarize(mean(mood_score))
+```
+
+But when you write your **own functions**, R needs to know whether you mean:
+- the name of the column you provided, or
+- the name of the argument inside your function.
+
+This creates an **indirection problem**: the column name is being passed through another variable.
+
+```{r}
+grouped_mean <- function(df, group_var, mean_var) {
+  df |>
+    dplyr::group_by(group_var) |>
+    dplyr::summarize(mean(mean_var))
+}
+
+grouped_mean(sleep_study, group, mood_score)
+# Error: Column `group_var` is not found.
+```
+
+::: {.callout-tip}
+Think of it this way:
+You typed `group`, but **inside the function**, R only sees the name **`group_var`**.
+So instead of looking for a column named `group`, it looks for a column literally named `group_var`—which does not exist.
+That's why the function fails. On the next slide, we'll see how `{{ }}` tells R to use the column the user actually supplied.
+:::
+
+## Embracing with `{{ }}` -- Pointing, Not Spelling It Out
+
+Think of `{{ }}` like **pointing at something** instead of spelling its name out
+letter by letter. It tells the function "treat this as the actual column the user
+means," not a generic placeholder.
+
+```{r}
+grouped_mean <- function(df, group_var, mean_var) {
+  df |>
+    dplyr::group_by({{ group_var }}) |>
+    dplyr::summarize(mean = mean({{ mean_var }}, na.rm = TRUE))
+}
+
+grouped_mean(sleep_study, group, mood_score)
+
+#> # A tibble: 2 x 2
+#>   group      mean
+#>   <chr>     <dbl>
+#> 1 control    48.3
+#> 2 treatment  53.1
+```
+
+::: {.tip-box}
+
+**Rule of thumb:** if you wrote `{{ }}` around it, ask "am I passing this argument
+straight into a tidyverse verb like `group_by()`, `summarize()`, `filter()`, or
+`aes()`?" If yes, it needs `{{ }}`. If you're just using the value directly in
+arithmetic (like `x + 1`), it doesn't.
+
+:::
+
+## When to Embrace
+
+- **Embrace (`{{ }}`)** when the argument is a **column name** from the data
+- **Don't embrace** when the argument is a plain value, like `TRUE`/`FALSE` or a number
+
+```{r}
+count_prop <- function(df, var, sort = FALSE) {
+  df |>
+    dplyr::count({{ var }}, sort = sort) |>
+    dplyr::mutate(prop = n / sum(n))
+}
+
+sleep_study |> count_prop(group, sort = TRUE)
+```
+
+::: {.tip-box}
+
+`sort` is just `TRUE` or `FALSE` -- a plain value, so it's passed through normally, no
+pointing required.
+
+:::
+
+## Style Conventions for Functions
+
+Think of clean function style like **legible handwriting** -- it's not just about
+being "correct," it's about someone else (or you, in six months) being able to read
+it quickly.
+
+```{r}
+# Easy to read
+add_full_name <- function(data, first, last) {
+  data |>
+    dplyr::mutate(name = paste(first, last))
+}
+
+# Hard to read -- same logic, but cramped
+addFullName <- function(data, first, last) {
+  data |> dplyr::mutate(name = paste(first, last))
+}
+```
+
+## Chapter 25 Summary
+
+- Write a function whenever you'd otherwise copy-paste the same code more than twice
+- A function is a **recipe card**: name, ingredients (arguments), steps (body)
+- Use `stopifnot()` or `if`/`stop()` as an alarm bell for bad inputs
+- `...` **forwards** extra arguments to another function inside yours, unopened
+- Variables inside a function only mean something inside that function (scope)
+- Use `{{ }}` to **point at** a column name passed into your function
+
+# Chapter 26: Iteration {background-color="#003B70"}
+
+## Why Iterate?
+
+Imagine checking ten participants' files one at a time, writing down the median steps
+for each. Iteration is like having a **helper** who does the same repetitive task for
+you, one participant at a time, without you copy-pasting the same line ten times.
+
+```{r}
+sleep_study <- tibble::tibble(
+  p1 = rnorm(10),
+  p2 = rnorm(10),
+  p3 = rnorm(10),
+  p4 = rnorm(10)
+)
+
+# Copy-paste approach -- tedious and easy to mess up
+median(sleep_study$p1)
+median(sleep_study$p2)
+median(sleep_study$p3)
+median(sleep_study$p4)
+```
+
+::: {.callout-tip}
+Just like with functions, repeated code is your cue that a loop (or `purrr`) could
+help.
+:::
+
+## `for` Loops -- Think: A Checklist
+
+A `for` loop is like working through a **checklist**: you have a list of items (the
+sequence), something you do to each one (the body), and somewhere you record the
+result (the output).
+
+```{r}
+output <- vector("double", ncol(sleep_study))
+
+for (i in seq_along(sleep_study)) {
+  output[[i]] <- median(sleep_study[[i]])
+}
+
+output
+#> [1] -0.245  0.281 -0.123  0.132
+```
+
+::: {.tip-box}
+
+`seq_along(sleep_study)` is safer than `1:ncol(sleep_study)` -- it behaves correctly
+even if there are zero columns, the same way a checklist with zero items shouldn't
+crash your morning.
+
+:::
+
+## For Loop Variation: Modifying in Place
+
+Sometimes, instead of writing new results elsewhere, you want to **edit your own
+notes directly** -- like updating a participant's chart in place rather than
+starting a new one.
+
+```{r}
+sleep_study <- tibble::tibble(
+  p1 = rnorm(10),
+  p2 = rnorm(10),
+  p3 = rnorm(10),
+  p4 = rnorm(10)
+)
+
+for (i in seq_along(sleep_study)) {
+  sleep_study[[i]] <- rescale01(sleep_study[[i]])
+}
+```
+
+## For Loop Variation: Unknown Output Length
+
+If you don't know how much output you'll end up with, it's like **catching rain in a
+bucket** -- you don't know how much will fall, so you use a flexible container (a
+list) rather than a rigid one you'd have to keep resizing.
+
+```{r}
+out <- list()
+i <- 1
+
+while (length(some_vector <- rnorm(1)) > 0 && i <= 5) {
+  out[[i]] <- some_vector
+  i <- i + 1
+}
+
+str(out)
+```
+
+::: {.callout-tip}
+Growing a vector with `c()` inside a loop is slow -- collecting results in a list and
+combining once at the end is much faster.
+:::
+
+## For Loop Variation: Unknown Sequence Length
+
+A `for` loop always needs to know *how many times* to repeat before it starts. A
+`while` loop is for when you don't know that number in advance -- you just know the
+**condition** that should make it stop.
+
+**Simplest possible example first:**
+
+```{r}
+count <- 0
+
+while (count < 5) {
+  count <- count + 1
+}
+
+count
+#> [1] 5
+```
+
+Read it like a sentence: *"while `count` is less than 5, add 1 to it."* Every `while`
+loop needs something inside it (here, `count <- count + 1`) that eventually makes the
+condition false -- otherwise it never stops.
+
+**A more realistic study example:** taking a participant's blood pressure repeatedly
+until it settles below a threshold, rather than after a fixed number of attempts.
+
+```{r}
+check_reading <- function() sample(c("high", "normal"), 1)
+
+attempts <- 0
+normal_in_a_row <- 0
+
+while (normal_in_a_row < 3) {
+  if (check_reading() == "normal") {
+    normal_in_a_row <- normal_in_a_row + 1
+  } else {
+    normal_in_a_row <- 0
+  }
+  attempts <- attempts + 1
+}
+
+attempts
+#> [1] 7
+```
+
+::: {.tip-box}
+
+Use a `for` loop when you know the number of items ahead of time (10 participants, 4
+columns). Use a `while` loop when you're waiting for something to happen and don't
+know how many tries it'll take.
+
+:::
+
+## Introducing `purrr` -- The Assembly-Line Robot
+
+`purrr` is like an **assembly-line robot**: tell it once what to do to one item, and
+it applies that same action to every item in the box -- no loop needed.
+
+```{r}
+purrr::map_dbl(sleep_study, median)
+#>      p1     p2     p3     p4
+#> -0.245  0.281 -0.123  0.132
+
+purrr::map_dbl(sleep_study, mean)
+purrr::map_dbl(sleep_study, sd)
+```
+
+::: {.highlight-box}
+
+Every `map_*()` function takes a set of items and a function, and applies the
+function to each one -- just like our helper working through a checklist, but in one
+line.
+
+:::
+
+## The `map()` Family -- Different Bins for Different Outputs
+
+Think of each `map_*()` variant as a **different colored bin** for the result you're
+expecting to come out. Choosing the right bin isn't optional decoration -- it's what
+makes `purrr` more predictable than `sapply()` (more on that in Chapter 27).
+
+| Function | Returns | Example use |
+|----------|---------|--------------|
+| `map()` | list (a mixed bin -- always works, but output isn't simplified) | pulling out model objects |
+| `map_lgl()` | TRUE/FALSE values | "is this column numeric?" |
+| `map_int()` | whole numbers | counts, row numbers |
+| `map_dbl()` | decimal numbers | means, medians, SDs |
+| `map_chr()` | text | labels, formatted strings |
+
+```{r}
+purrr::map_chr(sleep_study, \(x) round(mean(x), 2) |> as.character())
+```
+
+::: {.callout-tip}
+If the function you're applying doesn't actually return the type you asked for (e.g.
+you use `map_dbl()` but the function sometimes returns text), `purrr` throws an
+error right away instead of silently giving you a mismatched result -- that's the
+whole point of picking a specific bin.
+:::
+
+## Iterating over Multiple Vectors: `map2()`
+
+Think of `map2()` like **matching pairs of socks** -- it lines up two lists side by
+side and processes them together, one pair at a time (for example, each
+participant's baseline score paired with their follow-up score).
+
+```{r}
+sims <- tibble::tibble(n = c(10, 20, 30), sd = c(1, 5, 10))
+
+sims |>
+  dplyr::mutate(
+    sample = purrr::map2(n, sd, \(n, sd) rnorm(n, sd = sd))
+  )
+```
+
+::: {.tip-box}
+
+Notice the pattern: `map()` walks one list and hands your function **one** value at a
+time. `map2()` walks two lists in lockstep and hands your function **two** values at
+a time (matched by position -- item 1 with item 1, item 2 with item 2, and so on).
+
+:::
+
+## Iterating over Many Arguments: `pmap()`
+
+When you have **three or more** lists to line up together, `pmap()` works like
+coordinating three ingredient lists at once, matched row by row. The lists get
+bundled into a single `list()` so `pmap()` knows how many there are.
+
+```{r}
+params <- tibble::tribble(
+  ~mean , ~sd , ~n ,
+      1 ,   1 , 10 ,
+      2 ,   5 , 20 ,
+      3 ,  10 , 30
+)
+
+params |>
+  dplyr::mutate(sim = purrr::pmap(list(mean, sd, n), rnorm))
+```
+
+::: {.callout-tip}
+Same family, same idea, just more inputs: `map()` = 1 list in, `map2()` = 2 lists in,
+`pmap()` = however many lists you bundle into `list(...)`. You'll almost always use
+`pmap()` with a data frame like `params` above, where each row is one full set of
+arguments.
+:::
+
+## Chapter 26 Summary
+
+- A `for` loop needs a **checklist** (sequence), a **task** (body), and a **place to
+  record results** (output)
+- Use a `while` loop when you don't know how many tries it will take
+- `purrr::map_*()` replaces many common loops with a single line
+- `map2()` and `pmap()` line up multiple lists together, item by item
+- Prefer `map()` variants over `for` loops when possible -- less code, fewer places to
+  make a mistake
+
+# Chapter 27: A Field Guide to Base R {background-color="#003B70"}
+
+## Why Learn Base R?
+
+Even if you write tidyverse code day-to-day, you'll run into base R -- in older
+scripts, Stack Overflow answers, or a colleague's code. Think of it like learning to
+**read** an older cookbook's instructions, even if you cook differently yourself.
+
+::: {.callout-tip}
+The goal isn't to switch back to base R -- it's to be able to read it without getting
+stuck.
+:::
+
+## Selecting Elements: `[`
+
+Think of `[` like **grabbing a handful of jellybeans from a jar** -- whatever you pull
+out is still the same type of thing (still jellybeans, still a vector).
+
+```{r}
+x <- c(10, 20, 30, 40, 50)
+
+x[c(1, 3)]
+#> [1] 10 30
+
+x[x > 25]
+#> [1] 30 40 50
+
+x[-c(1, 2)]
+#> [1] 30 40 50
+```
+
+## Selecting Elements: `[[` and `$`
+
+Think of `[[` and `$` like **reaching into a labeled folder and pulling out one
+specific document by name** -- you get just that one thing, not the whole folder.
+
+```{r}
+sleep_study[["mood_score"]]
+sleep_study$mood_score
+
+# Difference with [ vs [[ on a list
+l <- list(a = 1, b = "text")
+l["a"] # still a small folder containing the number
+l[["a"]] # just the number itself, 1
+```
+
+::: {.tip-box}
+
+`[` keeps the folder; `[[`/`$` reach inside and hand you the single item.
+
+:::
+
+## The `apply` Family
+
+Base R's `apply` functions are the **older version** of the assembly-line robot we
+met with `purrr::map()` -- same idea, slightly different tools.
+
+```{r}
+sleep_study <- tibble::tibble(
+  p1 = rnorm(10),
+  p2 = rnorm(10),
+  p3 = rnorm(10),
+  p4 = rnorm(10)
+)
+
+lapply(sleep_study, mean) # returns a list
+sapply(sleep_study, mean) # tries to simplify to a plain vector
+```
+
+::: {.callout-tip}
+`sapply()`'s automatic simplifying is convenient but unpredictable -- `purrr`'s typed
+`map_*()` functions were designed to fix that unpredictability.
+:::
+
+## `for` Loops in Base R
+
+A base R `for` loop works exactly like the checklist we saw in Chapter 26 -- no extra
+packages required, like a manual tally counter you click by hand.
+
+```{r}
+total <- 0
+
+for (i in 1:10) {
+  total <- total + i
+}
+
+total
+#> [1] 55
+```
+
+## Chapter 27 Summary
+
+- `[` grabs a handful and keeps the same container type; `[[`/`$` pull out one labeled
+  item
+- `lapply()`/`sapply()` are base R's version of `purrr::map()`
+- Base R `for` loops work the same everywhere, with or without extra packages
+- Being able to **read** base R helps when you run into older code or documentation
+
+## Wrap-Up
+
+- **Chapter 25**: Functions are recipe cards -- write once, reuse anywhere. Master
+  `{{ }}` for functions that work on your study data
+- **Chapter 26**: Iteration with `for` loops and `purrr::map()` automates repetitive
+  tasks across participants, columns, or files
+- **Chapter 27**: Base R subsetting and the apply family are worth recognizing, even
+  if you write mostly tidyverse code day-to-day
+
+::: {.highlight-box}
+
+Now let's put functions and iteration into practice with our own study data.
+
+:::
+
+# Practice Time {background-color="#003B70"}
+
+## Practice Exercise: Build a Function, Then Automate It
+
+Now use what you have learned to build some functions! 
+
+```{r}
+sleep_study <- tibble::tibble(
+  steps = rnorm(10, 8000, 1500),
+  sleep_hours = rnorm(10, 7, 1),
+  mood_score = rnorm(10, 50, 10),
+  memory_score = rnorm(10, 75, 8)
+)
+```
+
+## Tier 1: Write a One-Step Function
+
+Many temperature readings during clinic visits or studies report temperature in
+Fahrenheit, but we often need Celsius for analysis. Write a function called
+`f_to_c()` that converts a temperature from Fahrenheit to Celsius.
+
+**Formula:** `C = (F - 32) * 5/9`
+
+```{r}
+f_to_c <- function(temp_f) {
+  # your code here
+}
+
+f_to_c(98.6)
+f_to_c(32)
+```
+
+
+
+## Tier 2: Add One More Step
+
+Physical activity trackers usually log **steps**, but it's often more useful to talk
+about **distance walked**. Write a function called `steps_to_miles()` that estimates
+miles walked from a step count, then adds a **second step** and a **default
+argument** round the result, and let the user choose how many decimal places
+(defaulting to 1 if they don't say).
+
+**Formula:** assume an average stride length of 2.5 feet, and that there are 5,280
+feet in a mile: `miles = steps * 2.5 / 5280`
+
+```{r}
+steps_to_miles <- function(steps, digits = 1) {
+  # your code here
+  # step 1: convert steps to miles using the formula above
+  # step 2: round the result to `digits` decimal places
+}
+
+steps_to_miles(8000)
+steps_to_miles(8000, digits = 3)
+```
+
+
+
+## Tier 3: Apply It to Many Values with `purrr`
+
+Real study data isn't a single step count -- it's a whole column of them, one per
+participant. Instead of calling `steps_to_miles()` once per person, use
+`purrr::map_dbl()` to apply it to an entire vector at once, the same way you saw with
+`median()` and `mean()` in Chapter 26.
+
+```{r}
+daily_steps <- c(4200, 6100, 8000, 9800, 11500)
+
+# your code here
+# use purrr::map_dbl() to apply steps_to_miles() to every value in daily_steps
+
+# or, inside a data frame:
+tibble::tibble(steps = daily_steps) |>
+  dplyr::mutate(
+    miles = # your code here
+  )
+```
+
+**Stretch goal:** try passing `digits = 3` as an extra argument to your `map_dbl()`
+call -- extra arguments after the function name get forwarded to `steps_to_miles()`
+for every value, the same forwarding idea as `...` from Chapter 25.

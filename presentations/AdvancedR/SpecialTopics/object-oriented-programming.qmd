@@ -4,7 +4,7 @@ subtitle: "Applying R to Lifestyle and Brain Health Research"
 author: "Brian C. Helsel, PhD"
 institute: "University of Kansas Medical Center"
 date: 2026-10-14
-image: "../../../images/thumbnails/image-template.png"
+image: "../../../images/thumbnails/oop.png"
 format:
   revealjs:
     theme: [default, "../../../styles/styleReveal.scss"]

@@ -1,0 +1,895 @@
+---
+title: "Import"
+subtitle: "Getting data into R"
+author: "Ian Weidling"
+institute: "University of Kansas Medical Center"
+date: 2026-07-15
+image: "../../images/thumbnails/import.png"
+format:
+  revealjs:
+    theme: [default, "../../styles/styleReveal.scss"]
+    slide-number: true
+    preview-links: auto
+    logo: https://brand.ku.edu/sites/brand/files/styles/wide_col_xl_6/public/images/2020/KUMarksLogo.png
+    footer: "R for Lifestyle and Brain Health (R-LAB)"
+    transition: slide
+    background-transition: fade
+    highlight-style: github
+    code-line-numbers: true
+    code-block-bg: true
+    incremental: false
+    date-format: long
+    embed-resources: true
+execute:
+  freeze: auto
+---
+
+## Data import {.title-slide}
+
+::: {.highlight-box}
+**Data import is the bridge between real-world data and analysis-ready R objects.**
+:::
+
+. . .
+
+Today we will focus on the practical question every data analysis begins with
+
+
+::: {.notes}
+Emphasize that this lecture is not just about memorizing functions. The goal is to help students recognize what kind of data source they have and choose an import strategy that preserves the meaning of the data.
+:::
+
+## Learning goals
+
+By the end of this session, you should be able to:
+
+- Choose the right import function for common data sources
+- Use project-oriented file paths
+- Diagnose common import problems
+- Understand when data are loaded immediately versus queried lazily
+- Recognize hierarchical data and choose a rectangling strategy
+- Extract simple data from an HTML page
+
+::: {.notes}
+Frame these goals as practical skills. Students do not need mastery of every edge case today. They need enough conceptual understanding to know what tool to reach for and what to check after importing.
+:::
+
+## Class plan
+
+::: {.highlight-box}
+**We will alternate between short lecture/demo sections and coding breaks.**
+:::
+
+| Section | Topic | Instructor-led | Student practice |
+|---|---|---:|---:|
+| 1 | Importing files into R | ~15 min | Coding Break 1 — 10 min |
+| 2 | Working with databases and large datasets | ~15 min | Coding Break 2 — 15 min |
+| 3 | Hierarchical and web data | ~15 min | Coding Break 3 — 10 min |
+
+::: {.tip-box}
+💡 The goal is not to memorize every argument. The goal is to practice the workflow: **import → inspect → fix → continue**.
+:::
+
+::: {.notes}
+This slide replaces the original long lecture followed by long practice plan. Tell students that they will practice after each major section while the material is still fresh.
+:::
+
+## The import mindset
+
+::: {.highlight-box}
+**Importing data is not complete when the file loads without an error.**
+:::
+
+A good import workflow asks:
+
+1. Did the data load?
+2. Are the rows and columns what I expected?
+3. Did R guess the column types correctly?
+4. Are missing values represented correctly?
+5. Is the result ready for transformation or visualization?
+
+::: {.notes}
+This is the central “why” behind the lecture. R may import a file successfully but still misinterpret IDs, dates, missing values, or column names. Encourage students to slow down and inspect their objects immediately after importing.
+:::
+
+## Project-oriented workflow
+
+::: {.highlight-box}
+**Use relative paths that describe where files live inside your project.**
+:::
+
+```text
+data-import-workshop/
+├── data/
+│   ├── penguins.csv
+│   └── sales.xlsx
+├── data_import_practice.qmd
+└── data-import-workshop.Rproj
+```
+
+```r
+read_csv("data/penguins.csv")
+```
+
+::: {.tip-box}
+Avoid file paths that only work on your computer, like `C:/Users/yourname/Downloads/data.csv`.
+:::
+
+::: {.notes}
+Explain that many “import problems” are really file path problems. Relative paths make code shareable across computers because they describe the location of a file within the project rather than the location of the project on one person’s machine.
+:::
+
+## Section 1: Importing files into R {.title-slide}
+
+::: {.highlight-box}
+**CSV, TSV, delimited text files, URLs, and spreadsheets**
+:::
+
+. . .
+
+We will start with the file types students are most likely to encounter first.
+
+::: {.notes}
+This section combines the text-file and spreadsheet material. The emphasis should be on choosing the right read function and inspecting the result.
+:::
+
+## Common import functions
+
+| Data source | Package | Function |
+|---|---|---|
+| CSV | readr | `read_csv()` |
+| TSV | readr | `read_tsv()` |
+| Other delimiters | readr | `read_delim()` |
+| Excel | readxl | `read_excel()` |
+| Google Sheets | googlesheets4 | `read_sheet()` |
+
+::: {.highlight-box}
+**The function you choose should match how the data are stored.**
+:::
+
+::: {.notes}
+This slide gives students a mental lookup table. It also introduces the idea that import functions are specialized because different file formats store data differently.
+:::
+
+## Delimiters
+
+A **delimiter** is the character that separates one column from the next.
+
+| File type | Delimiter | Function |
+|---|---|---|
+| `.csv` | comma | `read_csv()` |
+| `.tsv` | tab | `read_tsv()` |
+| `.txt` | varies | `read_delim()` |
+
+```r
+read_delim("data/labs.txt", delim = "|")
+```
+
+::: {.tip-box}
+💡 File extensions can be misleading. If import looks wrong, open the file as plain text and inspect the delimiter.
+:::
+
+::: {.notes}
+Explain that delimited text files are just plain-text tables. The delimiter tells R where one column ends and the next begins. If the delimiter is wrong, R may put everything into one column or split columns incorrectly.
+:::
+
+## Read a CSV file
+
+```r
+library(tidyverse)
+
+penguins <- read_csv("data/penguins.csv")
+penguins
+#> # A tibble: 344 × 8
+#>   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex     year
+#>   <chr>   <chr>              <dbl>         <dbl>             <dbl>       <dbl> <chr>  <dbl>
+#> 1 Adelie  Torgersen           39.1          18.7               181        3750 male    2007
+#> 2 Adelie  Torgersen           39.5          17.4               186        3800 female  2007
+#> 3 Adelie  Torgersen           40.3          18                 195        3250 female  2007
+```
+
+::: {.notes}
+The code and printed output are kept in one non-evaluated code block so the example stays together and always renders consistently. Point out the tibble dimensions and the column type abbreviations under each column name.
+:::
+
+## Read directly from a URL
+
+```r
+penguins_url <- "https://raw.githubusercontent.com/allisonhorst/palmerpenguins/master/inst/extdata/penguins.csv"
+
+penguins <- read_csv(penguins_url)
+```
+
+::: {.highlight-box}
+`readr` functions can read from local files **or** URLs.
+:::
+
+. . .
+
+This is useful for reproducible examples, teaching materials, and public datasets.
+
+::: {.notes}
+Emphasize that students do not always need to manually download a file. If the data are available at a stable URL, they can import directly from the link.
+:::
+
+## Inspect after import
+
+```r
+penguins |> glimpse()
+#> Rows: 344
+#> Columns: 8
+#> $ species           <chr> "Adelie", "Adelie", "Adelie", ...
+#> $ island            <chr> "Torgersen", "Torgersen", "Torgersen", ...
+#> $ bill_length_mm    <dbl> 39.1, 39.5, 40.3, ...
+#> $ bill_depth_mm     <dbl> 18.7, 17.4, 18.0, ...
+#> $ flipper_length_mm <dbl> 181, 186, 195, ...
+#> $ body_mass_g       <dbl> 3750, 3800, 3250, ...
+#> $ sex               <chr> "male", "female", "female", ...
+#> $ year              <dbl> 2007, 2007, 2007, ...
+```
+
+::: {.tip-box}
+💡 A successful import should still be checked with `glimpse()` and, when needed, `spec()`.
+:::
+
+::: {.notes}
+Explain that `glimpse()` is a quick import quality check. It shows dimensions, names, types, and example values. This is often the first thing you should do after reading in a dataset.
+:::
+
+## Column type guessing and specifications
+
+`read_csv()` guesses column types automatically.
+
+```r
+penguins <- read_csv(penguins_url)
+spec(penguins)
+#> cols(
+#>   species = col_character(),
+#>   island = col_character(),
+#>   bill_length_mm = col_double(),
+#>   bill_depth_mm = col_double(),
+#>   flipper_length_mm = col_double(),
+#>   body_mass_g = col_double(),
+#>   sex = col_character(),
+#>   year = col_double()
+#> )
+```
+
+::: {.tip-box}
+💡 Guessing is convenient, but not perfect. Use `col_types` when a column has meaning that R cannot infer, such as IDs, zip codes, or years you want treated as labels.
+:::
+
+```r
+penguins <- read_csv(
+  penguins_url,
+  col_types = cols(
+    year = col_character()
+  )
+)
+```
+
+::: {.notes}
+This slide consolidates the old column type guessing, specification, and manual column type slides. The key message is that readr guesses types, but analysts should verify those guesses. Explain that years, IDs, and codes often look numeric but may be better represented as character variables.
+:::
+
+## Why spreadsheets are different
+
+::: {.highlight-box}
+**Spreadsheets are designed for humans first and computers second.**
+:::
+
+Common spreadsheet issues:
+
+- Multiple sheets
+- Extra titles or notes above the data
+- Merged cells
+- Non-data formatting
+- Inconsistent column names
+
+```r
+library(readxl)
+
+read_excel("data/sales.xlsx", sheet = "January")
+```
+
+::: {.notes}
+The purpose of this slide is to explain why Excel import is a separate topic. Spreadsheets often contain presentation choices that make sense for people but complicate analysis.
+:::
+
+## Column names from Excel
+
+Sometimes the first row is not the real header.
+
+```r
+read_excel("data/sales.xlsx", skip = 2)
+```
+
+Or you can specify a range:
+
+```r
+read_excel("data/sales.xlsx", range = "A3:F20")
+```
+
+::: {.tip-box}
+💡 `janitor::clean_names()` can standardize messy names, and `purrr::map()` can help read many sheets using the same workflow.
+:::
+
+::: {.notes}
+This slide now preserves the key Excel-header point and folds in janitor and purrr as tips rather than separate slides. Explain that the strategy is to identify where the actual rectangular data begins.
+:::
+
+## Coding Break 1: Read functions
+
+::: {.highlight-box}
+**Goal: import a public CSV and control one column type.**
+:::
+
+Open your practice file and complete the following tasks:
+
+1. Load the tidyverse.
+2. Read the Palmer Penguins CSV directly from the URL.
+3. Use `glimpse()` to inspect the imported data.
+4. Re-import the data and force `year` to be a character column.
+5. Confirm that `year` changed from numeric to character.
+
+```r
+penguins_url <- "https://raw.githubusercontent.com/allisonhorst/palmerpenguins/master/inst/extdata/penguins.csv"
+```
+
+::: {.tip-box}
+💡 Finish early? Try forcing `species` to a factor with `col_factor()`.
+:::
+
+::: {.notes}
+Give students about 15 minutes. The point is to practice import, inspection, and column type control with a public dataset that does not require local files.
+:::
+
+## Coding Break 1: Solution
+
+```r
+library(tidyverse)
+
+penguins_url <- "https://raw.githubusercontent.com/allisonhorst/palmerpenguins/master/inst/extdata/penguins.csv"
+
+penguins <- read_csv(penguins_url)
+penguins |> glimpse()
+
+penguins_year_chr <- read_csv(
+  penguins_url,
+  col_types = cols(
+    year = col_character()
+  )
+)
+
+penguins_year_chr |> glimpse()
+```
+
+::: {.notes}
+During discussion, ask students why they might want to treat a year as character. The answer is not that year is always character, but that analysts should decide based on how the variable will be used.
+:::
+
+## Section 2: Working with databases and large datasets {.title-slide}
+
+::: {.highlight-box}
+**Sometimes the data are too large, too shared, or too structured to live in a single CSV.**
+:::
+
+This section introduces database-backed tables and larger-than-memory data workflows.
+
+::: {.notes}
+The goal is conceptual. Students do not need to become database administrators. They need to understand why databases exist and how dplyr can help them query database tables.
+:::
+
+## Why databases?
+
+Compared with a CSV, a database can:
+
+- Store many related tables
+- Support larger datasets
+- Let multiple users access the same data
+- Query only the rows and columns you need
+- Preserve structure and relationships
+
+::: {.highlight-box}
+**With databases, you usually query first and collect later.**
+:::
+
+::: {.notes}
+This slide provides the “why” for databases. A CSV is loaded into memory all at once. A database can stay where it is, while R sends instructions about what subset to retrieve.
+:::
+
+## Database workflow: connect, reference, then query
+
+When working with a database, R does **not** usually import the whole dataset right away.
+
+Instead, the workflow is:
+
+1. **Connect** to the database
+2. **Reference** a table with `tbl()`
+3. **Build a query** using dplyr verbs
+4. **Collect** only the result you need
+
+::: {.highlight-box}
+`tbl()` is like a pointer to a table that lives somewhere else. It lets you work with the table without copying everything into R.
+:::
+
+::: {.tip-box}
+💡 In the coding break, we will create a small temporary database from Palmer Penguins so you can practice this workflow without needing access to a real institutional database.
+:::
+
+::: {.notes}
+This slide replaces the large setup code block with the conceptual takeaway. Emphasize that the setup code is not the lesson; the lesson is the mental model. In database workflows, you first connect, then reference a table, then write a query, and only at the end collect a smaller result into R.
+:::
+
+## Use dplyr on a database
+
+You can write familiar dplyr code:
+
+```r
+adelie_query <- penguins_db |>
+  filter(species == "Adelie") |>
+  select(species, island, body_mass_g, sex)
+
+adelie_query
+```
+
+Behind the scenes, `dbplyr` translates the dplyr pipeline into SQL.
+
+```r
+adelie_query |> show_query()
+```
+
+::: {.highlight-box}
+**The code feels like dplyr, but the work happens in the database.**
+:::
+
+::: {.notes}
+This combines the dplyr and SQL translation slides. Emphasize that students do not need to write SQL to benefit from databases, although seeing the SQL can help them understand what is happening.
+:::
+
+## Collect results into R
+
+Use `collect()` when you are ready to bring the result into memory.
+
+```r
+adelie_local <- adelie_query |>
+  collect()
+
+adelie_local
+```
+
+::: {.tip-box}
+💡 Disconnect when finished:
+
+```r
+dbDisconnect(con)
+```
+:::
+
+::: {.notes}
+Explain that `collect()` is the boundary between database work and local R work. Once collected, the result is a regular tibble in R memory. Also remind students to disconnect from database connections when done.
+:::
+
+## Where Arrow and Parquet fit
+
+::: {.highlight-box}
+**Parquet is a file format; Arrow is a toolkit for working with columnar data efficiently.**
+:::
+
+Why this matters:
+
+- Parquet files are often smaller than CSV files
+- Columnar storage is efficient for selecting variables
+- Arrow can work with large data without loading everything at once
+- The workflow often resembles database work: filter first, collect later
+
+::: {.tip-box}
+For this course, focus on the concept: **large data workflows often avoid loading everything into memory immediately**.
+:::
+
+::: {.notes}
+This single conceptual slide replaces multiple Arrow-specific workflow slides. The aim is to connect Arrow to the database idea of lazy querying without overwhelming students with another API.
+:::
+
+## Coding Break 2: Database queries
+
+::: {.highlight-box}
+**Goal: query a simulated database using dplyr and collect a summary.**
+:::
+
+Run this setup code first:
+
+```r
+library(tidyverse)
+library(DBI)
+library(RSQLite)
+library(dbplyr)
+library(palmerpenguins)
+
+con <- dbConnect(SQLite(), ":memory:")
+copy_to(con, penguins, "penguins", temporary = FALSE)
+```
+
+Then:
+
+1. Reference the `penguins` table with `tbl()`.
+2. Filter to Gentoo penguins.
+3. Select `species`, `island`, `body_mass_g`, and `sex`.
+4. Group by `sex` and calculate mean body mass.
+5. Use `collect()` to bring the result into R.
+
+::: {.tip-box}
+💡 Finish early? Run `show_query()` before `collect()`.
+:::
+
+::: {.notes}
+Give students the database setup code so the exercise focuses on database-backed dplyr logic rather than setup. The key learning objective is when to use `collect()`.
+:::
+
+## Coding Break 2: Solution
+
+```r
+library(tidyverse)
+library(DBI)
+library(RSQLite)
+library(dbplyr)
+library(palmerpenguins)
+
+con <- dbConnect(SQLite(), ":memory:")
+copy_to(con, penguins, "penguins", temporary = FALSE)
+
+penguins_db <- tbl(con, "penguins")
+
+body_mass_summary <- penguins_db |>
+  filter(species == "Gentoo") |>
+  select(species, island, body_mass_g, sex) |>
+  group_by(sex) |>
+  summarize(mean_body_mass_g = mean(body_mass_g, na.rm = TRUE)) |>
+  collect()
+
+body_mass_summary
+
+dbDisconnect(con)
+```
+
+::: {.notes}
+In the discussion, highlight the order of operations. Students first create a lazy query against the database, then collect only the small summary table.
+:::
+
+## Section 3: Hierarchical and web data {.title-slide}
+
+::: {.highlight-box}
+**Not all data arrive as rectangles.**
+:::
+
+This section covers:
+
+- Lists and list-columns
+- Rectangling nested data
+- JSON
+- HTML tables and web scraping
+
+::: {.notes}
+This merged section replaces the separate hierarchical data and web scraping title slides. Emphasize that web data often arrive in nested or semi-structured formats.
+:::
+
+## Rectangular versus hierarchical data
+
+A rectangular dataset has rows and columns:
+
+```text
+species | island    | body_mass_g
+Adelie  | Torgersen | 3750
+Adelie  | Torgersen | 3800
+```
+
+A hierarchical dataset is tree-like:
+
+```text
+penguin
+├── species
+├── island
+└── measurements
+    ├── bill_length_mm
+    └── body_mass_g
+```
+
+::: {.highlight-box}
+**Rectangling means converting tree-like data into rows and columns.**
+:::
+
+::: {.notes}
+This is the big conceptual transition. Students already know how to work with rectangular data. Hierarchical data require inspecting structure and deciding how to turn nested components into rows or columns.
+:::
+
+## Lists store hierarchical data
+
+Lists can contain different kinds of objects.
+
+```r
+x <- list(
+  species = "Adelie",
+  measurements = list(
+    bill_length_mm = 39.1,
+    body_mass_g = 3750
+  ),
+  tags = c("Torgersen", "male")
+)
+
+str(x)
+#> List of 3
+#>  $ species     : chr "Adelie"
+#>  $ measurements:List of 2
+#>   ..$ bill_length_mm: num 39.1
+#>   ..$ body_mass_g   : num 3750
+#>  $ tags        : chr [1:2] "Torgersen" "male"
+```
+
+::: {.notes}
+This slide follows the R4DS chapter’s emphasis on lists as the structure that makes hierarchical data possible. Use `str()` as the main inspection tool.
+:::
+
+## List-columns
+
+A list-column is a list stored inside a tibble.
+
+```r
+df <- tibble(
+  id = 1:2,
+  bird = c("A", "B"),
+  measurements = list(
+    list(bill = 39.1, mass = 3750),
+    list(bill = 46.5, mass = 4200)
+  )
+)
+
+df
+#> # A tibble: 2 × 3
+#>      id bird  measurements
+#>   <int> <chr> <list>
+#> 1     1 A     <named list [2]>
+#> 2     2 B     <named list [2]>
+
+df |> pull(measurements) |> str()
+#> List of 2
+#>  $ :List of 2
+#>   ..$ bill: num 39.1
+#>   ..$ mass: num 3750
+#>  $ :List of 2
+#>   ..$ bill: num 46.5
+#>   ..$ mass: num 4200
+```
+
+::: {.tip-box}
+💡 Tibbles summarize list-columns as `<list>`. Use `pull()` + `str()` to inspect what is inside.
+:::
+
+::: {.notes}
+The requested change was to print the `str()` result so students can see the underlying structure. Explain that list-columns are normal columns, but each cell can contain a more complex object.
+:::
+
+## Rectangling decision guide
+
+::: {.highlight-box}
+**Choose the function based on what the nested values represent.**
+:::
+
+| Situation | Common tool | Result |
+|---|---|---|
+| Named values should become variables | `unnest_wider()` | More columns |
+| Repeated values should become observations | `unnest_longer()` | More rows |
+| You only need a few pieces | `hoist()` | Selected columns |
+| You are not sure yet | `str()` / `View()` | Inspect structure |
+
+::: {.tip-box}
+Rectangling is iterative: **inspect → choose wider/longer/hoist → inspect again**.
+:::
+
+::: {.notes}
+This consolidates the many individual rectangling function slides into one decision guide. Use this slide to keep the why front and center. The function is chosen based on the meaning of the nested data.
+:::
+
+## Compact rectangling example
+
+```r
+df <- tibble(
+  id = 1:2,
+  measurements = list(
+    list(bill = 39.1, mass = 3750),
+    list(bill = 46.5, mass = 4200)
+  ),
+  tags = list(
+    c("Torgersen", "male"),
+    c("Biscoe", "female")
+  )
+)
+
+# Named elements become columns
+df |> unnest_wider(measurements)
+
+# Repeated values become rows
+df |> unnest_longer(tags)
+```
+
+::: {.notes}
+This replaces separate wider/longer slides with a compact comparison. Explain that named measurement values behave like variables, while repeated tags behave like multiple observations.
+:::
+
+## What is JSON?
+
+::: {.highlight-box}
+**JSON** stands for **JavaScript Object Notation**. It is a common format for storing and exchanging hierarchical data.
+:::
+
+You will often encounter JSON when data comes from:
+
+- Web APIs
+- Public data portals
+- Application logs
+- Web services
+- Nested metadata files
+
+JSON can represent structures that do not fit neatly into rows and columns right away:
+
+```text
+{
+  "name": "Ava",
+  "scores": [90, 92],
+  "metadata": {"group": "A", "site": "KC"}
+}
+```
+
+::: {.tip-box}
+💡 Many APIs return JSON because it can store nested information. In R, JSON often becomes a list or list-column, so we use rectangling tools to turn it into a tibble.
+:::
+
+::: {.notes}
+Use this slide to connect rectangling to real data sources. JSON is common in APIs because it can represent nested structures: one person can have multiple scores, metadata can have named subfields, and records do not need to be perfectly rectangular at first. The key transition is that JSON data often enters R as lists, and rectangling turns those lists into columns and rows.
+:::
+
+## Read JSON, then rectangle it
+
+```r
+library(jsonlite)
+library(tidyr)
+
+json <- '[
+  {"id": 1, "name": "Ava", "scores": [90, 92]},
+  {"id": 2, "name": "Ben", "scores": [85, 88, 91]}
+]'
+
+students <- fromJSON(json, simplifyVector = FALSE)
+
+tibble(student = students) |>
+  unnest_wider(student) |>
+  unnest_longer(scores)
+#> # A tibble: 5 × 3
+#>      id name  scores
+#>   <int> <chr>  <dbl>
+#> 1     1 Ava       90
+#> 2     1 Ava       92
+#> 3     2 Ben       85
+#> 4     2 Ben       88
+#> 5     2 Ben       91
+```
+
+::: {.notes}
+This slide keeps the code and its displayed output together in one code block using the `#>` convention. Explain that JSON often becomes a list in R, and rectangling turns that list into a tibble.
+:::
+
+## Web scraping
+
+::: {.highlight-box}
+**Web scraping means extracting data from HTML.**
+:::
+
+A common workflow is:
+
+```r
+library(rvest)
+
+page <- read_html("https://example.com")
+
+tables <- page |>
+  html_elements("table") |>
+  html_table()
+```
+
+::: {.tip-box}
+💡 Always check whether a site allows scraping, and prefer stable public pages or official APIs when available.
+:::
+
+::: {.notes}
+Keep this slide practical and cautious. Web scraping is powerful, but fragile. HTML structure can change, and not all sites allow scraping.
+:::
+
+## Coding Break 3: Web scraping challenge
+
+::: {.highlight-box}
+**Goal: scrape a public HTML table and turn it into a tibble.**
+:::
+
+Use this public page:
+
+```r
+url <- "https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)"
+```
+
+Tasks:
+
+1. Read the page with `read_html()`.
+2. Extract all tables with `html_elements("table")` and `html_table()`.
+3. Pull out the first table.
+4. Use `glimpse()` to inspect it.
+5. Select a few columns that look useful.
+
+::: {.tip-box}
+💡 Finish early? Clean the column names with `janitor::clean_names()`. Because web pages change, inspect the tables before assuming which one you need.
+:::
+
+::: {.notes}
+Give students about 15 minutes. Remind them that web pages can contain many tables, so scraping often begins by extracting a list of tables and inspecting which one you need.
+:::
+
+## Coding Break 3: Solution
+
+```r
+library(tidyverse)
+library(rvest)
+
+url <- "https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)"
+
+page <- read_html(url)
+
+tables <- page |>
+  html_elements("table") |>
+  html_table()
+
+population <- tables[[1]]
+
+population |> glimpse()
+
+population_small <- population |>
+  select(1:4)
+
+population_small
+```
+
+::: {.notes}
+If the page structure changes, adapt live by inspecting `length(tables)` and viewing the first few table names. This is a teachable moment: web scraping is useful but more fragile than reading a stable file.
+:::
+
+## Summary
+
+| Source | Key idea |
+|---|---|
+| Text files | Choose the function that matches the delimiter |
+| Spreadsheets | Find the actual rectangle inside the workbook |
+| Databases | Query first, `collect()` later |
+| Arrow / Parquet | Large data workflows often avoid loading everything at once |
+| Hierarchical data | Inspect lists and rectangle iteratively |
+| Web pages | Extract HTML elements carefully and check the result |
+
+::: {.highlight-box}
+**Import is successful only when the object in R matches the meaning of the original data.**
+:::
+
+::: {.notes}
+End by returning to the core theme: data import is about preserving meaning. A dataset that loads successfully can still be wrong if types, names, paths, or structure were misinterpreted.
+:::
+
+## Practice files
+
+::: {.highlight-box}
+Continue working in the companion activity file.
+:::
+
+Recommended files:
+
+- `data_import_activities.qmd` for the three coding breaks
+- The rendered slides for reference
+- The R4DS import chapters for deeper examples
+
+::: {.notes}
+Use this as the bridge from the lecture to the companion practice document. If time remains, students can repeat the breaks or extend them.
+:::
