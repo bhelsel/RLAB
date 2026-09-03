@@ -1904,39 +1904,39 @@
     "text": "While and Repeat\nFor loops are useful if you know in advance the set of values that you want to iterate over. If you don’t know, there are two related tools with more flexible specifications:\nwhile(condition) action: performs action while condition is TRUE.\nrepeat(action): repeats action forever (i.e. until it encounters break).\n\nbpcut &lt;- 120\nbpsys &lt;- 126\n\nwhile (bpsys &gt; bpcut) {\n  print(\"Your systolic blood pressure is elevated\")\n  bpsys &lt;- bpsys - 1\n}\n# [1] \"Your systolic blood pressure is elevated\"\n# [1] \"Your systolic blood pressure is elevated\"\n# [1] \"Your systolic blood pressure is elevated\"\n# [1] \"Your systolic blood pressure is elevated\"\n# [1] \"Your systolic blood pressure is elevated\"\n# [1] \"Your systolic blood pressure is elevated\"\n# [1] \"Your systolic blood pressure is elevated\"\n\nbpcut &lt;- 120\nbpsys &lt;- 126\n\nrepeat {\n  if (bpsys &lt;= bpcut) {\n    break\n  }\n  print(\"Your systolic blood pressure is elevated\")\n  bpsys &lt;- bpsys - 1\n}\n\n# [1] \"Your systolic blood pressure is elevated\"\n# [1] \"Your systolic blood pressure is elevated\"\n# [1] \"Your systolic blood pressure is elevated\"\n# [1] \"Your systolic blood pressure is elevated\"\n# [1] \"Your systolic blood pressure is elevated\"\n# [1] \"Your systolic blood pressure is elevated\"\n# [1] \"Your systolic blood pressure is elevated\"\n\nstep_goal &lt;- 10000\ncurrent_steps &lt;- 6500\n\nrepeat {\n  if (current_steps &gt;= step_goal) {\n    print(\"Congrats! You've reached your daily step goal.\")\n    break\n  }\n\n  print(paste(\n    \"You have\",\n    step_goal - current_steps,\n    \"steps to go. Keep moving!\"\n  ))\n  steps_taken &lt;- sample(500:1500, 1)\n  current_steps &lt;- current_steps + steps_taken\n\n  Sys.sleep(1)\n}\n# {1] \"You have 3500 steps to go. Keep moving!\"\n# [1] \"You have 2901 steps to go. Keep moving!\"\n# [1] \"You have 2131 steps to go. Keep moving!\"\n# [1] \"You have 792 steps to go. Keep moving!\"\n# [1] \"Congrats! You've reached your daily step goal.\""
   },
   {
-    "objectID": "presentations/AdvancedR/Foundations/functions.html#functions",
-    "href": "presentations/AdvancedR/Foundations/functions.html#functions",
+    "objectID": "presentations/AdvancedR/Foundations/functions.html#what-are-functions",
+    "href": "presentations/AdvancedR/Foundations/functions.html#what-are-functions",
     "title": "Functions",
-    "section": "Functions",
-    "text": "Functions\n\nA function is a machine that takes something in, does a job to it, and gives something back out. For example, think about a blender:\n\n\nInput → “ingredients” you put into the function (e.g., fruit)\nFunction → what the machine actual does; blend the ingredients together\nOutput → resulting product: smoothie!\n\n\nblender &lt;- function(fruit) {\n  smoothie &lt;- blend(fruit)\n  return(smoothie)\n}"
+    "section": "What are functions?",
+    "text": "What are functions?\n\nA function is a machine that takes something in, does a job to it, and gives something back out. For example, think about a blender:\n\n\n\n\n\n\nInput → “ingredients” you put into the function: fruit\nFunction → machine’s task: blend\nOutput → resulting product: smoothie\n\n\n\nblender &lt;- function(fruit) {\n  smoothie &lt;- blend(fruit)\n  return(smoothie)\n}"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/functions.html#functions-have-three-main-parts",
     "href": "presentations/AdvancedR/Foundations/functions.html#functions-have-three-main-parts",
     "title": "Functions",
-    "section": "Functions Have Three Main Parts",
-    "text": "Functions Have Three Main Parts\nA function is a machine (in our example, a blender): input (fruit) goes in, the machine (blender) completes a task, and output (smoothie) comes out. But what actually happens inside the machine?\n\nEvery function is built from three parts: arguments, body, and environment\n\n\nArguments (formals()) → input, or ingredients you feed in (e.g., fruit)\nBody (body()) → provides instructions for the machine, or actual steps of how fruit gets blended\nEnvironment (environment()) → ‘kitchen’ the blender sits in, or everything else it can access while it runs\n\n\n# Environment example: adding milk to smoothie\n\nmilk &lt;- \"Half cup of milk\" \n# milk accessible to blender in environment (in other words, R knows what you mean by milk)\n\nblender &lt;- function(fruit) { # fruit assigned as an argument\n  smoothie &lt;- blend(fruit, milk) # milk is not an argument, but available in environment\n  return(smoothie) # smoothie made from fruit and milk\n}\n\n\nMilk was never passed in as an argument, but the blender can “grab” the milk because it is in the ‘blender’s kitchen’, or the ‘function’s environment’.\n\nThe function (blender) is assigned its environment (kitchen) automatically when it is built and never forgets it. R calls this lexical scoping (more on this later)."
+    "section": "Functions have three main parts",
+    "text": "Functions have three main parts\nA function is a machine (blender): input (fruit) goes in, the machine (blender) completes a task, and output (smoothie) comes out. But what actually happens inside the machine?\n\nEvery function is built from three parts: arguments, body, and environment\n\n\nArguments (formals()) → input, or ingredients you feed in (e.g., fruit)\nBody (body()) → how the function works, or actual steps of how fruit gets blended\nEnvironment (environment()) → everything else the function can access, or the ‘kitchen’ the blender sits in\n\n\n# Environment example: adding milk to the smoothie\n\nmilk &lt;- \"Half cup of milk\" \n# milk accessible to blender in environment (i.e., R knows what you mean by milk)\n\nblender &lt;- function(fruit) { # fruit assigned as an argument\n  smoothie &lt;- blend(fruit, milk) # milk is not an argument, but available in environment\n  return(smoothie) # smoothie made from fruit and milk\n}\n\nMilk was never passed in as an argument, but the blender can ‘grab’ the milk because it is in the ‘blender’s kitchen’, or the ‘function’s environment’.\n\nThe function (blender) is assigned its environment (kitchen) automatically when it is built and never forgets it. R calls this lexical scoping (more on this later)."
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/functions.html#attributes",
     "href": "presentations/AdvancedR/Foundations/functions.html#attributes",
     "title": "Functions",
     "section": "Attributes",
-    "text": "Attributes\nBeyond the three main components, functions also have extra ‘labels’ of information called attributes attr(). In our example, think of sticky notes attached to the blender.\nOne particularly useful attribute is srcref (source reference), which is like a sticky note with the smoothie recipe.\n\nblender &lt;- function(fruit) {\n  # Blend the fruit into a smoothie\n  smoothie &lt;- blend(fruit)\n  return(smoothie)\n}\n\nattr(blender, \"srcref\")\n\n#&gt; function(fruit) {\n#&gt;   # Blend the fruit into a smoothie\n#&gt;   smoothie &lt;- blend(fruit)\n#&gt;   return(smoothie)\n#&gt; }"
+    "text": "Attributes\nFunctions also have extra ‘labels’ of information called attributes attr(). In our example, think of sticky notes attached to the blender.\nOne particularly useful attribute is srcref (source reference), which is like a sticky note with the smoothie recipe.\n\nblender &lt;- function(fruit) {\n  # Blend the fruit into a smoothie\n  smoothie &lt;- blend(fruit)\n  return(smoothie)\n}\n\nattr(blender, \"srcref\")\n\n#&gt; function(fruit) {\n#&gt;   # Blend the fruit into a smoothie\n#&gt;   smoothie &lt;- blend(fruit)\n#&gt;   return(smoothie)\n#&gt; }"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/functions.html#primitive-functions",
     "href": "presentations/AdvancedR/Foundations/functions.html#primitive-functions",
     "title": "Functions",
     "section": "Primitive functions",
-    "text": "Primitive functions\n\nOur first main concept was that every function is built from three parts: arguments, body, and environment. Primitive functions break this rule (sigh!)\n\n\nSmall set of functions that skip the traditional three-part structure\nInstead of running R code, they connect to C code: language R itself is built on\nSince primitive functions are not “build” the normal way, arguments, body, and environments are all NULL\n\n\nThink of these as functions with no visible “recipe” at all; they are wired straight into R’s engine rather than written out like the functions we’ve been building.\n\n\n\n\nPrimitive functions come in two types: builtin or special\n\nsum\n#&gt; function (..., na.rm = FALSE)  .Primitive(\"sum\")\ntypeof(sum)\n#&gt; [1] \"builtin\"\n\n`[`\n#&gt; .Primitive(\"[\")\ntypeof(`[`)\n#&gt; [1] \"special\""
+    "text": "Primitive functions\n\nWe just learned that every function is built from three parts: arguments, body, and environment. Primitive functions break this rule (sigh!)\n\n\nSmall set of functions that skip the traditional three-part structure\nInstead of running R code, they connect to C code: language R itself is built on\nSince primitive functions are not “built” the normal way, arguments, body, and environments are all NULL\n\n\nThink of these as functions with no visible “recipe” at all; they are wired straight into R’s engine rather than written out explicitly.\n\n\n\n\nPrimitive functions come in two types: builtin or special\n\nsum\n#&gt; function (..., na.rm = FALSE)  .Primitive(\"sum\")\ntypeof(sum)\n#&gt; [1] \"builtin\"\n\n`[`\n#&gt; .Primitive(\"[\")\ntypeof(`[`)\n#&gt; [1] \"special\""
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/functions.html#first-class-functions-they-are-just-objects",
     "href": "presentations/AdvancedR/Foundations/functions.html#first-class-functions-they-are-just-objects",
     "title": "Functions",
     "section": "First-class functions: They are just objects!",
-    "text": "First-class functions: They are just objects!\n\nSo far we’ve treated functions like special machines. But in R, a function is just another type of object.\n\n\n\n\nThere’s no special syntax needed to “declare” a function\nYou create it with function(), then give it a name with &lt;- — just like assigning a number to a name\n\n\n\n\n\nf01 &lt;- function(x) {\n  sin(1 / x^2)\n}\n\nBecause functions are just objects, they don’t need a name at all. Anonymous functions run the same way but are never assigned a name. This is useful if you only plan on running the analysis once, defeating the purpose of assigning it a long-term name.\n\nunlist(lapply(mtcars, function(x) length(unique(x))))\n#&gt;   mpg  cyl disp  hp  drat  wt  qsec   vs  am  gear carb\n#&gt;   25    3   27   22   22   29   30    2    2    3    6\n\nFunctions can also be stroed inside other objects, like a list.\n\nfuns &lt;- list(\n  half = function(x) x / 2,\n  double = function(x) x * 2\n)"
+    "text": "First-class functions: They are just objects!\n\nSo far we’ve treated functions like special machines. But in R, a function is just another type of object.\n\n\n\n\nThere’s no special syntax needed to “declare” a function\nYou create it with function(), then give it a name with &lt;- — just like assigning a number to a name\n\n\n\n\n\nf01 &lt;- function(x) {\n  sin(1 / x^2)\n}\n\nBecause functions are just objects, they don’t need a name at all. Anonymous functions run the same way but are never assigned a name. This is useful if you only plan on running the analysis once, defeating the purpose of assigning it a long-term name.\n\nunlist(lapply(mtcars, function(x) length(unique(x))))\n#&gt;   mpg  cyl disp  hp  drat  wt  qsec   vs  am  gear carb\n#&gt;   25    3   27   22   22   29   30    2    2    3    6\n\nFunctions can also be stored inside other objects, like a list.\n\nfuns &lt;- list(\n  half = function(x) x / 2,\n  double = function(x) x * 2\n)"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/functions.html#invoking-a-function",
@@ -1950,133 +1950,112 @@
     "href": "presentations/AdvancedR/Foundations/functions.html#function-composition",
     "title": "Functions",
     "section": "Function composition",
-    "text": "Function composition\n\nMost analyses you will engage in as a researcher likely involves more than one function. Composition refers to chaining functions together so the output of one becomes the input of the next.\n\nBase R gives you two main ways to achieve this:\nOption 1: Save each step as its own variable (Intermediate Results) - Pros: easy to read and write, especially if sharing code with others - Cons: can create a lot of unnecessary intermediate objects\n\nsquare &lt;- function(x) x^2\ndeviation &lt;- function(x) x - mean(x)\n\nx &lt;- 1:20\n\n# Saving intermediate results\nout &lt;- deviation(x)\nout &lt;- square(out)\nout &lt;- mean(out)\nout &lt;- sqrt(out)\n\nOption 2: Nest the functions inside each other (Nested) - Pros: No extra variables - Cons: ‘inside out’ reading, which can be difficult to follow\n\n# Nested\nsqrt(mean(square(deviation(x))))\n\n\nBoth versions calculate the exact same thing; they’re just two different ways of writing the same sequence of steps.\n\nOption 3: magrittr package The magrittr package uses binary operator called the pipe %&gt;%, which read as “and then”. The basic idea is to take what is on the left and then feed it into the function on the right. - Pros: read code in straightforward fashion without intermediate objects - Cons: requires additional package and slightly more advanced understanding of R\n\nlibrary(magrittr)\n\nx %&gt;%\n  deviation() %&gt;%\n  square() %&gt;%\n  mean() %&gt;%\n  {\n    paste0(\"Square root of \", ., \" is \", round(sqrt(.), 2))\n  }"
+    "text": "Function composition\n\nMost analyses you conduct will likely involve more than one function. Composition refers to chaining functions together so the output of one becomes the input of the next.\n\nBase R gives you two main ways to achieve this:\nOption 1: Save each step as its own variable (Intermediate Results)\n\nPros: easy to read and write, especially if sharing code with others\nCons: can create a lot of unnecessary intermediate objects\n\n\nsquare &lt;- function(x) x^2\ndeviation &lt;- function(x) x - mean(x)\n\nx &lt;- 1:20\n\n# Saving intermediate results\nout &lt;- deviation(x)\nout &lt;- square(out)\nout &lt;- mean(out)\nout &lt;- sqrt(out)\n\nOption 2: Nest the functions inside each other (Nested)\n\nPros: no extra variables\nCons: ‘inside out’ reading, which can be difficult to follow\n\n\n# Nested\nsqrt(mean(square(deviation(x))))\n\n\nBoth versions calculate the exact same thing; they’re just two different ways of writing the same sequence of steps.\n\nOption 3: magrittr\nThe magrittr package uses binary operator called the pipe %&gt;%, which read as “and then”. The basic idea is to take what is on the left and then feed it into the function on the right.\n\nPros: read code in straightforward fashion without intermediate objects\nCons: requires additional package and slightly more advanced understanding of R\n\n\nlibrary(magrittr)\n\nx %&gt;%\n  deviation() %&gt;%\n  square() %&gt;%\n  mean() %&gt;%\n  {\n    paste0(\"Square root of \", ., \" is \", round(sqrt(.), 2))\n  }"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/functions.html#lexical-scoping",
     "href": "presentations/AdvancedR/Foundations/functions.html#lexical-scoping",
     "title": "Functions",
     "section": "Lexical scoping",
-    "text": "Lexical scoping\nR looks up the values of names based on how a function is defined and not how it is called. Lexical is a technical term used in computer science that tells us that the scoping rules use a parse-time structure rather than a run-time structure. The lexical scoping in R follows four primary rules: (1) name masking, (2) functions versus variables,(3) a fresh start, and (4) dynamic lookup."
+    "text": "Lexical scoping\n\nA function’s environment (its “kitchen”) is fixed the moment the function is built, not when it’s used. Lexical scoping is the rule that R looks up values based on where the function was written, not where it’s called from.\n\nLexical scoping follows four rules:\n\nName masking\nFunctions vs Variables\nFresh start\nDynamic lookup"
   },
   {
-    "objectID": "presentations/AdvancedR/Foundations/functions.html#name-masking",
-    "href": "presentations/AdvancedR/Foundations/functions.html#name-masking",
+    "objectID": "presentations/AdvancedR/Foundations/functions.html#rule-1-name-masking",
+    "href": "presentations/AdvancedR/Foundations/functions.html#rule-1-name-masking",
     "title": "Functions",
-    "section": "Name masking",
-    "text": "Name masking\nNames defined inside of a function mask names dfined outside of a function.\n\nx &lt;- 10\ny &lt;- 20\n\ng01 &lt;- function() {\n  x &lt;- 1\n  y &lt;- 2\n  c(x, y)\n}\n\ng01()\n#&gt; [1] 1 2\n\nR looks one level up if a name is not defined inside of a function.\n\nx &lt;- 2\n\ng02 &lt;- function() {\n  y &lt;- 1\n  c(x, y)\n}\n\ng02()\n#&gt; [1] 2 1\n\nThe same rules apply if a function is defined inside another function. If R is unable to find the value, it looks for the value in the location that the function is defined, all the way up to the global environment including other loaded packages.\n\nx &lt;- 1\n\ng03 &lt;- function() {\n  y &lt;- 2\n  i &lt;- function() {\n    z &lt;- 3\n    c(x, y, z)\n  }\n  i()\n}\n\ng03()\n#&gt; [1] 1 2 3"
+    "section": "Rule 1: Name masking",
+    "text": "Rule 1: Name masking\nIf a name exists both inside and outside a function, R uses the inside version. The inside version masks or hides the outside version.\n\nx &lt;- 10\n\nf &lt;- function() {\n  x &lt;- 1\n  x\n}\n\nf()()\n#&gt; [1] 1 \n\nIf a name isn’t defined inside a function, R looks one level up to find it:\n\ny &lt;- 2\n\nf &lt;- function() {\n  y\n}\n\nf()\n#&gt; [1] 2\n\nStep outward until you find it: R keeps looking further out, all the way to the global environment, until it finds a match.\n\nApplied to the kitchen analogy: if an ingredient isn’t right next to the blender, R will check the counter, then the pantry, then the kitchen, then the house…"
   },
   {
-    "objectID": "presentations/AdvancedR/Foundations/functions.html#functions-versus-variables",
-    "href": "presentations/AdvancedR/Foundations/functions.html#functions-versus-variables",
+    "objectID": "presentations/AdvancedR/Foundations/functions.html#rule-2-functions-vs-variables",
+    "href": "presentations/AdvancedR/Foundations/functions.html#rule-2-functions-vs-variables",
     "title": "Functions",
-    "section": "Functions versus variables",
-    "text": "Functions versus variables\nThe name masking rules apply to functions. However, a function and an object sharing the same name must reside in different environments.\n\ng04 &lt;- function(x) x + 1\ng05 &lt;- function(x) x * 2\n\ng06 &lt;- function() {\n  g04 &lt;- function(x) x + 100\n  g05 &lt;- 10\n  c(g04(10), g05(g05))\n}\n\ng06()\n#&gt; [1] 110 20"
+    "section": "Rule 2: Functions vs Variables",
+    "text": "Rule 2: Functions vs Variables\nIf a name is being used as a variable, R looks for a variable. If a name is being used as a function (i.e., followed by parentheses), R looks for a function, even if a variable with that name is closer (per Rule 1).\n\nn &lt;- function(x) x + 1\n\nf &lt;- function() {\n  n &lt;- 5\n  n(10)\n}\n\nf()\n#&gt; [1] 11\n\n\nOutside f(), ‘n’ is a function that adds 1 to whatever you give it\nInside f(), a second ‘n’ is created, where it is set equal to 5\nThe last line, n(10) uses parentheses, telling R you want the function version of n\nR sees n(…) and knows it needs a function, so it skips over the variable n &lt;– 5 and keeps looking outward until it finds a function version of n\nf() thus is 10 + 1 = 11\n\n\nThe number 5 and function x + 1 are both named ‘n’, and they coexist without conflict because R checks how the name is being used (as a value or as a function)."
   },
   {
-    "objectID": "presentations/AdvancedR/Foundations/functions.html#a-fresh-start",
-    "href": "presentations/AdvancedR/Foundations/functions.html#a-fresh-start",
+    "objectID": "presentations/AdvancedR/Foundations/functions.html#rule-3-fresh-start",
+    "href": "presentations/AdvancedR/Foundations/functions.html#rule-3-fresh-start",
     "title": "Functions",
-    "section": "A fresh start",
-    "text": "A fresh start\nA new environment is created each time a function is called to execute the function.\n\ng07 &lt;- function() {\n  if (!exists(\"a\")) {\n    a &lt;- 1\n  } else {\n    a &lt;- a + 1\n  }\n  a\n}\n\ng07()\n#&gt; [1] 1\n\ng07()\n#&gt; [1] 1"
+    "section": "Rule 3: Fresh start",
+    "text": "Rule 3: Fresh start\nEvery time a function is called, R builds it a new, empty environment. Nothing from the previous call is remembered.\n\nadd_one &lt;- function() {\n  x &lt;- 0\n  x &lt;- x + 1\n  x\n}\n\nadd_one()\n#&gt; [1] 1\n\nadd_one()\n#&gt; [1] 1\n\n\nEach time add_one() runs, it starts fresh: x is set to 0, then 1 is added\nThe second call does not remember the first: instead of adding one to the previous answer, it starts fresh with 0 + 1\nIn other words, x from the first call is thrown away the moment the function finishes, so the second call builds x from scratch"
   },
   {
-    "objectID": "presentations/AdvancedR/Foundations/functions.html#dynamic-lookup",
-    "href": "presentations/AdvancedR/Foundations/functions.html#dynamic-lookup",
+    "objectID": "presentations/AdvancedR/Foundations/functions.html#rule-4-dynamic-lookup",
+    "href": "presentations/AdvancedR/Foundations/functions.html#rule-4-dynamic-lookup",
     "title": "Functions",
-    "section": "Dynamic lookup",
-    "text": "Dynamic lookup\nValues are searched for when the function is run. Thus, values can differ based on the objects outside of the function’s environment.\n\ng08 &lt;- function() x + 1\n\nx &lt;- 15\n\ng08()\n#&gt; [1] 16\n\nx &lt;- 20\n\ng08()\n#&gt; [1] 21\n\n\nR relies on lexical scoping to find everything. Potential problems with dynamic lookup are not found when you create the function and error messages may never be returned depending on the variables defined in a user’s global environment.\n\nThe codetools::findGlobals function can be used to detect external dependencies within a function and setting a function’s environment to empty using emptyenv can help solve this problem. Of course, you would then need to add the functions from findGlobals manually to an environment before calling the function.\n\ncodetools::findGlobals(g08)\n#&gt; [1] \"+\" \"x\"\n\nmy_env &lt;- new.env(parent = emptyenv())\nenvironment(g08) &lt;- my_env\n\ng08()\n#&gt; Error in `x + 1`: could not find function \"+\"\n\nmy_env$x &lt;- 15\nmy_env$`+` &lt;- base::`+`\nmy_env$`{` &lt;- base::`{`\n\ng08()\n#&gt; [1] 16"
+    "section": "Rule 4: Dynamic lookup",
+    "text": "Rule 4: Dynamic lookup\nLexical scoping tells R where to look for a value, but R doesn’t check where that value is until the function is run (not when it’s created).\n\nf &lt;- function() x + 1\n\nx &lt;- 15\nf()\n#&gt; [1] 16\n\nx &lt;- 20\nf()\n#&gt; [1] 21\n\n\nF() doesn’t have its own ‘x’, so it looks one level out to find it (Rule 1)\nWhich value of ‘x’ depends on whatever ‘x’ is at the moment f() runs, not what ‘x’ was when f() was first written"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/functions.html#lazy-evaluation",
     "href": "presentations/AdvancedR/Foundations/functions.html#lazy-evaluation",
     "title": "Functions",
     "section": "Lazy Evaluation",
-    "text": "Lazy Evaluation\nFunctions are lazily evaluated, meaning that they are only evaluated if accessed. This allows you to include potentially expensive computations in function arguments that are only evaluated if needed.\n\nh01 &lt;- function(x) {\n  10\n}\n# No error is generated because x is never used.\nh01(stop(\"This is an error!\"))\n#&gt; [1] 10"
+    "text": "Lazy Evaluation\nFunction arguments are lazy: they are not evaluated until they are actually used inside the function. If an argument is not used, it will not be evaluated.\n\nf &lt;- function(x) {\n  10\n}\n# No error is generated because x is never used.\nf(stop(\"This is an error!\"))\n#&gt; [1] 10\n\n\nf() never uses ‘x’ in its body; it returns “10” no matter what is passed in\n‘stop(“This is an error!”)’ would normally halt everything, but it is never triggered because R is not told to evaluate x in the body of its function"
   },
   {
-    "objectID": "presentations/AdvancedR/Foundations/functions.html#promises",
-    "href": "presentations/AdvancedR/Foundations/functions.html#promises",
+    "objectID": "presentations/AdvancedR/Foundations/functions.html#why-laziness-matters",
+    "href": "presentations/AdvancedR/Foundations/functions.html#why-laziness-matters",
     "title": "Functions",
-    "section": "Promises",
-    "text": "Promises\nLazy evaluation is powered by a data structure called a promise. A promise has 3 components:\n\nAn expression that defers evaluation until the value is used (e.g., x + y).\nAn environment where the function is called and the expression is evaluated.\n\n\ny &lt;- 10\n\nh02 &lt;- function(x) {\n  y &lt;- 100\n  x + 1\n}\n\n# Returns 11 not 101 since x is assigned a value of 10\n# from y outside of the function.\n\nh02(y)\n#&gt; [1] 11\n\n# Assignment inside a function call binds the\n# variable outside the function\nh02(y &lt;- 1000)\n#&gt; [1] 1001\n\nprint(y)\n#&gt; [1] 1000\n\n\nA value that is computed and cached the first time a promise is accessed.\n\n\n# Ensures that Calculating... is only printed once\n\ndouble &lt;- function(x) {\n  message(\"Calculating...\")\n  x * 2\n}\n\nh03 &lt;- function(x) {\n  c(x, x)\n}\n\nh03(double(20))\n#&gt; Calculating...\n#&gt; [1] 40 40"
-  },
-  {
-    "objectID": "presentations/AdvancedR/Foundations/functions.html#default-arguments",
-    "href": "presentations/AdvancedR/Foundations/functions.html#default-arguments",
-    "title": "Functions",
-    "section": "Default arguments",
-    "text": "Default arguments\nDefault values can be defined based on other arguments or even variables defined later in the function. Many base R functions use this strategy, but it is harder to read the code adn predict what is returned.\n\nh04 &lt;- function(x = 1, y = x * 2, z = a + b) {\n  a &lt;- 10\n  b &lt;- 100\n  c(x, y, z)\n}\n\nh04()\n#&gt; [1] 1 2 110\n\nThe evaluation environment is slightly different for default and user supplied arguments. Default arguments are evaluated inside the function.\n\nh05 &lt;- function(x = ls()) {\n  a &lt;- 1\n  x\n}\n\n# ls() evaluated inside h05\nh05()\n#&gt; [1] \"a\" \"x\"\n\n# ls() evaluated in the global environment\nh05(x = ls())\n#&gt; \"h05\""
-  },
-  {
-    "objectID": "presentations/AdvancedR/Foundations/functions.html#missing-arguments",
-    "href": "presentations/AdvancedR/Foundations/functions.html#missing-arguments",
-    "title": "Functions",
-    "section": "Missing arguments",
-    "text": "Missing arguments\nWe can determine if an argument’s value comes from the user or from a default using the missing function. The sample function uses this technique.\n\nh06 &lt;- function(x = 10) list(missing(x), x)\n\nstr(h06())\n#&gt; List of 2\n#&gt;  $ : logi TRUE\n#&gt;  $ : num 10\n\nstr(h06(10))\n#&gt; List of 2\n#&gt;  $ : logi FALSE\n#&gt;  $ : num 10"
-  },
-  {
-    "objectID": "presentations/AdvancedR/Foundations/functions.html#an-example-with-sample",
-    "href": "presentations/AdvancedR/Foundations/functions.html#an-example-with-sample",
-    "title": "Functions",
-    "section": "An Example with Sample",
-    "text": "An Example with Sample\nThis code is from base::sample which takes a sample of the specified size from the elements of x with or without replacement.\n\nThe missing function evaluates whether size is given and returns the length of x if it is missing.\nThis function makes it appear as if x and size are required arguments.\n\n\nsample &lt;- function(x, size, replace = FALSE, prob = NULL) {\n  if (length(x) == 1L && is.numeric(x) && is.finite(x) && x &gt;= 1) {\n    if (missing(size)) {\n      size &lt;- x\n    }\n    sample.int(x, size, replace, prob)\n  } else {\n    if (missing(size)) {\n      size &lt;- length(x)\n    }\n    x[sample.int(length(x), size, replace, prob)]\n  }\n}\n\nAn alternative way to write sample is setting size = NULL in the function arguments to indicate that it is not required. A simpler version of the sample function is to check for NULL.\n\nsample &lt;- function(x, size = NULL, replace = FALSE, prob = NULL) {\n  if (is.null(size)) {\n    size &lt;- length(x)\n  }\n  # Or using the `%||%` operator from base R to use the left\n  # side if it's not NULL and return the right side otherwise.\n  # size &lt;- size %||% length(x)\n  x[sample.int(length(x), size, replace, prob)]\n}"
+    "section": "Why laziness matters",
+    "text": "Why laziness matters\n1) A value is calculated once, no matter how many times it is used\n\ndouble &lt;- function(x) {\n  message(\"Calculating...\")\n  x * 2\n}\n\nf &lt;- function(x) {\n  c(x, x)\n}\n\nf(double(20))\n#&gt; Calculating...\n#&gt; [1] 40 40\n\n“Calculating…” only prints once, even though x appears twice inside f(). R evaluates it the first time it’s needed, then reuses that same result.\n2) Default argument values can refer to other arguments\n\nf &lt;- function(x = 1, y = x + 1) {\n  c(x, y)\n}\n\nf()\n#&gt; [1] 1 2\n\n\ny’s default is an expression of ‘x + 1’, not a fixed number\nSince arguments are lazy, ‘y’ isn’t evaluated until it is needed. By the time y is needed, x is already assigned 1, so ‘y’ becomes 2"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/functions.html#the-dot-dot-dot",
     "href": "presentations/AdvancedR/Foundations/functions.html#the-dot-dot-dot",
     "title": "Functions",
     "section": "The … (dot-dot-dot)",
-    "text": "The … (dot-dot-dot)\nA special argument ... (pronounced dot-dot-dot) can be used in a function to take any additional number of arguments. These arguments can either be used inside the function or passed to another function.\n\ni01 &lt;- function(y, z) {\n  list(y = y, z = z)\n}\n\ni02 &lt;- function(x, ...) {\n  i01(...)\n}\n\n# Passing x, y, and z to i01\nstr(i02(x = 1, y = 2, z = 3))\n\n#&gt; List of 2\n#&gt;  $ y: num 2\n#&gt;  $ z: num 3\n\nIt can be useful to store the arguments in a list to pass along to a different function. This is how the lapply function works in R.\n\nmylapply &lt;- function(X, FUN, ...) {\n  FUN &lt;- match.fun(FUN)\n  if (!is.vector(X) || is.object(X)) {\n    X &lt;- as.list(X)\n  }\n  .Internal(lapply(X, FUN))\n}\n\nx &lt;- list(c(1, 3, NA), c(4, NA, 6))\n\nstr(mylapply(x, mean, na.rm = TRUE))\n\n#&gt; List of 2\n#&gt;  $ : num 2\n#&gt;  $ : num 5\n\nS3 generic functions can use ... to allow the methods to take additional arguments. A function like print would have too many arguements for all the objects it would need to display.\n\nmyprint &lt;- function(x, ...) {\n  print(x, ...)\n}\n\nmyprint(factor(letters), max.levels = 4)\n#&gt;  [1] a b c d e f g h i j k l m n o p q r s t u v w x y z\n#&gt; 26 Levels: a b c ... z\n\nprint(\"Greetings!\", quote = FALSE)\n#&gt; [1] Greetings!\n\n\nThe downsides of using ... is that more documentation may be needed to help user’s understand what arguments they can pass and where those arguments go. Additionally, misspelled arguments go unnoticed as they disappear and do not raise an error.\n\n\nstr(mylapply(x, mean, na_rm = TRUE))\n\n#&gt; List of 2\n#&gt;  $ : num NA\n#&gt;  $ : num NA"
+    "text": "The … (dot-dot-dot)\n\n... (pronounced dot-dot-dot) let’s a function accept any number of arguments without naming them ahead of time, which can be used directly or passed along to another function.\n\n\nf &lt;- function(...) {\n  sum(...)\n}\n\nf(1, 2, 3)\n#&gt; [1] 6\n\n\n... uses argments given in f(): 1, 2, and 3\nThose arguments are passed to sum()"
+  },
+  {
+    "objectID": "presentations/AdvancedR/Foundations/functions.html#errors-with",
+    "href": "presentations/AdvancedR/Foundations/functions.html#errors-with",
+    "title": "Functions",
+    "section": "Errors with …",
+    "text": "Errors with …\nBecause ... accepts anything, a misspelled argument name won’t cause an error; it will just get ignored and disappear.\n\nf &lt;- function(x, ...) {\n  mean(x, ...)\n}\n\nf(c(1, 2, NA), na.rm = TRUE)\n#&gt; [1] 1.5\n\nf(c(1, 2, NA), na_rm = TRUE)\n#&gt; [1] NA\n\n\nThe second call misspells na.rm as na_rm\nR doesn’t catch the error; it treats na_rm as an used argument in ...\n\n\n... is helpful for writing flexible, reusable functions, but typos in arguments get ignored instead of flagged."
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/functions.html#exiting-a-function",
     "href": "presentations/AdvancedR/Foundations/functions.html#exiting-a-function",
     "title": "Functions",
     "section": "Exiting a function",
-    "text": "Exiting a function\nFunctions exit by returning a value or throwing an error. Returns can be implicit where the last evaluated expression is returned or explicit by calling return.\n\n# Implicit\nj01 &lt;- function(x) {\n  if (x &lt; 10) {\n    0\n  } else {\n    10\n  }\n}\n\nj01(9)\n#&gt; [1] 0\n\n# Explicit\nj02 &lt;- function(x) {\n  if (x &lt; 10) {\n    return(0)\n  } else {\n    return(10)\n  }\n}\n\n\nMost functions return visibly, but the invisible function prevents automatic printing of the last value. The most common function that returns invisibly is &lt;-.\n\n\na &lt;- 2\n\n# You can display visibly with print or by wrapping in ()\nprint(a &lt;- 2)\n#&gt; [1] 2\n\n(a &lt;- 2)\n#&gt; [1] 2"
+    "text": "Exiting a function\nA function exits in one of two ways: by returning a value or by throwing an error. A return can be implicit (R returns the last line) or explicit (you use return() yourself).\n\n# Implicit -  the last evaluated expression is returned automatically\nf &lt;- function(x) {\n  if (x &lt; 10) {\n    0\n  } else {\n    10\n  }\n}\n\nf(9)\n#&gt; [1] 0\n\n# Explicit - return() exits the function immediately with that value\nf &lt;- function(x) {\n  if (x &lt; 10) {\n    return(0)\n  }\n  return(10)\n}\n\nf(9)\n#&gt; [1] 0\n\nBoth versions do the same thing: return() is optional but makes it explicit to what is being sent back and when."
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/functions.html#errors",
     "href": "presentations/AdvancedR/Foundations/functions.html#errors",
     "title": "Functions",
     "section": "Errors",
-    "text": "Errors\nErrors occur when a function cannot complete its assigned task. It uses the stop function to stop the execution of the function.\n\ndouble &lt;- function(x) {\n  if (!is.numeric(x)) {\n    stop(sprintf(\"%s is not numeric\", x))\n  }\n  return(x * 2)\n}\n\ndouble(10)\n#&gt; [1] 20\n\ndouble(\"10\")\n#&gt; Error in double(\"10\") : 10 is not numeric"
-  },
-  {
-    "objectID": "presentations/AdvancedR/Foundations/functions.html#exit-handlers",
-    "href": "presentations/AdvancedR/Foundations/functions.html#exit-handlers",
-    "title": "Functions",
-    "section": "Exit handlers",
-    "text": "Exit handlers\nA function may need to make a temporary change to the global state. However, cleaning up those changes may be problematic if there is an error. Using on.exit ensures those changes are undone and the global state restored.\n\npretty_print &lt;- function(x) {\n  old_digits &lt;- getOption(\"digits\")\n  options(digits = 2)\n  on.exit(options(digits = old_digits), add = TRUE)\n  print(x / 3)\n}\n\npretty_print(1:5)\n#&gt; [1] 0.33 0.67 1.00 1.33 1.67\n\nprint(1 / 3)\n#&gt; [1] 0.3333333\n\n\nYou can use after = TRUE or after = FALSE to control the order of on.exit within a function if you need some actions to be performed in a specific order."
+    "text": "Errors\nErrors occur when a function cannot complete its assigned task. It uses stop() to stop the execution of the function.\n\ndouble &lt;- function(x) {\n  if (!is.numeric(x)) {\n    stop(\"x must be numeric\")\n  }\n  x * 2\n}\n\ndouble(10)\n#&gt; [1] 20\n\ndouble(\"cats\")\n#&gt; Error in double(\"cats\") : x must be numeric\n\n\nA clear stop() halts the function and displays an error message telling user exactly what went wrong, instead of the function failing confusingly down the line."
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/functions.html#function-forms",
     "href": "presentations/AdvancedR/Foundations/functions.html#function-forms",
     "title": "Functions",
     "section": "Function forms",
-    "text": "Function forms\nThere are four varieties of functions in R:\n\nPrefix: The function name comes before its arguments (e.g., print(x))\nInfix: The function name comes in between its arguments (e.g., x + y)\nReplacement: The function replaces values by assignment (e.g., names(x) &lt;- c(“a”, “b”, “c”))\nSpecial: Functions like [[, if, and for\n\nAn interesting property of R is that all function varieties can be rewritten to prefix form.\n\nx &lt;- 1:5\ny &lt;- 2\n\n`+`(x, y)\n#&gt; [1] 3 4 5 6 7\n\nstr(`names&lt;-`(data.frame(x, y), c(\"a\", \"b\")))\n#&gt; 'data.frame':   5 obs. of  2 variables:\n#&gt;  $ a: int  1 2 3 4 5\n#&gt;  $ b: num  2 2 2 2 2\n\n`for`(i, x, print(i))\n#&gt; [1] 1\n#&gt; [1] 2\n#&gt; [1] 3\n#&gt; [1] 4\n#&gt; [1] 5\n\nKnowing the name of a non-prefix function allows you to override its behavior.\n\n`+` &lt;- function(x, y) {\n  return(x * y)\n}\n\n5 + 10\n#&gt; [1] 50\n\nrm(`+`)\n\n5 + 10\n#&gt; [1] 15"
+    "text": "Function forms\nFunctions can be written in four different styles, depending on where the function name sits relative to arguments.\n\nPrefix: name comes before arguments, print(x)\nInfix: name comes between its arguments, x + y\nReplacement: modifies values by assignment, names(x) &lt;- c(\"a\", \"b\")\nSpecial: built in language features like if, for, and [["
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/functions.html#prefix-functions",
     "href": "presentations/AdvancedR/Foundations/functions.html#prefix-functions",
     "title": "Functions",
     "section": "Prefix Functions",
-    "text": "Prefix Functions\nMost common functions in R and can specify functions in three ways:\n\nPosition (e.g., help(mean))\nPartial Matching (e.g., help(top = mean))\nName (e.g., help(topic = mean))\n\n\nget_structure &lt;- function(age_years, weight_kg, amyloid_level) {\n  str(list(age = age_years, weight = weight_kg, amyloid = amyloid_level))\n}\n\n# By Position\n\nget_structure(30, 70, 19)\n\n#&gt; List of 3\n#&gt;  $ age    : num 30\n#&gt;  $ weight : num 70\n#&gt;  $ amyloid: num 19\n\n# By name (full name or partial-matching)\n\nget_structure(weight = 70, 19, age = 30)\n\n#&gt; List of 3\n#&gt;  $ age    : num 30\n#&gt;  $ weight : num 70\n#&gt;  $ amyloid: num 19\n\n# Raises error as a matches both age_years and amyloid_level\n\nget_structure(30, 175, a = 19)\n#&gt; Error in get_structure(30, 175, a = 19) :\n#&gt;   argument 3 matches multiple formal arguments"
+    "text": "Prefix Functions\nMost common functions in R and what you have been seeing throughout this presentation. Function name comes first, followed by its arguments in parentheses. R lets you supply those arguments in a few different ways.\n\nf &lt;- function(age, weight) {\n  list(age = age, weight = weight)\n}\n\n# By position\nf(30, 70)\n#&gt; $age\n#&gt; [1] 30\n#&gt;\n#&gt; $weight\n#&gt; [1] 70\n\n# By name — order no longer matters\nf(weight = 70, age = 30)\n#&gt; $age\n#&gt; [1] 30\n#&gt;\n#&gt; $weight\n#&gt; [1] 70\n\n\nArguments can be matched by their position (order listed) or name, which overrides their position."
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/functions.html#infix-functions",
     "href": "presentations/AdvancedR/Foundations/functions.html#infix-functions",
     "title": "Functions",
     "section": "Infix functions",
-    "text": "Infix functions\nInfix functions have two arguments with the function inbetween those arguments.\n\nR has a many built-in infix operators including:\n:, ::, :::, $, @, ^, *, /, +, -, &gt;, &gt;=, &lt;, &lt;=, ==, !=, !, &, &&, |, ||, ~, &lt;-, and &lt;&lt;-\n\nYou can also create your own infix functions that start and end with %. Base R uses this pattern to define %%, %*%, %/%, %in%, %o%, and %x%.\n\n`%+%` &lt;- function(a, b) paste(a, b)\n\n\"new\" %+% \"string\"\n#&gt; [1] \"new string\"\n\nNames of infix functions are more flexible as they can contain any sequence of characters except for %. Any special characters need to be escaped when you define the function and infix operators are composed from the left to the right.\n\n`% %` &lt;- function(a, b) paste(a, b)\n\n\"another\" % % \"new\" % % \"string\"\n#&gt; [1] \"another new string\"\n\n`%/\\\\%` &lt;- function(a, b) paste(a, b)\n\n\"and\" %/\\% \"one\" %/\\% \"with\" %/\\% \"special\" %/\\% \"characters\"\n#&gt; [1] \"and one with special characters\"\n\n`%-%` &lt;- function(a, b) paste0(\"(\", a, \" %-% \", b, \")\")\n\n\"a\" %-% \"b\" %-% \"c\"\n#&gt; [1] \"((a %-% b) %-% c)\""
+    "text": "Infix functions\nInfix functions take two arguments with the function name between them, like + or -. This is calling the style you use everytime you write x + y.\n\nx &lt;- 5\ny &lt;- 2\n\nx + y\n#&gt; [1] 7\n\n`+`(x, y)\n#&gt; [1] 7\n\n\nInfix functions are regular functions that you can call in a natural, readable way."
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/functions.html#replacement-functions",
     "href": "presentations/AdvancedR/Foundations/functions.html#replacement-functions",
     "title": "Functions",
-    "section": "Replacement functions",
-    "text": "Replacement functions\nAct like they modify their arguments in place and have the special name xxx&lt;- with arguments x and value. If additional arguments are needed, place them between x and value.\n\n`second&lt;-` &lt;- function(x, value) {\n  x[2] &lt;- value\n  x\n}\n\nx &lt;- 1:5\nsecond(x) &lt;- 5L\nx\n#&gt; [1] 1 5 3 4 5\n\n`modify&lt;-` &lt;- function(x, position, value) {\n  x[position] &lt;- value\n  x\n}\n\nmodify(x, 1) &lt;- 10\nx\n#&gt; [1] 10 5 3 4 5\n\n# R interprets modify as \"x &lt;- `modify&lt;-`(x, 1, 10)\".\n\nCombining replacement with other functions requires more complex translations.\n\nx &lt;- c(a = 1, b = 2, c = 3)\n\nnames(x)\n#&gt; [1] \"a\" \"b\" \"c\"\n\nnames(x)[2] &lt;- \"two\"\nnames(x)\n#&gt; [1] \"a\" \"two\" \"c\"\n\n#' R interprets this as the following:\n`*tmp*` &lt;- x\nx &lt;- `names&lt;-`(`*tmp*`, `[&lt;-`(names(`*tmp*`), 2, \"two\"))\nrm(`*tmp*`)\nnames(x)\n#&gt; [1] \"a\" \"two\" \"c\""
+    "section": "Replacement Functions",
+    "text": "Replacement Functions\nReplacement functions look like they’re modifying a value in place, but they’re just regular functions with a special name ending in &lt;-.\n\n`first&lt;-` &lt;- function(x, value) {\n  x[1] &lt;- value\n  x\n}\n\nx &lt;- c(1, 2, 3)\nfirst(x) &lt;- 100\nx\n#&gt; [1] 100 2 3"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/functions.html#special-forms",
@@ -2084,6 +2063,20 @@
     "title": "Functions",
     "section": "Special forms",
     "text": "Special forms\nThere are many language features in R that are written in special ways but also have prefix forms.\n\n\n\n\n\n\n\nSpecial\nPrefix\n\n\n\n\n(x)\n`(`(x)\n\n\n{x}\n`{`(x)\n\n\nx[i]\n`[`(x, i)\n\n\nx[[i]]\n`[[`(x, i)\n\n\nif (cond) true\n`if`(cond, true)\n\n\nif (cond) true else false\n`if`(cond, true, false)\n\n\nfor(var in seq) action\n`for`(var, seq, action)\n\n\nwhile(cond) action\n`while`(cond, action)\n\n\nrepeat expr\n`repeat`(expr)\n\n\nnext\n`next`()\n\n\nbreak\n`break`()\n\n\nfunction(arg1, arg2) {body}\n`function`(alist(arg1, arg2), body, env)"
+  },
+  {
+    "objectID": "presentations/AdvancedR/Foundations/functions.html#practice-creating-your-own-functions",
+    "href": "presentations/AdvancedR/Foundations/functions.html#practice-creating-your-own-functions",
+    "title": "Functions",
+    "section": "Practice creating your own functions!",
+    "text": "Practice creating your own functions!\n\nTime to build a few functions! First try them on your own, and then we will walk through the solutions together.\n\n1) Write a basic function\nWrite a function called square() that takes one number and returns its square (e.g., square(4) should return ‘16’)\n2) Write a function with a default argument\nWrite a function called greet() that takes a name and returns a greeting with “Hello, [name]!”. Give name a default value of “friend”, so greet() with no input returns “Hello, friend!”.\n3) Write a function using ...\nWrite a function called add_all() that takes any number of numeric arguments and returns their sum (e.g., add_all(1, 2, 3) should return ‘6’)\n\nHint: think back to how sum() was used inside the ... example!"
+  },
+  {
+    "objectID": "presentations/AdvancedR/Foundations/functions.html#solutions",
+    "href": "presentations/AdvancedR/Foundations/functions.html#solutions",
+    "title": "Functions",
+    "section": "Solutions",
+    "text": "Solutions\n\n# 1. Write a basic function\nsquare &lt;- function(x) {\n  x^2\n}\n\nsquare(4)\n#&gt; [1] 16\n\n# 2. Write a function with a default argument\ngreet &lt;- function(name = \"friend\") {\n  paste0(\"Hello, \", name, \"!\")\n}\n\ngreet()\n#&gt; [1] \"Hello, friend!\"\n\ngreet(\"Ashlyn\")\n#&gt; [1] \"Hello, Ashlyn!\"\n\n# 3. Write a function using '...'\nadd_all &lt;- function(...) {\n  sum(...)\n}\n\nadd_all(1, 2, 3)\n#&gt; [1] 6"
   },
   {
     "objectID": "presentations/AdvancedR/Foundations/subsetting.html#subsetting",
