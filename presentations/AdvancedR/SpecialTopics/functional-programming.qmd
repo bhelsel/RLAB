@@ -629,7 +629,7 @@ str(purrr::map(purrr::keep(df, is.numeric), mean))
 #>  $ num2: num 6
 ```
 
-## Matrices and Arrays {visibility="hidden"}
+## Matrices and Arrays
 
 The `base::apply` function is designed to work with matrices and arrays. It is an operation that summarizes a matrix
 or array by collapsing each row or column into a single value. The `apply` function has four arguments: 
@@ -793,7 +793,7 @@ the argument is only used by the manufactured function.
 
 :::
 
-## Stateful Functions {visibility="hidden"}
+## Stateful Functions
 
 Function factories allow you to maintain state across function calls. This is made possible because the enclosing environment of the manufactured function is unique and constant and the
 `<<-` special assignment operator can modify bindings in the enclosing environment.
@@ -823,7 +823,7 @@ for (i in 1:5) {
 #> [1] 5
 ```
 
-## Graphical Factories {visibility="hidden"}
+## Graphical Factories
 
 The `scales` package makes it easy to customize the labels in **ggplot2** plots, providing
 many  functions to control the fine details of axes and legends. The formatter functions
@@ -909,7 +909,7 @@ ggplot2::ggplot(df, ggplot2::aes(x)) +
   ggplot2::labs(x = NULL)
 ```
 
-## Using ggsave {visibility="hidden"}
+## Using ggsave
 
 A function factory used internally by **ggsave** is `ggplot2::plot_dev`. This helps transition
 from a file extension (e.g., png, jpeg, etc) to a graphics device function (e.g., png(), 
@@ -946,7 +946,7 @@ plot_dev("png")
 #> <environment: 0x12f5c7458>
 ```
 
-## Statistical Factories {visibility="hidden"}
+## Statistical Factories
 
 Function factories are also a good fit for certain statistical techniques like box-cox
 transformations, bootstrap resampling, and maximum likelihood estimation (MLE; See Advanced R
@@ -1002,7 +1002,7 @@ ggplot2::ggplot(data.frame(x = c(0.01, 1)), ggplot2::aes(x)) +
 :::
 :::
 
-## Bootstrap Generators {visibility="hidden"}
+## Bootstrap Generators
 
 A bootstrap generator can create a fresh bootstrap every time it is called. The advantage
 of using a function factory is clear with a parametric bootstrap where we need to fit a
@@ -1296,7 +1296,7 @@ smaller subproblems, and storing their solutions significantly enhances efficien
 
 :::
 
-## Creating Your Own Function Operator {visibility="hidden"}
+## Creating Your Own Function Operator
 
 Imagine you have a named vector of URLs and you want to download each one to your 
 computer. It is simple with **purrr::walk2** and **utils::file.download()**.
