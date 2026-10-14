@@ -26,7 +26,7 @@ execute:
   freeze: auto
 ---
 
-# Introduction
+## Introduction
 
 Object-Oriented Programming (OOP) focuses on objects (like data frames or models). 
 The same function can work differently depending on the object type — this is called 
@@ -65,7 +65,7 @@ for OOP which differ in how methods and classes are related:
 ## Object-Oriented Programming in R
 
 Base R has three OOP systems including S3, S4, and RC. A number of other OOP systems exist
-from CRAN packages including R6, R.oo, and proto.
+from CRAN packages including R6, S7, R.oo, and proto.
 
 The **sloop** package provides tools to help you interactively explore and understand 
 object oriented programming in R. For example, `sloop::otype()` makes it easy to find
@@ -112,7 +112,7 @@ sloop::s3_class(x)
 #> [1] "matrix" "integer" "numeric"
 ```
 
-# S3 Basics
+## S3 Basics
 
 An S3 object is a base type with at least a **class** attribute. 
 
@@ -549,7 +549,7 @@ x[1]
 #> [1] 15
 ```
 
-This works, but the default `[` method does not preserve the class and hide the output. Providing a 
+This works, but the default **[** method does not preserve the class and hide the output. Providing a 
 `[.secret` method would solve this problem. However, the naive approach would cause an infinite loop.
 
 ```{r}
@@ -637,7 +637,7 @@ vector-like objects in R
 
 :::
 
-# R6 Basics
+## R6 Basics
 
 The R6 OOP system has 2 special propoerties:
 
@@ -709,7 +709,7 @@ x$add(10)$add(10)$sum
 ## Important Methods
 
 The `$initialize()` and `$print()` methods should be defined for most classes as they make your class
-easier to use. The **initialize()** method overrides the default behavior of **$new()** and **$print()**
+easier to use. The **initialize** method overrides the default behavior of `$new()` and **print**
 overrides the default printing behavior.
 
 ```{r}
@@ -731,11 +731,11 @@ Person <- R6::R6Class(
   )
 )
 
-Brian <- Person$new("Person", age = 36)
+Brian <- Person$new("Person", 37)
 Brian
 #> Person:
 #>   Name: Person
-#>   Age: 36
+#>   Age: 37
 ```
 
 ## Adding Methods After Creation
@@ -825,11 +825,11 @@ Person <- R6::R6Class(
   )
 )
 
-Brian <- Person$new("Brian", age = 36)
+Brian <- Person$new("Brian", age = 37)
 Brian
 #> Person:
 #>   Name: Brian
-#>   Age: 36
+#>   Age: 37
 
 Brian$name
 #> NULL
@@ -904,14 +904,14 @@ Person <- R6::R6Class(
   )
 )
 
-Brian <- Person$new("Brian", age = 36)
+Brian <- Person$new("Brian", age = 37)
 Brian$name
 #> [1] "Brian"
 
 Brian$name <- 10
 #> Error: is.character(value) is not TRUE
 
-Brian$age <- 35
+Brian$age <- 36
 #> Error: `$age` is read only
 ```
 
@@ -993,7 +993,7 @@ db_a$file$path == db_b$file$path
 #> [1] TRUE
 ```
 
-In the example above, `TemporaryFile$new()` is only called once when `TemporaryDatabase` is
+In the example above, `TemporaryFile$new()` is only called once when **TemporaryDatabase** is
 defined. We can move the call to `$initialize()` to create a new file each time
 
 ```{r}
@@ -1021,7 +1021,7 @@ db_a$file$path == db_b$file$path
 #> [1] FALSE
 ```
 
-# S4 Basics
+## S4 Basics
 
 S4 provides a more formal approach to functional OOP. The underlying ideas are like S3, but it
 has stricter implementation and makes use of specialized functions for creating classes 
@@ -1047,7 +1047,7 @@ setClass(
   )
 )
 
-Brian <- new("Person", name = "Brian Helsel", age = 36)
+Brian <- new("Person", name = "Brian Helsel", 37)
 
 # Check class with "is"
 is(Brian)
@@ -1095,7 +1095,7 @@ sloop::ftype(age)
 
 Defining S4 classes with `setClass` and three arguments:
 
-- **Class*: The class name using *UpperCamelCase*
+- **Class**: The class name using *UpperCamelCase*
 - **slots**: A named character vector describing the names and classes of the fields (use "ANY" to
 allow a slot to accept objects from any type)
 - **prototype**: A list of default values for each slot
@@ -1211,7 +1211,7 @@ Person("Brian", age = c(36, 37))
 #> invalid class “Person” object: @name and @age must be the same length
 
 # Check the validity with validObject
-validObject(Person("Brian", age = 36))
+validObject(Person("Brian", age = 37))
 #> [1] TRUE
 ```
 
