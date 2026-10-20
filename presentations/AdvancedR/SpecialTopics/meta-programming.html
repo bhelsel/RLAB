@@ -1168,7 +1168,7 @@ Brian C. Helsel, PhD
 <span id="cb10-4"><a aria-label="4"></a>}</span>
 <span id="cb10-5"><a aria-label="5"></a></span>
 <span id="cb10-6"><a aria-label="6"></a><span class="fu">cv</span>(x)</span>
-<span id="cb10-7"><a aria-label="7"></a><span class="co">#&gt; sd(x)/mean(y)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-7"><a aria-label="7"></a><span class="co">#&gt; sd(x)/mean(x)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="evaluation-runs-code" class="slide level2">
@@ -1313,7 +1313,7 @@ Brian C. Helsel, PhD
 </section>
 <section id="expressions" class="slide level2 title-slide center">
 <h2>Expressions</h2>
-<p><strong>Expressions are the data structures</strong> in ASTs. They are created by parsing code and can include constants, symbols, function calls, and pairlists (such as those from <strong>expr</strong>).</p>
+<p><strong>Expressions are the data structures</strong> in ASTs created by parsing code. They can include constants, symbols, function calls, and pairlists (such as those from <strong>expr</strong>).</p>
 </section>
 <section id="constants" class="slide level2">
 <h2>Constants</h2>
@@ -1478,10 +1478,9 @@ Brian C. Helsel, PhD
 <p>Quotation, the first part of quasiquotation, is capturing an expression without evaluating it. There are four important quoting functions:</p>
 <ul>
 <li><strong>expr</strong>: captures its argument exactly as provided</li>
-<li><strong>enexpr</strong>: captures what the caller supplied to the function by looking at the internal promise object that powers lazy evaluation</li>
-<li><strong>enexprs</strong>: captures all arguments in …</li>
+<li><strong>enexpr</strong>: captures what the caller supplied to the function by looking at the internal promise object that powers lazy evaluation (<strong>ensym</strong> for converting to a symbol)</li>
+<li><strong>enexprs</strong>: captures all arguments in … (<strong>ensyms</strong> for converting to a symbol)</li>
 <li><strong>exprs</strong>: captures a list of expressions</li>
-<li><strong>ensym</strong> and <strong>ensyms</strong> converts to a symbol</li>
 </ul>
 <div class="highlight-box">
 <p>Many of the <code>rlang</code> functions described have a base R equivalent. For example, <strong>quote</strong> is the base R equivalent of <strong>expr</strong>, <strong>substitute</strong> is the base R equivalent of <strong>enexpr</strong>, and <strong>alist</strong> is the base R equivalent of <strong>exprs</strong>.</p>
@@ -1693,7 +1692,7 @@ Brian C. Helsel, PhD
 <p>You can also provide argument names indirectly or call different functions with the same arguments.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a aria-label="1"></a>arg_name <span class="ot">&lt;-</span> <span class="st">&quot;na.rm&quot;</span></span>
-<span id="cb42-2"><a aria-label="2"></a>arg_val <span class="ot">=</span> <span class="cn">TRUE</span></span>
+<span id="cb42-2"><a aria-label="2"></a>arg_val <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
 <span id="cb42-3"><a aria-label="3"></a></span>
 <span id="cb42-4"><a aria-label="4"></a>rlang<span class="sc">::</span><span class="fu">exec</span>(<span class="st">&quot;mean&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="sc">!!</span><span class="at">arg_name :=</span> arg_val)</span>
 <span id="cb42-5"><a aria-label="5"></a><span class="co">#&gt; [1] 5.5</span></span>
@@ -2029,7 +2028,7 @@ Brian C. Helsel, PhD
 </section>
 <section id="handling-ambiguity" class="slide level2">
 <h2>Handling Ambiguity</h2>
-<p>Even a simple wrapper around a quoting function using tidy evaluation can be problematic when there are no arguments to quote. This wrapper around subset2 can return incorrect results whenx exists in the calling environment and not in the data frame or when val exists in the data frame.</p>
+<p>Even a simple wrapper around a quoting function using tidy evaluation can be problematic when there are no arguments to quote. This wrapper around subset2 can return incorrect results when <code>x</code> exists in the calling environment and not in the data frame or when val exists in the data frame.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a aria-label="1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
 <span id="cb62-2"><a aria-label="2"></a>no_x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">y =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
