@@ -129,7 +129,7 @@ cv <- function(var) {
 }
 
 cv(x)
-#> sd(x)/mean(y)
+#> sd(x)/mean(x)
 ```
 
 ## Evaluation Runs Code
@@ -317,9 +317,9 @@ lobstr::ast(y <- x * 10)
 
 ## Expressions {.title-slide}
 
-**Expressions are the data structures** in ASTs. They are created by parsing 
-code and can include constants, symbols, function calls, and pairlists (such as 
-those from **expr**).
+**Expressions are the data structures** in ASTs created by parsing code. They
+can include constants, symbols, function calls, and pairlists (such as those
+from **expr**).
 
 ## Constants
 
@@ -532,11 +532,12 @@ Quotation, the first part of quasiquotation, is capturing an expression without
 evaluating it. There are four important quoting functions:
 
 - **expr**: captures its argument exactly as provided
-- **enexpr**: captures what the caller supplied to the function by looking
-at the internal promise object that powers lazy evaluation
-- **enexprs**: captures all arguments in ...
+- **enexpr**: captures what the caller supplied to the function by looking at
+the internal promise object that powers lazy evaluation (**ensym** for
+converting to a symbol)
+- **enexprs**: captures all arguments in ... (**ensyms** for converting to a
+symbol)
 - **exprs**: captures a list of expressions
-- **ensym** and **ensyms** converts to a symbol
 
 ::: {.highlight-box}
 
@@ -824,7 +825,7 @@ the same arguments.
 
 ```{r}
 arg_name <- "na.rm"
-arg_val = TRUE
+arg_val <- TRUE
 
 rlang::exec("mean", 1:10, !!arg_name := arg_val)
 #> [1] 5.5
@@ -1232,7 +1233,7 @@ subsample(df, x == 1)
 
 Even a simple wrapper around a quoting function using tidy evaluation can be problematic
 when there are no arguments to quote. This wrapper around subset2 can return incorrect
-results whenx exists in the calling environment and not in the data frame or when val
+results when `x` exists in the calling environment and not in the data frame or when val
 exists in the data frame.
 
 ```{r}
